@@ -1,0 +1,33 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+//
+
+html, body{
+    height: 100%;
+}
+body{
+    display: flex;flex-direction: column;
+}
+main{
+    flex: 1 0 auto;
+}
+.font-perso {
+    font-family: 'Nunito', sans-serif;
+}
+
+#menu-toggle:checked + #menu {
+    display: block;
+}
+
+.hover\:grow {
+    transition: all 0.3s;
+    transform: scale(1);
+}
+
+.hover\:grow:hover {
+    transform: scale(1.02);
+}

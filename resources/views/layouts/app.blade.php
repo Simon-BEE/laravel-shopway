@@ -21,7 +21,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     @yield('extra-css')
 </head>
-<body class="bg-gray-100 min-h-screen antialiased leading-none font-perso">
+<body class="bg-gray-100 min-h-screen antialiased leading-none font-perso relative"  x-data="{ 'isDialogOpen': false }">
     <!--Nav-->
     <header id="header" class="w-full z-30 top-0 py-1 bg-gray-900 mb-4">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">

@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+<x-modal title="">
+    <x-product.content-modal />
+</x-modal>
 
     <section class="bg-white py-8">
         <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
@@ -39,7 +42,7 @@
 
             @for ($i = 0; $i < 12; $i++)
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-                <a href="#">
+                <a href="#" @click="isDialogOpen = true;">
                     <div class="img hover:grow hover:shadow-lg w-72 h-48">
                         <img class="w-full h-full object-cover rounded shadow-lg" src="https://picsum.photos/300/300?random={{ $i + 1 }}">
                     </div>

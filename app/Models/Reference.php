@@ -8,6 +8,11 @@ class Reference extends Model
 {
     protected $guarded = ['id'];
 
+    public function getImagePathAttribute()
+    {
+        return "https://picsum.photos/800";
+    }
+
     /**
      * ? RELATIONS
      */

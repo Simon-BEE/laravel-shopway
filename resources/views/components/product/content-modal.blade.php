@@ -2,12 +2,12 @@
 
 <div class="flex flex-col md:flex-row items-stretch justify-around">
     <div class="img w-full md:w-4/12">
-        <img class="w-full h-full object-cover rounded shadow-lg" src="https://picsum.photos/800/800?random=8">
+        <img class="w-full h-full object-cover rounded shadow-lg" x-ref="productModalImg" src="" alt="lorem">
     </div>
 
     <div class="mt-4 md:mt-0 text-gray-700 w-full md:w-6/12 flex flex-col justify-between max-h-full">
         <div>
-            <h3 class="text-xl mb-3 tracking-wider font-semibold">Lorem ipsum dolor sit.</h3>
+            <h3 class="text-xl mb-3 tracking-wider font-semibold" x-ref="productModalTitle">Lorem ipsum dolor sit.</h3>
             <div class="text-sm mb-5">
                 <span class="flex items-center">
                     <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-400" viewBox="0 0 24 24">
@@ -28,11 +28,11 @@
                     <span class="text-gray-600 ml-3">4 Reviews</span>
                 </span>
             </div>
-            <p class="text-justify leading-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam ipsum atque, est magnam praesentium laboriosam omnis? Ad cumque reiciendis natus ullam id voluptate similique. Dolorem autem magnam quidem excepturi magni numquam! Odio iusto quidem, rerum autem unde explicabo neque, minima, dolor alias recusandae architecto cum iure. Quis ducimus quod nemo.</p>
+            <p class="text-justify leading-5" x-ref="productModalDesc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam ipsum atque, est magnam praesentium laboriosam omnis? Ad cumque reiciendis natus ullam id voluptate similique. Dolorem autem magnam quidem excepturi magni numquam! Odio iusto quidem, rerum autem unde explicabo neque, minima, dolor alias recusandae architecto cum iure. Quis ducimus quod nemo.</p>
             <p class="text-right mt-4"><a href="#" class="link text-blue-400 hover:underline">Show details...</a></p>
         </div>
         <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
-            <div class="price text-3xl font-semibold text-gray-700">49.99<span class="text-gray-500 font-thin">€</span></div>
+            <div class="price text-3xl font-semibold text-gray-700"><span class="price" x-ref="productModalPrice">49</span><span class="text-gray-500 font-thin">€</span></div>
             <div class="flex">
                 <a href="" class="flex items-center p-2 rounded text-xl text-white mr-2 bg-blue-400 hover:bg-blue-600">
                     <span class="mdi mdi-cart-outline mr-2"></span>

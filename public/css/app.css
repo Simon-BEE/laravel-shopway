@@ -18125,7 +18125,7 @@ video {
   transition-delay: 1000ms;
 }
 
-html, body {
+html {
   height: 100%;
 }
 

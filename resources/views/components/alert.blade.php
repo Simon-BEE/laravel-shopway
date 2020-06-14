@@ -1,10 +1,14 @@
-<div class="fixed right-0 top-0 mt-12 alert-flash transition-all duration-200 transform translate-x-full">
-    <div class="p-2">
-        <div class="inline-flex items-center bg-white leading-none {{ $type == 'success' ? 'text-green-500' : 'text-pink-600' }} rounded-full p-2 shadow text-teal text-sm">
-            <span class="inline-flex {{ $type == 'success' ? 'bg-green-500' : 'bg-pink-600' }} text-white rounded-full pb-2 pt-1 px-3 justify-center items-center">
-                {{ $type  }}
+<div class="fixed right-0 top-0 mt-20 max-w-lg z-40 alert-flash transition-all duration-200 transform translate-x-full">
+    <div class="px-4 py-3">
+        <div class="inline-flex items-center bg-white leading-none rounded px-3 py-5 shadow-lg border-l-4 text-teal text-sm {{ $type == 'success' ? 'text-green-500 border-green-500' : 'text-red-500 border-red-500' }}">
+            <span class="inline-flex  rounded-full py-2 px-3 justify-center items-center">
+                @if ($type == 'success')
+                    <span class="mdi mdi-alert-circle-check-outline text-2xl"></span>
+                @else
+                    <span class="mdi mdi-alert-remove-outline text-2xl"></span>
+                @endif
             </span>
-            <span class="inline-flex px-2">
+            <span class="inline-flex px-2 leading-4 text-gray-700">
                 {{ $slot }}
             </span>
         </div>

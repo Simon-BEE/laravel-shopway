@@ -6,7 +6,7 @@
     </div>
 
     <div class="mt-4 md:mt-0 text-gray-700 w-full md:w-6/12 flex flex-col justify-between max-h-full">
-        <div>
+        <div class="flex flex-col">
             <h3 class="text-xl mb-3 tracking-wider font-semibold" x-ref="productModalTitle">Lorem ipsum dolor sit.</h3>
             <div class="text-sm mb-5">
                 <span class="flex items-center">
@@ -29,9 +29,7 @@
                 </span>
             </div>
             <p class="text-justify leading-5" x-ref="productModalDesc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam ipsum atque, est magnam praesentium laboriosam omnis? Ad cumque reiciendis natus ullam id voluptate similique. Dolorem autem magnam quidem excepturi magni numquam! Odio iusto quidem, rerum autem unde explicabo neque, minima, dolor alias recusandae architecto cum iure. Quis ducimus quod nemo.</p>
-            <p class="text-right mt-4">
-                <a href="#" class="link p-2 text-blue-400 hover:underline" x-ref="productModalRoute">Show details...</a>
-            </p>
+            <a href="#" class="link p-2 text-blue-400 hover:underline ml-auto mt-4" x-ref="productModalRoute">Show details...</a>
         </div>
         <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
             <div class="price text-3xl font-semibold text-gray-700"><span class="price" x-ref="productModalPrice">49</span><span class="text-gray-500 font-thin">€</span></div>

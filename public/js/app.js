@@ -1812,7 +1812,19 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 /* harmony import */ var alpinejs__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(alpinejs__WEBPACK_IMPORTED_MODULE_0__);
- // Alert animation
+
+window.livewire.on('flashMessage', function (param) {
+  createAlert(param['type'], param['message'], param['id']);
+  var flashAlertElements = document.querySelectorAll('.alert-flash');
+  flashAlertElements.forEach(function (element) {
+    setTimeout(function () {
+      element.style.transform = 'translateX(0)';
+    }, 1000);
+    setTimeout(function () {
+      element.style.transform = 'translateX(100%)';
+    }, 5000);
+  });
+}); // Alert animation
 
 var flashAlertElement = document.querySelector('.alert-flash');
 
@@ -1823,6 +1835,24 @@ if (flashAlertElement) {
   setTimeout(function () {
     flashAlertElement.style.transform = 'translateX(100%)';
   }, 5000);
+}
+
+function createAlert(type, message, id) {
+  var alertElement = document.createElement('div');
+  alertElement.className = 'fixed right-0 top-0 mt-20 max-w-lg z-40 alert-flash transition-all duration-200 transform translate-x-full';
+  alertElement.id = "alert-".concat(id);
+  alertElement.innerHTML = "\n        <div class=\"px-4 py-3\">\n            <div class=\"inline-flex items-center bg-white leading-none rounded px-3 py-5 shadow-lg border-l-4 text-teal text-sm \" id=\"alert-type-".concat(id, "\">\n                <span class=\"inline-flex  rounded-full py-2 px-3 justify-center items-center\" id=\"alert-icon-").concat(id, "\">\n                </span>\n                <span class=\"inline-flex px-2 leading-4 text-gray-700\" id=\"alert-content-").concat(id, "\">\n                </span>\n            </div>\n        </div>\n    ");
+  document.querySelector('main').append(alertElement);
+
+  if (type === 'success') {
+    document.getElementById("alert-type-".concat(id)).classList.add('text-green-500', 'border-green-500');
+    document.getElementById("alert-icon-".concat(id)).innerHTML = "<span class=\"mdi mdi-alert-circle-check-outline text-2xl\"></span>";
+  } else {
+    document.getElementById("alert-type-".concat(id)).classList.add('text-red-500', 'border-red-500');
+    document.getElementById("alert-icon-".concat(id)).innerHTML = "<span class=\"mdi mdi-alert-remove-outline text-2xl\"></span>";
+  }
+
+  document.getElementById("alert-content-".concat(id)).innerHTML = message;
 }
 
 /***/ }),

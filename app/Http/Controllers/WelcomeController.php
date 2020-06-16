@@ -16,8 +16,8 @@ class WelcomeController extends Controller
      */
     public function __invoke(): View
     {
-        $cartService = new CartManager();
-        $cartService->add(Reference::find(11));
+        // $cartService = new CartManager();
+        // $cartService->add(Reference::find(11));
         // dd(session('cart'));
         // session()->flush();
 

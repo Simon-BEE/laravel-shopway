@@ -20,15 +20,11 @@ class Add extends Component
     {
         $cartManager->add($this->reference);
 
-        // session()->flash('type', 'success');
-        // session()->flash('message', 'Product successfully added to cart.');
         $this->emit('flashMessage', [
             'type' => 'success',
             'message' => 'Product successfully added to cart.',
             'id' => Str::random(6)
         ]);
-
-        // return redirect()->to('/');
     }
 
     public function render()

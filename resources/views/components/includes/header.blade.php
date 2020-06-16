@@ -44,9 +44,7 @@
                     <a class="rounded-full bg-gray-100 text-gray-700 text-xl text-center p-2 hover:bg-transparent hover:text-white transition-colors duration-200" href="{{ route('users.dashboard') }}">
                         <span class="mdi mdi-account"></span>
                     </a>
-                    <a href="#" class="ml-3 rounded-full bg-gray-100 text-gray-700 text-xl text-center p-2 hover:bg-transparent hover:text-white transition-colors duration-200">
-                        <span class="mdi mdi-cart-outline"></span>
-                    </a>
+                    <livewire:cart.icon />
                 @endauth
             </div>
         </div>

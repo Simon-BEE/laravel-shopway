@@ -20,6 +20,8 @@ class AddFromModal extends Component
             'message' => 'Product successfully added to cart.',
             'id' => Str::random(6)
         ]);
+
+        $this->emit('cartUpdated');
     }
 
     public function render()

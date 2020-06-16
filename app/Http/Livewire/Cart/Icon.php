@@ -6,6 +6,8 @@ use Livewire\Component;
 
 class Icon extends Component
 {
+    protected $listeners = ['cartUpdated' => "render"];
+
     public function render()
     {
         return view('livewire.cart.icon', [

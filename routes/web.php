@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController')->name('welcome');
 
+Route::get('/products/{product:slug}', 'Product\ShowController')->name('products.show');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/profile', 'User\DashboardController')->name('users.dashboard');
+});
+
 

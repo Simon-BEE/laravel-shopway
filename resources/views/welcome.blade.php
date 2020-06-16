@@ -44,6 +44,7 @@
                 <div class="cursor-pointer"
                     @click="
                         isDialogOpen = true;
+                        $refs.productModalRoute.href='{{ route('products.show', $reference->product) }}';
                         $refs.productModalTitle.innerText='{{ ucfirst($reference->product->title) }}';
                         $refs.productModalDesc.innerText='{{ $reference->product->description }}';
                         $refs.productModalPrice.innerText='{{ $reference->price }}';

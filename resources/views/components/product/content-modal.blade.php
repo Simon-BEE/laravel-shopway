@@ -29,12 +29,14 @@
                 </span>
             </div>
             <p class="text-justify leading-5" x-ref="productModalDesc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam ipsum atque, est magnam praesentium laboriosam omnis? Ad cumque reiciendis natus ullam id voluptate similique. Dolorem autem magnam quidem excepturi magni numquam! Odio iusto quidem, rerum autem unde explicabo neque, minima, dolor alias recusandae architecto cum iure. Quis ducimus quod nemo.</p>
-            <p class="text-right mt-4"><a href="#" class="link text-blue-400 hover:underline">Show details...</a></p>
+            <p class="text-right mt-4">
+                <a href="#" class="link p-2 text-blue-400 hover:underline" x-ref="productModalRoute">Show details...</a>
+            </p>
         </div>
         <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
             <div class="price text-3xl font-semibold text-gray-700"><span class="price" x-ref="productModalPrice">49</span><span class="text-gray-500 font-thin">€</span></div>
             <div class="flex">
-                <a href="" class="flex items-center p-2 rounded text-xl text-white mr-2 bg-blue-400 hover:bg-blue-600">
+                <a href="#" class="flex items-center p-2 rounded text-xl text-white mr-2 bg-blue-400 hover:bg-blue-600">
                     <span class="mdi mdi-cart-outline mr-2"></span>
                     Add to cart
                 </a>

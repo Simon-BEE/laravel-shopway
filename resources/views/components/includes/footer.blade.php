@@ -15,27 +15,27 @@
                         <h3 class="font-bold text-gray-900">Links</h3>
                         <ul class="list-reset items-center pt-3">
                             <li>
-                                <a class="inline-block border-l-2 border-transparent hover:border-blue-400 py-1 pl-4" href="{{ route('welcome') }}">Homepage</a>
+                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="{{ route('welcome') }}">Homepage</a>
                             </li>
                             <li>
-                                <a class="inline-block border-l-2 border-transparent hover:border-blue-400 py-1 pl-4" href="#">Products</a>
+                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="#">Products</a>
                             </li>
                             <li>
-                                <a class="inline-block border-l-2 border-transparent hover:border-blue-400 py-1 pl-4" href="#">Contact</a>
+                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="#">Contact</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="text-center md:text-left text-xs text-gray-500">
-                <a href="#">Terms</a>
+                <a href="#" class="hover:underline">Terms</a>
                 <span class="mx-2">&bull;</span>
-                <a href="#">Legal Notice</a>
+                <a href="#" class="hover:underline">Legal Notice</a>
                 <span class="mx-2">&bull;</span>
-                <a href="#">Pricing Policy</a>
+                <a href="#" class="hover:underline">Pricing Policy</a>
             </div>
         </div>
         <div class="bg-gray-800 p-4 mt-4 text-center tracking-wider text-sm">
-            Made with <span class="text-red-500">♥</span> in France by <a href="https://skymon.fr" class="text-gray-500">Skymon</a>
+            Made with <span class="text-red-500">♥</span> in 🇫🇷 by <a href="https://skymon.fr" class="text-gray-500 hover:underline">🐧</a>
         </div>
     </footer>

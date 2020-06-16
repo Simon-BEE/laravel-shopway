@@ -15,13 +15,13 @@
                         <h3 class="font-bold text-gray-900">Links</h3>
                         <ul class="list-reset items-center pt-3">
                             <li>
-                                <a class="inline-block no-underline hover:text-black hover:underline py-1" href="{{ route('welcome') }}">Homepage</a>
+                                <a class="inline-block border-l-2 border-transparent hover:border-blue-400 py-1 pl-4" href="{{ route('welcome') }}">Homepage</a>
                             </li>
                             <li>
-                                <a class="inline-block no-underline hover:text-black hover:underline py-1" href="#">Products</a>
+                                <a class="inline-block border-l-2 border-transparent hover:border-blue-400 py-1 pl-4" href="#">Products</a>
                             </li>
                             <li>
-                                <a class="inline-block no-underline hover:text-black hover:underline py-1" href="#">Contact</a>
+                                <a class="inline-block border-l-2 border-transparent hover:border-blue-400 py-1 pl-4" href="#">Contact</a>
                             </li>
                         </ul>
                     </div>

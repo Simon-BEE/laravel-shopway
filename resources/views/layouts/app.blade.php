@@ -34,7 +34,9 @@
             <x-alert type="{{ session('type') }}">{{ session()->has('message') ? session('message') : '' }}</x-alert>
         @endif
 
-        @yield('content')
+        <section class="container mx-auto">
+            @yield('content')
+        </section>
     </main>
 
     <!--Footer-->

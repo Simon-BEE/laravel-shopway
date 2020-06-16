@@ -9,6 +9,30 @@ class Product extends Model
     protected $guarded = ['id'];
 
     /**
+     * ? ATTRIBUTES
+     */
+
+    /**
+     * Return the main reference of a product
+     *
+     * @return Reference (model)
+     */
+    public function getFirstReferenceAttribute(): Reference
+    {
+        return $this->references->first();
+    }
+
+    /**
+     * Return truncate description of a product
+     *
+     * @return string
+     */
+    public function getExcerptAttribute(): string
+    {
+        return substr($this->description, 0, 200) . '...';
+    }
+
+    /**
      * ? RELATIONS
      */
 
@@ -19,6 +43,6 @@ class Product extends Model
 
     public function references()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Reference::class);
     }
 }

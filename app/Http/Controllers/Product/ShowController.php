@@ -16,7 +16,8 @@ class ShowController extends Controller
      */
     public function __invoke(Product $product)
     {
-        dd($product);
-        return view();
+        return view('products.show', [
+            'product' => $product->load('references')
+        ]);
     }
 }

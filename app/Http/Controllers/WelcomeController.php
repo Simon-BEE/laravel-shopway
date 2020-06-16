@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reference;
-use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\View\View;
 
 class WelcomeController extends Controller
 {
     /**
-     * Handle the incoming request.
+     * Homepage view with some random products
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function __invoke(Request $request)
+    public function __invoke(): View
     {
         return view('welcome', [
-            'references' => Reference::with('product')->inRandomOrder()->take(12)->get(),
+            'products' => Product::with('references')->inRandomOrder()->take(12)->get(),
         ]);
     }
 }

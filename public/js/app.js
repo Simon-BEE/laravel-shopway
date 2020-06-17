@@ -1823,6 +1823,9 @@ window.livewire.on('flashMessage', function (param) {
     setTimeout(function () {
       element.style.transform = 'translateX(100%)';
     }, 5000);
+    setTimeout(function () {
+      removeElement(element);
+    }, 6500);
   });
 }); // Alert animation
 
@@ -1853,6 +1856,10 @@ function createAlert(type, message, id) {
   }
 
   document.getElementById("alert-content-".concat(id)).innerHTML = message;
+}
+
+function removeElement(element) {
+  element.parentNode.removeChild(element);
 }
 
 /***/ }),

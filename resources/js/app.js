@@ -11,6 +11,9 @@ window.livewire.on('flashMessage', param => {
         setTimeout(() => {
             element.style.transform = 'translateX(100%)';
         }, 5000);
+        setTimeout(() => {
+            removeElement(element)
+        }, 6500);
     });
 });
 
@@ -49,4 +52,8 @@ function createAlert(type, message, id) {
     }
 
     document.getElementById(`alert-content-${id}`).innerHTML = message;
+}
+
+function removeElement(element) {
+    element.parentNode.removeChild(element);
 }

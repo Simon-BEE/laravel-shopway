@@ -44,7 +44,11 @@ class CartManager
 
     public function totalItemWithoutTax(int $productId)
     {
-        return session('cart')[$productId]['quantity'] * session('cart')[$productId]['price'];
+        if (isset(session('cart')[$productId])) {
+            return session('cart')[$productId]['quantity'] * session('cart')[$productId]['price'];
+        }
+
+        return 0;
     }
 
     public function totalItemWithTax(int $productId)

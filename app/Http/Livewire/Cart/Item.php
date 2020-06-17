@@ -55,8 +55,6 @@ class Item extends Component
         $this->emit('itemChanged');
         $this->emit('cartUpdated');
 
-        return view('livewire.cart.item', [
-            'totalItem' => Cart::totalItemWithoutTax($this->referenceId),
-        ]);
+        return view('livewire.cart.item');
     }
 }

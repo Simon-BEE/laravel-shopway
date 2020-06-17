@@ -29,7 +29,7 @@
     </td>
     <td class="text-right">
         <span class="text-sm lg:text-base font-semibold">
-        {{ $totalItem }}
+        {{ $referenceId ? Cart::totalItemWithoutTax($this->referenceId) : 0 }}
         </span>
     </td>
 </tr>

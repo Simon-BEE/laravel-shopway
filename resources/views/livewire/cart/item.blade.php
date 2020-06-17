@@ -24,12 +24,12 @@
     </td>
     <td class="hidden text-right md:table-cell">
         <span class="text-sm lg:text-base font-medium">
-        {{ $reference['price'] }}€
+            {{ Format::priceWithTaxAndCurrency($reference['price']) }}
         </span>
     </td>
     <td class="text-right">
         <span class="text-sm lg:text-base font-semibold">
-        {{ $referenceId ? Cart::totalItemWithoutTax($this->referenceId) : 0 }}
+            {{ $referenceId ? Cart::totalItemWithTax($this->referenceId) : 0 }}
         </span>
     </td>
 </tr>

@@ -7,7 +7,9 @@
 
     <div class="mt-4 md:mt-0 text-gray-700 w-full md:w-6/12 flex flex-col justify-between max-h-full">
         <div class="flex flex-col">
-            <h3 class="text-xl mb-3 tracking-wider font-semibold" x-ref="productModalTitle">Lorem ipsum dolor sit.</h3>
+            <h3 class="text-xl mb-3 tracking-wider font-semibold" x-ref="productModalTitle">
+                {{-- Dynamic Content Here --}}
+            </h3>
             <div class="text-sm mb-5">
                 <span class="flex items-center">
                     <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-400" viewBox="0 0 24 24">
@@ -28,16 +30,16 @@
                     <span class="text-gray-600 ml-3">4 Reviews</span>
                 </span>
             </div>
-            <p class="text-justify leading-5" x-ref="productModalDesc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam ipsum atque, est magnam praesentium laboriosam omnis? Ad cumque reiciendis natus ullam id voluptate similique. Dolorem autem magnam quidem excepturi magni numquam! Odio iusto quidem, rerum autem unde explicabo neque, minima, dolor alias recusandae architecto cum iure. Quis ducimus quod nemo.</p>
+            <p class="text-justify leading-5" x-ref="productModalDesc">
+                {{-- Dynamic Content Here --}}
+            </p>
             <a href="#" class="link p-2 text-blue-400 hover:underline ml-auto mt-4" x-ref="productModalRoute">Show details...</a>
         </div>
         <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
-            <div class="price text-3xl font-semibold text-gray-700"><span class="price" x-ref="productModalPrice">49</span><span class="text-gray-500 font-thin">€</span></div>
+            <div class="price text-3xl font-semibold text-gray-700"><span class="price" x-ref="productModalPrice">
+                {{-- Dynamic Content Here --}}
+            </div>
             <div class="flex">
-                {{-- <a href="#" class="flex items-center p-2 rounded text-xl text-white mr-2 bg-blue-400 hover:bg-blue-600">
-                    <span class="mdi mdi-cart-outline mr-2"></span>
-                    Add to cart
-                </a> --}}
                 <livewire:cart.add-from-modal />
                 <a href="#" class="rounded-full p-2 bg-gray-200 text-gray-500 hover:text-white hover:bg-red-500 transition-colors duration-200" @click.stop="alert('ok')">
                     <svg class="h-6 w-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

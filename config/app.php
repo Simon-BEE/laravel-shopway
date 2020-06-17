@@ -228,6 +228,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'ProductHelper' => App\Helpers\ProductHelper::class,
         'Cart' => App\Helpers\Cart::class,
+        'Format' => App\Helpers\Format::class,
 
     ],
 

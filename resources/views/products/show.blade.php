@@ -51,7 +51,7 @@
             </div>
             <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
                 <div class="price text-3xl font-semibold text-gray-700">
-                    <span class="price">{{ $product->firstReference->price }}</span><span class="text-gray-500 font-thin">€</span>
+                    {{ Format::priceWithTaxAndCurrency($product->firstReference->price) }}
                 </div>
                 <div class="flex">
                     <livewire:cart.add :reference="$product->firstReference" />

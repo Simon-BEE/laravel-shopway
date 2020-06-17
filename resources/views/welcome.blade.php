@@ -47,7 +47,7 @@
                         $refs.productModalRoute.href='{{ route('products.show', $product) }}';
                         $refs.productModalTitle.innerText='{{ ucfirst($product->title) }}';
                         $refs.productModalDesc.innerText='{{ $product->excerpt }}';
-                        $refs.productModalPrice.innerText='{{ $product->firstReference->price }}';
+                        $refs.productModalPrice.innerText='{{ Format::priceWithTaxAndCurrency($product->firstReference->price) }}';
                         $refs.productModalImg.src='{{ $product->firstReference->imagePath }}';
                         $refs.productModalId.setAttribute('data-product', {{ $product->firstReference->id }});
                 ">
@@ -62,7 +62,7 @@
                             </svg>
                         </a>
                     </div>
-                    <p class="pt-1 text-gray-800 font-bold text-xl">{{ $product->firstReference->price }}<span class="font-thin">€</span></p>
+                    <p class="pt-1 text-gray-800 font-bold text-xl">{{ Format::priceWithTaxAndCurrency($product->firstReference->price) }}</p>
                 </div>
             </div>
             @empty

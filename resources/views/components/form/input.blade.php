@@ -1,4 +1,4 @@
-<div class="flex flex-wrap mb-4">
+<div class="{{ $classDiv ?? 'flex flex-wrap mb-4' }}">
     @if($label ?? null)
     <div class="flex justify-between w-full items-center mb-2">
         <label class="label {{ ($required ?? false) ? 'label-required' : '' }} text-gray-700" for="{{ $name }}">

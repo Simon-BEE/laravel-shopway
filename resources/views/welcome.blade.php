@@ -49,7 +49,7 @@
                         $refs.productModalDesc.innerText='{{ $product->excerpt }}';
                         $refs.productModalPrice.innerText='{{ $product->firstReference->price }}';
                         $refs.productModalImg.src='{{ $product->firstReference->imagePath }}';
-                        $refs.productModalId.dataset.product='{{ $product->firstReference->id }}';
+                        $refs.productModalId.setAttribute('data-product', {{ $product->firstReference->id }});
                 ">
                     <div class="img hover:grow hover:shadow-lg w-72 h-48">
                         <img class="w-full h-full object-cover rounded shadow-lg" src="https://picsum.photos/300/300?random={{ mt_rand(1, 15) }}">
@@ -78,8 +78,8 @@
 <script>
     window.onload = () => {
         window.livewire.on('addToCart', () => {
-            let btnElement = document.getElementById('btnModal');
-            window.livewire.emit('addToCartFromModal', btnElement.getAttribute('data-product'));
+            let modalProductElement = document.querySelector('.modal-product');
+            window.livewire.emit('addToCartFromModal', modalProductElement.getAttribute('data-product'));
         });
     }
 </script>

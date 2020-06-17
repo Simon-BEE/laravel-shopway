@@ -40,10 +40,10 @@
                     </span>
                 </div>
                 <p class="text-justify leading-5">{{ $product->description }}</p>
-                <p class="text-right mt-4">
+                <p class="text-right mt-4 leading-6">
                     Other references :
                     @forelse ($product->references as $reference)
-                        <span class="mr-1 text-xs text-white px-2 py-1 rounded bg-blue-400">{{ $reference->name }}</span>
+                        <span class="mr-1 text-xs text-white px-2 py-1 rounded bg-blue-400 break-words">{{ $reference->name }}</span>
                     @empty
                         <span>No references found.</span>
                     @endforelse

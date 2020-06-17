@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController')->name('welcome');
 
+Route::get('/cart', 'Cart\CartController@index')->name('cart.index');
+
 Route::get('/products/{product:slug}', 'Product\ShowController')->name('products.show');
 
 Auth::routes();

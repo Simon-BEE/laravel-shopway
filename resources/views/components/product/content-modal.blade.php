@@ -1,6 +1,6 @@
 
 
-<div class="flex flex-col md:flex-row items-stretch justify-around">
+<div class="flex flex-col md:flex-row items-stretch justify-around modal-product" data-product="" x-ref="productModalId">
     <div class="img w-full md:w-4/12">
         <img class="w-full h-full object-cover rounded shadow-lg" x-ref="productModalImg" src="" alt="lorem">
     </div>

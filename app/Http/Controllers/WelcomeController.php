@@ -19,7 +19,7 @@ class WelcomeController extends Controller
         // $cartService = new CartManager();
         // $cartService->add(Reference::find(11));
         // dd(session('cart'));
-        // session()->flush();
+        // session()->put('cart', []);
 
         return view('welcome', [
             'products' => Product::with('references')->inRandomOrder()->take(12)->get(),

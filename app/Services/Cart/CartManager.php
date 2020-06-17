@@ -11,34 +11,44 @@ class CartManager
         Adding::add($productReference);
     }
 
-    // public function update(Request $request)
-    // {
-    //     if($request->id and $request->quantity)
-    //     {
-    //         $cart = session()->get('cart');
+    public function remove(int $referenceId)
+    {
+        Removing::remove($referenceId);
+    }
 
-    //         $cart[$request->id]["quantity"] = $request->quantity;
+    public function update($referenceId, $qty)
+    {
+        Updating::update($referenceId, $qty);
+    }
 
-    //         session()->put('cart', $cart);
+    /**
+     * ? TOTAL
+     */
 
-    //         session()->flash('success', 'Cart updated successfully');
-    //     }
-    // }
+    public function totalWithoutTax()
+    {
+        return collect(session('cart'))->sum(function ($product){
+            return ($product['quantity'] * $product['price']);
+        });
+    }
 
-    // public function remove(Request $request)
-    // {
-    //     if($request->id) {
+    public function totalWithTax()
+    {
+        return $this->totalWithoutTax() + $this->totalTax();
+    }
 
-    //         $cart = session()->get('cart');
+    public function totalTax()
+    {
+        return $this->totalWithoutTax() * config('cart.tax');
+    }
 
-    //         if(isset($cart[$request->id])) {
+    public function totalItemWithoutTax(int $productId)
+    {
+        return session('cart')[$productId]['quantity'] * session('cart')[$productId]['price'];
+    }
 
-    //             unset($cart[$request->id]);
-
-    //             session()->put('cart', $cart);
-    //         }
-
-    //         session()->flash('success', 'Product removed successfully');
-    //     }
-    // }
+    public function totalItemWithTax(int $productId)
+    {
+        return $this->totalItemWithoutTax($productId) + ($this->totalItemWithoutTax($productId) * config('cart.tax'));
+    }
 }

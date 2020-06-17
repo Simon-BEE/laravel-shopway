@@ -14,6 +14,6 @@ class ProductHelper
      */
     public static function getRouteByReference(int $id)
     {
-        return route('products.show', Reference::findOrFail($id)->product);
+        return route('products.show', Reference::with('product')->findOrFail($id)->product);
     }
 }

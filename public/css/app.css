@@ -18155,6 +18155,85 @@ main {
   transform: scale(1.02);
 }
 
+/* purgecss start ignore */
+
+.livewire-pagination {
+  display: inline-block;
+  width: auto;
+  margin-left: auto;
+  float: right;
+}
+
+ul.pagination {
+  display: flex;
+  border-width: 1px;
+  --border-opacity: 1;
+  border-color: #edf2f7;
+  border-color: rgba(237, 242, 247, var(--border-opacity));
+  border-radius: 0.25rem;
+  font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.page-link {
+  display: block;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #2c5282;
+  color: rgba(44, 82, 130, var(--text-opacity));
+  border-right-width: 1px;
+  --border-opacity: 1;
+  border-color: #edf2f7;
+  border-color: rgba(237, 242, 247, var(--border-opacity));
+  outline: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  width: 3rem;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.page-link:last-child {
+  border-width: 0;
+}
+
+.page-link:hover {
+  --bg-opacity: 1;
+  background-color: #2b6cb0;
+  background-color: rgba(43, 108, 176, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #2b6cb0;
+  border-color: rgba(43, 108, 176, var(--border-opacity));
+}
+
+.page-item.active .page-link {
+  --bg-opacity: 1;
+  background-color: #2b6cb0;
+  background-color: rgba(43, 108, 176, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #2b6cb0;
+  border-color: rgba(43, 108, 176, var(--border-opacity));
+}
+
+.page-item.disabled .page-link {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #e2e8f0;
+  color: rgba(226, 232, 240, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #edf2f7;
+  border-color: rgba(237, 242, 247, var(--border-opacity));
+}
+
 :root {
   --main: #263238;
   --link: #37474F;

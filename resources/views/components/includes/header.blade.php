@@ -13,7 +13,7 @@
             <nav>
                 <ul class="md:flex items-center justify-between text-base text-gray-300 pt-4 md:pt-0">
                     <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="{{ route('welcome') }}">Home</a></li>
-                    <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="#">Products</a></li>
+                    <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="{{ route('products.index') }}">Products</a></li>
                     <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </nav>

@@ -23,7 +23,7 @@
         @yield('extra-css')
     </head>
 
-    <body class="bg-white min-h-screen antialiased leading-none font-perso relative"  x-data="{ 'isDialogOpen': false }">
+    <body class="bg-white min-h-screen antialiased leading-none font-perso relative" x-data="{ 'isDialogOpen': false }">
         <!--Nav-->
         <x-includes.header />
 

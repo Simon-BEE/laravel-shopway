@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'WelcomeController')->name('welcome');
 
+Route::get('/products', 'Product\IndexController')->name('products.index');
+
 Route::view('/contact', 'contact')->name('contact');
 
 Route::get('/cart', 'Cart\CartController@index')->name('cart.index');

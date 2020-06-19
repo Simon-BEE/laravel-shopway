@@ -18,10 +18,10 @@
                                 <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="{{ route('welcome') }}">Homepage</a>
                             </li>
                             <li>
-                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="#">Products</a>
+                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="{{ route('products.index') }}">Products</a>
                             </li>
                             <li>
-                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="#">Contact</a>
+                                <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="{{ route('contact') }}">Contact</a>
                             </li>
                         </ul>
                     </div>

@@ -14,7 +14,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.cart.index', [
-            'cartReferences' => session('cart'),
+            'cartReferences' => session('cart') ?? [],
             'totalWithoutTax' => Cart::totalWithoutTax(),
             'totalWithTax' => Cart::totalWithTax(),
             'totalTax' => Cart::totalTax(),

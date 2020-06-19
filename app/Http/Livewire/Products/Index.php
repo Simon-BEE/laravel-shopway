@@ -14,10 +14,10 @@ class Index extends Component
     public $search;
     public $currentPage = 1;
 
-    public function paginationView()
-    {
-        return 'vendor.pagination.tailwind';
-    }
+    // public function paginationView()
+    // {
+    //     return 'vendor.pagination.tailwind';
+    // }
 
     public function updatedSearch()
     {

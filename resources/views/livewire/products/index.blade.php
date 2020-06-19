@@ -24,7 +24,7 @@
     </nav>
     @forelse ($products as $product)
     <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
-        <div class="cursor-pointer">
+        <a href="{{ route('products.show', $product) }}" class="cursor-pointer">
             <div class="img hover:grow hover:shadow-lg w-72 h-48">
                 <img class="w-full h-full object-cover rounded shadow-lg" src="https://picsum.photos/300/300?random={{ mt_rand(1, 15) }}">
             </div>
@@ -37,12 +37,12 @@
                 </a>
             </div>
             <p class="pt-1 text-gray-800 font-bold text-xl">{{ Format::priceWithTaxAndCurrency($product->firstReference->price) }}</p>
-        </div>
+        </a>
     </div>
     @empty
     <p>Sorry, no products can be displayed for the moment!</p>
     @endforelse
-    <div class="mt-6">
+    <div class="mt-6 flex justify-center w-full">
         {{ $products->links() }}
     </div>
 </div>

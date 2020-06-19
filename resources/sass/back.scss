@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+
+:root{
+    --main: #263238;
+    --link: #37474F;
+    --hover: #455A64;
+}
+
+.font-family-karla { font-family: karla; }
+.bg-sidebar { background: var(--main); }
+.cta-btn { color: var(--main); }
+.upgrade-btn { background: var(--link); }
+.upgrade-btn:hover { background: var(--hover); }
+.active-nav-link { background: var(--link); }
+.nav-item:hover { background: var(--link); }
+.account-link:hover { background: var(--main); }
+
+.menu-link{
+    @apply flex items-center text-white opacity-75 py-4 pl-6;
+}
+.menu-link:hover{
+    @apply opacity-100;
+}
+
+.menu-mobile-link{
+    @apply flex items-center text-white opacity-75 py-2 pl-4;
+}
+.menu-mobile-link:hover{
+    @apply opacity-100;
+}
+
+.table-body tr:nth-child(even){
+    @apply bg-gray-200;
+}
+
+.custom-label input:checked + svg {
+    display: block !important;
+}
+
+.modal {
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 55vw;
+    min-width: 300px;
+    height: 400px;
+}

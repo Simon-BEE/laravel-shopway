@@ -25,6 +25,11 @@ Route::get('/products/{product:slug}', 'Product\ShowController')->name('products
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::view('/admin', 'layouts.back')->name('admin');
+    });
+
     Route::get('/profile', 'User\DashboardController')->name('users.dashboard');
 });
 

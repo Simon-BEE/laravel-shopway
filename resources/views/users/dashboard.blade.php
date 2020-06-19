@@ -11,8 +11,11 @@
 @section('content')
 
 <section class="my-12 min-h-full px-6 py-10 relative">
-    <article class="my-4 absolute left-0 top-0 ml-4">
+    <article class="my-4 absolute left-0 top-0 ml-4 flex items-end">
         <h2 class="text-xl font-semibold text-gray-600">{{ __('Welcome') }} <span class="font-normal">{{ auth()->user()->firstname ?? auth()->user()->email }}</span></h2>
+        @admin
+            <a href="{{ route('admin') }}" class="ml-2 uppercase text-xs text-indigo-500 hover:underline">&rarr; Admin Panel</a>
+        @endadmin
     </article>
     <article class="my-4 absolute right-0 top-0 mr-2">
         <x-form.form-button action="{{ route('logout') }}" class="bg-red-400 text-white hover:bg-red-600">

@@ -41,6 +41,10 @@
                         <span class="mdi mdi-cart-arrow-down mr-2"></span>
                         Produits
                     </a>
+                    <a href="" class="menu-link nav-item">
+                        <span class="mdi mdi-basket-outline mr-2"></span>
+                        Commandes
+                    </a>
                     <a href="#" class="menu-link nav-item">
                         <span class="mdi mdi-account-group-outline mr-2"></span>
                         Utilisateurs
@@ -96,6 +100,10 @@
                         <a href="" class="menu-mobile-link nav-item">
                             <span class="mdi mdi-cart-arrow-down mr-2"></span>
                             Produits
+                        </a>
+                        <a href="" class="menu-mobile-link nav-item">
+                            <span class="mdi mdi-basket-outline mr-2"></span>
+                            Commandes
                         </a>
                         <a href="#" class="menu-mobile-link nav-item">
                             <span class="mdi mdi-account-group-outline mr-2"></span>

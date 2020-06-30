@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserIsLogged;
+use App\Events\UserIsLogout;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -41,6 +43,18 @@ class LoginController extends Controller
     }
 
     /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        event(new UserIsLogged($user));
+    }
+
+    /**
      * Log the user out of the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -48,6 +62,7 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        event(new UserIsLogout(auth()->user()));
         $this->guard()->logout();
 
         // $request->session()->invalidate();

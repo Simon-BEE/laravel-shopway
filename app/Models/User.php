@@ -62,6 +62,11 @@ class User extends Authenticatable
         return $this->getPermissionsThroughRole()->implode(', ');
     }
 
+    public function getHasAlreadyCartAttribute(): bool
+    {
+        return $this->cart ? true : false;
+    }
+
     /**
      * ? RELATIONS
      */
@@ -79,5 +84,15 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function wishes()
+    {
+        return $this->hasMany(Wish::class);
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
     }
 }

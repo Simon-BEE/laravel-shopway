@@ -4,7 +4,7 @@ namespace App\Services\Cart;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Adding
+class CartAdding
 {
     /**
      * Add a product in cart

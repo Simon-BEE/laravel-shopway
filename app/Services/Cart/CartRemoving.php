@@ -2,7 +2,7 @@
 
 namespace App\Services\Cart;
 
-class Removing
+class CartRemoving
 {
     /**
      * Remove a product in cart

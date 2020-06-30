@@ -12,6 +12,17 @@ class Product extends Model
      * ? ATTRIBUTES
      */
 
+     /**
+      * Return title with uppercase on first character
+      *
+      * @param string $title
+      * @return string
+      */
+    public function getTitleAttribute(string $title): string
+    {
+        return ucfirst($title);
+    }
+
     /**
      * Return the main reference of a product
      *

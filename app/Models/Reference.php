@@ -26,4 +26,9 @@ class Reference extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function wishes()
+    {
+        return $this->hasMany(Wish::class);
+    }
 }

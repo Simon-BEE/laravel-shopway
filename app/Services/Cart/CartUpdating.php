@@ -2,7 +2,7 @@
 
 namespace App\Services\Cart;
 
-class Updating
+class CartUpdating
 {
     /**
      * Update a product in cart by its reference id

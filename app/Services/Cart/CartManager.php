@@ -8,17 +8,17 @@ class CartManager
 {
     public function add(Reference $productReference)
     {
-        Adding::add($productReference);
+        CartAdding::add($productReference);
     }
 
     public function remove(int $referenceId)
     {
-        Removing::remove($referenceId);
+        CartRemoving::remove($referenceId);
     }
 
     public function update($referenceId, $qty)
     {
-        Updating::update($referenceId, $qty);
+        CartUpdating::update($referenceId, $qty);
     }
 
     /**

@@ -18,6 +18,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        'App\Events\UserIsLogged' => [
+            'App\Listeners\SetCartToUser',
+        ],
+        'App\Events\UserIsLogout' => [
+            'App\Listeners\SetUserCartToDatabase',
+        ],
     ];
 
     /**

@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('meta-desc')
-    <meta name="description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nam veniam tempora fugit fuga pariatur atque maiores consequuntur asperiores dolores! Facere natus vitae odit, quis corporis recusandae ad consectetur numquam!"/>
+    <meta name="description" content="{{ $product->excerpt }}"/>
 @endsection
 
-@section('meta-title')
-    {{ $product->title }}
-@endsection
+@section('meta-title') {{ $product->title }} @endsection
 
 @section('content')
 

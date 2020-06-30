@@ -23,7 +23,7 @@
         @yield('extra-css')
 </head>
 <body>
-    <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
+    <div x-data="{ sidebarOpen: false, 'isDialogOpen': false }" class="flex h-screen bg-gray-200 font-family-karla">
         <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
 
         <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
@@ -52,7 +52,7 @@
                     </div>
                     <ul class="flex flex-col py-2" x-show.transition="dropdownProducts">
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Show list</a>
+                            <a class="block py-2" href="{{ route('admin.products.index') }}"><span class="mr-4">&mdash;</span> Show list</a>
                         </li>
                         <li class="hover:bg-gray-500">
                             <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Add new one</a>
@@ -161,11 +161,15 @@
                 </div>
             </header>
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                @if (session()->has('type'))
+                    <x-alert type="{{ session('type') }}">{{ session()->has('message') ? session('message') : '' }}</x-alert>
+                @endif
                 <div class="container mx-auto px-6 py-8">
                     @yield('content')
                 </div>
             </main>
         </div>
     </div>
+    <livewire:scripts>
 </body>
 </html>

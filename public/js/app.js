@@ -1858,7 +1858,7 @@ var flashAlertElement = document.querySelector('.alert-flash');
 if (flashAlertElement) {
   setTimeout(function () {
     flashAlertElement.style.transform = 'translateX(0)';
-  }, 1000);
+  }, 500);
   setTimeout(function () {
     flashAlertElement.style.transform = 'translateX(100%)';
   }, 5000);

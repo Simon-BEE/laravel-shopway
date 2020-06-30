@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'admin.',
     ], function () {
         Route::get('/', 'DashboardController')->name('dashboard');
+        Route::get('/products', 'Products\IndexController')->name('products.index');
+        Route::get('/products/edit/{product}', 'Products\EditController@edit')->name('products.edit');
+        Route::patch('/products/edit/{product}', 'Products\EditController@update')->name('products.update');
+        Route::delete('/products/{product}', 'Products\DestroyController')->name('products.destroy');
     });
 
     Route::get('/profile', 'User\DashboardController')->name('users.dashboard');

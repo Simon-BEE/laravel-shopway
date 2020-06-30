@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use Carbon\Carbon;
+
 class Format
 {
     public static function price(float $price)
@@ -17,5 +19,10 @@ class Format
     public static function priceWithTaxAndCurrency(float $price)
     {
         return number_format(($price + ($price * config('cart.tax'))), 2, '.', ' ') . config('cart.currency');
+    }
+
+    public static function date($date, string $format = 'd/m/Y')
+    {
+        return Carbon::parse($date)->format($format);
     }
 }

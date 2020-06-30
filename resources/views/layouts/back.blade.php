@@ -37,14 +37,14 @@
             {{-- sidebar --}}
             <nav class="mt-10">
                 {{-- normal link --}}
-                <a class="flex items-center mt-4 py-2 px-6 border-l-4 bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100" href="{{ route('admin.dashboard') }}">
+                <a class="flex items-center mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.dashboard')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif" href="{{ route('admin.dashboard') }}">
                     <span class="mdi mdi-chart-pie text-xl"></span>
 
                     <span class="mx-4">Dashboard</span>
                 </a>
 
                 {{-- dropdown link --}}
-                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 cursor-pointer" x-data="{ dropdownProducts : false }" @click="dropdownProducts = !dropdownProducts">
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.products.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownProducts : false }" @click="dropdownProducts = !dropdownProducts">
                     <div class="flex items-center">
                         <span class="mdi mdi-cart-arrow-down text-xl"></span>
 
@@ -63,7 +63,7 @@
                     </ul>
                 </div>
                 {{-- dropdown link --}}
-                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 cursor-pointer" x-data="{ dropdownSales : false }" @click="dropdownSales = !dropdownSales">
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.sales.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownSales : false }" @click="dropdownSales = !dropdownSales">
                     <div class="flex items-center">
                         <span class="mdi mdi-basket-outline text-xl"></span>
 
@@ -82,7 +82,7 @@
                     </ul>
                 </div>
                 {{-- dropdown link --}}
-                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 cursor-pointer" x-data="{ dropdownUsers : false }" @click="dropdownUsers = !dropdownUsers">
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.users.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownUsers : false }" @click="dropdownUsers = !dropdownUsers">
                     <div class="flex items-center">
                         <span class="mdi mdi-account-group-outline text-xl"></span>
 
@@ -98,7 +98,7 @@
                     </ul>
                 </div>
                 {{-- normal link --}}
-                <a class="flex items-center mt-4 py-2 px-6 border-l-4 border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100" href="#">
+                <a class="flex items-center mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.settings')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif" href="#">
                     <span class="mdi mdi-cellphone-cog text-xl"></span>
 
                     <span class="mx-4">Settings</span>

@@ -28,8 +28,13 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::group(['middleware' => ['role:admin']], function () {
-        Route::view('/admin', 'layouts.back')->name('admin');
+    Route::group([
+        'middleware' => ['role:admin'],
+        'prefix' => 'admin',
+        'namespace' => 'Admin',
+        'as' => 'admin.',
+    ], function () {
+        Route::get('/', 'DashboardController')->name('dashboard');
     });
 
     Route::get('/profile', 'User\DashboardController')->name('users.dashboard');

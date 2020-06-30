@@ -3,7 +3,7 @@
     @method($method ?? 'POST')
         <button
             type="submit"
-            class="p-2 rounded inline-flex {{ $class ?? 'text-red-400 hover:text-red-600' }}"
+            class="{{ $class ?? 'p-2 rounded inline-flex text-red-400 hover:text-red-600' }}"
         >
             {{ $slot }}
         </button>

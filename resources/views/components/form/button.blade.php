@@ -1,3 +1,4 @@
+@props(['classDiv', 'class'])
 <div class="{{ $classDiv ?? 'mt-4 flex justify-end' }}">
     <button
         type="submit"

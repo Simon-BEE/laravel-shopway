@@ -12,11 +12,10 @@ class Index extends Component
     use WithPagination;
 
     public $search;
-    public $currentPage = 1;
 
     // public function paginationView()
     // {
-    //     return 'vendor.pagination.tailwind';
+    //     return 'vendor.pagination.livewire-tailwind';
     // }
 
     public function updatedSearch()

@@ -67,6 +67,15 @@ class User extends Authenticatable
         return $this->cart ? true : false;
     }
 
+    public function isInWishlist(int $referenceId): bool
+    {
+        if (!auth()->check()) {
+            return false;
+        }
+
+        return $this->wishes->contains('reference_id', $referenceId);
+    }
+
     /**
      * ? RELATIONS
      */

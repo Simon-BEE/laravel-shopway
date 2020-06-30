@@ -58,6 +58,10 @@
             let modalProductElement = document.querySelector('.modal-product');
             window.livewire.emit('addToCartFromModal', modalProductElement.getAttribute('data-product'));
         });
+        window.livewire.on('addToWishlist', () => {
+            let modalProductElement = document.querySelector('.modal-product');
+            window.livewire.emit('addToWishlistFromModal', modalProductElement.getAttribute('data-product'));
+        });
     }
 </script>
 @endsection

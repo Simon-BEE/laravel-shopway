@@ -10,6 +10,11 @@ class Reference extends Model
 
     // protected $with = ['wishes'];
 
+    public function getNameAttribute(string $name)
+    {
+        return ucfirst($name);
+    }
+
     public function getImagePathAttribute()
     {
         return "https://picsum.photos/800";

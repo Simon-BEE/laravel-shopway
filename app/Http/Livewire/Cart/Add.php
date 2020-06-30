@@ -23,7 +23,7 @@ class Add extends Component
         $this->emit('flashMessage', [
             'type' => 'success',
             'message' => 'Product successfully added to cart.',
-            'id' => Str::random(6)
+            'id' => Str::random(10)
         ]);
 
         $this->emit('cartUpdated');
@@ -31,6 +31,7 @@ class Add extends Component
 
     public function render()
     {
+
         return view('livewire.cart.add');
     }
 }

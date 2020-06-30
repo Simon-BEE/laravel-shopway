@@ -22,7 +22,7 @@ class Toggle extends Component
             $this->emit('flashMessage', [
                 'type' => 'error',
                 'message' => 'You need to be connected for this.',
-                'id' => Str::random(6)
+                'id' => Str::random(10)
             ]);
             return;
         }
@@ -38,7 +38,7 @@ class Toggle extends Component
             $this->emit('flashMessage', [
                 'type' => 'success',
                 'message' => 'This item has been added to your wishlist.',
-                'id' => Str::random(6)
+                'id' => Str::random(10)
             ]);
         }
 
@@ -52,10 +52,8 @@ class Toggle extends Component
         $this->emit('flashMessage', [
             'type' => 'success',
             'message' => 'This item has been removed from your wishlist.',
-            'id' => Str::random(6)
+            'id' => Str::random(10)
         ]);
-
-        // $this->emit('refreshCard');
     }
 
     public function render()

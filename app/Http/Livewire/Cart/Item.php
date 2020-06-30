@@ -29,7 +29,7 @@ class Item extends Component
             $this->emit('flashMessage', [
                 'type' => 'success',
                 'message' => 'Product successfully updated on cart.',
-                'id' => Str::random(6)
+                'id' => Str::random(10)
             ]);
 
             return;
@@ -46,7 +46,7 @@ class Item extends Component
         $this->emit('flashMessage', [
             'type' => 'success',
             'message' => 'Product successfully removed from cart.',
-            'id' => Str::random(6)
+            'id' => Str::random(10)
         ]);
     }
 

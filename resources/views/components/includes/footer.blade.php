@@ -1,5 +1,5 @@
 
-    <footer class="bg-gray-900 text-gray-200 w-full pt-4 border-t-4 border-gray-400">
+    <footer class="bg-gray-900 text-gray-200 w-full pt-4 border-t-4 border-gray-400 mt-8">
         <div class="container mx-auto flex flex-col px-3 py-8 ">
             <div class="w-full mx-auto flex flex-wrap">
                 <div class="flex w-full lg:w-1/2 ">

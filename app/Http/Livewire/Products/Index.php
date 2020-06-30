@@ -28,7 +28,7 @@ class Index extends Component
     {
         // dd(Product::with('references')->where('title', 'like', '%' . $this->search . '%')->paginate(12));
         return view('livewire.products.index', [
-            'products' => Product::with('references')->where('title', 'like', '%' . $this->search . '%')->paginate(12),
+            'products' => Product::with('references.wishes')->where('title', 'like', '%' . $this->search . '%')->paginate(12),
         ]);
     }
 }

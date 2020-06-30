@@ -22,7 +22,7 @@ class WelcomeController extends Controller
         // session()->put('cart', []);
 
         return view('welcome', [
-            'products' => Product::with('references')->inRandomOrder()->take(12)->get(),
+            'products' => Product::with('references.wishes')->inRandomOrder()->take(12)->get(),
         ]);
     }
 }

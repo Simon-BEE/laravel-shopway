@@ -5,5 +5,5 @@ Soberly called **Shopway**
 - [ ] Cart icon when not logged
 - [ ] Profile completion
 - [ ] Address create
-- [ ] Wishlist system
-- [ ] Cart in database
+- [x] Wishlist system
+- [x] Cart in database

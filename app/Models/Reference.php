@@ -8,9 +8,20 @@ class Reference extends Model
 {
     protected $guarded = ['id'];
 
+    // protected $with = ['wishes'];
+
     public function getImagePathAttribute()
     {
         return "https://picsum.photos/800";
+    }
+
+    public function getIsInWishlistAttribute(): bool
+    {
+        if (!auth()->check()) {
+            return false;
+        }
+
+        return $this->wishes->contains('user_id', auth()->id());
     }
 
     /**

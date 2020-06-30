@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::get('/profile', 'User\DashboardController')->name('users.dashboard');
+    Route::get('/wishlist', 'User\Wish\IndexController')->name('users.wish.index');
 });
 
 

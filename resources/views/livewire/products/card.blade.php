@@ -4,7 +4,7 @@
     </div>
     <div class="pt-3 flex items-center justify-between">
         <p class="">{{ ucfirst($product->title) }}</p>
-        <livewire:wish.add :reference="$product->firstReference" :key="$product->firstReference->id" />
+        <livewire:wish.toggle :reference="$product->firstReference" :key="$product->firstReference->id" />
     </div>
     <p class="pt-1 text-gray-800 font-bold text-xl">{{ Format::priceWithTaxAndCurrency($product->firstReference->price) }}</p>
 </div>

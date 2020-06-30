@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -41,6 +42,26 @@ class Product extends Model
     public function getExcerptAttribute(): string
     {
         return substr($this->description, 0, 200) . '...';
+    }
+
+    /**
+     * ? ATTRIBUTES
+     */
+
+     /**
+      * Return a random collection of products
+      *
+      * @param Builder $query
+      * @param string $with
+      * @param integer $number
+      * @return Builder
+      */
+    public function scopeRandomProducts(Builder $query, string $with = 'references', int $number = 12): Builder
+    {
+        return $query
+            ->with($with)
+            ->inRandomOrder()
+            ->take($number);
     }
 
     /**

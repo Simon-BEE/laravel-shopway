@@ -1,4 +1,6 @@
 import 'alpinejs';
+const Turbolinks = require("turbolinks");
+Turbolinks.start();
 
 window.livewire.on('flashMessage', param => {
     createAlert(param['type'], param['message'], param['id']);

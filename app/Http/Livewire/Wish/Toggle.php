@@ -7,7 +7,7 @@ use App\Models\Reference;
 use App\Models\Wish;
 use Illuminate\Support\Str;
 
-class Add extends Component
+class Toggle extends Component
 {
     public $reference;
 
@@ -21,7 +21,7 @@ class Add extends Component
         if (!auth()->check()) {
             $this->emit('flashMessage', [
                 'type' => 'error',
-                'message' => 'You need to be connected to do this.',
+                'message' => 'You need to be connected for this.',
                 'id' => Str::random(6)
             ]);
             return;
@@ -60,6 +60,6 @@ class Add extends Component
 
     public function render()
     {
-        return view('livewire.wish.add');
+        return view('livewire.wish.toggle');
     }
 }

@@ -16,13 +16,10 @@ class WelcomeController extends Controller
      */
     public function __invoke(): View
     {
-        // $cartService = new CartManager();
-        // $cartService->add(Reference::find(11));
-        // dd(session('cart'));
-        // session()->put('cart', []);
+        $products = auth()->check() ? Product::randomProducts('references.wishes')->get() : Product::randomProducts()->get();
 
         return view('welcome', [
-            'products' => Product::with('references.wishes')->inRandomOrder()->take(12)->get(),
+            'products' => $products,
         ]);
     }
 }

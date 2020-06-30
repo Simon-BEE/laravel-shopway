@@ -10,9 +10,6 @@
 
         <title>{{ config('app.name', 'Laravel') }} &bull; @yield('meta-title')</title>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css" integrity="sha256-nwNjrH7J9zS/Ti4twtWX7OsC5QdQHCIKTv5cLMsGo68=" crossorigin="anonymous" />
@@ -44,6 +41,7 @@
         <!--Footer-->
         <x-includes.footer />
         <livewire:scripts>
+        <script src="{{ asset('js/app.js') }}"></script>
         @yield('extra-js')
     </body>
 </html>

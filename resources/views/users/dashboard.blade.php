@@ -55,16 +55,10 @@
             </ul>
         </article>
         {{--  --}}
-        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
+        <a href="{{ route('users.wish.index') }}" class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105">
             <span class="text-6xl text-blue-500 mdi mdi-heart-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Wishlist') }}</h2>
-            <ul class="mt-5" x-show.transition.duration.300ms="open">
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-            </ul>
-        </article>
+        </a>
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-credit-card-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Payments') }}</h2>

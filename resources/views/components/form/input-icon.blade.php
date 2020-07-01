@@ -1,3 +1,4 @@
+@props(['classDiv', 'class', 'type', 'label', 'placeholder', 'name', 'value', 'required', 'helper', 'icon'])
 <div class="flex flex-wrap mb-4">
     @if($label ?? null)
     <div class="flex justify-between w-full items-center mb-2">

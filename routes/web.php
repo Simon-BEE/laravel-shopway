@@ -35,10 +35,19 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'admin.',
     ], function () {
         Route::get('/', 'DashboardController')->name('dashboard');
-        Route::get('/products', 'Products\MainController@index')->name('products.index');
-        Route::get('/products/edit/{product}', 'Products\EditController@edit')->name('products.edit');
-        Route::patch('/products/edit/{product}', 'Products\EditController@update')->name('products.update');
-        Route::delete('/products/{product}', 'Products\DestroyController')->name('products.destroy');
+
+        Route::group([
+            'namespace' => 'Products',
+            'prefix' => 'products',
+            'as' => 'products.',
+        ], function () {
+            Route::get('/', 'MainController@index')->name('index');
+            Route::delete('{product}', 'MainController@destroy')->name('destroy');
+            Route::get('edit/{product}', 'EditController@edit')->name('edit');
+            Route::patch('edit/{product}', 'EditController@update')->name('update');
+            Route::get('create', 'CreateController@create')->name('create');
+            Route::post('/', 'CreateController@store')->name('store');
+        });
     });
 
     Route::get('/profile', 'User\DashboardController')->name('users.dashboard');

@@ -22,7 +22,7 @@
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         @yield('extra-css')
 </head>
-<body>
+<body class="text-gray-700">
     <div x-data="{ sidebarOpen: false, 'isDialogOpen': false }" class="flex h-screen bg-gray-200 font-family-karla">
         <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
 
@@ -55,7 +55,7 @@
                             <a class="block py-2" href="{{ route('admin.products.index') }}"><span class="mr-4">&mdash;</span> Show list</a>
                         </li>
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Add new one</a>
+                            <a class="block py-2" href="{{ route('admin.products.create') }}"><span class="mr-4">&mdash;</span> Add new one</a>
                         </li>
                         <li class="hover:bg-gray-500">
                             <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Categories</a>
@@ -171,5 +171,6 @@
         </div>
     </div>
     <livewire:scripts>
+        @yield('extra-js')
 </body>
 </html>

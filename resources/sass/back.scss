@@ -45,3 +45,7 @@
     min-width: 300px;
     height: 400px;
 }
+
+.can-be-disabled:disabled{
+    @apply bg-gray-200 text-gray-700 opacity-75;
+}

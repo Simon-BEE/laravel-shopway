@@ -14,7 +14,19 @@
             </x-form.form-button>
         </div>
     </x-modal>
-    <h3 class="text-gray-700 text-3xl font-medium">List of products</h3>
+    <div class="flex justify-between">
+        <h3 class="text-gray-700 text-3xl font-medium">List of products</h3>
+        <div class="flex">
+            <a href="{{ route('admin.products.create') }}" class="flex items-center mr-3 p-2 rounded text-white bg-blue-600 hover:bg-blue-500">
+                <span class="mdi mdi-plus mr-2"></span>
+                Create a product
+            </a>
+            <a href="{{ route('admin.products.create') }}" class="flex items-center p-2 rounded text-white bg-orange-500 hover:bg-orange-600">
+                <span class="mdi mdi-plus mr-2"></span>
+                Add a new reference
+            </a>
+        </div>
+    </div>
 
     <livewire:admin.products.index />
 @endsection

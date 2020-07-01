@@ -8,7 +8,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
         </div>
-        <div class="p-2 mb-6">
+        <div class="p-2 mb-6 modal-content">
             {{ $slot }}
         </div>
     </div>

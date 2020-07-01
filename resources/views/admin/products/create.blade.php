@@ -71,11 +71,12 @@
     <p class="my-2 text-gray-700 font-semibold">To active this reference you need to add images on next step.</p>
     <div class="mt-5 flex justify-end">
         <x-form.button classDiv="none" class="bg-gray-200 text-gray-700 hover:bg-gray-300" x-on:click="isDialogOpen = false">Cancel</x-form.button>
-        <x-form.button classDiv="" type="button" x-ref="modalReference" id="modalSaveRef">
+        <x-form.button classDiv="" type="button" x-ref="modalReference" id="modalSaveRef" x-on:click="isDialogOpen = false">
             Add this reference
         </x-form.button>
     </div>
 </x-modal>
+
     <div class="flex justify-between">
         <h3 class="text-gray-700 text-3xl font-medium">Create a product</h3>
     </div>
@@ -95,6 +96,7 @@
                 label="Describe your product"
                 name="description"
                 placeholder="Product's description"
+                value="{{ old('description') }}"
                 required
             />
 

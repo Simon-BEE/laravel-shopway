@@ -9,7 +9,7 @@
         <p>Are you sure you want to delete this product and its references?</p>
         <div class="mt-5 flex justify-end">
             <x-form.button classDiv="none" class="bg-gray-200 text-gray-700 hover:bg-gray-300" @click="isDialogOpen = false">Cancel</x-form.button>
-            <x-form.form-button action="#" method="DELETE" class="p-2 rounded bg-red-500 text-white hover:bg-red-600" x-ref="modalUser">
+            <x-form.form-button action="#" method="DELETE" class="p-2 rounded bg-red-500 text-white hover:bg-red-600" x-ref="modalDelete">
                 Delete this product
             </x-form.form-button>
         </div>
@@ -29,4 +29,12 @@
     </div>
 
     <livewire:admin.products.index />
+@endsection
+
+@section('extra-js')
+    <script>
+        function setAction(event) {
+            document.querySelector('.modal-element form').action = event.target.getAttribute('data-route');
+        }
+    </script>
 @endsection

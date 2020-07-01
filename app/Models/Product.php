@@ -2,12 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
     protected $guarded = ['id'];
+
+    public static function booted()
+    {
+        static::creating(function ($product){
+            $product->slug = Str::slug($product->title);
+        });
+    }
 
     /**
      * ? ATTRIBUTES

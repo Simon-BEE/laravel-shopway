@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin\Products;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class EditController extends Controller
 {
-    public function edit()
+    public function edit(Product $product)
     {
-        # code...
+        dd($product);
     }
 
     public function update()

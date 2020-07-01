@@ -29,6 +29,8 @@ class Index extends Component
         }
 
         $this->sortField = $field;
+
+        $this->gotoPage(1);
     }
 
     public function render()

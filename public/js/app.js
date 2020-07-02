@@ -1841,30 +1841,31 @@ window.livewire.on('flashMessage', function (param) {
   createAlert(param['type'], param['message'], param['id']);
   var flashAlertElements = document.querySelectorAll('.alert-flash');
   flashAlertElements.forEach(function (element) {
-    setTimeout(function () {
-      element.style.transform = 'translateX(0)';
-    }, 500);
-    setTimeout(function () {
-      element.style.transform = 'translateX(100%)';
-    }, 5000);
-    setTimeout(function () {
-      removeElement(element);
-    }, 6500);
+    alertTransition(element);
   });
 }); // Alert animation
 
 var flashAlertElement = document.querySelector('.alert-flash');
 
 if (flashAlertElement) {
+  alertTransition(flashAlertElement);
+}
+
+function alertTransition(alertElement) {
   setTimeout(function () {
-    flashAlertElement.style.transform = 'translateX(0)';
+    alertElement.style.transform = 'translateX(0)';
   }, 500);
   setTimeout(function () {
-    flashAlertElement.style.transform = 'translateX(100%)';
+    alertElement.style.transform = 'translateX(100%)';
   }, 5000);
+  setTimeout(function () {
+    removeElement(alertElement);
+  }, 6500);
 }
 
 function createAlert(type, message, id) {
+  console.log('ok');
+
   if (!document.querySelector("#alert-".concat(id))) {
     var alertElement = document.createElement('div');
     alertElement.className = 'fixed right-0 top-0 mt-20 max-w-lg z-40 alert-flash transition-all duration-200 transform translate-x-full';
@@ -1886,6 +1887,64 @@ function createAlert(type, message, id) {
 
 function removeElement(element) {
   element.parentNode.removeChild(element);
+} // preview images
+
+
+var previewDiv = document.getElementById('imagesPreview');
+
+if (previewDiv) {
+  var previewImages = function previewImages() {
+    if (this.files) {
+      [].forEach.call(this.files, readAndPreview);
+    }
+
+    function readAndPreview(file) {
+      console.log(file);
+
+      if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+        createAlert('error', file.name + " is not an image", Math.floor(Math.random() * 111));
+        resetInputFiles();
+        return;
+      }
+
+      if (file.size >= 2000000) {
+        createAlert('error', file.name + " is too big", Math.floor(Math.random() * 112));
+        resetInputFiles();
+        return;
+      }
+
+      if (previewDiv.classList.contains('hidden')) {
+        previewDiv.classList.remove('hidden');
+        resetButton.classList.remove('hidden');
+      }
+
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        var image = new Image();
+        image.title = file.name;
+        image.src = this.result;
+        previewDiv.appendChild(image);
+      });
+      reader.readAsDataURL(file);
+    }
+  };
+
+  var resetInputFiles = function resetInputFiles() {
+    previewDiv.classList.add('hidden');
+    resetButton.classList.add('hidden');
+    previewDiv.innerHTML = '';
+    inputForUpload.value = '';
+    var alertElement = document.querySelector('.alert-flash');
+
+    if (alertElement) {
+      alertTransition(alertElement);
+    }
+  };
+
+  var resetButton = document.getElementById('resetImages');
+  var inputForUpload = document.getElementById('imagesInput');
+  inputForUpload.addEventListener('change', previewImages);
+  resetButton.addEventListener('click', resetInputFiles);
 }
 
 /***/ }),

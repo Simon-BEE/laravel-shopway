@@ -6,31 +6,33 @@ window.livewire.on('flashMessage', param => {
     createAlert(param['type'], param['message'], param['id']);
 
     let flashAlertElements = document.querySelectorAll('.alert-flash');
+
     flashAlertElements.forEach(element => {
-        setTimeout(() => {
-            element.style.transform = 'translateX(0)';
-        }, 500);
-        setTimeout(() => {
-            element.style.transform = 'translateX(100%)';
-        }, 5000);
-        setTimeout(() => {
-            removeElement(element)
-        }, 6500);
+        alertTransition(element);
     });
 });
 
 // Alert animation
 const flashAlertElement = document.querySelector('.alert-flash');
 if (flashAlertElement) {
+    alertTransition(flashAlertElement);
+}
+
+function alertTransition(alertElement){
     setTimeout(() => {
-        flashAlertElement.style.transform = 'translateX(0)';
+        alertElement.style.transform = 'translateX(0)';
     }, 500);
     setTimeout(() => {
-        flashAlertElement.style.transform = 'translateX(100%)';
+        alertElement.style.transform = 'translateX(100%)';
     }, 5000);
+    setTimeout(() => {
+        removeElement(alertElement);
+    }, 6500);
 }
 
 function createAlert(type, message, id) {
+    console.log('ok');
+
     if (!document.querySelector(`#alert-${id}`)) {
         const alertElement = document.createElement('div');
         alertElement.className = 'fixed right-0 top-0 mt-20 max-w-lg z-40 alert-flash transition-all duration-200 transform translate-x-full';
@@ -60,4 +62,60 @@ function createAlert(type, message, id) {
 
 function removeElement(element) {
     element.parentNode.removeChild(element);
+}
+
+// preview images
+const previewDiv = document.getElementById('imagesPreview');
+if (previewDiv) {
+    const resetButton = document.getElementById('resetImages');
+    const inputForUpload = document.getElementById('imagesInput');
+
+    function previewImages() {
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+        function readAndPreview(file) {
+            console.log(file);
+
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                createAlert('error', file.name + " is not an image", Math.floor(Math.random() * 111));
+                resetInputFiles();
+                return;
+            }
+            if (file.size >= 2000000) {
+                createAlert('error', file.name + " is too big", Math.floor(Math.random() * 112));
+                resetInputFiles();
+                return;
+            }
+
+            if (previewDiv.classList.contains('hidden')) {
+                previewDiv.classList.remove('hidden');
+                resetButton.classList.remove('hidden');
+            }
+
+            const reader = new FileReader();
+            reader.addEventListener("load", function() {
+                var image = new Image();
+                image.title  = file.name;
+                image.src    = this.result;
+                previewDiv.appendChild(image);
+            });
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function resetInputFiles(){
+        previewDiv.classList.add('hidden');
+        resetButton.classList.add('hidden');
+        previewDiv.innerHTML = '';
+        inputForUpload.value = '';
+
+        let alertElement = document.querySelector('.alert-flash');
+        if (alertElement) {
+            alertTransition(alertElement);
+        }
+    }
+
+    inputForUpload.addEventListener('change', previewImages);
+    resetButton.addEventListener('click', resetInputFiles);
 }

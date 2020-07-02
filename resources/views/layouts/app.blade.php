@@ -18,6 +18,7 @@
         <livewire:styles>
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
         @yield('extra-css')
+        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
 
     <body class="bg-white min-h-screen antialiased leading-none font-perso relative" x-data="{ 'isDialogOpen': false }">
@@ -41,7 +42,6 @@
         <!--Footer-->
         <x-includes.footer />
         <livewire:scripts>
-        <script src="{{ asset('js/app.js') }}"></script>
         @yield('extra-js')
     </body>
 </html>

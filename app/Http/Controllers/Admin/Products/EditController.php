@@ -10,7 +10,10 @@ class EditController extends Controller
 {
     public function edit(Product $product)
     {
-        dd($product);
+        // dd($product);
+        return view('admin.products.edit', [
+            'product' => $product,
+        ]);
     }
 
     public function update()

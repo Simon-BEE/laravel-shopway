@@ -41,6 +41,10 @@
                             Title <span class="ml-1 text-xs">{!! $sortAsc ? '&darr;' : '&uarr;' !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
+                        >
+                            References
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                             wire:click="sortBy('created_at')"
                         >
                             Added at
@@ -71,6 +75,11 @@
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
+                                    {{ $product->references->count() }}
+                                </p>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap">
                                     {{ Format::date($product->created_at) }}
                                 </p>
                             </td>
@@ -81,9 +90,9 @@
                                 </span>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
+                                {{-- <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
                                     <span class="text-lg mdi mdi-eye"></span>
-                                </a>
+                                </a> --}}
                                 <a href="{{ route('admin.products.edit', $product) }}" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-900 mr-2">
                                     <span class="text-lg mdi mdi-pencil-outline"></span>
                                 </a>

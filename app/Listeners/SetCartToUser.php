@@ -4,10 +4,8 @@ namespace App\Listeners;
 
 use App\Events\UserIsLogged;
 use App\Models\Cart;
-use App\Models\Reference;
+use App\Models\Product;
 use App\Services\Cart\CartManager;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 
 class SetCartToUser
@@ -36,7 +34,7 @@ class SetCartToUser
     }
 
     /**
-     * Check if reference already exist and add to session cart
+     * Check if product already exist and add to session cart
      *
      * @param Cart $cart
      * @return void
@@ -45,9 +43,9 @@ class SetCartToUser
     {
         $cartManager = new CartManager();
 
-        $cart->each(function ($item, $referenceId) use ($cartManager){
-            if ($reference = Reference::find($referenceId)) {
-                return $cartManager->add($reference);
+        $cart->each(function ($item, $productId) use ($cartManager){
+            if ($product = Product::find($productId)) {
+                return $cartManager->add($product);
             }
         });
     }

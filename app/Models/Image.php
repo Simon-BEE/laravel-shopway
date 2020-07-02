@@ -20,8 +20,8 @@ class Image extends Model
      * ? RELATIONS
      */
 
-    public function references()
+    public function products()
     {
-        return $this->belongsTo(Reference::class);
+        return $this->belongsTo(Product::class);
     }
 }

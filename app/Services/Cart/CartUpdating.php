@@ -5,7 +5,7 @@ namespace App\Services\Cart;
 class CartUpdating
 {
     /**
-     * Update a product in cart by its reference id
+     * Update a product in cart by its id
      *
      * @param int $productId
      * @return void

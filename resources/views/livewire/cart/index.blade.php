@@ -10,8 +10,8 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($cartReferences as $referenceId => $reference)
-            <livewire:cart.item :referenceId="$referenceId" :reference="$reference" :key="$referenceId"/>
+            @forelse ($cartProducts as $productId => $product)
+            <livewire:cart.item :productId="$productId" :product="$product" :key="$productId"/>
             @empty
                 <tr>
                     <td colspan="100%" class="text-center p-4 bg-gray-200">
@@ -22,7 +22,7 @@
         </tbody>
     </table>
     <hr class="pb-6 mt-6">
-    @if (count($cartReferences) > 0)
+    @if (count($cartProducts) > 0)
         @auth
         <div class="mb-4 mt-6 -mx-2 lg:flex">
             <div class="lg:px-2 lg:w-1/2">

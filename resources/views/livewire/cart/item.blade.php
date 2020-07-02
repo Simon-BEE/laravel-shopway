@@ -1,14 +1,14 @@
 <tr>
     <td class="hidden md:table-cell">
         <a href="#">
-            <img src="{{ $reference['photo'] }}" class="w-12 h-12 rounded" alt="Thumbnail">
+            <img src="{{ $product['photo'] }}" class="w-12 h-12 rounded" alt="Thumbnail">
         </a>
     </td>
     <td>
-        <a href="{{ ProductHelper::getRouteByReference($referenceId) }}" class="hover:underline mr-2">
-            {{ $reference['name'] }}
+        <a href="{{ route('products.show', $productId) }}" class="hover:underline mr-2">
+            {{ $product['name'] }}
         </a>
-        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $referenceId }})">
+        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productId }})">
             <span class="mdi mdi-delete ml-2"></span>
         </x-form.form-button>
     </td>
@@ -24,12 +24,12 @@
     </td>
     <td class="hidden text-right md:table-cell">
         <span class="text-sm lg:text-base font-medium">
-            {{ Format::priceWithTaxAndCurrency($reference['price']) }}
+            {{ Format::priceWithTaxAndCurrency($product['price']) }}
         </span>
     </td>
     <td class="text-right">
         <span class="text-sm lg:text-base font-semibold">
-            {{ $referenceId ? Cart::totalItemWithTax($this->referenceId) : 0 }}
+            {{ $productId ? Cart::totalItemWithTax($this->productId) : 0 }}
         </span>
     </td>
 </tr>

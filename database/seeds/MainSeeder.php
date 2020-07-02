@@ -9,7 +9,6 @@ use App\Models\Address;
 use App\Models\Category;
 use App\Models\Country;
 use App\Models\Product;
-use App\Models\Reference;
 use App\Models\Shipping;
 use App\Models\ShippingCompany;
 use Illuminate\Database\Seeder;
@@ -128,9 +127,7 @@ class MainSeeder extends Seeder
         });
 
         factory(Category::class, 5)->create()->each(function ($category){
-            $category->products()->saveMany(factory(Product::class, mt_rand(4, 12))->create()->each(function ($product){
-                $product->references()->saveMany(factory(Reference::class, mt_rand(1, 4))->make());
-            }));
+            $category->products()->saveMany(factory(Product::class, mt_rand(4, 12))->create());
         });
 
         factory(Shop::class)->create();

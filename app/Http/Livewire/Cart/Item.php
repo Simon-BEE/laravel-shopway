@@ -9,22 +9,22 @@ use App\Services\Cart\CartManager;
 
 class Item extends Component
 {
-    public $reference;
-    public $referenceId;
+    public $product;
+    public $productId;
     public $quantity;
 
-    public function mount(int $referenceId, array $reference)
+    public function mount(int $productId, array $product)
     {
-        $this->referenceId = $referenceId;
-        $this->reference = $reference;
-        $this->quantity = $reference['quantity'];
+        $this->productId = $productId;
+        $this->product = $product;
+        $this->quantity = $product['quantity'];
     }
 
     public function updatedQuantity(int $quantity)
     {
         if ($quantity > 0) {
             $cartManager = new CartManager();
-            $cartManager->update($this->referenceId, $quantity);
+            $cartManager->update($this->productId, $quantity);
 
             $this->emit('flashMessage', [
                 'type' => 'success',
@@ -35,13 +35,13 @@ class Item extends Component
             return;
         }
 
-        $this->removeFromCart($this->referenceId);
+        $this->removeFromCart($this->productId);
     }
 
-    public function removeFromCart(int $referenceId)
+    public function removeFromCart(int $productId)
     {
         $cartManager = new CartManager();
-        $cartManager->remove($referenceId);
+        $cartManager->remove($productId);
 
         $this->emit('flashMessage', [
             'type' => 'success',

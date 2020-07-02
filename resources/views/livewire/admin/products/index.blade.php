@@ -36,13 +36,9 @@
                 <thead>
                     <tr>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                            wire:click="sortBy('title')"
+                            wire:click="sortBy('name')"
                         >
-                            Title <span class="ml-1 text-xs">{!! $sortAsc ? '&darr;' : '&uarr;' !!}</span>
-                        </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                        >
-                            References
+                            Name <span class="ml-1 text-xs">{!! $sortAsc ? '&darr;' : '&uarr;' !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                             wire:click="sortBy('created_at')"
@@ -50,7 +46,7 @@
                             Added at
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                            wire:click="sortBy('title')"
+                            wire:click="sortBy('name')"
                         >
                             Status
                         </th>
@@ -65,18 +61,13 @@
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-10 h-10">
-                                        <img class="w-full h-full rounded w-6 h-6" src="{{ $product->firstReference->imagePath }}" alt="{{ $product->firstReference->name }}">
+                                        <img class="w-full h-full rounded w-6 h-6" src="{{ $product->imagePath }}" alt="{{ $product->name }}">
                                     </div>
 
                                     <div class="ml-3">
-                                        <a href="{{ route('admin.products.edit', $product) }}" class="text-gray-900 whitespace-no-wrap hover:underline">{{ $product->title }}</a>
+                                        <a href="{{ route('admin.products.edit', $product) }}" class="text-gray-900 whitespace-no-wrap hover:underline">{{ $product->name }}</a>
                                     </div>
                                 </div>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ $product->references->count() }}
-                                </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">

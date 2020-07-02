@@ -3,22 +3,22 @@
 namespace App\Http\Livewire\Cart;
 
 use Livewire\Component;
-use App\Models\Reference;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Services\Cart\CartManager;
 
 class Add extends Component
 {
-    public $reference;
+    public $product;
 
-    public function mount(Reference $reference)
+    public function mount(Product $product)
     {
-        $this->reference = $reference;
+        $this->product = $product;
     }
 
     public function addToCart(CartManager $cartManager)
     {
-        $cartManager->add($this->reference);
+        $cartManager->add($this->product);
 
         $this->emit('flashMessage', [
             'type' => 'success',

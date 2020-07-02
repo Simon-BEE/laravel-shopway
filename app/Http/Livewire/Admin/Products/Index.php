@@ -37,8 +37,7 @@ class Index extends Component
     {
         // dump($this);
         return view('livewire.admin.products.index', [
-            'products' => Product::with('references')
-                ->where('title', 'like' , "%$this->searchTerm%")
+            'products' => Product::where('name', 'like' , "%$this->searchTerm%")
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage)
             ,

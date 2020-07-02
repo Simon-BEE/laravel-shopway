@@ -67,13 +67,13 @@ class User extends Authenticatable
         return $this->cart ? true : false;
     }
 
-    public function isInWishlist(int $referenceId): bool
+    public function isInWishlist(int $productId): bool
     {
         if (!auth()->check()) {
             return false;
         }
 
-        return $this->wishes->contains('reference_id', $referenceId);
+        return $this->wishes->contains('product_id', $productId);
     }
 
     /**

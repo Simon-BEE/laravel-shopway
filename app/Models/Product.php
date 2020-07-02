@@ -13,7 +13,7 @@ class Product extends Model
     public static function booted()
     {
         static::creating(function ($product){
-            $product->slug = Str::slug($product->title);
+            $product->slug = Str::slug($product->name);
         });
     }
 
@@ -22,24 +22,28 @@ class Product extends Model
      */
 
      /**
-      * Return title with uppercase on first character
+      * Return name with uppercase on first character
       *
-      * @param string $title
+      * @param string $name
       * @return string
       */
-    public function getTitleAttribute(string $title): string
+    public function getNameAttribute(string $name): string
     {
-        return ucfirst($title);
+        return ucfirst($name);
     }
 
-    /**
-     * Return the main reference of a product
-     *
-     * @return Reference (model)
-     */
-    public function getFirstReferenceAttribute(): Reference
+    public function getImagePathAttribute()
     {
-        return $this->references->first();
+        return "https://picsum.photos/800";
+    }
+
+    public function getIsInWishlistAttribute(): bool
+    {
+        if (!auth()->check()) {
+            return false;
+        }
+
+        return $this->wishes->contains('user_id', auth()->id());
     }
 
     /**
@@ -64,7 +68,7 @@ class Product extends Model
       * @param integer $number
       * @return Builder
       */
-    public function scopeRandomProducts(Builder $query, string $with = 'references', int $number = 12): Builder
+    public function scopeRandomProducts(Builder $query, string $with = '', int $number = 12): Builder
     {
         return $query
             ->with($with)
@@ -81,8 +85,13 @@ class Product extends Model
         return $this->belongsToMany(Category::class);
     }
 
-    public function references()
+    public function images()
     {
-        return $this->hasMany(Reference::class);
+        return $this->hasMany(Image::class);
+    }
+
+    public function wishes()
+    {
+        return $this->hasMany(Wish::class);
     }
 }

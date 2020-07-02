@@ -17,22 +17,22 @@ class Wish extends Model
     {
         return $query
             ->where('user_id', auth()->id())
-            ->with('reference')
+            ->with('product')
         ;
     }
 
      /**
-      * Select a wish by auth id and reference id
+      * Select a wish by auth id and product id
       *
       * @param [type] $query
-      * @param integer $referenceId
+      * @param integer $productId
       * @return self|null
       */
-    public function scopeRemove(Builder $query, int $referenceId, int $userId)
+    public function scopeRemove(Builder $query, int $productId, int $userId)
     {
         return $query
             ->where('user_id', $userId)
-            ->where('reference_id', $referenceId)
+            ->where('product_id', $productId)
             ->delete()
         ;
     }
@@ -41,9 +41,9 @@ class Wish extends Model
      * ? RELATIONS
      */
 
-    public function reference()
+    public function product()
     {
-        return $this->belongsTo(Reference::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()

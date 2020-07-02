@@ -2,23 +2,23 @@
 
 namespace App\Services\Cart;
 
-use App\Models\Reference;
+use App\Models\Product;
 
 class CartManager
 {
-    public function add(Reference $productReference)
+    public function add(Product $product)
     {
-        CartAdding::add($productReference);
+        CartAdding::add($product);
     }
 
-    public function remove(int $referenceId)
+    public function remove(int $productId)
     {
-        CartRemoving::remove($referenceId);
+        CartRemoving::remove($productId);
     }
 
-    public function update($referenceId, $qty)
+    public function update($productId, $qty)
     {
-        CartUpdating::update($referenceId, $qty);
+        CartUpdating::update($productId, $qty);
     }
 
     /**

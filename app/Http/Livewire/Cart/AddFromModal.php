@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Cart;
 
-use App\Models\Reference;
+use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Services\Cart\CartManager;
@@ -13,7 +13,7 @@ class AddFromModal extends Component
 
     public function addToCartFromModal(CartManager $cartManager, int $id)
     {
-        $cartManager->add(Reference::findOrFail($id));
+        $cartManager->add(Product::findOrFail($id));
 
         $this->emit('flashMessage', [
             'type' => 'success',

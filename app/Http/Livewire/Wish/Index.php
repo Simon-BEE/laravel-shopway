@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Wish;
 
-use App\Models\Reference;
+use App\Models\Product;
 use App\Models\Wish;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -12,11 +12,11 @@ class Index extends Component
 {
 
 
-    public function addToCart(CartManager $cartManager, int $referenceId)
+    public function addToCart(CartManager $cartManager, int $productId)
     {
-        $reference = Reference::find($referenceId);
+        $product = Product::find($productId);
 
-        if (!$reference) {
+        if (!$product) {
             $this->emit('flashMessage', [
                 'type' => 'error',
                 'message' => 'Error from product.',
@@ -24,7 +24,7 @@ class Index extends Component
             ]);
         }
 
-        $cartManager->add($reference);
+        $cartManager->add($product);
 
         $this->emit('flashMessage', [
             'type' => 'success',
@@ -34,12 +34,12 @@ class Index extends Component
 
         $this->emit('cartUpdated');
 
-        $this->removeFromWishlist($referenceId);
+        $this->removeFromWishlist($productId);
     }
 
-    public function removeFromWishlist(int $referenceId)
+    public function removeFromWishlist(int $productId)
     {
-        Wish::remove($referenceId, auth()->id());
+        Wish::remove($productId, auth()->id());
 
         $this->emit('flashMessage', [
             'type' => 'success',

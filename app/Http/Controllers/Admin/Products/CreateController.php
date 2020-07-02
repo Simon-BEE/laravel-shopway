@@ -16,14 +16,10 @@ class CreateController extends Controller
     public function store(StoreProductRequest $request)
     {
         $validatedData = $request->validated();
-        $references = array_pop($validatedData);
 
-
+        //TODO: images
 
         $product = Product::create($validatedData);
-        foreach ($references as $key => $reference) {
-            $product->references()->create($reference);
-        }
 
         return redirect()->route('admin.products.index')->with([
             'type' => 'success',

@@ -4,19 +4,19 @@
     <meta name="description" content="{{ $product->excerpt }}"/>
 @endsection
 
-@section('meta-title') {{ $product->title }} @endsection
+@section('meta-title') {{ $product->name }} @endsection
 
 @section('content')
 
 <section class="my-12 min-h-full px-6 py-10 relative">
     <div class="flex flex-col md:flex-row items-stretch justify-around">
         <div class="img w-full md:w-4/12">
-            <img class="w-full h-full object-cover rounded shadow-lg" src="{{ $product->firstReference->imagePath }}" alt="lorem">
+            <img class="w-full h-full object-cover rounded shadow-lg" src="{{ $product->imagePath }}" alt="lorem">
         </div>
 
         <div class="mt-4 md:mt-0 text-gray-700 w-full md:w-6/12 flex flex-col justify-between max-h-full">
             <div>
-                <h3 class="text-xl mb-3 tracking-wider font-semibold">{{ $product->title }}</h3>
+                <h3 class="text-xl mb-3 tracking-wider font-semibold">{{ $product->name }}</h3>
                 <div class="text-sm mb-5">
                     <span class="flex items-center">
                         <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-blue-400" viewBox="0 0 24 24">
@@ -38,22 +38,14 @@
                     </span>
                 </div>
                 <p class="text-justify leading-5">{{ $product->description }}</p>
-                <p class="text-right mt-4 leading-6">
-                    Other references :
-                    @forelse ($product->references as $reference)
-                        <span class="mr-1 text-xs text-white px-2 py-1 rounded bg-blue-400 break-words">{{ $reference->name }}</span>
-                    @empty
-                        <span>No references found.</span>
-                    @endforelse
-                </p>
             </div>
             <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
                 <div class="price text-3xl font-semibold text-gray-700">
-                    {{ Format::priceWithTaxAndCurrency($product->firstReference->price) }}
+                    {{ Format::priceWithTaxAndCurrency($product->price) }}
                 </div>
                 <div class="flex">
-                    <livewire:cart.add :reference="$product->firstReference" :slot="'button'" />
-                    <livewire:wish.toggle :reference="$product->firstReference" :key="$product->firstReference->id" />
+                    <livewire:cart.add :product="$product" :slot="'button'" />
+                    <livewire:wish.toggle :product="$product" :key="$product->id" />
                 </div>
             </div>
         </div>

@@ -24,31 +24,19 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => [
+            'name' => [
                 'required', 'string', 'between:5,150',
             ],
             'description' => [
                 'required', 'string', 'min:40',
             ],
-            'references' => [
-                'required', 'array',
-            ],
-            'references.*.name' => [
-                'required', 'string', 'between:5,150',
-            ],
-            'references.*.color' => [
-                'nullable', 'string', 'between:1,30',
-            ],
-            'references.*.size' => [
+            'weight' => [
                 'nullable', 'numeric', 'between:1,2000',
             ],
-            'references.*.weight' => [
-                'nullable', 'numeric', 'between:1,2000',
-            ],
-            'references.*.price' => [
+            'price' => [
                 'required', 'numeric', 'between:1,2000',
             ],
-            'references.*.quantity' => [
+            'quantity' => [
                 'required', 'numeric', 'between:1,2000',
             ],
         ];
@@ -59,10 +47,7 @@ class StoreProductRequest extends FormRequest
         // dd($validator);
         $validator->after(function ($validator){
             $failedRules = $validator->failed();
-            if (isset($failedRules['references']) && isset($failedRules['references']['Required'])) {
-                session()->flash('type', 'error');
-                session()->flash('message', 'You need to add at least one reference.');
-            }elseif (!empty($failedRules)) {
+            if (!empty($failedRules)) {
                 session()->flash('type', 'error');
                 session()->flash('message', 'Please fill correctly the form.');
             }

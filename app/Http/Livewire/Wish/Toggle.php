@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire\Wish;
 
+use App\Models\Product;
 use Livewire\Component;
-use App\Models\Reference;
 use App\Models\Wish;
 use Illuminate\Support\Str;
 
 class Toggle extends Component
 {
-    public $reference;
+    public $product;
 
-    public function mount(Reference $reference)
+    public function mount(Product $product)
     {
-        $this->reference = $reference;
+        $this->product = $product;
     }
 
     public function addToWishlist()
@@ -27,12 +27,12 @@ class Toggle extends Component
             return;
         }
 
-        if ($this->reference->isInWishlist) {
+        if ($this->product->isInWishlist) {
             $this->removeToWishlist();
         }else{
             Wish::create([
                 'user_id' => auth()->id(),
-                'reference_id' => $this->reference->id,
+                'product_id' => $this->product->id,
             ]);
 
             $this->emit('flashMessage', [
@@ -42,12 +42,12 @@ class Toggle extends Component
             ]);
         }
 
-        $this->reference = Reference::find($this->reference->id);
+        $this->product = Product::find($this->product->id);
     }
 
     private function removeToWishlist()
     {
-        $wish = Wish::remove($this->reference->id, auth()->id());
+        $wish = Wish::remove($this->product->id, auth()->id());
 
         $this->emit('flashMessage', [
             'type' => 'success',

@@ -1,4 +1,4 @@
-<button type="button" wire:click.stop.prevent="addToWishlist" class="@if($reference->isInWishlist) text-red-400 hover:text-gray-500 @else text-gray-500 hover:text-red-400 @endif">
+<button type="button" wire:click.stop.prevent="addToWishlist" class="@if($product->isInWishlist) text-red-400 hover:text-gray-500 @else text-gray-500 hover:text-red-400 @endif">
     <svg
         class="h-6 w-6 fill-current z-10"
         xmlns="http://www.w3.org/2000/svg"

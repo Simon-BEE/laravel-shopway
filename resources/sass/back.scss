@@ -47,7 +47,7 @@
 }
 
 #imagesPreview img{
-    @apply w-64 h-64 mx-2 object-cover shadow-md rounded;
+    @apply w-64 h-64 mx-2 mb-4 object-cover shadow-md rounded;
 }
 
 .can-be-disabled:disabled{

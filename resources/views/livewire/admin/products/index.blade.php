@@ -61,7 +61,7 @@
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-10 h-10">
-                                        <img class="w-full h-full rounded w-6 h-6" src="{{ $product->imagePath }}" alt="{{ $product->name }}">
+                                        <img class="w-full h-full rounded w-6 h-6" src="{{ $product->mainImagePath }}" alt="{{ $product->name }}">
                                     </div>
 
                                     <div class="ml-3">

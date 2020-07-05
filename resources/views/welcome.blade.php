@@ -36,7 +36,7 @@
                         $refs.productModalTitle.innerText='{{ ucfirst($product->name) }}';
                         $refs.productModalDesc.innerText='{{ $product->excerpt }}';
                         $refs.productModalPrice.innerText='{{ Format::priceWithTaxAndCurrency($product->price) }}';
-                        $refs.productModalImg.src='{{ $product->imagePath }}';
+                        $refs.productModalImg.src='{{ $product->mainImagePath }}';
                         $refs.productModalId.setAttribute('data-product', {{ $product->id }});
                 ">
                     <livewire:products.card :product="$product" :key="$product->id" />

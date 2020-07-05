@@ -1864,8 +1864,6 @@ function alertTransition(alertElement) {
 }
 
 function createAlert(type, message, id) {
-  console.log('ok');
-
   if (!document.querySelector("#alert-".concat(id))) {
     var alertElement = document.createElement('div');
     alertElement.className = 'fixed right-0 top-0 mt-20 max-w-lg z-40 alert-flash transition-all duration-200 transform translate-x-full';
@@ -1899,8 +1897,6 @@ if (previewDiv) {
     }
 
     function readAndPreview(file) {
-      console.log(file);
-
       if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
         createAlert('error', file.name + " is not an image", Math.floor(Math.random() * 111));
         resetInputFiles();

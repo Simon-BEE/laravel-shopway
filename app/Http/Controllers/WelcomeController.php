@@ -14,7 +14,7 @@ class WelcomeController extends Controller
      */
     public function __invoke(): View
     {
-        $products = auth()->check() ? Product::randomProducts('wishes')->get() : Product::randomProducts()->get();
+        $products = auth()->check() ? Product::randomProducts()->get() : Product::randomProducts()->get();
 
         return view('welcome', [
             'products' => $products,

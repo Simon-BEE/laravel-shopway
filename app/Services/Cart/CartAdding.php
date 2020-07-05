@@ -22,7 +22,7 @@ class CartAdding
                     'name' => isset($product->name) ? $product->name : null,
                     'quantity' => 1,
                     'price' => $product->price,
-                    'photo' => $product->imagePath
+                    'photo' => $product->mainImagePath
                 ]
             ];
 
@@ -42,7 +42,7 @@ class CartAdding
             'name' => isset($product->name) ? $product->name : null,
             'quantity' => 1,
             'price' => $product->price,
-            'photo' => $product->imagePath
+            'photo' => $product->mainImagePath
         ];
 
         session()->put('cart', $cartSession);

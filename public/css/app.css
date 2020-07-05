@@ -18310,6 +18310,7 @@ ul.pagination {
   height: 16rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+  margin-bottom: 1rem;
   -o-object-fit: cover;
      object-fit: cover;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);

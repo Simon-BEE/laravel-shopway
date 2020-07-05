@@ -32,9 +32,9 @@ class Product extends Model
         return ucfirst($name);
     }
 
-    public function getImagePathAttribute()
+    public function getMainImagePathAttribute()
     {
-        return "https://picsum.photos/800";
+        return $this->images->isNotEmpty() ? $this->imagePath($this->images->first()->filename) : "https://picsum.photos/800";
     }
 
     public function getIsInWishlistAttribute(): bool
@@ -44,6 +44,11 @@ class Product extends Model
         }
 
         return $this->wishes->contains('user_id', auth()->id());
+    }
+
+    public function imagePath(string $filename): string
+    {
+        return asset('/storage/products') . '/' . $filename;
     }
 
     /**
@@ -68,10 +73,9 @@ class Product extends Model
       * @param integer $number
       * @return Builder
       */
-    public function scopeRandomProducts(Builder $query, string $with = '', int $number = 12): Builder
+    public function scopeRandomProducts(Builder $query, int $number = 12): Builder
     {
         return $query
-            ->with($with)
             ->inRandomOrder()
             ->take($number);
     }

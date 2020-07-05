@@ -39,6 +39,12 @@ class StoreProductRequest extends FormRequest
             'quantity' => [
                 'required', 'numeric', 'between:1,2000',
             ],
+            'images' => [
+                'required', 'array', 'min:1',
+            ],
+            'images.*' => [
+                'required', 'image', 'mimes:png,jpg,jpeg', 'max:2200',
+            ],
         ];
     }
 
@@ -48,6 +54,7 @@ class StoreProductRequest extends FormRequest
         $validator->after(function ($validator){
             $failedRules = $validator->failed();
             if (!empty($failedRules)) {
+                dd($failedRules);
                 session()->flash('type', 'error');
                 session()->flash('message', 'Please fill correctly the form.');
             }

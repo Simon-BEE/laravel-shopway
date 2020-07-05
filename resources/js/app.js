@@ -64,9 +64,9 @@ function removeElement(element) {
 
 // preview images
 const previewDiv = document.getElementById('imagesPreview');
-if (previewDiv) {
+const inputForUpload = document.getElementById('imagesInput');
+if (previewDiv && inputForUpload) {
     const resetButton = document.getElementById('resetImages');
-    const inputForUpload = document.getElementById('imagesInput');
 
     function previewImages() {
         if (this.files) {

@@ -1,41 +1,34 @@
-@extends('layouts.back')
+<div class="bg-white p-4 mt-6 relative">
+    <button type="button" class="absolute right-0 mr-3 p-2 rounded inline-flex text-red-400 hover:bg-gray-200 hover:text-red-600">
+        <span class="text-lg mdi mdi-delete-outline" data-route="{{ route('admin.products.destroy', $product) }}" x-on:click="isDialogOpen = true;"></span>
+    </button>
 
-@section('meta-title')
-    Create a product
-@endsection
-
-@section('content')
-
-    <div class="flex justify-between">
-        <h3 class="text-gray-700 text-3xl font-medium">Create a product</h3>
-    </div>
-    <div class="mt-6 p-4 bg-white">
-        <form action="{{ route('admin.products.store') }}" method="post" class="productForm" enctype="multipart/form-data">
-            @csrf
-            <h4 class="text-lg font-semibold mb-3">Informations</h4>
-
-            <x-form.input
-                label="Define a product's name"
-                type="text"
-                name="name"
-                placeholder="Product's name"
-                value="{{ old('name') }}"
-                helper="A slug will be generated automatically"
-                required
-            />
-            <x-form.textarea
-                label="Describe your product"
-                name="description"
-                placeholder="Product's description"
-                value="{{ old('description') }}"
-                required
-            />
-            <x-form.input-icon
+    <form action="#" method="post">
+        @csrf
+        <h4 class="font-semibold mb-3 text-lg">General informations about product</h4>
+        <x-form.input
+            label="Define a product's name"
+            type="text"
+            name="name"
+            placeholder="Product's name"
+            value="{{ old('name') ?? $name }}"
+            helper="A slug will be generated automatically"
+            required
+            wire:model.lazy="name"
+        />
+        <x-form.textarea
+            label="Describe your product"
+            name="description"
+            placeholder="Product's description"
+            value="{{ old('description') ?? $product->description }}"
+            required
+        />
+        <x-form.input-icon
                 label="Define a product's price"
                 type="text"
                 name="price"
                 placeholder="Product's price"
-                value="{{ old('price') }}"
+                value="{{ old('price') ?? $product->price }}"
                 helper="Must be without currency"
                 icon="mdi-home-currency-usd"
                 required
@@ -47,7 +40,7 @@
                         type="text"
                         name="weight"
                         placeholder="Product's weight"
-                        value="{{ old('weight') }}"
+                        value="{{ old('weight') ?? $product->weight }}"
                         helper="Must be in grams"
                         icon="mdi-weight"
                         required
@@ -59,7 +52,7 @@
                         type="text"
                         name="quantity"
                         placeholder="Product's quantity"
-                        value="{{ old('quantity') }}"
+                        value="{{ old('quantity') ?? $product->quantity }}"
                         icon="mdi-package-variant"
                         required
                     />
@@ -67,18 +60,27 @@
             </div>
 
             <h4 class="text-lg font-semibold mb-3">Media</h4>
-
             <section class="media">
                 <div class="flex justify-between w-full items-center mb-2">
                     <label class="label text-gray-700" for="labelImages">
-                        Add few images about your product
+                        Remove or add images about your product
                     </label>
                     <button type="button" class="hidden p-2 text-red-500 rounded hover:bg-gray-200" id="resetImages" title="{{ __('Reset images') }}">
                         <span class="mdi mdi-delete-outline"></span>
                     </button>
                 </div>
-                <div class="flex flex-wrap justify-center my-4 hidden relative" id="imagesPreview">
-                    <!-- Images previews -->
+                <div class="flex flex-wrap justify-center my-4 relative" id="imagesPreview">
+                    @forelse ($product->images as $image)
+                        <article class="flex flex-col">
+                            <img src="{{ $product->imagePath($image->filename) }}" alt="{{ $image->filename }}">
+                            <a href="#" class="text-sm text-red-500 -mt-3 text-center hover:underline">
+                                <span class="mdi mdi-delete-outline mr-2"></span>
+                                Remove
+                            </a>
+                        </article>
+                    @empty
+                        <p class="my-6">No images found.</p>
+                    @endforelse
                 </div>
                 <div class="w-1/2 mx-auto">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="imagesInput">
@@ -96,17 +98,6 @@
                         </div>
                     </label>
                 </div>
-                <x-form.button classDiv="flex justify-center my-4" type="button" class="bg-orange-500 hover:bg-orange-600">
-                    {{ __('Or choose in Image Manager') }}
-                </x-form.button>
             </section>
-
-            <div class="mt-6">
-                <hr>
-                <x-form.button>
-                    {{ __('Create a product') }}
-                </x-form.button>
-            </div>
-        </form>
-    </div>
-@endsection
+    </form>
+</div>

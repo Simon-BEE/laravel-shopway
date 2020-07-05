@@ -84,10 +84,10 @@
                                 {{-- <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
                                     <span class="text-lg mdi mdi-eye"></span>
                                 </a> --}}
-                                <a href="{{ route('admin.products.edit', $product) }}" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-900 mr-2">
+                                <a href="{{ route('admin.products.edit', $product) }}" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2">
                                     <span class="text-lg mdi mdi-pencil-outline"></span>
                                 </a>
-                                <button type="button" class="bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-900">
+                                <button type="button" class="bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-600">
                                     <span class="text-lg mdi mdi-delete-outline" data-route="{{ route('admin.products.destroy', $product) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
                                 </button>
                             </td>

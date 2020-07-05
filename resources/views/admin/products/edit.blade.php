@@ -5,31 +5,23 @@
 @endsection
 
 @section('content')
-<div class="flex justify-between">
+<x-modal title="Are you sure ?">
+    <p>Are you sure you want to delete this product?</p>
+    <div class="mt-5 flex justify-end">
+        <x-form.button classDiv="none" class="bg-gray-200 text-gray-700 hover:bg-gray-300" @click="isDialogOpen = false">Cancel</x-form.button>
+        <x-form.form-button action="{{ route('admin.products.destroy', $product) }}" method="DELETE" class="p-2 rounded bg-red-500 text-white hover:bg-red-600">
+            Delete this product
+        </x-form.form-button>
+    </div>
+</x-modal>
+
+<div class="flex flex-col md:flex-row">
     <h3 class="text-gray-700 text-3xl">Product edit: <span class="font-semibold">{{ $product->name }}</span></h3>
+    <small class="md:ml-4 text-xs text-gray-700 flex items-center">
+        <span class="mr-2 mdi mdi-information-outline text-orange-500 text-lg"></span>
+        Each field has autosaving, be careful.
+    </small>
 </div>
 
-<div class="bg-white p-4 mt-6">
-
-    <form action="#" method="post">
-        @csrf
-        <h4 class="font-semibold mb-3 text-lg">General informations about product</h4>
-        <x-form.input
-            label="Define a product's name"
-            type="text"
-            name="name"
-            placeholder="Product's name"
-            value="{{ old('name') ?? $product->name }}"
-            helper="A slug will be generated automatically"
-            required
-        />
-        <x-form.textarea
-            label="Describe your product"
-            name="description"
-            placeholder="Product's description"
-            value="{{ old('description') ?? $product->description }}"
-            required
-        />
-    </form>
-</div>
+<livewire:admin.products.edit :product="$product"/>
 @endsection

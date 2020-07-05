@@ -1889,8 +1889,9 @@ function removeElement(element) {
 
 
 var previewDiv = document.getElementById('imagesPreview');
+var inputForUpload = document.getElementById('imagesInput');
 
-if (previewDiv) {
+if (previewDiv && inputForUpload) {
   var previewImages = function previewImages() {
     if (this.files) {
       [].forEach.call(this.files, readAndPreview);
@@ -1938,7 +1939,6 @@ if (previewDiv) {
   };
 
   var resetButton = document.getElementById('resetImages');
-  var inputForUpload = document.getElementById('imagesInput');
   inputForUpload.addEventListener('change', previewImages);
   resetButton.addEventListener('click', resetInputFiles);
 }

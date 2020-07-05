@@ -1,6 +1,6 @@
 <div>
     <div class="img hover:grow hover:shadow-lg w-72 h-48">
-        <img class="w-full h-full object-cover rounded shadow-lg" src="https://picsum.photos/300/300?random={{ mt_rand(1, 15) }}">
+        <img class="w-full h-full object-cover rounded shadow-lg" src="{{ $product->mainImagePath }}">
     </div>
     <div class="pt-3 flex items-center justify-between">
         <p class="">{{ ucfirst($product->name) }}</p>

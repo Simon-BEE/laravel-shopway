@@ -9,9 +9,9 @@
 @section('content')
 
 <section class="my-12 min-h-full px-6 py-10 relative">
-    <div class="flex flex-col md:flex-row items-stretch justify-around">
+    <div class="flex flex-col md:flex-row items-stretch justify-between">
         <div class="img w-full md:w-4/12">
-            <img class="w-full h-full object-cover rounded shadow-lg" src="{{ $product->mainImagePath }}" alt="lorem">
+            <img class="w-full h-full object-cover rounded shadow-lg" src="{{ $product->mainImagePath }}" alt="{{ $product->name }}">
         </div>
 
         <div class="mt-4 md:mt-0 text-gray-700 w-full md:w-6/12 flex flex-col justify-between max-h-full">
@@ -49,6 +49,16 @@
                 </div>
             </div>
         </div>
+    </div>
+    <h3 class="mt-6 font-semibold text-lg text-gray-700">{{ __('All products pictures') }}</h3>
+    <div class="mt-4 grid md:grid-cols-4 gap-4">
+        @forelse ($product->images as $image)
+            <a href="{{ $product->imagePath($image->filename) }}" class="transition-transform duration-700 transform hover:scale-105">
+                <img class="w-full h-full object-cover rounded shadow-lg" src="{{ $product->imagePath($image->filename) }}" alt="{{ $product->name }}">
+            </a>
+        @empty
+            No pictures found.
+        @endforelse
     </div>
 </section>
 

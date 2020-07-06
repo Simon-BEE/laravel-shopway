@@ -22,6 +22,7 @@
             placeholder="Product's description"
             value="{{ old('description') ?? $product->description }}"
             required
+            wire:model.lazy="description"
         />
         <x-form.input-icon
                 label="Define a product's price"
@@ -32,6 +33,7 @@
                 helper="Must be without currency"
                 icon="mdi-home-currency-usd"
                 required
+                wire:model.lazy="price"
             />
             <div class="flex flex-col md:flex-row justify-between mt-3">
                 <div class="w-full md:w-5/12">
@@ -44,6 +46,7 @@
                         helper="Must be in grams"
                         icon="mdi-weight"
                         required
+                        wire:model.lazy="weight"
                     />
                 </div>
                 <div class="w-full md:w-5/12">
@@ -55,6 +58,7 @@
                         value="{{ old('quantity') ?? $product->quantity }}"
                         icon="mdi-package-variant"
                         required
+                        wire:model.lazy="quantity"
                     />
                 </div>
             </div>
@@ -70,13 +74,13 @@
                     </button>
                 </div>
                 <div class="flex flex-wrap justify-center my-4 relative" id="imagesPreview">
-                    @forelse ($product->images as $image)
+                    @forelse ($images as $image)
                         <article class="flex flex-col">
                             <img src="{{ $product->imagePath($image->filename) }}" alt="{{ $image->filename }}">
-                            <a href="#" class="text-sm text-red-500 -mt-3 text-center hover:underline">
+                            <button type="button" class="text-sm text-red-500 -mt-3 text-center hover:underline" wire:click="$emit('removeProductImage', {{ $image->id }})">
                                 <span class="mdi mdi-delete-outline mr-2"></span>
                                 Remove
-                            </a>
+                            </button>
                         </article>
                     @empty
                         <p class="my-6">No images found.</p>
@@ -94,10 +98,11 @@
                             </span>
                             <span class="font-semibold text-sm mb-3">{{ __('Click to upload your file') }}</span>
                             <span class="font-light text-xs mb-3">{{ __('PNG, or JPG are allowed (2MB max)') }}</span>
-                            <input type="file" class="hidden" accept="image/*" name="images[]" id="imagesInput" multiple="">
+                            <input type="file" class="hidden" accept="image/*" name="pictures[]" id="imagesInput" wire:model="pictures"  multiple="">
                         </div>
                     </label>
                 </div>
+                @error('pictures.*') <span class="text-red-500">{{ $message }}</span> @enderror
             </section>
     </form>
 </div>

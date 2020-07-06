@@ -50,11 +50,10 @@ class StoreProductRequest extends FormRequest
 
     public function withValidator($validator)
     {
-        // dd($validator);
         $validator->after(function ($validator){
             $failedRules = $validator->failed();
             if (!empty($failedRules)) {
-                dd($failedRules);
+                // dd($failedRules);
                 session()->flash('type', 'error');
                 session()->flash('message', 'Please fill correctly the form.');
             }

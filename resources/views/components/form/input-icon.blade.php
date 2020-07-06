@@ -16,10 +16,9 @@
             type="{{ $type ?? 'text' }}"
             name="{{ $name }}"
             id="{{ $name }}"
-            class="form-input w-full border-gray-200 {{ !empty($iconRight) ? 'pr-8' : 'pl-8' }} @error($name) border-red-500 @enderror"
+            class="form-input w-full border-gray-200 {{ !empty($iconRight) ? 'pr-10' : 'pl-10' }} @error($name) border-red-500 @enderror"
             placeholder="{{ $placeholder ?? '' }}"
-            {{-- value="{{ old($name, $value ?? '') }}" --}}
-            value="{{ old($name) ?? ((isset($property) && $property) ? $property : '') }}"
+            value="{{ isset($value) ? $value : '' }}"
             {{ ($required ?? false) ? 'required' : '' }}
             {{ $attributes }}
         >

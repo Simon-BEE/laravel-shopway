@@ -12,7 +12,7 @@ class Index extends Component
 
     public $perPage = 10;
     public $searchTerm;
-    public $sortField ='id';
+    public $sortField ='name';
     public $sortAsc = true;
 
     public function updatedSearchTerm($value)

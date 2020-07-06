@@ -80,7 +80,7 @@
                                     <span class="relative">Online</span>
                                 </span>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
                                 {{-- <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
                                     <span class="text-lg mdi mdi-eye"></span>
                                 </a> --}}

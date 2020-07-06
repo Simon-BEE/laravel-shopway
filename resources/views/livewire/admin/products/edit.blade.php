@@ -34,7 +34,7 @@
                 required
             />
             <div class="flex flex-col md:flex-row justify-between mt-3">
-                <div class="w-5/12">
+                <div class="w-full md:w-5/12">
                     <x-form.input-icon
                         label="Define a product's weight"
                         type="text"
@@ -46,7 +46,7 @@
                         required
                     />
                 </div>
-                <div class="w-5/12">
+                <div class="w-full md:w-5/12">
                     <x-form.input-icon
                         label="Define a product's quantity"
                         type="text"

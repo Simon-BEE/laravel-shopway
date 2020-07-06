@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
+use App\Traits\Upload\ImageUpload;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
+    use ImageUpload;
+
     protected $guarded = ['id'];
 
     public static function booted()
     {
         static::creating(function ($product){
             $product->slug = Str::slug($product->name);
+        });
+
+        static::deleting(function ($product){
+            foreach ($product->images as $image) {
+                (new static)->removeImage($image->filename, 'products');
+            }
         });
     }
 

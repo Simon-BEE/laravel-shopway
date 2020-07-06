@@ -12,3 +12,11 @@
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, eaque rerum beatae, iste exercitationem repellendus esse optio laborum in voluptates eum voluptatibus veritatis ut possimus necessitatibus. Ipsam repellat officiis numquam consequatur ea, amet explicabo sunt est facere voluptatum nemo temporibus voluptas animi, consectetur iure exercitationem ad dolores iusto dolorem suscipit. Nostrum inventore unde quam nulla corrupti aspernatur, iste sint quidem eos. Enim soluta nostrum impedit quibusdam dolores sequi quo accusamus est id perferendis, quia molestiae deleniti vitae, adipisci non dicta vel totam omnis eum voluptate, numquam natus aliquam modi. Nostrum quidem possimus deserunt praesentium quisquam, neque nihil, animi deleniti iure natus, cum accusantium itaque culpa. Maiores quod consequuntur facere illum quam esse aperiam perferendis facilis expedita autem officiis porro, possimus unde ad nostrum mollitia at reiciendis. Iste blanditiis exercitationem modi tempore. Nobis perferendis asperiores assumenda corporis. Natus, esse molestias deleniti commodi iusto mollitia minus sapiente eius, earum, nostrum repellat accusamus dolorum ipsum modi facilis hic vitae! Sit repellendus laborum, nam voluptatem saepe commodi iusto soluta quam animi magnam libero accusamus obcaecati, est, necessitatibus deserunt! Quos ratione error illo odit reiciendis ad hic odio libero iste, maiores eveniet, unde quasi dolore aut doloribus porro fuga id esse quo qui praesentium soluta.</p>
     </div>
 @endsection
+
+{{-- @section('extra-js')
+    <script>
+        if (console.log(!window.location.href.indexOf("admin") > -1);) {
+            window.location.reload();
+        }
+    </script>
+@endsection --}}

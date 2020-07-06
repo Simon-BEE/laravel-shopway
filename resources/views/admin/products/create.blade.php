@@ -110,3 +110,9 @@
         </form>
     </div>
 @endsection
+
+@section('extra-js')
+    <script>
+        Turbolinks.visit(window.location.reload())
+    </script>
+@endsection

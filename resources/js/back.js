@@ -6,4 +6,4 @@ Turbolinks.start();
 require('./includes/alert.js');
 require('./includes/preview.js');
 
-// window.onload(() => console.info('App scripts charged.'));
+// window.onload(() => console.info('Back app scripts charged.'));

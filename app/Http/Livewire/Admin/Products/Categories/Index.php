@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Products;
+namespace App\Http\Livewire\Admin\Products\Categories;
 
-use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
 
 class Index extends Component
@@ -35,10 +35,8 @@ class Index extends Component
 
     public function render()
     {
-        // dump($this);
-        return view('livewire.admin.products.index', [
-            'products' => Product::where('name', 'like' , "%$this->searchTerm%")
-                ->with(['images', 'categories'])
+        return view('livewire.admin.products.categories.index', [
+            'categories' => Category::where('name', 'like' , "%$this->searchTerm%")
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage)
             ,

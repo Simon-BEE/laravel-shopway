@@ -5,7 +5,11 @@
 @endsection
 
 @section('meta-title')
-    Your account
+{{ __('Your account') }}
+@endsection
+
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('users.dashboard') }}" label="{{ __('Account') }}" active />
 @endsection
 
 @section('content')

@@ -4,6 +4,11 @@
     Product edit: {{ $product->name }}
 @endsection
 
+@section('breadcrumb')
+    <x-back.breadcrumb-item route="{{ route('admin.products.index') }}" label="List of products"/>
+    <x-back.breadcrumb-item route="{{ route('admin.products.edit', $product) }}" label="{{ $product->name }}" active/>
+@endsection
+
 @section('content')
 <x-modal title="Are you sure ?">
     <p>Are you sure you want to delete this product?</p>

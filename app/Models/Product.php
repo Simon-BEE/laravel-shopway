@@ -47,6 +47,11 @@ class Product extends Model
         return asset('/storage/products') . '/' . $filename;
     }
 
+    public function hasCategory(Category $category): bool
+    {
+        return $this->categories->contains($category);
+    }
+
     /**
      * ? ATTRIBUTES
      */
@@ -97,6 +102,11 @@ class Product extends Model
     public function getExcerptAttribute(): string
     {
         return substr($this->description, 0, 200) . '...';
+    }
+
+    public function getCategoriesListAttribute()
+    {
+        return $this->categories->pluck('name')->implode(', ');
     }
 
     /**

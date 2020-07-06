@@ -4,6 +4,11 @@
     Create a product
 @endsection
 
+@section('breadcrumb')
+    <x-back.breadcrumb-item route="{{ route('admin.products.index') }}" label="List of products"/>
+    <x-back.breadcrumb-item route="{{ route('admin.products.create') }}" label="Create a product" active/>
+@endsection
+
 @section('content')
 
     <div class="flex justify-between">

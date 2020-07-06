@@ -1,4 +1,4 @@
-<header id="header" class="w-full z-30 top-0 py-1 bg-gray-900 mb-4 border-b-4 border-gray-200">
+<header id="header" class="w-full z-30 top-0 py-1 bg-gray-900">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3 relative">
 
         <label for="menu-toggle" class="cursor-pointer md:hidden block">
@@ -12,9 +12,21 @@
         <div class="hidden md:flex md:items-center md:w-auto w-full order-3 md:order-2 md:mr-16" id="menu">
             <nav>
                 <ul class="md:flex items-center justify-between text-base text-gray-300 pt-4 md:pt-0">
-                    <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="{{ route('welcome') }}">Home</a></li>
-                    <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="{{ route('products.index') }}">Products</a></li>
-                    <li class="px-2"><a class="inline-block no-underline py-2 px-2 border-b border-transparent hover:border-blue-400" href="{{ route('contact') }}">Contact</a></li>
+                    <li class="px-2">
+                        <a class="inline-block no-underline py-2 px-2 border-b border-transparent @if(Route::is('welcome')) border-blue-400 @else hover:border-blue-400 @endif" href="{{ route('welcome') }}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="px-2">
+                        <a class="inline-block no-underline py-2 px-2 border-b border-transparent @if(Route::is('products.index')) border-blue-400 @else hover:border-blue-400 @endif" href="{{ route('products.index') }}">
+                            Products
+                        </a>
+                    </li>
+                    <li class="px-2">
+                        <a class="inline-block no-underline py-2 px-2 border-b border-transparent @if(Route::is('contact')) border-blue-400 @else hover:border-blue-400 @endif" href="{{ route('contact') }}">
+                            Contact
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>

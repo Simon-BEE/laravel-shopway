@@ -33,6 +33,10 @@
             @if (session()->has('type'))
                 <x-alert type="{{ session('type') }}">{{ session()->has('message') ? session('message') : '' }}</x-alert>
             @endif
+            <section class="breadcrumb w-full bg-gray-700 border-b-4 border-gray-200 py-3 px-4 flex flex-wrap">
+                <a href="{{ route('admin.dashboard') }}" class="text-white hover:underline @if(Route::is('welcome')) text-blue-200 @endif">Home</a>
+                @yield('breadcrumb')
+            </section>
 
             <section class="container mx-auto">
                 @yield('content')

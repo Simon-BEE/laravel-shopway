@@ -100,7 +100,21 @@ class Edit extends Component
 
     public function updateCategories(int $categoryId)
     {
-        $this->product->categories()->toggle($categoryId);
+        if ($this->product->categories->count() <= 1) {
+            // dd($this->product->categories->contains('id', $categoryId));
+            if ($this->product->categories->contains('id', $categoryId)) {
+                $this->emit('flashMessage', [
+                    'type' => 'success',
+                    'message' => 'Last product\'s category can\'t be removed.',
+                    'id' => Str::random(10)
+                ]);
+                return;
+            }
+            $this->product->categories()->attach($categoryId);
+        }else{
+            $this->product->categories()->toggle($categoryId);
+        }
+
         
         $this->emit('flashMessage', [
             'type' => 'success',

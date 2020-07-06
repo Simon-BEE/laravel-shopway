@@ -5,7 +5,11 @@
 @endsection
 
 @section('meta-title')
-    Your cart
+    {{ __('Your cart') }}
+@endsection
+
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('cart.index') }}" label="{{ __('Your cart') }}" active />
 @endsection
 
 @section('content')

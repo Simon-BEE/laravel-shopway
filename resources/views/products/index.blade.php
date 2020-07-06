@@ -5,7 +5,11 @@
 @endsection
 
 @section('meta-title')
-    Our products
+    {{ __('Our products') }}
+@endsection
+
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('products.index') }}" label="{{ __('Products') }}" active />
 @endsection
 
 @section('content')

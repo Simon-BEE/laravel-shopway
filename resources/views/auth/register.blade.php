@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('meta-desc')
+    <meta name="description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nam veniam tempora fugit fuga pariatur atque maiores consequuntur asperiores dolores! Facere natus vitae odit, quis corporis recusandae ad consectetur numquam!"/>
+@endsection
+
+@section('meta-title')
+    {{ __('Register') }}
+@endsection
+
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('register') }}" label="{{ __('Register') }}" active classActiv="text-yellow-500" />
+@endsection
+
 @section('content')
     <div class="container mx-auto">
         <div class="w-full max-w-sm mx-auto">

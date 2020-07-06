@@ -5,7 +5,11 @@
 @endsection
 
 @section('meta-title')
-    Contact
+    {{ __('Contact') }}
+@endsection
+
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('contact') }}" label="{{ __('Contact') }}" active />
 @endsection
 
 @section('content')

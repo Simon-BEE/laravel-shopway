@@ -46,6 +46,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('edit/{product}', 'MainController@edit')->name('edit');
             Route::get('create', 'CreateController@create')->name('create');
             Route::post('/', 'CreateController@store')->name('store');
+
+            Route::resource('categories', 'Category\MainController')->except(['show', 'edit', 'create']);
         });
     });
 

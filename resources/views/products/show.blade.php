@@ -6,6 +6,11 @@
 
 @section('meta-title') {{ $product->name }} @endsection
 
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('products.index') }}" label="{{ __('Products') }}" />
+    <x-breadcrumb-item route="{{ route('products.show', $product) }}" label="{{ $product->name }}" active />
+@endsection
+
 @section('content')
 
 <section class="my-12 min-h-full px-6 py-10 relative">

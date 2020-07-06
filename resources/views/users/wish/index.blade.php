@@ -8,6 +8,11 @@
     {{ __('Your wishlist') }}
 @endsection
 
+@section('breadcrumb')
+    <x-breadcrumb-item route="{{ route('users.dashboard') }}" label="{{ __('Account') }}" />
+    <x-breadcrumb-item route="{{ route('users.wish.index') }}" label="{{ __('Wishlist') }}" active />
+@endsection
+
 @section('content')
 
 <section class="text-gray-700 mt-5 relative">

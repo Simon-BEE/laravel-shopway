@@ -16,7 +16,7 @@ class MainController extends Controller
     public function edit(Product $product)
     {
         return view('admin.products.edit', [
-            'product' => $product->load('images'),
+            'product' => $product->load(['images', 'categories']),
         ]);
     }
 

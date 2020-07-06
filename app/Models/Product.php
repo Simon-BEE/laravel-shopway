@@ -43,7 +43,20 @@ class Product extends Model
 
     public function getMainImagePathAttribute()
     {
-        return $this->images->isNotEmpty() ? $this->imagePath($this->images->first()->filename) : "https://picsum.photos/800";
+        return $this->images->isNotEmpty() 
+            ? $this->imagePath($this->getMainImage()->filename) 
+            : "https://picsum.photos/800";
+    }
+
+    public function getMainImage()
+    {
+        if ($this->images->contains('is_main', true)) {
+            return $this->images->skipUntil(function ($image){
+                return $image->is_main;
+            })->first();
+        }
+
+        return $this->images->first();
     }
 
     public function getIsInWishlistAttribute(): bool

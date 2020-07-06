@@ -13,6 +13,13 @@ class MainController extends Controller
         return view('admin.products.index');
     }
 
+    public function edit(Product $product)
+    {
+        return view('admin.products.edit', [
+            'product' => $product->load('images'),
+        ]);
+    }
+
     public function destroy(Product $product)
     {
         $product->delete();

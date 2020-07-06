@@ -67,7 +67,7 @@
             <section class="media">
                 <div class="flex justify-between w-full items-center mb-2">
                     <label class="label text-gray-700" for="labelImages">
-                        Remove or add images about your product
+                        {{ __('Remove or add images about your product') }}
                     </label>
                     <button type="button" class="hidden p-2 text-red-500 rounded hover:bg-gray-200" id="resetImages" title="{{ __('Reset images') }}">
                         <span class="mdi mdi-delete-outline"></span>
@@ -75,15 +75,32 @@
                 </div>
                 <div class="flex flex-wrap justify-center my-4 relative" id="imagesPreview">
                     @forelse ($images as $image)
-                        <article class="flex flex-col">
+                        <article class="flex flex-col relative">
                             <img src="{{ $product->imagePath($image->filename) }}" alt="{{ $image->filename }}">
-                            <button type="button" class="text-sm text-red-500 -mt-3 text-center hover:underline" wire:click="$emit('removeProductImage', {{ $image->id }})">
-                                <span class="mdi mdi-delete-outline mr-2"></span>
-                                Remove
-                            </button>
+                            <div class="flex justify-around">
+                                <button type="button" class="text-sm text-red-500 -mt-3 justify-center hover:underline" wire:click="$emit('removeProductImage', {{ $image->id }})">
+                                    <span class="mdi mdi-delete-outline mr-2"></span>
+                                    {{ __('Remove') }}
+                                </button>
+                                @if ($images->count() > 1)
+                                    {{-- <button type="button" class="text-sm text-blue-500 -mt-3 hover:underline" wire:click="$emit('removeProductImage', {{ $image->id }})">
+                                        <span class="mdi mdi-delete-outline mr-2"></span>
+                                        {{ __('Define as main') }}
+                                    </button> --}}
+                                    <x-form.radio
+                                        classDiv="absolute top-0 right-0 mt-1 rounded bg-white bg-opacity-25 px-2 py-1 shadow-sm mr-4"
+                                        name="is_main"
+                                        label=""
+                                        value="{{ $product->id }}"
+                                        checked="{{ $image->is_main }}"
+                                        title="Set as main image"
+                                        wire:change="$emit('setImageAsMain', {{ $image->id }})"
+                                    />
+                                @endif
+                            </div>
                         </article>
                     @empty
-                        <p class="my-6">No images found.</p>
+                        <p class="my-6">{{ __('No images found') }}.</p>
                     @endforelse
                 </div>
                 <div class="w-1/2 mx-auto">

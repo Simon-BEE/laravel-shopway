@@ -43,8 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
         ], function () {
             Route::get('/', 'MainController@index')->name('index');
             Route::delete('{product}', 'MainController@destroy')->name('destroy');
-            Route::get('edit/{product}', 'EditController@edit')->name('edit');
-            Route::patch('edit/{product}', 'EditController@update')->name('update');
+            Route::get('edit/{product}', 'MainController@edit')->name('edit');
             Route::get('create', 'CreateController@create')->name('create');
             Route::post('/', 'CreateController@store')->name('store');
         });

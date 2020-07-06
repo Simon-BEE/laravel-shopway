@@ -21,7 +21,7 @@ class Edit extends Component
     public $weight;
     public $quantity;
 
-    protected $listeners = ['removeProductImage', 'saveProductImages'];
+    protected $listeners = ['removeProductImage', 'setImageAsMain'];
 
     public function mount(Product $product)
     {
@@ -33,9 +33,32 @@ class Edit extends Component
         $this->quantity = $product->quantity;
     }
 
-    public function removeProductImage(int $id, ?string $filename = null)
+    public function setImageAsMain(int $id)
     {
         $image = Image::findOrFail($id);
+        
+        $image->setAsMain();
+
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Product\'s image has been set as main.',
+            'id' => Str::random(10)
+        ]);
+    }
+
+    public function removeProductImage(int $id)
+    {
+        $image = Image::findOrFail($id);
+
+        if ($image->is_main) {
+            $this->emit('flashMessage', [
+                'type' => 'error',
+                'message' => 'Product\'s main image can\'t be removed.',
+                'id' => Str::random(10)
+            ]);
+
+            return;
+        }
 
         $this->removeImage($image->filename, 'products');
 

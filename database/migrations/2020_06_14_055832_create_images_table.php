@@ -17,6 +17,7 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->string('filename');
+            $table->boolean('is_main')->default(false);
             $table->timestamps();
         });
     }

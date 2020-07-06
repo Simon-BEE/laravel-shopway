@@ -2,7 +2,7 @@
 
 <div class="flex flex-col md:flex-row items-stretch justify-around modal-product" data-product="" x-ref="productModalId">
     <div class="img w-full md:w-4/12">
-        <img class="w-full h-full object-cover rounded shadow-lg" x-ref="productModalImg" src="" alt="lorem">
+        <img class="w-full h-64 object-cover rounded shadow-lg" x-ref="productModalImg" src="" alt="lorem">
     </div>
 
     <div class="mt-4 md:mt-0 text-gray-700 w-full md:w-6/12 flex flex-col justify-between max-h-full">

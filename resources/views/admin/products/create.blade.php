@@ -30,13 +30,23 @@
                 value="{{ old('description') }}"
                 required
             />
+            <x-form.select 
+                label="Choose a product's category"
+                name="categories[]"
+                required
+                multiple
+            >
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </x-form.select>
             <x-form.input-icon
                 label="Define a product's price"
                 type="text"
                 name="price"
                 placeholder="Product's price"
                 value="{{ old('price') }}"
-                helper="Must be without currency"
+                helper="Must be without currency and tax"
                 icon="mdi-home-currency-usd"
                 required
             />
@@ -61,6 +71,7 @@
                         placeholder="Product's quantity"
                         value="{{ old('quantity') }}"
                         icon="mdi-package-variant"
+                        helper="Product will be offline when quantity is less than 2."
                         required
                     />
                 </div>

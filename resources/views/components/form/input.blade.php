@@ -21,11 +21,11 @@
         {{ $attributes }}
     >
 
-    @if (isset($helper) && $helper)
+    @isset($helper)
         <x-form.helper>
             {{ $helper }}
         </x-form.helper>
-    @endif
+    @endisset
 
     @error($name)
         <x-form.error>

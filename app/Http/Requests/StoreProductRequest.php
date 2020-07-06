@@ -39,6 +39,12 @@ class StoreProductRequest extends FormRequest
             'quantity' => [
                 'required', 'numeric', 'between:1,2000',
             ],
+            'categories' => [
+                'required', 'array', 'min:1',
+            ],
+            'categories.*' => [
+                'required', 'numeric', 'exists:categories,id',
+            ],
             'images' => [
                 'required', 'array', 'min:1',
             ],

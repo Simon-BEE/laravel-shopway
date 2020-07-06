@@ -13,10 +13,22 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'active' => 'boolean',
+        'price' => 'float',
+        'weight' => 'float',
+        'quantity' => 'integer',
+    ];
+
     public static function booted()
     {
         static::creating(function ($product){
             $product->slug = Str::slug($product->name);
+            $product->active = $product->quantity > 1;
+        });
+
+        static::updating(function ($product){
+            $product->active = $product->quantity > 1;
         });
 
         static::deleting(function ($product){
@@ -24,6 +36,15 @@ class Product extends Model
                 (new static)->removeImage($image->filename, 'products');
             }
         });
+    }
+
+    /**
+     * ? MISC
+     */
+
+    public function imagePath(string $filename): string
+    {
+        return asset('/storage/products') . '/' . $filename;
     }
 
     /**
@@ -68,11 +89,6 @@ class Product extends Model
         return $this->wishes->contains('user_id', auth()->id());
     }
 
-    public function imagePath(string $filename): string
-    {
-        return asset('/storage/products') . '/' . $filename;
-    }
-
     /**
      * Return truncate description of a product
      *
@@ -84,7 +100,7 @@ class Product extends Model
     }
 
     /**
-     * ? ATTRIBUTES
+     * ? SCOPES
      */
 
      /**
@@ -98,6 +114,7 @@ class Product extends Model
     public function scopeRandomProducts(Builder $query, int $number = 12): Builder
     {
         return $query
+            ->where('active', true)
             ->inRandomOrder()
             ->take($number);
     }

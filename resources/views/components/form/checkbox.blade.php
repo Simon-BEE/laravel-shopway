@@ -1,3 +1,4 @@
+@props(['class', 'label', 'name', 'value', 'checked'])
 <div class="flex flex-col mb-6">
     <label class="inline-flex items-center text-sm text-gray-700" for="{{ $name }}">
         <input
@@ -5,17 +6,12 @@
             name="{{ $name }}"
             id="{{ $name }}"
             class="form-checkbox"
-            {{ old($name) ? 'checked' : '' }}
-            {{ $required ? 'required' : '' }}
-        >
-        <span class="ml-2">{{ __($label) }}</span>
+            value="{{ $value ?? '' }}"
+            {{ ($checked ?? false) ? 'checked' : '' }}
+            {{ $attributes }}
+        />
+        <span class="ml-2 mr-4">{{ __($label) }}</span>
     </label>
-
-    @if (isset($helper) && $helper)
-        <x-form.helper>
-            {{ $helper }}
-        </x-form.helper>
-    @endif
 
     @error($name)
         <x-form.error>

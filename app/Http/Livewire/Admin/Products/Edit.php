@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
 use App\Traits\Upload\ImageUpload;
@@ -20,17 +21,20 @@ class Edit extends Component
     public $price;
     public $weight;
     public $quantity;
+    public $categories;
 
     protected $listeners = ['removeProductImage', 'setImageAsMain'];
 
     public function mount(Product $product)
     {
+        // dd(request()->route()->parameters()['product']);
         $this->product = $product;
         $this->name = $product->name;
         $this->description = $product->description;
         $this->price = $product->price;
         $this->weight = $product->weight;
         $this->quantity = $product->quantity;
+        $this->categories = Category::all();
     }
 
     public function setImageAsMain(int $id)
@@ -90,6 +94,17 @@ class Edit extends Component
         $this->emit('flashMessage', [
             'type' => 'success',
             'message' => 'Product\'s image has been added successfully.',
+            'id' => Str::random(10)
+        ]);
+    }
+
+    public function updateCategories(int $categoryId)
+    {
+        $this->product->categories()->toggle($categoryId);
+        
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Product\'s categories has been updated successfully.',
             'id' => Str::random(10)
         ]);
     }

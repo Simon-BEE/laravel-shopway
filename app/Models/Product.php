@@ -2,14 +2,11 @@
 
 namespace App\Models;
 
-use App\Traits\Upload\ImageUpload;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
 class Product extends Model
 {
-    use ImageUpload;
 
     protected $guarded = ['id'];
 
@@ -19,24 +16,6 @@ class Product extends Model
         'weight' => 'float',
         'quantity' => 'integer',
     ];
-
-    public static function booted()
-    {
-        static::creating(function ($product){
-            $product->slug = Str::slug($product->name);
-            $product->active = $product->quantity > 1;
-        });
-
-        static::updating(function ($product){
-            $product->active = $product->quantity > 1;
-        });
-
-        static::deleting(function ($product){
-            foreach ($product->images as $image) {
-                (new static)->removeImage($image->filename, 'products');
-            }
-        });
-    }
 
     /**
      * ? MISC

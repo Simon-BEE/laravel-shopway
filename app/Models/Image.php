@@ -9,19 +9,6 @@ class Image extends Model
 {
     protected $guarded = ['id'];
 
-    public static function booted()
-    {
-        static::creating(function ($image){
-            if (!(new static)->getMainImageByProduct($image->product->id)) {
-                $image->is_main = true;
-            };
-        });
-
-        static::deleted(function ($image){
-            Storage::disk('products')->delete($image->filename);
-        });
-    }
-
     public function setAsMain()
     {
         $oldMainImage = $this->getMainImageByProduct($this->product->id);

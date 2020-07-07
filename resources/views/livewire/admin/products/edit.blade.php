@@ -35,9 +35,7 @@
                         label="{{ $category->name }}"
                         value="{{ $category->id }}" 
                         checked="{{ $product->hasCategory($category) ? true : false }}"
-                        {{-- disabled="{{ $product->hasCategory($category) && $this->product->categories->count() == 1 }}" --}}
                         wire:change="updateCategories({{ $category->id }})"
-                        wire:poll.2000ms="$refresh"
                     />
                 @endforeach
             </div>

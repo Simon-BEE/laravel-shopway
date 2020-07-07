@@ -17,7 +17,10 @@ trait ImageUpload
      */
     public function removeImage(string $fileName, string $disk = 'public'): bool
     {
-        return Storage::disk($disk)->delete($fileName);
+        // Just save placeholder pictures
+        if ($fileName !== 'product_1.jpg' || $fileName !== 'product_2.jpg') {
+            return Storage::disk($disk)->delete($fileName);
+        }
     }
 
     /**

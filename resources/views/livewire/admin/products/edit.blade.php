@@ -36,6 +36,7 @@
                         value="{{ $category->id }}" 
                         checked="{{ $product->hasCategory($category) ? true : false }}"
                         wire:change="updateCategories({{ $category->id }})"
+                        wire:poll.2500ms="$refresh"
                     />
                 @endforeach
             </div>

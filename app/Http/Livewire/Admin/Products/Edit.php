@@ -64,8 +64,6 @@ class Edit extends Component
             return;
         }
 
-        $this->removeImage($image->filename, 'products');
-
         $image->delete();
 
         $this->emit('flashMessage', [

@@ -3,10 +3,12 @@
 namespace App\Observers;
 
 use App\Models\Image;
+use App\Traits\Upload\ImageUpload;
 use Illuminate\Support\Facades\Storage;
 
 class ImageObserver
 {
+    use ImageUpload;
     /**
      * Handle the image "creating" event.
      *
@@ -28,6 +30,6 @@ class ImageObserver
      */
     public function deleted(Image $image)
     {
-        Storage::disk('products')->delete($image->filename);
+        $this->removeImage($image->filename, 'products');
     }
 }

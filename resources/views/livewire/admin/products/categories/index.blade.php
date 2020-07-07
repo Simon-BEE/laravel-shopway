@@ -108,17 +108,6 @@
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex md:table-cell">
                                 <button type="button">
-                                    <span 
-                                        class="text-lg mdi mdi-pencil-outline bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2"
-                                        data-method="PATCH"
-                                        x-on:click="formModalOpen = true;
-                                        $refs.modalFormAction.action='{{ route('admin.products.categories.update', $category) }}';
-                                        $refs.modalFormInput.value='{{ $category->name }}';
-                                        $refs.modalFormBtn.innerText='{{ __('Edit this category') }}';
-                                        updateMethod($event)"
-                                    ></span>
-                                </button>
-                                <button type="button">
                                     <span class="text-lg mdi mdi-delete-outline bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-600" data-route="{{ route('admin.products.categories.destroy', $category) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
                                 </button>
                             </td>

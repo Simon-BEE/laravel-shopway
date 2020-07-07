@@ -22,8 +22,8 @@ class CreateAddressesTable extends Migration
             $table->boolean('professionnal')->default(false);
             $table->string('company', 100)->nullable();
             $table->string('address');
-            $table->string('addressbis')->nullable();
-            $table->string('postal', 10);
+            $table->string('info_address')->nullable();
+            $table->string('zipcode', 10);
             $table->string('city', 100);
             $table->string('phone', 25);
             $table->timestamps();

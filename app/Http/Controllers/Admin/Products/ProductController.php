@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Products;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 
-class MainController extends Controller
+class ProductController extends Controller
 {
 
     public function index()

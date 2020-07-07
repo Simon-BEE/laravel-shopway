@@ -31,7 +31,7 @@
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-archive-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Orders') }}</h2>
-            <ul class="mt-5" x-show.transition.duration.300ms="open">
+            <ul class="mt-5 text-center" x-show.transition="open">
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
@@ -41,17 +41,19 @@
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-map-search-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Addresses') }}</h2>
-            <ul class="mt-5" x-show.transition.duration.300ms="open">
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
+            <ul class="mt-5 text-center" x-show.transition="open">
+                <li class="mb-2">
+                    <a href="{{ route('users.addresses.index') }}" class="text-gray-600 hover:underline">{{ __('My addresses') }}</a>
+                </li>
+                <li>
+                    <a href="{{ route('users.addresses.create') }}" class="text-gray-600 hover:underline">{{ __('Add a new address') }}</a>
+                </li>
             </ul>
         </article>
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-account-cog-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Account') }}</h2>
-            <ul class="mt-5" x-show.transition.duration.300ms="open">
+            <ul class="mt-5 text-center" x-show.transition="open">
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
@@ -66,7 +68,7 @@
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-credit-card-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Payments') }}</h2>
-            <ul class="mt-5" x-show.transition.duration.300ms="open">
+            <ul class="mt-5 text-center" x-show.transition="open">
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
@@ -76,7 +78,7 @@
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-help-circle-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Help') }}</h2>
-            <ul x-show.transition.duration.300ms="open">
+            <ul x-show.transition="open">
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>
                 <li>Lorem ipsum dolor sit amet.</li>

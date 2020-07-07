@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class MainController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,29 +46,6 @@ class MainController extends Controller
             'message' => 'Category has been created.'
         ]);
     }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \App\Models\Category  $category
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Category $category)
-    // {
-    //     $validateData = request()->validate([
-    //         'name' => [
-    //             'required', 'string', 'between:3,150', 
-    //             Rule::unique('categories', 'name')->ignore($category->id)
-    //         ],
-    //     ]);
-
-    //     $category->update($validateData);
-
-    //     return redirect()->route('admin.products.categories.index')->with([
-    //         'type' => 'success',
-    //         'message' => 'Category has been edited.'
-    //     ]);
-    // }
 
     /**
      * Remove the specified resource from storage.

@@ -30,8 +30,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::group([
         'middleware' => ['role:admin'],
-        'prefix' => 'admin',
         'namespace' => 'Admin',
+        'prefix' => 'admin',
         'as' => 'admin.',
     ], function () {
         Route::get('/', 'DashboardController')->name('dashboard');
@@ -41,18 +41,24 @@ Route::group(['middleware' => ['auth']], function () {
             'prefix' => 'products',
             'as' => 'products.',
         ], function () {
-            Route::get('/', 'MainController@index')->name('index');
-            Route::delete('{product}', 'MainController@destroy')->name('destroy');
-            Route::get('edit/{product}', 'MainController@edit')->name('edit');
+            Route::get('/', 'ProductController@index')->name('index');
+            Route::delete('{product}', 'ProductController@destroy')->name('destroy');
+            Route::get('edit/{product}', 'ProductController@edit')->name('edit');
             Route::get('create', 'CreateController@create')->name('create');
             Route::post('/', 'CreateController@store')->name('store');
 
-            Route::resource('categories', 'Category\MainController')->except(['show', 'edit', 'create']);
+            Route::resource('categories', 'Category\CategoryController')->except(['show', 'edit', 'create', 'update']);
         });
     });
 
-    Route::get('/profile', 'User\DashboardController')->name('users.dashboard');
-    Route::get('/wishlist', 'User\Wish\IndexController')->name('users.wish.index');
+    Route::group([
+        'namespace' => 'User',
+        'as' => 'users.',
+    ], function () {
+        Route::get('/profile', 'DashboardController')->name('dashboard');
+        Route::get('/wishlist', 'Wish\IndexController')->name('wish.index');
+        Route::resource('addresses', 'Address\AddressController')->except(['show']);
+    });
 });
 
 

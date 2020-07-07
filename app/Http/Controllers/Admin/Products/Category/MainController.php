@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Products\Category;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
-use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class MainController extends Controller
 {
@@ -21,25 +22,53 @@ class MainController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $validator = Validator::make(request()->all(), [
+            'name' => 'required|string|between:3,150|unique:categories,name',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('admin.products.categories.index')->with([
+                'type' => 'error',
+                'message' => 'Please fill the form correctly.'
+            ]);
+        }
+
+        Category::create([
+            'name' => request()->name,
+        ]);
+
+        return redirect()->route('admin.products.categories.index')->with([
+            'type' => 'success',
+            'message' => 'Category has been created.'
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \App\Models\Category  $category
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Category $category)
+    // {
+    //     $validateData = request()->validate([
+    //         'name' => [
+    //             'required', 'string', 'between:3,150', 
+    //             Rule::unique('categories', 'name')->ignore($category->id)
+    //         ],
+    //     ]);
+
+    //     $category->update($validateData);
+
+    //     return redirect()->route('admin.products.categories.index')->with([
+    //         'type' => 'success',
+    //         'message' => 'Category has been edited.'
+    //     ]);
+    // }
 
     /**
      * Remove the specified resource from storage.

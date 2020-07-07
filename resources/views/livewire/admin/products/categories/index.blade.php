@@ -1,4 +1,13 @@
-<div class="mt-4">
+<div class="mt-2">
+    <div class="flex justify-between">
+        <h3 class="text-gray-700 text-3xl font-medium">List of categories</h3>
+        <div class="flex">
+            <button type="button" class="flex items-center mr-3 p-2 rounded text-white bg-blue-600 hover:bg-blue-500" x-on:click="formModalOpen = true">
+                <span class="mdi mdi-plus mr-2"></span>
+                Create a category
+            </button>
+        </div>
+    </div>
     {{-- filter --}}
     <div class="mt-3 flex flex-col sm:flex-row">
         <div class="flex">
@@ -54,10 +63,41 @@
                 <tbody>
                     @forelse ($categories as $category)
                         <tr wire:key="{{ $loop->index }}">
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white">
                                 <div class="flex items-center">
                                     <div class="ml-3 flex flex-col">
-                                        <a href="#" class="text-gray-900 whitespace-no-wrap hover:underline">{{ $category->name }}</a>
+                                        <div class="text-gray-900 whitespace-no-wrap" x-data="{ 
+                                            isEditing: false, 
+                                            {{-- selectText: function() {
+                                                console.log(this.$refs.textInput)
+                                                const textInput = this.$refs.textInput;
+                                                textInput.focus();
+                                                textInput.select();
+                                            } --}}
+                                        }">
+                                            <span x-show="!isEditing" x-on:click="
+                                                isEditing = true;
+                                                {{-- $nextTick(() => selectText()); --}}
+                                            ">
+                                                {{ $category->name }}
+                                            </span>
+                                            <div x-show.transition="isEditing">
+                                                <x-form.input
+                                                    label=""
+                                                    type="text"
+                                                    name="name"
+                                                    placeholder="Product's name"
+                                                    value="{{ old('name') ?? $category->name }}"
+                                                    helper="Enter to save, Esc to cancel"
+                                                    required
+                                                    wire:keydown.enter="updateCategory({{ $category->id }}, $event.target.value)"
+                                                    {{-- x-ref="textInput" --}}
+                                                    x-on:keydown.enter="isEditing = false"
+                                                    x-on:keydown.escape="isEditing = false"
+                                                    x-on:click.away="isEditing = false"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
@@ -66,12 +106,20 @@
                                     {{ Format::date($category->created_at) }}
                                 </p>
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
-                                <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2">
-                                    <span class="text-lg mdi mdi-pencil-outline"></span>
-                                </a>
-                                <button type="button" class="bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-600">
-                                    <span class="text-lg mdi mdi-delete-outline" data-route="{{ route('admin.products.categories.destroy', $category) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex md:table-cell">
+                                <button type="button">
+                                    <span 
+                                        class="text-lg mdi mdi-pencil-outline bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2"
+                                        data-method="PATCH"
+                                        x-on:click="formModalOpen = true;
+                                        $refs.modalFormAction.action='{{ route('admin.products.categories.update', $category) }}';
+                                        $refs.modalFormInput.value='{{ $category->name }}';
+                                        $refs.modalFormBtn.innerText='{{ __('Edit this category') }}';
+                                        updateMethod($event)"
+                                    ></span>
+                                </button>
+                                <button type="button">
+                                    <span class="text-lg mdi mdi-delete-outline bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-600" data-route="{{ route('admin.products.categories.destroy', $category) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
                                 </button>
                             </td>
                         </tr>

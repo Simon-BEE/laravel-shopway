@@ -18,15 +18,24 @@
             </x-form.form-button>
         </div>
     </x-modal>
-    <div class="flex justify-between">
-        <h3 class="text-gray-700 text-3xl font-medium">List of categories</h3>
-        <div class="flex">
-            <a href="#" class="flex items-center mr-3 p-2 rounded text-white bg-blue-600 hover:bg-blue-500">
-                <span class="mdi mdi-plus mr-2"></span>
-                Create a category
-            </a>
-        </div>
-    </div>
+    <x-modal title="Create a new category for products" modalName="formModalOpen">
+        <form action="{{ route('admin.products.categories.store') }}" method="POST" id="modalForm">
+            @csrf
+            <x-form.input
+                label="Define a category's name"
+                type="text"
+                name="name"
+                placeholder="Category's name"
+                value="{{ old('name') }}"
+                helper="A slug will be generated automatically"
+                required
+            />
+            <div class="mt-5 flex justify-end">
+                <x-form.button type="button" classDiv="none" class="bg-gray-200 text-gray-700 hover:bg-gray-300" @click="formModalOpen = false">Cancel</x-form.button>
+                <x-form.button classDiv="none" class="bg-blue-500 text-gray-200 hover:bg-blue-600">Create a new category</x-form.button>
+            </div>
+        </form>
+    </x-modal>
 
     <livewire:admin.products.categories.index />
 @endsection

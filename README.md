@@ -11,3 +11,4 @@ Soberly called **Shopway**
 - [ ] Address create
 - [x] Wishlist system
 - [x] Cart in database
+- [ ] Category edit interactive

@@ -45,7 +45,7 @@ class AddressController extends Controller
 
         return redirect()->route('users.addresses.index')->with([
             'type' => 'success',
-            'message' => 'Address has been recorded.'
+            'message' => __('Address has been recorded.')
         ]);
     }
 
@@ -79,6 +79,20 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        $this->authorize('delete', $address);
+
+        $alert = ['type' => 'error', 'message' => __('Main address can\'t be deleted.')];
+
+        if (!$address->is_main) {
+            $address->delete();
+            
+            $alert = ['type' => 'success', 'message' => __('Address has been deleted successfully.')];
+        }
+
+
+        return back()->with([
+            'type' => $alert['type'],
+            'message' => $alert['message'],
+        ]);
     }
 }

@@ -23,12 +23,14 @@
                 <button type="button" class="p-2 rounded text-blue-500 hover:bg-gray-200 mr-1" title="{{ __('Edit') }}">
                     <span class="mdi mdi-pencil-outline"></span>
                 </button>
+                @if (!$address->is_main)
                 <button type="button" title="{{ __('Remove') }}" >
-                    <span class="mdi mdi-delete-outline p-2 rounded text-red-500 hover:bg-gray-200" data-route="{{ route('users.addresses.destroy', $address) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
+                    <span class="mdi mdi-delete-outline p-2 rounded text-red-500 hover:bg-gray-200" data-route="{{ route('users.addresses.destroy', $address) }}" x-on:click.stop="setAction($event); isDialogOpen = true;"></span>
                 </button>
+                @endif
             </div>
             @if ($address->is_main)
-                <span class="absolute bottom-0 right-0 mb-2 mr-2">
+                <span class="absolute bottom-0 right-0 mr-2">
                     <span class="mdi mdi-check-circle-outline text-gray-700 text-2xl"></span>
                 </span>
                 <div class="h-full w-1 bg-gray-700 absolute bottom-0 left-0"></div>

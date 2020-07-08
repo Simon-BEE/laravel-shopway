@@ -144,7 +144,7 @@
             value="{{ old('name') }}"
             required
         />
-        <x-form.button class="p-2 bg-blue-600 hover:bg-blue-500">
+        <x-form.button class="p-4 mt-2 bg-blue-600 hover:bg-blue-500">
             {{ __('Add a new address') }}
         </x-form.button>
     </form>

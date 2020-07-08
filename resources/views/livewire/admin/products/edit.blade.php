@@ -28,7 +28,7 @@
 
         <div class="">
             <p class="text-gray-700 mb-2">Select one or more categories</p>
-            <div class="flex">
+            <div class="flex flex-wrap">
                 @foreach ($categories as $category)
                     <x-form.checkbox 
                         name="categories[{{ $category->id }}]"

@@ -126,8 +126,8 @@ class MainSeeder extends Seeder
                 );
         });
 
-        factory(Category::class, 5)->create()->each(function ($category){
-            $category->products()->saveMany(factory(Product::class, mt_rand(4, 12))->create()->each(function ($product){
+        factory(Category::class, 20)->create()->each(function ($category){
+            $category->products()->saveMany(factory(Product::class, mt_rand(6, 32))->create()->each(function ($product){
                 $product->images()->create([
                     'filename' => 'product_' . mt_rand(1, 2) . '.jpg',
                 ]);

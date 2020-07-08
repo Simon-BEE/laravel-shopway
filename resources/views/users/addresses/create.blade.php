@@ -65,7 +65,6 @@
                 <label class="label text-gray-700" for="company">
                     {{ __('Company name') }}
                 </label>
-                <small class="text-xs text-gray-500">(Optionnal)</small>
             </div>
             <input
                 type="text"
@@ -137,7 +136,15 @@
         </div>
 
         <hr class="my-12">
-        <x-form.button class="p-4 bg-blue-600 hover:bg-blue-500">
+        <x-form.input
+            label="{{ __('Give a name to this address') }}"
+            type="text"
+            name="name"
+            placeholder="{{ __('Address name') }}"
+            value="{{ old('name') }}"
+            required
+        />
+        <x-form.button class="p-2 bg-blue-600 hover:bg-blue-500">
             {{ __('Add a new address') }}
         </x-form.button>
     </form>

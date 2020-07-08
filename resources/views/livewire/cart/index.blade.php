@@ -26,7 +26,7 @@
         @auth
         <div class="mb-4 mt-6 -mx-2 lg:flex">
             <div class="lg:px-2 lg:w-1/2">
-                <div class="p-4 bg-gray-100 rounded">
+                <div class="p-2 bg-gray-100 rounded">
                     <h3 class="ml-2 font-bold uppercase">Coupon Code</h3>
                 </div>
                 <div class="p-4">
@@ -43,7 +43,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="p-4 mt-6 bg-gray-100 rounded">
+                <div class="p-2 mt-6 bg-gray-100 rounded">
                     <h3 class="ml-2 font-bold uppercase">Instruction for seller</h3>
                 </div>
                 <div class="p-4">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="lg:px-2 lg:w-1/2">
-                <div class="p-4 bg-gray-100 rounded">
+                <div class="p-2 bg-gray-100 rounded">
                     <h3 class="ml-2 font-bold uppercase">Order Details</h3>
                 </div>
                 <div class="p-4">

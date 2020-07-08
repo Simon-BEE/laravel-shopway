@@ -17,6 +17,7 @@ class CreateAddressesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->string('name');
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->boolean('professionnal')->default(false);
@@ -26,6 +27,7 @@ class CreateAddressesTable extends Migration
             $table->string('zipcode', 10);
             $table->string('city', 100);
             $table->string('phone', 25);
+            $table->boolean('is_main')->default(false);
             $table->timestamps();
         });
     }

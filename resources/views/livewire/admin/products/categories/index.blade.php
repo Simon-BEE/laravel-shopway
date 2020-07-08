@@ -88,7 +88,7 @@
                                                     name="name"
                                                     placeholder="Product's name"
                                                     value="{{ old('name') ?? $category->name }}"
-                                                    helper="Enter to save, Esc to cancel"
+                                                    helper="Enter to save, Esc to {{ __('Cancel') }}"
                                                     required
                                                     wire:keydown.enter="updateCategory({{ $category->id }}, $event.target.value)"
                                                     {{-- x-ref="textInput" --}}

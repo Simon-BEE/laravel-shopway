@@ -27,6 +27,9 @@ class StoreAddressRequest extends FormRequest
             'country_id' => [
                 'required', 'numeric', 'exists:countries,id',
             ],
+            'name' => [
+                'required', 'string', 'between:2,100',
+            ],
             'firstname' => [
                 'required', 'string', 'between:2,100',
             ],
@@ -37,7 +40,7 @@ class StoreAddressRequest extends FormRequest
                 'nullable', 'boolean',
             ],
             'company' => [
-                'nullable', 'string', 'between:2,100',
+                'nullable', 'required_if:professionnal,1', 'exclude_unless:professionnal,1', 'string', 'between:2,100',
             ],
             'address' => [
                 'required', 'string', 'between:10,255',
@@ -54,6 +57,13 @@ class StoreAddressRequest extends FormRequest
             'phone' => [
                 'required', 'between:6,25',
             ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'company.required_if' => __('The company field is required when professionnal is checked. '),
         ];
     }
 }

@@ -9,6 +9,7 @@ $factory->define(Address::class, function (Faker $faker) {
     $pro = $faker->boolean(40);
 
     return [
+        'name' => $faker->words(3, true),
         'lastname' => $pro ? null : $faker->lastName,
         'firstname' => $pro ? null : $faker->firstName,
         'company' => $pro ? $faker->company : null,

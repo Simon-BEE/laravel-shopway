@@ -14,13 +14,35 @@
 @endsection
 
 @section('content')
+<x-modal title="Are you sure ?">
+    <p>{{ __('Are you sure you want to delete this address?') }}</p>
+    <div class="mt-5 flex justify-end">
+        <x-form.button classDiv="none" class="p-3 mr-3 bg-gray-200 text-gray-700 hover:bg-gray-300" @click="isDialogOpen = false">{{ __('Cancel') }}</x-form.button>
+        <x-form.form-button action="#" method="DELETE" class="p-3 rounded bg-red-500 text-white hover:bg-red-600" x-ref="modalDelete">
+            {{ __('Delete this address') }}
+        </x-form.form-button>
+    </div>
+</x-modal>
 
-<section class="my-12 min-h-full px-6 py-10 relative">
-    <article class="mb-6 flex items-end">
-        <h2 class="text-xl font-semibold text-gray-600">{{ __('Your addresses') }}</h2>
-    </article>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, error alias sapiente accusantium similique eaque, aliquid debitis cum at qui ullam exercitationem neque dignissimos libero culpa blanditiis. Repellat alias libero nesciunt, dignissimos sapiente at ut quisquam consectetur sint excepturi laboriosam recusandae, error accusantium nobis, pariatur laborum saepe beatae molestias ea doloribus itaque? Distinctio necessitatibus quod iusto, non accusantium incidunt vel reprehenderit quos, fugit porro corporis expedita. Ea dolorum fugiat unde quam molestiae consectetur doloremque non aspernatur a placeat ut accusantium voluptate laboriosam fuga at obcaecati ducimus sequi necessitatibus exercitationem quis adipisci, dolores sit saepe natus. Itaque exercitationem quod in, soluta dolorem tempore suscipit repudiandae placeat? Accusantium obcaecati rerum vel nobis quae dignissimos animi facilis delectus in eum ad qui, ratione consequatur tenetur necessitatibus nam fugit eligendi explicabo aperiam vitae! Possimus dolore aut eaque facilis earum! Nobis assumenda, maxime quis ullam vel dolores. Voluptatum laboriosam distinctio officiis rem consequuntur dolore delectus incidunt provident nihil, quidem odio excepturi praesentium nulla, alias beatae aut accusantium asperiores sunt. Enim vero, animi ipsam ex sit incidunt impedit asperiores doloribus suscipit a voluptatum quisquam praesentium cumque eum necessitatibus aliquam! Ex aspernatur unde numquam suscipit excepturi delectus, soluta beatae dolor explicabo error similique, modi harum reiciendis, perferendis earum dicta minima sequi voluptas doloremque consequuntur? Illo optio adipisci, impedit dolore, hic a minima sapiente ut aliquam perspiciatis dolorem sit? Numquam sunt sed in deleniti natus ducimus praesentium nobis hic, quam quae quas culpa quasi doloribus excepturi vero tenetur tempore iusto fuga accusantium quisquam ut maxime atque minus autem. Error, optio animi eveniet illo incidunt, molestias quis magnam molestiae magni distinctio harum. Cupiditate iure, quidem reprehenderit voluptatum repellat eos doloremque maxime sed reiciendis aspernatur, totam ipsa corrupti blanditiis ullam nesciunt officiis architecto iste, possimus magnam a? Suscipit esse sapiente quod necessitatibus perspiciatis labore illum? Sit quod labore totam eaque omnis deleniti, nemo eum accusantium veniam mollitia recusandae, aliquid quidem, at vitae sequi! Asperiores labore at, architecto maiores aspernatur quasi nam! Neque, voluptatum earum labore mollitia tempora inventore quia ad ratione cupiditate exercitationem animi numquam, hic sequi beatae architecto? Explicabo ut quo modi sequi mollitia voluptatem fuga rerum ipsum cum. Nihil voluptatibus deleniti, reiciendis, ad necessitatibus id tempore, a modi vero ab excepturi nostrum numquam facere obcaecati harum aut eos maiores perspiciatis. Ipsam, dignissimos ipsa laboriosam amet facere ad laborum labore, voluptates quas deleniti voluptatum dicta similique quos animi exercitationem consectetur. Ab cumque voluptatem blanditiis quos sapiente fugiat labore debitis veniam, excepturi explicabo fuga aliquam consectetur magnam dolor vero qui, nam nesciunt nulla adipisci voluptatum aspernatur nobis vel perferendis eaque! Amet quasi impedit explicabo nemo nobis ex exercitationem odio, porro atque, at quis quibusdam animi expedita cupiditate aperiam! Nemo esse consequatur odit. Sequi ad aut corporis laborum velit ipsa assumenda voluptate illum veritatis quos natus saepe neque, dolorem aperiam vel minima cumque error excepturi. Suscipit officiis debitis odit, dolore accusamus minima iste voluptas veniam mollitia labore. Similique maxime aperiam eius, est quia quaerat voluptas odit magnam fugiat libero exercitationem autem amet. Aliquid, qui assumenda. Et nisi autem perspiciatis quaerat deserunt?
+<section class="my-4 min-h-full container px-5 py-12 mx-auto relative text-gray-700 body-font">
+    <div class="flex flex-col text-center w-full mb-20">
+        <h2 class="text-2xl font-medium title-font mb-4 tracking-widest uppercase">{{ __('Your addresses') }}</h2>
+        <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.</p>
+        <div class="text-center mt-6">
+            <a href="{{ route('users.addresses.create') }}" class="p-3 rounded bg-blue-500 text-white hover:bg-blue-600 inline-flex items-center">
+                <span class="mdi mdi-plus-circle text-white text-xl mr-2"></span>
+                {{ __('Add a new address') }}
+            </a>
+        </div>
+    </div>
+    <livewire:addresses.index />
 </section>
+@endsection
 
-
+@section('extra-js')
+    <script>
+        function setAction(event) {
+            document.querySelector('.modal-element form').action = event.target.getAttribute('data-route');
+        }
+    </script>
 @endsection

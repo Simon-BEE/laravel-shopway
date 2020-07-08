@@ -12,7 +12,7 @@
     <x-modal title="Are you sure ?">
         <p>Are you sure you want to delete this category?</p>
         <div class="mt-5 flex justify-end">
-            <x-form.button classDiv="none" class="bg-gray-200 text-gray-700 hover:bg-gray-300" @click="isDialogOpen = false">Cancel</x-form.button>
+            <x-form.button classDiv="none" class="p-2 mr-3 bg-gray-200 text-gray-700 hover:bg-gray-300" @click="isDialogOpen = false">{{ __('Cancel') }}</x-form.button>
             <x-form.form-button action="#" method="DELETE" class="p-2 rounded bg-red-500 text-white hover:bg-red-600" x-ref="modalDelete">
                 Delete this category
             </x-form.form-button>
@@ -31,8 +31,8 @@
                 required
             />
             <div class="mt-5 flex justify-end">
-                <x-form.button type="button" classDiv="none" class="bg-gray-200 text-gray-700 hover:bg-gray-300" @click="formModalOpen = false">Cancel</x-form.button>
-                <x-form.button classDiv="none" class="bg-blue-500 text-gray-200 hover:bg-blue-600">Create a new category</x-form.button>
+                <x-form.button type="button" classDiv="none" class="p-2 mr-3 bg-gray-200 text-gray-700 hover:bg-gray-300" @click="formModalOpen = false">{{ __('Cancel') }}</x-form.button>
+                <x-form.button classDiv="none" class="p-2 mr-3 bg-blue-500 text-gray-200 hover:bg-blue-600">Create a new category</x-form.button>
             </div>
         </form>
     </x-modal>

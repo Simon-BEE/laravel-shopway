@@ -112,7 +112,7 @@
                         </div>
                     </label>
                 </div>
-                <x-form.button classDiv="flex justify-center my-4" type="button" class="bg-orange-500 hover:bg-orange-600">
+                <x-form.button classDiv="flex justify-center my-4" type="button" class="p-4 bg-orange-500 hover:bg-orange-600">
                     {{ __('Or choose in Image Manager') }}
                 </x-form.button>
             </section>

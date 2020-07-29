@@ -4,8 +4,6 @@ namespace App\Http\Livewire\Cart;
 
 use App\Helpers\Cart;
 use Livewire\Component;
-use Illuminate\Support\Str;
-use App\Services\Cart\CartManager;
 
 class Index extends Component
 {

@@ -88,6 +88,11 @@ class Product extends Model
         return $this->categories->pluck('name')->implode(', ');
     }
 
+    public function getPathAttribute()
+    {
+        return route('products.show', $this->slug);
+    }
+
     /**
      * ? SCOPES
      */

@@ -44,19 +44,19 @@ class MainSeeder extends Seeder
             ['company_id' => 1, 'country_id' => 1, 'range_id' => 1, 'price' => 7.25],
             ['company_id' => 1, 'country_id' => 1, 'range_id' => 2, 'price' => 8.95],
             ['company_id' => 1, 'country_id' => 1, 'range_id' => 3, 'price' => 13.75],
-            ['company_id' => 1, 'country_id' => 1, 'range_id' => 4, 'price' => 0],
+            ['company_id' => 1, 'country_id' => 1, 'range_id' => 4, 'price' => 28.55],
             ['company_id' => 1, 'country_id' => 2, 'range_id' => 1, 'price' => 15.5],
             ['company_id' => 1, 'country_id' => 2, 'range_id' => 2, 'price' => 17.55],
             ['company_id' => 1, 'country_id' => 2, 'range_id' => 3, 'price' => 22.45],
-            ['company_id' => 1, 'country_id' => 2, 'range_id' => 4, 'price' => 0],
+            ['company_id' => 1, 'country_id' => 2, 'range_id' => 4, 'price' => 38.55],
             ['company_id' => 1, 'country_id' => 3, 'range_id' => 1, 'price' => 15.5],
             ['company_id' => 1, 'country_id' => 3, 'range_id' => 2, 'price' => 17.55],
             ['company_id' => 1, 'country_id' => 3, 'range_id' => 3, 'price' => 22.45],
-            ['company_id' => 1, 'country_id' => 3, 'range_id' => 4, 'price' => 0],
+            ['company_id' => 1, 'country_id' => 3, 'range_id' => 4, 'price' => 38.55],
             ['company_id' => 1, 'country_id' => 4, 'range_id' => 1, 'price' => 27.65],
             ['company_id' => 1, 'country_id' => 4, 'range_id' => 2, 'price' => 38],
             ['company_id' => 1, 'country_id' => 4, 'range_id' => 3, 'price' => 55.65],
-            ['company_id' => 1, 'country_id' => 4, 'range_id' => 4, 'price' => 0],
+            ['company_id' => 1, 'country_id' => 4, 'range_id' => 4, 'price' => 78.55],
         ]);
 
         State::insert([

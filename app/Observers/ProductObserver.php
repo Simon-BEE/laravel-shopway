@@ -42,7 +42,10 @@ class ProductObserver
     public function deleting(Product $product)
     {
         foreach ($product->images as $image) {
-            (new static)->removeImage($image->filename, 'products');
+            // Just save placeholder pictures
+            if ($image->filename !== 'product_1.jpg' && $image->filename !== 'product_2.jpg') {
+                (new static)->removeImage($image->filename, 'products');
+            }
         }
     }
 }

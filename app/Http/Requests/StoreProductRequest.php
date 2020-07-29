@@ -34,7 +34,7 @@ class StoreProductRequest extends FormRequest
                 'nullable', 'numeric', 'between:1,2000',
             ],
             'price' => [
-                'required', 'numeric', 'between:1,2000',
+                'required', 'numeric', 'between:100,20000',
             ],
             'quantity' => [
                 'required', 'numeric', 'between:0,2000',

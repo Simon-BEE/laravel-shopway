@@ -47,7 +47,7 @@
             name="price"
             placeholder="Product's price"
             value="{{ old('price') ?? $product->price }}"
-            helper="Must be without currency and tax"
+            helper="Must be in cents and without currency and tax"
             icon="mdi-home-currency-usd"
             required
             wire:model.lazy="price"

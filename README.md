@@ -8,7 +8,10 @@ Soberly called **Shopway**
 ## TODO
 - [ ] Cart icon when not logged
 - [ ] Profile completion
-- [ ] Address create
+- [x] Address create
 - [x] Wishlist system
 - [x] Cart in database
-- [ ] Category edit interactive
+- [x] Category edit interactive
+- [ ] Order checkout
+- [ ] Stripe payment
+- [ ] Products filter

@@ -5,7 +5,7 @@
         </a>
     </td>
     <td>
-        <a href="{{ route('products.show', $productId) }}" class="hover:underline mr-2">
+        <a href="{{ $product['path'] }}" class="hover:underline mr-2">
             {{ $product['name'] }}
         </a>
         <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productId }})">

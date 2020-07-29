@@ -59,6 +59,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/wishlist', 'Wish\IndexController')->name('wish.index');
         Route::resource('addresses', 'Address\AddressController')->except(['show']);
     });
+
+    Route::group([
+        'middleware' => ['cart'],
+        'prefix' => 'checkout',
+        'as' => 'checkout.',
+        'namespace' => 'Checkout',
+    ], function () {
+        Route::get('/', 'CheckoutController@index')->name('index');
+    });
 });
 
 

@@ -82,7 +82,7 @@
                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">Total</div>
                         <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalWithTax }}</div>
                     </div>
-                    <a href="#">
+                    <a href="{{ route('checkout.index') }}">
                         <button class="flex justify-center items-center w-full px-10 py-3 mt-6 font-medium text-white uppercase bg-gray-800 rounded-full shadow item-center hover:bg-gray-700 focus:shadow-outline focus:outline-none">
                             <span class="mdi mdi-credit-card-check-outline mr-2 text-2xl"></span>
                             <span class="ml-2 mt-5px">Procceed to checkout</span>

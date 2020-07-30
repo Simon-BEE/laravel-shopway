@@ -34,7 +34,7 @@ class CartManager
 
     public function totalWithTax()
     {
-        return $this->totalWithoutTax() + $this->totalTax();
+        return round($this->totalWithoutTax() + $this->totalTax());
     }
 
     public function totalTax()

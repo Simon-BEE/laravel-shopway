@@ -67,6 +67,17 @@ class User extends Authenticatable
         return $this->cart ? true : false;
     }
 
+    public function getAddressAttribute()
+    {
+        if ($this->addresses->isEmpty()) {
+            return null;
+        }
+
+        return $this->addresses()->where('is_main', true)->first();
+    }
+
+    //
+
     public function isInWishlist(int $productId): bool
     {
         if (!auth()->check()) {

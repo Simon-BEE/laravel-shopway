@@ -15,3 +15,7 @@ Soberly called **Shopway**
 - [ ] Order checkout
 - [ ] Stripe payment
 - [ ] Products filter
+
+Replace session('cart') by something like Cart::items()
+
+Success and error page after payment

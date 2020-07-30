@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 
-class CartIsNotEmpty
+class UserHasAnAddress
 {
     /**
      * Handle an incoming request.
@@ -15,10 +15,10 @@ class CartIsNotEmpty
      */
     public function handle($request, Closure $next)
     {
-        if (empty(session('cart'))) {
-            return redirect()->route('welcome')->with([
+        if (auth()->user()->addresses->isEmpty()) {
+            return redirect()->route('users.addresses.create')->with([
                 'type' => 'error',
-                'message' => __('You need some products in your cart before.'),
+                'message' => __('You need to create an address before continue.'),
             ]);
         }
 

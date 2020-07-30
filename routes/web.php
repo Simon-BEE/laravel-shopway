@@ -61,12 +61,15 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group([
-        'middleware' => ['cart'],
+        'middleware' => ['cart', 'address'],
         'prefix' => 'checkout',
         'as' => 'checkout.',
         'namespace' => 'Checkout',
     ], function () {
         Route::get('/', 'CheckoutController@index')->name('index');
+        Route::get('/success', 'CheckoutController@successful')->name('successful');
+        Route::get('/error', 'CheckoutController@error')->name('error');
+        Route::post('/payment', 'CheckoutController@payment')->name('payment');
     });
 });
 

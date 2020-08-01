@@ -15,8 +15,8 @@ class CreateAddressesTable extends Migration
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('country_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('country_id')->constrained();
             $table->string('name');
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
@@ -29,6 +29,7 @@ class CreateAddressesTable extends Migration
             $table->string('phone', 25);
             $table->boolean('is_main')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -44,9 +44,11 @@
                 <div id="card-element"><!--Stripe.js injects the Card Element--></div>
                 <p id="card-error" role="alert" class="text-red-500 text-sm mt-3"></p>
                 <div class="text-right">
-                    <button id="submit" class="mt-8">
-                        <div class="spinner hidden" id="spinner"></div>
-                        <span id="button-text" class="inline-flex text-white bg-blue-500 border-0 py-3 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">{{ __('Pay') }} {{ $totalWithTax }}</span>
+                    <button id="submit" class="mt-8 inline-flex text-white bg-blue-500 border-0 py-3 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg">
+                        <div class="spinner hidden" id="spinner">
+                            <x-spinner />
+                        </div>
+                        <span id="button-text" class="">{{ __('Pay') }} {{ $totalWithTax }}</span>
                     </button>
                 </div>
             </form>
@@ -88,6 +90,7 @@
     <script>
         const stripe = Stripe('pk_test_51HAHRjJ3i26ImFyQUeuMgpNDr9qsWVFsxrOC8OyarC4JzlYTuOKfXlhLuTG4NdCQf6sERLl5Qds0O4mHV9YxHidH00sMDO0xZk');
         const elements = stripe.elements();
+        const cardError = document.querySelector("#card-error");
         const style = {
             base: {
                 color: "#32325d",
@@ -107,9 +110,8 @@
         card.mount("#card-element");
 
         card.on("change", function (event) {
-          // Disable the Pay button if there are no card details in the Element
           document.querySelector("button").disabled = event.empty;
-          document.querySelector("#card-error").textContent = event.error ? event.error.message : "";
+          cardError.textContent = event.error ? event.error.message : "";
         });
 
         const buttonForm = document.getElementById('submit');
@@ -117,22 +119,56 @@
         paymentForm.addEventListener('submit', (e) => {
             e.preventDefault();
             if (document.getElementById('card-element').classList.contains('StripeElement--complete')) {
-                buttonForm.disabled = true;
-                buttonForm.classList.add('opacity-50');
-
-                fetch("{{ route('checkout.payment') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                }).then((result) => {
-                    window.location.href = "{{ route('checkout.successful') }}"
-                }).catch((result) => {
-                    window.location.href = "{{ route('checkout.error') }}"
-                });
+                paymentProccess(stripe, card, '{{ $clientSecret }}');
             }
         });
+        
+        const paymentProccess = (stripe, card, clientSecret) => {
+                loading();
+
+                stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: card
+                    }
+                }).then((result) => {
+                    if (result.error) {
+                        cardError.textContent = result.error.message;
+                        loading(false);
+                        return;
+                    }
+                    orderComplete(result.paymentIntent.id)
+                });
+        };
+
+        const orderComplete = (paymentIntentId) => {
+            fetch("{{ route('checkout.payment') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    paymentIntent: paymentIntentId
+                })
+            }).then((result) => {
+                window.location.href = "{{ route('checkout.successful') }}";
+                // result.json().then((r) => { console.log(r) });
+            }).catch((error) => {
+                window.location.href = "{{ route('checkout.error') }}";
+            });
+        };
+        
+        const loading = (isLoading = true) => {
+            if (isLoading) {
+                buttonForm.disabled = true;
+                document.getElementById('spinner').classList.remove('hidden');
+                document.getElementById('button-text').classList.add('hidden');
+            } else {
+                buttonForm.disabled = false;
+                document.getElementById('spinner').classList.add('hidden');
+                document.getElementById('button-text').classList.remove('hidden');
+            }
+        };
 
     </script>
 @endsection

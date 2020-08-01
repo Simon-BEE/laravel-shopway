@@ -19,3 +19,4 @@ Soberly called **Shopway**
 Replace session('cart') by something like Cart::items()
 
 Success and error page after payment
+->> Order shipping set

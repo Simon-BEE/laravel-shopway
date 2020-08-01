@@ -32,9 +32,9 @@ class Order extends Model
      * ? RELATIONS
      */
 
-    public function adresses()
+    public function address()
     {
-        return $this->hasMany(OrderAddress::class);
+        return $this->belongsTo(Address::class);
     }
 
     // public function order_items()

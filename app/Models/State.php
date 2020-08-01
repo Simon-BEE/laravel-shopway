@@ -10,6 +10,11 @@ class State extends Model
 
     public $timestamps = false;
 
+    public static function getStateIdBySlug($slug = 'card'): int
+    {
+        return self::where('slug', $slug)->first()->id;
+    }
+
     /**
      * ? RELATIONS
      */

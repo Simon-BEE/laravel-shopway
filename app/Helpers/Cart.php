@@ -6,6 +6,16 @@ use App\Services\Cart\CartManager;
 
 class Cart
 {
+    public static function content()
+    {
+        return session('cart');
+    }
+
+    public static function clear()
+    {
+        return session()->forget(['cart', 'pId']);
+    }
+
     public static function totalWithoutTax()
     {
         $cartManager = new CartManager();

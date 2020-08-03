@@ -6,7 +6,7 @@ use App\Helpers\Cart;
 use App\Models\Order;
 use App\Models\State;
 use App\Models\OrderItem;
-use App\Services\Cart\CartManager;
+use App\Services\Cart\CartCalculator;
 
 class PaymentOrderProcessRepository
 {
@@ -17,7 +17,7 @@ class PaymentOrderProcessRepository
             'user_id' => auth()->id(),
             'address_id' => auth()->user()->address->id,
             'reference' => $paymentIntentId,
-            'total' => app(CartManager::class)->totalWithTax(),
+            'total' => app(CartCalculator::class)->totalWithTax(),
             'shipping' => 7.25,
             'payment' => $paymentMethod
         ]);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Checkout;
 use Stripe\Stripe;
 use App\Helpers\Cart;
 use Stripe\PaymentIntent;
-use App\Services\Cart\CartManager;
+use App\Services\Cart\CartCalculator;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Repository\PaymentOrderProcessRepository;
@@ -24,7 +24,7 @@ class CheckoutController extends Controller
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         $clientSecret = PaymentIntent::create([
-            'amount' => app(CartManager::class)->totalWithTax(),
+            'amount' => app(CartCalculator::class)->totalWithTax(),
             'currency' => config('cart.currency_iso'),
             'metadata' => [
                 'user_id' => auth()->id(),

@@ -5,7 +5,6 @@ namespace App\Listeners;
 use App\Helpers\Cart;
 use App\Models\Product;
 use App\Events\UserIsLogged;
-use App\Services\Cart\CartManager;
 use Illuminate\Support\Collection;
 
 class SetCartToUser

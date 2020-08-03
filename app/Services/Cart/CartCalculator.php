@@ -2,9 +2,7 @@
 
 namespace App\Services\Cart;
 
-use App\Models\Product;
-
-class CartManager
+class CartCalculator
 {
     /**
      * ? TOTAL

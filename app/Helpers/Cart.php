@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Product;
 use App\Services\Cart\CartAdding;
-use App\Services\Cart\CartManager;
+use App\Services\Cart\CartCalculator;
 use App\Services\Cart\CartRemoving;
 use App\Services\Cart\CartUpdating;
 
@@ -54,31 +54,31 @@ class Cart
 
     public static function totalWithoutTax()
     {
-        $cartManager = new CartManager();
-        return Format::price($cartManager->totalWithoutTax()) . config('cart.currency');
+        $calculator = new CartCalculator();
+        return Format::price($calculator->totalWithoutTax()) . config('cart.currency');
     }
 
     public static function totalWithTax()
     {
-        $cartManager = new CartManager();
-        return Format::price($cartManager->totalWithTax()) . config('cart.currency');
+        $calculator = new CartCalculator();
+        return Format::price($calculator->totalWithTax()) . config('cart.currency');
     }
 
     public static function totalItemWithoutTax(int $productId)
     {
-        $cartManager = new CartManager();
-        return Format::price($cartManager->totalItemWithoutTax($productId)) . config('cart.currency');
+        $calculator = new CartCalculator();
+        return Format::price($calculator->totalItemWithoutTax($productId)) . config('cart.currency');
     }
 
     public static function totalItemWithTax(int $productId)
     {
-        $cartManager = new CartManager();
-        return Format::price($cartManager->totalItemWithTax($productId)) . config('cart.currency');
+        $calculator = new CartCalculator();
+        return Format::price($calculator->totalItemWithTax($productId)) . config('cart.currency');
     }
 
     public static function totalTax()
     {
-        $cartManager = new CartManager();
-        return Format::price($cartManager->totalTax()) . config('cart.currency');
+        $calculator = new CartCalculator();
+        return Format::price($calculator->totalTax()) . config('cart.currency');
     }
 }

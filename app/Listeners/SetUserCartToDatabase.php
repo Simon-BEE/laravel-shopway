@@ -2,10 +2,11 @@
 
 namespace App\Listeners;
 
+use App\Helpers\Cart;
 use App\Events\UserIsLogout;
-use App\Models\Cart;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Models\Cart as CartModel;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SetUserCartToDatabase
 {
@@ -17,7 +18,7 @@ class SetUserCartToDatabase
      */
     public function handle(UserIsLogout $event)
     {
-        if (!$cart = session('cart')) {
+        if (!$cart = Cart::content()) {
             if ($event->user->hasAlreadyCart) {
                 $event->user->cart()->delete();
             }
@@ -31,7 +32,7 @@ class SetUserCartToDatabase
             return;
         }
 
-        Cart::create([
+        CartModel::create([
             'user_id' => $event->user->id,
             'content' => serialize($cart),
         ]);

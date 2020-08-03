@@ -12,7 +12,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.cart.index', [
-            'cartProducts' => session('cart') ?? [],
+            'cartProducts' => Cart::content() ?? [],
             'totalWithoutTax' => Cart::totalWithoutTax(),
             'totalWithTax' => Cart::totalWithTax(),
             'totalTax' => Cart::totalTax(),

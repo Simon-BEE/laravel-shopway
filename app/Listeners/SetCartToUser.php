@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\UserIsLogged;
-use App\Models\Cart;
+use App\Helpers\Cart;
 use App\Models\Product;
+use App\Events\UserIsLogged;
 use App\Services\Cart\CartManager;
 use Illuminate\Support\Collection;
 
@@ -24,7 +24,7 @@ class SetCartToUser
 
         $cartFromDatabase = collect($event->user->cart->content);
 
-        if (!$cartSession = session('cart')) {
+        if (!$cartSession = Cart::content()) {
             $this->addItemsToCart($cartFromDatabase);
             return;
         }
@@ -36,16 +36,14 @@ class SetCartToUser
     /**
      * Check if product already exist and add to session cart
      *
-     * @param Cart $cart
+     * @param Collection $cart
      * @return void
      */
     private function addItemsToCart(Collection $cart): void
     {
-        $cartManager = new CartManager();
-
-        $cart->each(function ($item, $productId) use ($cartManager){
+        $cart->each(function ($item, $productId){
             if ($product = Product::find($productId)) {
-                return $cartManager->add($product);
+                return Cart::add($product);
             }
         });
     }

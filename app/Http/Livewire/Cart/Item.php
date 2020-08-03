@@ -23,8 +23,7 @@ class Item extends Component
     public function updatedQuantity(int $quantity)
     {
         if ($quantity > 0) {
-            $cartManager = new CartManager();
-            $cartManager->update($this->productId, $quantity);
+            Cart::update($this->productId, $quantity);
 
             $this->emit('flashMessage', [
                 'type' => 'success',
@@ -40,8 +39,7 @@ class Item extends Component
 
     public function removeFromCart(int $productId)
     {
-        $cartManager = new CartManager();
-        $cartManager->remove($productId);
+        Cart::remove($productId);
 
         $this->emit('flashMessage', [
             'type' => 'success',

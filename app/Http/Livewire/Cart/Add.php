@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Cart;
 
+use App\Helpers\Cart;
 use Livewire\Component;
 use App\Models\Product;
 use Illuminate\Support\Str;
-use App\Services\Cart\CartManager;
 
 class Add extends Component
 {
@@ -16,9 +16,9 @@ class Add extends Component
         $this->product = $product;
     }
 
-    public function addToCart(CartManager $cartManager)
+    public function addToCart()
     {
-        $cartManager->add($this->product);
+        Cart::add($this->product);
 
         $this->emit('flashMessage', [
             'type' => 'success',

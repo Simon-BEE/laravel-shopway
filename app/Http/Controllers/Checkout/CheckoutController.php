@@ -15,7 +15,7 @@ class CheckoutController extends Controller
     public function index()
     {
         return view('checkout.index', [
-            'cartProducts' => session('cart'),
+            'cartProducts' => Cart::content(),
             'totalWithTax' => Cart::totalWithTax(),
         ]);
     }

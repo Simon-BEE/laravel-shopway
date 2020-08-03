@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Helpers\Cart;
 
 class CartIsNotEmpty
 {
@@ -15,7 +16,7 @@ class CartIsNotEmpty
      */
     public function handle($request, Closure $next)
     {
-        if (empty(session('cart'))) {
+        if (empty(Cart::content())) {
             return redirect()->route('welcome')->with([
                 'type' => 'error',
                 'message' => __('You need some products in your cart before.'),

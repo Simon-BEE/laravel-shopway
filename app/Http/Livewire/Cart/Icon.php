@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Cart;
 
+use App\Helpers\Cart;
 use Livewire\Component;
 
 class Icon extends Component
@@ -11,7 +12,7 @@ class Icon extends Component
     public function render()
     {
         return view('livewire.cart.icon', [
-            'cartAmount' => session('cart') ? count(session('cart')) : 0,
+            'cartAmount' => Cart::content() ? count(Cart::content()) : 0,
         ]);
     }
 }

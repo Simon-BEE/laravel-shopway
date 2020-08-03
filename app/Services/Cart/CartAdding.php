@@ -2,6 +2,7 @@
 
 namespace App\Services\Cart;
 
+use App\Helpers\Cart;
 use Illuminate\Database\Eloquent\Model;
 
 class CartAdding
@@ -14,7 +15,7 @@ class CartAdding
      */
     public static function add(Model $product)
     {
-        $cartSession = session('cart');
+        $cartSession = Cart::content();
 
         if (is_null($cartSession)) {
             $cart = [

@@ -6,21 +6,6 @@ use App\Models\Product;
 
 class CartManager
 {
-    public function add(Product $product)
-    {
-        CartAdding::add($product);
-    }
-
-    public function remove(int $productId)
-    {
-        CartRemoving::remove($productId);
-    }
-
-    public function update($productId, $qty)
-    {
-        CartUpdating::update($productId, $qty);
-    }
-
     /**
      * ? TOTAL
      */

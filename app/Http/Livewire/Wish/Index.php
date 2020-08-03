@@ -2,17 +2,17 @@
 
 namespace App\Http\Livewire\Wish;
 
+use App\Helpers\Cart;
 use App\Models\Product;
 use App\Models\Wish;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Services\Cart\CartManager;
 
 class Index extends Component
 {
 
 
-    public function addToCart(CartManager $cartManager, int $productId)
+    public function addToCart(int $productId)
     {
         $product = Product::find($productId);
 
@@ -24,7 +24,7 @@ class Index extends Component
             ]);
         }
 
-        $cartManager->add($product);
+        Cart::add($product);
 
         $this->emit('flashMessage', [
             'type' => 'success',

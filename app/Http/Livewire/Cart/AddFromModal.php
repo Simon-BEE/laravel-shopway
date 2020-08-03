@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire\Cart;
 
+use App\Helpers\Cart;
 use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Services\Cart\CartManager;
 
 class AddFromModal extends Component
 {
     protected $listeners = ['addToCartFromModal'];
 
-    public function addToCartFromModal(CartManager $cartManager, int $id)
+    public function addToCartFromModal(int $id)
     {
-        $cartManager->add(Product::findOrFail($id));
+        Cart::add(Product::findOrFail($id));
 
         $this->emit('flashMessage', [
             'type' => 'success',

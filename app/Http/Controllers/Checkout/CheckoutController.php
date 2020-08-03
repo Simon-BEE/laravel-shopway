@@ -4,16 +4,23 @@ namespace App\Http\Controllers\Checkout;
 
 use Stripe\Stripe;
 use App\Helpers\Cart;
-use App\Models\Order;
-use App\Models\State;
 use Stripe\PaymentIntent;
 use App\Services\Cart\CartManager;
 use App\Http\Controllers\Controller;
-use App\Models\OrderItem;
+use App\Models\Order;
+use App\Repository\PaymentOrderProcessRepository;
 
 class CheckoutController extends Controller
 {
     public function index()
+    {
+        return view('checkout.index', [
+            'cartProducts' => session('cart'),
+            'totalWithTax' => Cart::totalWithTax(),
+        ]);
+    }
+
+    public function paymentIntent()
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         $clientSecret = PaymentIntent::create([
@@ -24,75 +31,43 @@ class CheckoutController extends Controller
             ],
         ])->client_secret;
 
-        return view('checkout.index', [
-            'cartProducts' => session('cart'),
-            'totalWithTax' => Cart::totalWithTax(),
+        return response()->json([
             'clientSecret' => $clientSecret
         ]);
     }
 
-    public function payment()
+    public function paymentProcess(PaymentOrderProcessRepository $paymentOrderProcessRepository)
     {
+        $order = $paymentOrderProcessRepository->storeOrder(request()->paymentIntent);
 
-        session()->put('pId', request()->paymentIntent);
+        $paymentOrderProcessRepository->storeOrderItems($order);
+
+        $paymentOrderProcessRepository->storePayments($order);
+
+        Cart::clear();
+
+        session()->put('checkout_success', $order->id);
 
         return response()->json([
-            'success' => true,
+            'success' => true
         ]);
     }
 
     public function successful()
     {
-        $order = $this->storeOrder(session('pId'));
+        if (!session('checkout_success')) {
+            return redirect()->route('welcome');
+        }
 
-        $this->storeOrderItems($order);
+        $order = Order::find(session('checkout_success'));
+        
+        session()->forget('checkout_success');
 
-        $this->storePayments($order);
-
-        Cart::clear();
-
-        return view('checkout.success');
+        return view('checkout.success', compact('order'));
     }
 
     public function error()
     {
         return view('checkout.error');
-    }
-
-    private function storeOrder(string $paymentIntentId , string $paymentMethod = 'card')
-    {
-        return Order::create([
-            'state_id' => State::getStateIdBySlug($paymentMethod),
-            'user_id' => auth()->id(),
-            'address_id' => auth()->user()->address->id,
-            'reference' => $paymentIntentId,
-            'total' => app(CartManager::class)->totalWithTax(),
-            'shipping' => 7.25,
-            'payment' => $paymentMethod
-        ]);
-    }
-
-    private function storeOrderItems(Order $order)
-    {
-        $orderItems = collect(Cart::content())->map(function ($item, $itemId) use ($order){
-            return [
-                'product_id' => $itemId,
-                'order_id' => $order->id,
-                'name' => $item['name'],
-                'tax' => config('cart.tax'),
-                'price' => $item['price'],
-                'quantity' => $item['quantity'],
-            ];
-        })->toArray();
-
-        OrderItem::insert($orderItems);
-    }
-
-    public function storePayments(Order $order)
-    {
-        $order->payment()->create([
-            'user_id' => auth()->id(),
-            'payment_id' => $order->reference,
-        ]);
     }
 }

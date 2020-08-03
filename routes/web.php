@@ -67,10 +67,11 @@ Route::group(['middleware' => ['auth']], function () {
         'namespace' => 'Checkout',
     ], function () {
         Route::get('/', 'CheckoutController@index')->name('index');
-        Route::get('/success', 'CheckoutController@successful')->name('successful');
         Route::get('/error', 'CheckoutController@error')->name('error');
-        Route::post('/payment', 'CheckoutController@payment')->name('payment');
+        Route::post('/payment/intent', 'CheckoutController@paymentIntent')->name('payment.intent');
+        Route::post('/payment/process', 'CheckoutController@paymentProcess')->name('payment.process');
     });
+    Route::get('/checkout/success', 'Checkout\CheckoutController@successful')->name('checkout.successful');
 });
 
 

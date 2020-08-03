@@ -119,29 +119,43 @@
         paymentForm.addEventListener('submit', (e) => {
             e.preventDefault();
             if (document.getElementById('card-element').classList.contains('StripeElement--complete')) {
-                paymentProccess(stripe, card, '{{ $clientSecret }}');
+                paymentProccess(stripe, card);
             }
         });
         
-        const paymentProccess = (stripe, card, clientSecret) => {
-                loading();
+        const paymentProccess = (stripe, card) => {
+            loading();
 
-                stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: card
-                    }
-                }).then((result) => {
-                    if (result.error) {
-                        cardError.textContent = result.error.message;
-                        loading(false);
-                        return;
-                    }
-                    orderComplete(result.paymentIntent.id)
+            fetch("{{ route('checkout.payment.intent') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            }).then((result) => {
+                result.json().then((r) => { 
+                    
+                    stripe.confirmCardPayment(r.clientSecret, {
+                        payment_method: {
+                            card: card
+                        }
+                    }).then((result) => {
+                        if (result.error) {
+                            cardError.textContent = result.error.message;
+                            loading(false);
+                            return;
+                        }
+                        orderComplete(result.paymentIntent.id)
+                    });
                 });
+
+            }).catch((error) => {
+                window.location.href = "{{ route('checkout.error') }}";
+            });
         };
 
         const orderComplete = (paymentIntentId) => {
-            fetch("{{ route('checkout.payment') }}", {
+            fetch("{{ route('checkout.payment.process') }}", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -151,9 +165,16 @@
                     paymentIntent: paymentIntentId
                 })
             }).then((result) => {
-                window.location.href = "{{ route('checkout.successful') }}";
-                // result.json().then((r) => { console.log(r) });
+                result.json().then((r) => { 
+                    if (r.success) {
+                        console.log('Payment: OK');
+                        window.location.href = "{{ route('checkout.successful') }}";
+                    }else{
+                        window.location.href = "{{ route('checkout.error') }}";
+                    }
+                });
             }).catch((error) => {
+                console.log(error);
                 window.location.href = "{{ route('checkout.error') }}";
             });
         };

@@ -50,18 +50,3 @@
 
     <x-includes.newsletter />
 @endsection
-
-@section('extra-js')
-<script>
-    window.onload = () => {
-        window.livewire.on('addToCart', () => {
-            let modalProductElement = document.querySelector('.modal-product');
-            window.livewire.emit('addToCartFromModal', modalProductElement.getAttribute('data-product'));
-        });
-        window.livewire.on('addToWishlist', () => {
-            let modalProductElement = document.querySelector('.modal-product');
-            window.livewire.emit('addToWishlistFromModal', modalProductElement.getAttribute('data-product'));
-        });
-    }
-</script>
-@endsection

@@ -13,7 +13,7 @@ class Cart
 
     public static function clear()
     {
-        return session()->forget(['cart', 'pId']);
+        return session()->forget(['cart']);
     }
 
     public static function totalWithoutTax()

@@ -46,6 +46,19 @@
         <!--Footer-->
         <x-includes.footer />
         <livewire:scripts>
+
+        <script>
+            window.onload = () => {
+                window.livewire.on('addToCart', () => {
+                    let modalProductElement = document.querySelector('.modal-product');
+                    window.livewire.emit('addToCartFromModal', modalProductElement.getAttribute('data-product'));
+                });
+                window.livewire.on('addToWishlist', () => {
+                    let modalProductElement = document.querySelector('.modal-product');
+                    window.livewire.emit('addToWishlistFromModal', modalProductElement.getAttribute('data-product'));
+                });
+            }
+        </script>
         @yield('extra-js')
     </body>
 </html>

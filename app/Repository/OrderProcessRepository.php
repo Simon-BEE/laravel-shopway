@@ -8,7 +8,7 @@ use App\Models\State;
 use App\Models\OrderItem;
 use App\Services\Cart\CartCalculator;
 
-class PaymentOrderProcessRepository
+class OrderProcessRepository
 {
     public function storeOrder(string $paymentIntentId , string $paymentMethod = 'card')
     {

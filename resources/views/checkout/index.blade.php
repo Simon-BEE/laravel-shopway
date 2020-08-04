@@ -155,7 +155,7 @@
         };
 
         const orderComplete = (paymentIntentId) => {
-            fetch("{{ route('checkout.payment.process') }}", {
+            fetch("{{ route('checkout.order.store') }}", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

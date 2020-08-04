@@ -69,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/', 'CheckoutController@index')->name('index');
         Route::get('/error', 'CheckoutController@error')->name('error');
         Route::post('/payment/intent', 'CheckoutController@paymentIntent')->name('payment.intent');
-        Route::post('/payment/process', 'CheckoutController@paymentProcess')->name('payment.process');
+        Route::post('/order/store', 'CheckoutController@storingOrder')->name('order.store');
     });
     Route::get('/checkout/success', 'Checkout\CheckoutController@successful')->name('checkout.successful');
 });

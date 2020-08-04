@@ -18125,6 +18125,11 @@ video {
   transition-delay: 1000ms;
 }
 
+button:focus {
+  border: dashed #efefef 1px;
+  outline: dashed #efefef 1px;
+}
+
 html {
   height: 100%;
 }

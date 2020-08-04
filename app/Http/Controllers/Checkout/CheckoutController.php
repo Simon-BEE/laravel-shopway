@@ -8,7 +8,7 @@ use Stripe\PaymentIntent;
 use App\Services\Cart\CartCalculator;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
-use App\Repository\PaymentOrderProcessRepository;
+use App\Repository\OrderProcessRepository;
 
 class CheckoutController extends Controller
 {
@@ -20,6 +20,9 @@ class CheckoutController extends Controller
         ]);
     }
 
+    /**
+     * Generate a payment intent to stripe and return its client secret id
+     */
     public function paymentIntent()
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
@@ -36,20 +39,31 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function paymentProcess(PaymentOrderProcessRepository $paymentOrderProcessRepository)
+    /**
+     * After payment was processed, store in DB order
+     */
+    public function storingOrder(OrderProcessRepository $orderProcessRepository)
     {
-        $order = $paymentOrderProcessRepository->storeOrder(request()->paymentIntent);
+        $order = $orderProcessRepository->storeOrder(request()->paymentIntent);
 
-        $paymentOrderProcessRepository->storeOrderItems($order);
+        if (!$order) {
+            session()->put('checkout_error');
 
-        $paymentOrderProcessRepository->storePayments($order);
+            return response()->json([
+                'success' => false,
+            ]);
+        }
+
+        $orderProcessRepository->storeOrderItems($order);
+
+        $orderProcessRepository->storePayments($order);
 
         Cart::clear();
 
         session()->put('checkout_success', $order->id);
 
         return response()->json([
-            'success' => true
+            'success' => true,
         ]);
     }
 
@@ -68,6 +82,12 @@ class CheckoutController extends Controller
 
     public function error()
     {
+        if (!session('checkout_error')) {
+            return redirect()->route('welcome');
+        }
+
+        session()->forget('checkout_error');
+
         return view('checkout.error');
     }
 }

@@ -24,6 +24,11 @@ class Cart
         return session('cart')[$itemId];
     }
 
+    public static function model(int $itemId)
+    {
+        return Product::findOrFail($itemId);
+    }
+
     /**
      * ? Do actions on cart
      */

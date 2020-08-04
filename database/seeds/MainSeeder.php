@@ -30,10 +30,10 @@ class MainSeeder extends Seeder
         ]);
 
         Range::insert([
-            ['max' => 1],
-            ['max' => 2],
-            ['max' => 3],
-            ['max' => 100],
+            ['max' => 1000],
+            ['max' => 2000],
+            ['max' => 3000],
+            ['max' => 100000],
         ]);
 
         ShippingCompany::insert([

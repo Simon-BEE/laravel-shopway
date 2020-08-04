@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->foreignId('address_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('reference', 32);
-            $table->decimal('total');
-            $table->decimal('shipping');
+            $table->integer('total');
+            $table->integer('shipping');
             $table->enum('payment', [
                 'card',
                 'money order',

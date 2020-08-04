@@ -15,7 +15,7 @@ class CreateRangesTable extends Migration
     {
         Schema::create('ranges', function (Blueprint $table) {
             $table->id();
-            $table->decimal('max');
+            $table->integer('max');
         });
     }
 

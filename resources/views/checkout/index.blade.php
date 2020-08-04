@@ -48,7 +48,7 @@
                         <div class="spinner hidden" id="spinner">
                             <x-spinner />
                         </div>
-                        <span id="button-text" class="">{{ __('Pay') }} {{ $totalWithTax }}</span>
+                        <span id="button-text" class="">{{ __('Pay') }} {{ $totalWithTaxAndShipping }}</span>
                     </button>
                 </div>
             </form>
@@ -58,7 +58,7 @@
         <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">
             Order summary
         </h2>
-        <div class="p-2 rounded shadow-md mt-5">
+        <div class="p-2 rounded shadow-md mt-5 overflow-y-auto max-height-400">
             @foreach ($cartProducts as $productId => $product)
                 <article class="w-full p-5 relative flex items-center mb-3">
                     <div class="img w-5/12">
@@ -80,6 +80,30 @@
                     </div>
                 </article>
             @endforeach
+        </div>
+        <div class="mt-5">
+            <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">
+                Shipping fees
+            </h2>
+            <article class="p-2 rounded shadow-md mt-5">
+                <div class="w-full text-center relative">
+                    <span class="font-semibold text-lg">
+                        {{ $shippingFees }}
+                    </span>
+                </div>
+            </article>
+        </div>
+        <div class="mt-5">
+            <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">
+                Total to pay
+            </h2>
+            <article class="p-4 bg-gray-800 text-white rounded shadow-md mt-5">
+                <div class="w-full text-center relative">
+                    <span class="font-semibold text-lg">
+                        {{ $totalWithTaxAndShipping }}
+                    </span>
+                </div>
+            </article>
         </div>
     </section>
 </section>

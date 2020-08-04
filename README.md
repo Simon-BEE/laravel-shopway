@@ -12,12 +12,10 @@ Soberly called **Shopway**
 - [x] Wishlist system
 - [x] Cart in database
 - [x] Category edit interactive
-- [ ] Order checkout
-- [ ] Stripe payment
+- [x] Order checkout
+- [ ] Order invoice
+- [ ] Orders list
+- [ ] Orders show
+- [x] Stripe payment
 - [ ] Products filter
-
-Replace session('cart') by something like Cart::items()
-
-Success and error page after payment
-->> Order shipping set
-->> Coupon
+- [ ] Coupon system

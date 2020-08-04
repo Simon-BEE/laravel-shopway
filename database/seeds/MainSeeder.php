@@ -32,7 +32,8 @@ class MainSeeder extends Seeder
         Range::insert([
             ['max' => 1000],
             ['max' => 2000],
-            ['max' => 3000],
+            ['max' => 5000],
+            ['max' => 10000],
             ['max' => 100000],
         ]);
 
@@ -41,22 +42,26 @@ class MainSeeder extends Seeder
         ]);
 
         Shipping::insert([
-            ['company_id' => 1, 'country_id' => 1, 'range_id' => 1, 'price' => 7.25],
-            ['company_id' => 1, 'country_id' => 1, 'range_id' => 2, 'price' => 8.95],
-            ['company_id' => 1, 'country_id' => 1, 'range_id' => 3, 'price' => 13.75],
-            ['company_id' => 1, 'country_id' => 1, 'range_id' => 4, 'price' => 28.55],
-            ['company_id' => 1, 'country_id' => 2, 'range_id' => 1, 'price' => 15.5],
-            ['company_id' => 1, 'country_id' => 2, 'range_id' => 2, 'price' => 17.55],
-            ['company_id' => 1, 'country_id' => 2, 'range_id' => 3, 'price' => 22.45],
-            ['company_id' => 1, 'country_id' => 2, 'range_id' => 4, 'price' => 38.55],
-            ['company_id' => 1, 'country_id' => 3, 'range_id' => 1, 'price' => 15.5],
-            ['company_id' => 1, 'country_id' => 3, 'range_id' => 2, 'price' => 17.55],
-            ['company_id' => 1, 'country_id' => 3, 'range_id' => 3, 'price' => 22.45],
-            ['company_id' => 1, 'country_id' => 3, 'range_id' => 4, 'price' => 38.55],
-            ['company_id' => 1, 'country_id' => 4, 'range_id' => 1, 'price' => 27.65],
-            ['company_id' => 1, 'country_id' => 4, 'range_id' => 2, 'price' => 38],
-            ['company_id' => 1, 'country_id' => 4, 'range_id' => 3, 'price' => 55.65],
-            ['company_id' => 1, 'country_id' => 4, 'range_id' => 4, 'price' => 78.55],
+            ['company_id' => 1, 'country_id' => 1, 'range_id' => 1, 'price' => 725],
+            ['company_id' => 1, 'country_id' => 1, 'range_id' => 2, 'price' => 895],
+            ['company_id' => 1, 'country_id' => 1, 'range_id' => 3, 'price' => 1375],
+            ['company_id' => 1, 'country_id' => 1, 'range_id' => 4, 'price' => 1955],
+            ['company_id' => 1, 'country_id' => 1, 'range_id' => 5, 'price' => 2855],
+            ['company_id' => 1, 'country_id' => 2, 'range_id' => 1, 'price' => 1550],
+            ['company_id' => 1, 'country_id' => 2, 'range_id' => 2, 'price' => 1755],
+            ['company_id' => 1, 'country_id' => 2, 'range_id' => 3, 'price' => 2245],
+            ['company_id' => 1, 'country_id' => 2, 'range_id' => 4, 'price' => 2955],
+            ['company_id' => 1, 'country_id' => 2, 'range_id' => 5, 'price' => 3855],
+            ['company_id' => 1, 'country_id' => 3, 'range_id' => 1, 'price' => 1550],
+            ['company_id' => 1, 'country_id' => 3, 'range_id' => 2, 'price' => 1755],
+            ['company_id' => 1, 'country_id' => 3, 'range_id' => 3, 'price' => 2245],
+            ['company_id' => 1, 'country_id' => 3, 'range_id' => 4, 'price' => 2955],
+            ['company_id' => 1, 'country_id' => 3, 'range_id' => 5, 'price' => 3855],
+            ['company_id' => 1, 'country_id' => 4, 'range_id' => 1, 'price' => 2765],
+            ['company_id' => 1, 'country_id' => 4, 'range_id' => 2, 'price' => 3800],
+            ['company_id' => 1, 'country_id' => 4, 'range_id' => 3, 'price' => 5565],
+            ['company_id' => 1, 'country_id' => 4, 'range_id' => 4, 'price' => 6955],
+            ['company_id' => 1, 'country_id' => 4, 'range_id' => 5, 'price' => 9855],
         ]);
 
         State::insert([

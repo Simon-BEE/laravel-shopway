@@ -18,7 +18,7 @@ class OrderProcessRepository
             'address_id' => auth()->user()->address->id,
             'reference' => $paymentIntentId,
             'total' => app(CartCalculator::class)->totalWithTax(),
-            'shipping' => 7.25,
+            'shipping' => Cart::shipping(),
             'payment' => $paymentMethod
         ]);
     }

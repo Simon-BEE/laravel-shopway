@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Product;
+use App\Models\Shipping;
 use App\Services\Cart\CartAdding;
 use App\Services\Cart\CartCalculator;
 use App\Services\Cart\CartRemoving;
@@ -22,6 +23,18 @@ class Cart
     public static function item(int $itemId)
     {
         return session('cart')[$itemId];
+    }
+
+    public static function shipping()
+    {
+        $totalWeight = collect(self::content())->map(function ($item, $itemId){
+            $product = self::model($itemId);
+            return $product->weight;
+        })->sum();
+
+        $shipping = Shipping::byWeight($totalWeight)->first();
+
+        return $shipping->price;
     }
 
     public static function model(int $itemId)
@@ -57,6 +70,11 @@ class Cart
      * ? Get amount results
      */
 
+    public static function shippingFees()
+    {
+        return Format::price(self::shipping()) . config('cart.currency');
+    }
+
     public static function totalWithoutTax()
     {
         $calculator = new CartCalculator();
@@ -67,6 +85,12 @@ class Cart
     {
         $calculator = new CartCalculator();
         return Format::price($calculator->totalWithTax()) . config('cart.currency');
+    }
+
+    public static function totalWithTaxAndShipping()
+    {
+        $calculator = new CartCalculator();
+        return Format::price(($calculator->totalWithTax() + self::shipping())) . config('cart.currency');
     }
 
     public static function totalItemWithoutTax(int $productId)

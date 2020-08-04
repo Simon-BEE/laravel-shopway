@@ -20,6 +20,14 @@ body{
 main{
     flex: 1 0 auto;
 }
+
+@media (min-width: 768px) { 
+    .max-height-400{
+        max-height: 400px;
+    }
+ }
+
+
 .font-perso {
     font-family: 'Nunito', sans-serif;
 }

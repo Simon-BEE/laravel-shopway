@@ -16,7 +16,8 @@ class CheckoutController extends Controller
     {
         return view('checkout.index', [
             'cartProducts' => Cart::content(),
-            'totalWithTax' => Cart::totalWithTax(),
+            'shippingFees' => Cart::shippingFees(),
+            'totalWithTaxAndShipping' => Cart::totalWithTaxAndShipping(),
         ]);
     }
 
@@ -27,7 +28,7 @@ class CheckoutController extends Controller
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         $clientSecret = PaymentIntent::create([
-            'amount' => app(CartCalculator::class)->totalWithTax(),
+            'amount' => app(CartCalculator::class)->totalWithTax() + Cart::shipping(),
             'currency' => config('cart.currency_iso'),
             'metadata' => [
                 'user_id' => auth()->id(),

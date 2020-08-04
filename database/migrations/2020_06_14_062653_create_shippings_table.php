@@ -18,7 +18,7 @@ class CreateShippingsTable extends Migration
             $table->foreignId('company_id')->constrained('shipping_companies')->onDelete('cascade');
             $table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->foreignId('range_id')->constrained()->onDelete('cascade');
-            $table->decimal('price');
+            $table->integer('price');
             $table->timestamps();
         });
     }

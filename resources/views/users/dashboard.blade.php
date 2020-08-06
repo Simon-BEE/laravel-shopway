@@ -32,10 +32,12 @@
             <span class="text-6xl text-blue-500 mdi mdi-archive-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Orders') }}</h2>
             <ul class="mt-5 text-center" x-show.transition="open">
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
+                <li class="mb-2">
+                    <a href="#" class="text-gray-600 hover:underline">{{ __('Tracking') }}</a>
+                </li>
+                <li class="mb-2">
+                    <a href="{{ route('users.orders.index') }}" class="text-gray-600 hover:underline">{{ __('History') }}</a>
+                </li>
             </ul>
         </article>
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
@@ -69,10 +71,9 @@
             <span class="text-6xl text-blue-500 mdi mdi-credit-card-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Payments') }}</h2>
             <ul class="mt-5 text-center" x-show.transition="open">
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
-                <li>Lorem ipsum dolor sit amet.</li>
+                <li class="mb-2">
+                    <a href="#" class="text-gray-600 hover:underline">{{ __('Invoices') }}</a>
+                </li>
             </ul>
         </article>
         <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">

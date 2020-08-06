@@ -26,8 +26,8 @@
     
             <p class="flex justify-between mt-16">
                 <a href="#" class="font-semibold text-green-600 hover:underline">&rarr; Download your invoice</a>
-                <a href="#" class="font-semibold text-green-600 hover:underline">&rarr; Check your order</a>
-                <a href="#" class="font-semibold text-green-600 hover:underline">&rarr; Back to homepage</a>
+                <a href="{{ route('users.orders.show', $order) }}" class="font-semibold text-green-600 hover:underline">&rarr; Check your order</a>
+                <a href="{{ route('welcome') }}" class="font-semibold text-green-600 hover:underline">&rarr; Back to homepage</a>
             </p>
         </div>
     </article>

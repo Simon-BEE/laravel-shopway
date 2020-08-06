@@ -22,7 +22,7 @@ class Shipping extends Model
      * ? RELATIONS
      */
 
-    public function shipping_company()
+    public function company()
     {
         return $this->belongsTo(ShippingCompany::class, 'company_id');
     }

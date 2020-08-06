@@ -15,8 +15,8 @@
 
 @section('content')
 
-<section class="text-gray-700 my-10 flex flex-col md:flex-row justify-between">
-    <section class="w-full md:w-2/3">
+<section class="text-gray-700 my-10 flex flex-col-reverse md:flex-row justify-between">
+    <section class="w-full md:w-2/3 mt-8 md:mt-0">
         <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">
             Payment information
         </h2>

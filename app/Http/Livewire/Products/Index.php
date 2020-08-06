@@ -26,7 +26,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'products' => Product::with('wishes')->where('name', 'like', '%' . $this->search . '%')->paginate(12),
+            'products' => Product::with(['wishes', 'images'])
+                ->where('name', 'like', '%' . $this->search . '%')
+                ->paginate(12),
         ]);
     }
 }

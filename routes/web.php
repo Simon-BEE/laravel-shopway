@@ -28,6 +28,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
 
+    /**
+     * Admin routes
+     */
     Route::group([
         'middleware' => ['role:admin'],
         'namespace' => 'Admin',
@@ -51,15 +54,33 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 
+    /**
+     * User dashboard routes
+     */
     Route::group([
         'namespace' => 'User',
         'as' => 'users.',
     ], function () {
         Route::get('/profile', 'DashboardController')->name('dashboard');
         Route::get('/wishlist', 'Wish\IndexController')->name('wish.index');
-        Route::resource('addresses', 'Address\AddressController')->except(['show']);
+        Route::resource('addresses', 'Address\AddressController')->except(['show', 'edit', 'update']);
+
+        /**
+         * Orders routes
+         */
+        Route::group([
+            'prefix' => 'orders',
+            'as' => 'orders.',
+            'namespace' => 'Order',
+        ], function () {
+            Route::get('/', 'OrderController@index')->name('index');
+            Route::get('/{order}', 'OrderController@show')->name('show');
+        });
     });
 
+    /**
+     * Checkout routes
+     */
     Route::group([
         'middleware' => ['cart', 'address'],
         'prefix' => 'checkout',

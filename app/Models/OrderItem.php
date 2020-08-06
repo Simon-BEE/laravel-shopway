@@ -8,6 +8,8 @@ class OrderItem extends Model
 {
     protected $guarded = ['id'];
 
+    public $with = ['product'];
+
     /**
      * ? RELATIONS
      */

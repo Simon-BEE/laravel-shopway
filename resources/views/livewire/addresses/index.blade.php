@@ -19,12 +19,9 @@
                     <p class="mb-4">{{ $address->full_address }}</p>
                 </div>
             </div>
-            <div class="absolute top-0 right-0 mr-2 mt-3">
-                <button type="button" class="p-2 rounded text-blue-500 hover:bg-gray-200 mr-1" title="{{ __('Edit') }}">
-                    <span class="mdi mdi-pencil-outline"></span>
-                </button>
+            <div class="absolute top-0 right-0 mr-1 mt-1">
                 @if (!$address->is_main)
-                <button type="button" title="{{ __('Remove') }}" >
+                <button type="button" class="flex" title="{{ __('Remove') }}" >
                     <span class="mdi mdi-delete-outline p-2 rounded text-red-500 hover:bg-gray-200" data-route="{{ route('users.addresses.destroy', $address) }}" x-on:click.stop="setAction($event); isDialogOpen = true;"></span>
                 </button>
                 @endif

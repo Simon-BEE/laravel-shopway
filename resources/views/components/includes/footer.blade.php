@@ -10,9 +10,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex w-full lg:w-1/2 lg:justify-end lg:text-right">
-                    <div class="px-3 md:px-0">
-                        <h3 class="font-bold text-gray-900">Links</h3>
+                <div class="flex w-full lg:w-1/2 lg:justify-end lg:text-right mb-4 md:mb-0">
+                    <div class="px-3 md:px-0 w-full text-center md:text-right">
                         <ul class="list-reset items-center pt-3">
                             <li>
                                 <a class="inline-block border-r-2 border-transparent hover:border-blue-400 py-1 pr-4" href="{{ route('welcome') }}">Homepage</a>

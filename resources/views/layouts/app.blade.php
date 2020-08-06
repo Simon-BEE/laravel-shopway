@@ -38,7 +38,7 @@
                 @yield('breadcrumb')
             </section>
 
-            <section class="container mx-auto">
+            <section class="container mx-auto px-3 md:px-0">
                 @yield('content')
             </section>
         </main>

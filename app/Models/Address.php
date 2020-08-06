@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Address extends Model
@@ -11,8 +12,6 @@ class Address extends Model
 
     protected $guarded = ['id'];
 
-    protected $with = ['country'];
-
     public static function booted()
     {
         static::creating(function ($address){
@@ -20,6 +19,11 @@ class Address extends Model
                 $address->is_main = true;
             }
         });
+    }
+
+    public function scopeAllByUser(Builder $query, User $user = null): Builder
+    {
+        return $query->where('user_id', $user ? $user->id : auth()->id());
     }
 
     /**

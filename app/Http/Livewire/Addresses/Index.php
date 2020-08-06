@@ -51,7 +51,7 @@ class Index extends Component
     public function render()
     {
         return view('livewire.addresses.index', [
-            'addresses' => auth()->user()->addresses,
+            'addresses' => Address::allByUser()->with('country')->get(),
         ]);
     }
 }

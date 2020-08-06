@@ -73,7 +73,7 @@ class User extends Authenticatable
             return null;
         }
 
-        return $this->addresses()->where('is_main', true)->first();
+        return $this->addresses->firstWhere('is_main', true);
     }
 
     //

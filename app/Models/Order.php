@@ -10,7 +10,7 @@ class Order extends Model
 {
     protected $guarded = ['id'];
 
-    public function scopeAllByUser(Builder $query, User $user = null)
+    public function scopeAllByUser(Builder $query, User $user = null): Builder
     {
         return $query->where('user_id', $user ? $user->id : auth()->id());
     }

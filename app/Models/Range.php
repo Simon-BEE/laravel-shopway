@@ -13,7 +13,7 @@ class Range extends Model
 
     public function scopeByWeight(Builder $query, int $weight): Builder
     {
-        return $query->where('max', '>', $weight);
+        return $query->select('id')->where('max', '>', $weight);
     }
 
     /**

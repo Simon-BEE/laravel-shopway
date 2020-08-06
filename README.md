@@ -14,8 +14,9 @@ Soberly called **Shopway**
 - [x] Category edit interactive
 - [x] Order checkout
 - [ ] Order invoice
-- [ ] Orders list
-- [ ] Orders show
+- [x] Orders list
+- [x] Orders show
 - [x] Stripe payment
 - [ ] Products filter
 - [ ] Coupon system
+- [ ] Manage order status

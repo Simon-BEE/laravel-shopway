@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Checkout;
 
 use Stripe\Stripe;
 use App\Helpers\Cart;
+use App\Helpers\Format;
 use Stripe\PaymentIntent;
 use App\Services\Cart\CartCalculator;
 use App\Http\Controllers\Controller;
@@ -14,10 +15,12 @@ class CheckoutController extends Controller
 {
     public function index()
     {
+        $shippingFees = Cart::shipping();
+
         return view('checkout.index', [
             'cartProducts' => Cart::content(),
-            'shippingFees' => Cart::shippingFees(),
-            'totalWithTaxAndShipping' => Cart::totalWithTaxAndShipping(),
+            'shippingFees' => Format::priceWithCurrency($shippingFees),
+            'totalWithTaxAndShipping' => Format::priceWithCurrency(Cart::totalWithTaxRaw() + $shippingFees),
         ]);
     }
 

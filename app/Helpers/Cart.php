@@ -32,14 +32,14 @@ class Cart
             return $product->weight;
         })->sum();
 
-        $shipping = Shipping::byWeight($totalWeight)->first();
+        $shipping = Shipping::byWeight($totalWeight, 1)->first();
 
         return $shipping->price;
     }
 
     public static function model(int $itemId)
     {
-        return Product::findOrFail($itemId);
+        return Product::select('weight')->where('id', $itemId)->firstOrFail();
     }
 
     /**
@@ -85,6 +85,18 @@ class Cart
     {
         $calculator = new CartCalculator();
         return Format::price($calculator->totalWithTax()) . config('cart.currency');
+    }
+
+    public static function totalWithoutTaxRaw()
+    {
+        $calculator = new CartCalculator();
+        return $calculator->totalWithoutTax();
+    }
+
+    public static function totalWithTaxRaw()
+    {
+        $calculator = new CartCalculator();
+        return $calculator->totalWithTax();
     }
 
     public static function totalWithTaxAndShipping()

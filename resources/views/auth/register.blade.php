@@ -14,7 +14,7 @@
 
 @section('content')
     <div class="container mx-auto">
-        <div class="w-full max-w-sm mx-auto">
+        <div class="w-full max-w-lg mx-auto">
             <h2 class="font-semibold text-xl tracking-wide text-gray-700 py-3 px-6 mb-0">
                 &rarr; {{ __('Register') }}
             </h2>
@@ -23,12 +23,37 @@
                     <form class="w-full p-6" method="POST" action="{{ route('register') }}">
                         @csrf
 
+                        <div class="flex flex-col md:flex-row md:justify-between flex-wrap">
+                            <div class="md:w-5/12">
+                                <x-form.input
+                                    label="{{ __('Firstname') }}"
+                                    type="text"
+                                    name="firstname"
+                                    placeholder="{{ __('Firstname') }}"
+                                    value="{{ old('firstname') }}"
+                                    required
+                                />
+                            </div>
+                            <div class="md:w-5/12">
+                                <x-form.input
+                                    label="{{ __('Lastname') }}"
+                                    type="text"
+                                    name="lastname"
+                                    placeholder="{{ __('Lastname') }}"
+                                    value="{{ old('lastname') }}"
+                                    required
+                                />
+                            </div>
+
+
+                        </div>
+
                         <div class="flex flex-wrap mb-6">
                             <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
                                 {{ __('E-Mail Address') }}:
                             </label>
 
-                            <input id="email" type="email" class="form-input w-full @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                            <input id="email" type="email" class="form-input w-full @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" placeholder="{{ __('E-mail Address') }}" required autocomplete="email">
 
                             @error('email')
                                 <p class="text-red-500 text-xs italic mt-4">
@@ -42,7 +67,7 @@
                                 {{ __('Password') }}:
                             </label>
 
-                            <input id="password" type="password" class="form-input w-full @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password">
+                            <input id="password" type="password" class="form-input w-full @error('password') border-red-500 @enderror" name="password" placeholder="{{ __('Password') }}" required autocomplete="new-password">
 
                             @error('password')
                                 <p class="text-red-500 text-xs italic mt-4">
@@ -56,7 +81,7 @@
                                 {{ __('Confirm Password') }}:
                             </label>
 
-                            <input id="password-confirm" type="password" class="form-input w-full" name="password_confirmation" required autocomplete="new-password">
+                            <input id="password-confirm" type="password" class="form-input w-full" name="password_confirmation" placeholder="{{ __('Confirm Password') }}" required autocomplete="new-password">
                         </div>
 
                         <div class="flex flex-wrap">

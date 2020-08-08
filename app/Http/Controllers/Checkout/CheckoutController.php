@@ -8,8 +8,10 @@ use App\Helpers\Format;
 use Stripe\PaymentIntent;
 use App\Services\Cart\CartCalculator;
 use App\Http\Controllers\Controller;
+use App\Mail\ConfirmOrderMail;
 use App\Models\Order;
 use App\Repository\OrderProcessRepository;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -62,6 +64,8 @@ class CheckoutController extends Controller
 
         $orderProcessRepository->storePayments($order);
 
+        Mail::to(auth()->user())->queue(new ConfirmOrderMail(auth()->user(), $order));
+
         Cart::clear();
 
         session()->put('checkout_success', $order->id);
@@ -78,7 +82,7 @@ class CheckoutController extends Controller
         }
 
         $order = Order::find(session('checkout_success'));
-        
+
         session()->forget('checkout_success');
 
         return view('checkout.success', compact('order'));

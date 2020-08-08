@@ -18,7 +18,10 @@
 
 <section class="my-12 min-h-full px-6 py-10 relative">
     <div class="flex flex-col text-center w-full mb-10 md:mb-20">
-        <h2 class="text-2xl font-medium title-font mb-4 tracking-widest uppercase">{{ __('Order n°') . $order->id }}</h2>
+        <h2 class="text-2xl font-medium title-font mb-4 tracking-widest uppercase">
+            {{ __('Order n°') . $order->id }} 
+            <span class="text-gray-500">({{ Format::date($order->created_at) }})</span>
+        </h2>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
             Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them.
         </p>

@@ -19,12 +19,12 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $shippingFees = Cart::shipping();
+        // $shippingFees = Cart::shipping();
 
         return view('checkout.index', [
-            'cartProducts' => Cart::content(),
-            'shippingFees' => Format::priceWithCurrency($shippingFees),
-            'totalWithTaxAndShipping' => Format::priceWithCurrency(Cart::totalWithTaxRaw() + $shippingFees),
+            // 'cartProducts' => Cart::content(),
+            // 'shippingFees' => Format::priceWithCurrency($shippingFees),
+            // 'totalWithTaxAndShipping' => Format::priceWithCurrency(Cart::totalWithTaxRaw() + $shippingFees),
         ]);
     }
 

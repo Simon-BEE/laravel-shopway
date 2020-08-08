@@ -29,7 +29,7 @@ class Cart
     {
         $totalWeight = collect(self::content())->map(function ($item, $itemId){
             $product = self::model($itemId);
-            return $product->weight;
+            return $item['quantity'] * $product->weight;
         })->sum();
 
         $shipping = Shipping::byWeight($totalWeight, 1)->first();

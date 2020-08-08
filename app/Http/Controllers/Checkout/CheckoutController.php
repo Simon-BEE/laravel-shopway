@@ -10,6 +10,8 @@ use App\Services\Cart\CartCalculator;
 use App\Http\Controllers\Controller;
 use App\Mail\ConfirmOrderMail;
 use App\Models\Order;
+use App\Models\User;
+use App\Notifications\NewOrderNotification;
 use App\Repository\OrderProcessRepository;
 use Illuminate\Support\Facades\Mail;
 
@@ -65,6 +67,10 @@ class CheckoutController extends Controller
         $orderProcessRepository->storePayments($order);
 
         Mail::to(auth()->user())->queue(new ConfirmOrderMail(auth()->user(), $order));
+
+        User::admins()->each(function ($admin) use ($order){
+            $admin->notify(new NewOrderNotification($order));
+        });
 
         Cart::clear();
 

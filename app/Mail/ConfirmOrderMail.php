@@ -14,9 +14,9 @@ class ConfirmOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $shop;
-    public $user;
-    public $order;
+    public Shop $shop;
+    public User $user;
+    public Order $order;
 
     /**
      * Create a new message instance.

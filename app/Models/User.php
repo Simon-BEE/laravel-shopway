@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\Permissions\HasPermissionsTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -47,6 +48,13 @@ class User extends Authenticatable
     protected $dates = [
         'last_login_at',
     ];
+
+    public function scopeAdmins(Builder $query, bool $isAdmin = true)
+    {
+        return self::all()->filter(function ($user){
+            return $user->hasRoles('admin');
+        });
+    }
 
     /**
      * ? ATTRIBUTES

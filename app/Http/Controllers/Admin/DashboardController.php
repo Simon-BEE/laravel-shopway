@@ -8,15 +8,15 @@ class DashboardController extends Controller
 {
     public function __invoke()
     {
-        $notificationsUnread = request()->user()->unreadNotifications()->get();
+        $notificationsUnread = request()->user()->unreadNotifications;
 
         list($orderNotifications, $userNotifications) = $notificationsUnread->partition(function ($notification){
             return $notification->type === 'App\Notifications\NewOrderNotification';
         });
 
         return view('admin.dashboard', [
-            'orderNotifications' => $orderNotifications->count(),
-            'userNotifications' => $userNotifications->count()
+            'orderNotifications' => $orderNotifications,
+            'userNotifications' => $userNotifications,
         ]);
     }
 }

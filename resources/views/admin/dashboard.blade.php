@@ -10,14 +10,14 @@
     <div class="mt-6 flex flex-col md:flex-row justify-between">
         <article class="bg-gray-400 text-gray-700 flex flex-col justify-center items-center p-8 mb-2 md:w-5/12">
             <span class="mdi mdi-basket-fill mb-2 text-3xl"></span>
-            <p>{{ $orderNotifications }} {{ trans_choice('new orders', 2) }}.</p>
+            <p><span class="font-bold">{{ $orderNotifications->count() }}</span> {{ trans_choice('new orders', 2) }}.</p>
             <p>
                 <a href="#" class="text-blue-500 hover:underline">{{ __('Find out more') }}</a>
             </p>
         </article>
         <article class="bg-gray-400 text-gray-700 flex flex-col justify-center items-center p-8 mb-2 md:w-5/12">
             <span class="mdi mdi-account-multiple-plus mb-2 text-3xl"></span>
-            <p>{{ $userNotifications }} {{ trans_choice('new users', 2) }}.</p>
+            <p><span class="font-bold">{{ $userNotifications->count() }}</span> {{ trans_choice('new users', 2) }}.</p>
             <p>
                 <a href="#" class="text-blue-500 hover:underline">{{ __('Find out more') }}</a>
             </p>

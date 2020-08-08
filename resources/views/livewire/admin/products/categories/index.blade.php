@@ -47,12 +47,12 @@
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                             wire:click="sortBy('name')"
                         >
-                            Name <span class="ml-1 text-xs">{!! $sortAsc ? '&darr;' : '&uarr;' !!}</span>
+                            Name <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'name', $sortAsc) !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                             wire:click="sortBy('created_at')"
                         >
-                            Created at
+                            Created at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>
                         </th>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">

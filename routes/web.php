@@ -39,18 +39,23 @@ Route::group(['middleware' => ['auth']], function () {
     ], function () {
         Route::get('/', 'DashboardController')->name('dashboard');
 
+        // ADMIN PRODUCTS
         Route::group([
             'namespace' => 'Products',
-            'prefix' => 'products',
-            'as' => 'products.',
         ], function () {
-            Route::get('/', 'ProductController@index')->name('index');
-            Route::delete('{product}', 'ProductController@destroy')->name('destroy');
-            Route::get('edit/{product}', 'ProductController@edit')->name('edit');
-            Route::get('create', 'CreateController@create')->name('create');
-            Route::post('/', 'CreateController@store')->name('store');
+            Route::resource('products', 'ProductController')->only(['index', 'destroy', 'edit']);
+            Route::group(['as' => 'products.', 'prefix' => 'products'], function () {
+                Route::get('create', 'CreateController@create')->name('create');
+                Route::post('/', 'CreateController@store')->name('store');
+                Route::resource('categories', 'Category\CategoryController')->except(['show', 'edit', 'create', 'update']);
+            });
+        });
 
-            Route::resource('categories', 'Category\CategoryController')->except(['show', 'edit', 'create', 'update']);
+        // ADMIN USERS
+        Route::group([
+            'namespace' => 'User',
+        ], function () {
+            Route::resource('users', 'UserController')->only(['index']);
         });
     });
 

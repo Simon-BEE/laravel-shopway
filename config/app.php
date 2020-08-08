@@ -229,6 +229,7 @@ return [
         'ProductHelper' => App\Helpers\ProductHelper::class,
         'Cart' => App\Helpers\Cart::class,
         'Format' => App\Helpers\Format::class,
+        'Filter' => App\Helpers\Filter::class,
 
     ],
 

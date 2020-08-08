@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Products\Categories;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Traits\Classify\IsFilterableWithLivewire;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Illuminate\Validation\Rule;
@@ -11,31 +12,7 @@ use Illuminate\Support\Facades\Validator;
 
 class Index extends Component
 {
-    use WithPagination;
-
-    public $perPage = 10;
-    public $searchTerm;
-    public $sortField ='name';
-    public $sortAsc = true;
-    public $newCategory;
-
-    public function updatedSearchTerm($value)
-    {
-        $this->gotoPage(1);
-    }
-
-    public function sortBy($field)
-    {
-        if ($this->sortField === $field) {
-            $this->sortAsc = !$this->sortAsc;
-        }else{
-            $this->sortAsc = true;
-        }
-
-        $this->sortField = $field;
-
-        $this->gotoPage(1);
-    }
+    use WithPagination, IsFilterableWithLivewire;
 
     public function updateCategory(int $id, string $value)
     {        

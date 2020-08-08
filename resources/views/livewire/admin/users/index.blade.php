@@ -36,17 +36,24 @@
                 <thead>
                     <tr>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                            wire:click="sortBy('name')"
+                            wire:click="sortBy('id')"
                         >
-                            Name <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'name', $sortAsc) !!}</span>
+                            # <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'id', $sortAsc) !!}</span>
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
+                            wire:click="sortBy('lastname')"
+                        >
+                            Full Name <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'lastname', $sortAsc) !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                             wire:click="sortBy('created_at')"
                         >
-                            Added at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>
+                            Registered at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>
                         </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Status
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
+                            wire:click="sortBy('email')"
+                        >
+                            Email <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'email', $sortAsc) !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Actions
@@ -54,52 +61,43 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($products as $product)
+                    @forelse ($users as $user)
                         <tr wire:key="{{ $loop->index }}">
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 w-10 h-10">
-                                        <img class="w-full h-full rounded w-6 h-6" src="{{ $product->mainImagePath }}" alt="{{ $product->name }}">
-                                    </div>
-
-                                    <div class="ml-3 flex flex-col">
-                                        <a href="{{ route('admin.products.edit', $product) }}" class="text-gray-900 whitespace-no-wrap hover:underline">{{ $product->name }}</a>
-                                        {{-- <p class="text-gray-600">{{ $product->categoriesList }}</p> --}}
-                                    </div>
-                                </div>
+                                {{ $user->id }}
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <a href="#" class="text-gray-900 whitespace-no-wrap hover:underline">{{ $user->full_name }}</a>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ Format::date($product->created_at) }}
+                                    {{ Format::date($user->created_at, 'd/m/Y H:i') }}
                                 </p>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-xs">
-                                <span class="relative inline-block px-3 py-1 uppercase font-semibold leading-tight {{ $product->active ? 'text-green-900' : 'text-red-900' }}">
-                                    <span aria-hidden="" class="absolute inset-0 opacity-50 rounded-full {{ $product->active ? 'bg-green-200' : 'bg-red-200' }}"></span>
-                                    <span class="relative">{{ $product->active ? __('Online') : __('Offline') }}</span>
-                                </span>
+                                {{ $user->email }}
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
-                                {{-- <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
+                                <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
                                     <span class="text-lg mdi mdi-eye"></span>
-                                </a> --}}
-                                <a href="{{ route('admin.products.edit', $product) }}" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2">
+                                </a>
+                                <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2">
                                     <span class="text-lg mdi mdi-pencil-outline"></span>
                                 </a>
                                 <button type="button" class="bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-600">
-                                    <span class="text-lg mdi mdi-delete-outline" data-route="{{ route('admin.products.destroy', $product) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
+                                    <span class="text-lg mdi mdi-delete-outline" data-route="#" x-on:click="setAction($event); isDialogOpen = true;"></span>
                                 </button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="100%" class="p-6 text-center">No products found.</td>
+                            <td colspan="100%" class="p-6 text-center">No users found.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
             <div class="px-5 py-5 bg-white flex items-center justify-center">
-                {{ $products->links('vendor.pagination.livewire-tailwind') }}
+                {{ $users->links('vendor.pagination.livewire-tailwind') }}
             </div>
         </div>
     </div>

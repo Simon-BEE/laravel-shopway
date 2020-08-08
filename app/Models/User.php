@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this->cart ? true : false;
     }
 
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
+    }
+
     public function getAddressAttribute()
     {
         if ($this->addresses->isEmpty()) {

@@ -20,3 +20,7 @@ Soberly called **Shopway**
 - [ ] Products filter
 - [ ] Coupon system
 - [ ] Manage order status
+
+Admin : edit delete orders    
+Admin : edit delete users    
+Implement paypal

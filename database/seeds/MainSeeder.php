@@ -66,60 +66,29 @@ class MainSeeder extends Seeder
 
         State::insert([
             [
-                'name' => 'Attente chèque',
-                'slug' => 'check',
-                'color' => 'blue',
-                'indice' => 1
-            ],
-            [
-                'name' => 'Attente mandat administratif',
-                'slug' => 'money-order',
-                'color' => 'blue',
-                'indice' => 1
-            ],
-            [
-                'name' => 'Attente virement',
-                'slug' => 'bank-transfer',
-                'color' => 'blue',
-                'indice' => 1
-            ],
-            [
-                'name' => 'Attente paiement par carte',
-                'slug' => 'card',
-                'color' => 'blue',
-                'indice' => 1
-            ],
-            [
                 'name' => 'Erreur de paiement',
                 'slug' => 'error',
-                'color' => 'red',
-                'indice' => 0
+                'color' => 'indigo',
             ],
             [
                 'name' => 'Annulé',
                 'slug' => 'cancelled',
                 'color' => 'red',
-                'indice' => 2
             ],
             [
-                'name' => 'Mandat administratif reçu', 'slug' => 'money-order-ok', 'color' => 'green', 'indice' => 3],
-            [
                 'name' => 'Paiement accepté',
-                'slug' => 'payment_ok',
+                'slug' => 'paid',
                 'color' => 'green',
-                'indice' => 4
             ],
             [
                 'name' => 'Expédié',
                 'slug' => 'send',
-                'color' => 'green',
-                'indice' => 5
+                'color' => 'blue',
             ],
             [
                 'name' => 'Remboursé',
                 'slug' => 'refund',
-                'color' => 'red',
-                'indice' => 6
+                'color' => 'pink',
             ],
         ]);
 

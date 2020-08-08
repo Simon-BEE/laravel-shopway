@@ -41,19 +41,18 @@
                             # <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'id', $sortAsc) !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                            wire:click="sortBy('lastname')"
+                            wire:click="sortBy('total')"
                         >
-                            Full Name <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'lastname', $sortAsc) !!}</span>
+                            Amount <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'total', $sortAsc) !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
                             wire:click="sortBy('created_at')"
                         >
-                            Registered at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>
+                            Created at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>
                         </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                            wire:click="sortBy('email')"
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider""
                         >
-                            Email <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'email', $sortAsc) !!}</span>
+                            Status
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Actions
@@ -61,24 +60,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($users as $user)
+                    @forelse ($orders as $order)
                         <tr wire:key="{{ $loop->index }}">
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                {{ $user->id }}
+                                {{ $order->id }}
                             </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <a href="{{ route('admin.users.show', $user) }}" class="text-gray-900 whitespace-no-wrap hover:underline">{{ $user->full_name }}</a>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">
-                                    {{ Format::date($user->created_at, 'd/m/Y H:i') }}
-                                </p>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-semibold">
+                                {{ Format::priceWithCurrency($order->price) }}
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-xs">
-                                {{ $user->email }}
+                                {{ Format::date($order->created_at, 'd/m/Y H:i') }}
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <span class="rounded-lg p-3 bg-gray-200 text-{{ $order->state->color }}-500">{{ $order->status }}</span>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
-                                <a href="{{ route('admin.users.show', $user) }}" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
+                                <a href="{{ route('admin.orders.show', $order) }}" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
                                     <span class="text-lg mdi mdi-eye"></span>
                                 </a>
                                 <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2">
@@ -91,13 +88,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="100%" class="p-6 text-center">No users found.</td>
+                            <td colspan="100%" class="p-6 text-center">No orders found.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
             <div class="px-5 py-5 bg-white flex items-center justify-center">
-                {{ $users->links('vendor.pagination.livewire-tailwind') }}
+                {{ $orders->links('vendor.pagination.livewire-tailwind') }}
             </div>
         </div>
     </div>

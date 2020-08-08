@@ -72,7 +72,7 @@
                     </div>
                     <ul class="flex flex-col py-2" x-show.transition="dropdownSales">
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Orders</a>
+                            <a class="block py-2" href="{{ route('admin.orders.index') }}"><span class="mr-4">&mdash;</span> Orders</a>
                         </li>
                         <li class="hover:bg-gray-500">
                             <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Payments</a>

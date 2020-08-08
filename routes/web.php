@@ -55,7 +55,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group([
             'namespace' => 'User',
         ], function () {
-            Route::resource('users', 'UserController')->only(['index']);
+            Route::resource('users', 'UserController')->only(['index', 'show']);
+            Route::resource('addresses', 'AddressController')->only(['destroy']);
+        });
+
+        // ADMIN ORDERS
+        Route::group([
+            'namespace' => 'Order',
+        ], function () {
+            Route::resource('orders', 'OrderController')->only(['index', 'show']);
         });
     });
 

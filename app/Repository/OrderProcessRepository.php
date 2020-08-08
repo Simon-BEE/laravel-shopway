@@ -10,10 +10,10 @@ use App\Services\Cart\CartCalculator;
 
 class OrderProcessRepository
 {
-    public function storeOrder(string $paymentIntentId , string $paymentMethod = 'card')
+    public function storeOrder(string $paymentIntentId , string $state = 'paid', string $paymentMethod = 'card')
     {
         return Order::create([
-            'state_id' => State::getStateIdBySlug($paymentMethod),
+            'state_id' => State::getStateIdBySlug($state),
             'user_id' => auth()->id(),
             'address_id' => auth()->user()->address->id,
             'reference' => $paymentIntentId,

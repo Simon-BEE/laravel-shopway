@@ -1,22 +1,24 @@
-@extends('layouts.app')
-
-@section('meta-desc')
-    <meta name="description" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem nam veniam tempora fugit fuga pariatur atque maiores consequuntur asperiores dolores! Facere natus vitae odit, quis corporis recusandae ad consectetur numquam!"/>
-@endsection
+@extends('layouts.back')
 
 @section('meta-title')
-{{ __('Order n°') . $order->id }}
+    {{ __('Order n°') . $order->id }}
 @endsection
 
 @section('breadcrumb')
-    <x-breadcrumb-item route="{{ route('users.dashboard') }}" label="{{ __('Account') }}" />
-    <x-breadcrumb-item route="{{ route('users.orders.index') }}" label="{{ __('Orders') }}" />
-    <x-breadcrumb-item route="{{ route('users.orders.show', $order) }}" label="{{ __('Order n°') . $order->id }}" active />
+    <x-back.breadcrumb-item route="{{ route('admin.orders.index') }}" label="List of orders"/>
+    <x-back.breadcrumb-item route="{{ route('admin.orders.show', $order) }}" label="{{ __('Order n°') . $order->id }}" active/>
 @endsection
 
 @section('content')
-
-<section class="my-12 min-h-full px-6 py-10 relative">
+<section class="mb-12 min-h-full px-6 py-10 relative bg-white">
+    <div class="absolute top-0 right-0 mr-2 mt-2">
+        <a href="#" class="bg-white p-2 rounded inline-flex text-orange-400 hover:text-orange-600 hover:bg-gray-100 mr-2">
+            <span class="text-lg mdi mdi-pencil-outline"></span>
+        </a>
+        <button type="button" class="bg-white p-2 rounded inline-flex text-red-400 hover:text-red-600 hover:bg-gray-100">
+            <span class="text-lg mdi mdi-delete-outline" data-route="#" x-on:click="setAction($event); isDialogOpen = true;"></span>
+        </button>
+    </div>
     <div class="flex flex-col text-center w-full mb-10 md:mb-20">
         <h2 class="text-2xl font-medium title-font mb-4 tracking-widest uppercase">
             {{ __('Order n°') . $order->id }} 
@@ -27,7 +29,11 @@
         </p>
     </div>
 
-    <article class="text-right mb-6 md:mb-0">
+    <article class="text-right mb-6 md:mb-0 flex justify-end items-center">
+        <a href="{{ route('admin.users.show', $order->user) }}" class="text-blue-500 hover:underline inline-flex items-center mr-3">
+            <span class="mdi mdi-account-arrow-right mr-2 text-xl"></span>
+            {{ __('Show customer') }}
+        </a>
         <a href="#" class="text-blue-500 hover:underline inline-flex items-center">
             <span class="mdi mdi-file-download-outline mr-2 text-xl"></span>
             {{ __('Download invoice') }}
@@ -131,6 +137,5 @@
         </article>
     </section>
 </section>
-
 
 @endsection

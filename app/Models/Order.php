@@ -43,6 +43,11 @@ class Order extends Model
         return $shipping ? $shipping->company->name : ShippingCompany::first()->name;
     }
 
+    public function getStatusAttribute()
+    {
+        return $this->state->name;
+    }
+
     /**
      * ? RELATIONS
      */

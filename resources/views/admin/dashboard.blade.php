@@ -12,14 +12,14 @@
             <span class="mdi mdi-basket-fill mb-2 text-3xl"></span>
             <p><span class="font-bold">{{ $orderNotifications->count() }}</span> {{ trans_choice('new orders', 2) }}.</p>
             <p>
-                <a href="#" class="text-blue-500 hover:underline">{{ __('Find out more') }}</a>
+                <a href="{{ route('admin.orders.index') }}" class="text-blue-500 hover:underline">{{ __('Find out more') }}</a>
             </p>
         </article>
         <article class="bg-gray-400 text-gray-700 flex flex-col justify-center items-center p-8 mb-2 md:w-5/12">
             <span class="mdi mdi-account-multiple-plus mb-2 text-3xl"></span>
             <p><span class="font-bold">{{ $userNotifications->count() }}</span> {{ trans_choice('new users', 2) }}.</p>
             <p>
-                <a href="#" class="text-blue-500 hover:underline">{{ __('Find out more') }}</a>
+                <a href="{{ route('admin.users.index') }}" class="text-blue-500 hover:underline">{{ __('Find out more') }}</a>
             </p>
         </article>
     </div>

@@ -35,14 +35,16 @@
             <table class="min-w-full leading-normal">
                 <thead>
                     <tr>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                            wire:click="sortBy('name')"
-                        >
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"wire:click="sortBy('name')">
                             Name <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'name', $sortAsc) !!}</span>
                         </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
-                            wire:click="sortBy('created_at')"
-                        >
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" wire:click="sortBy('price')">
+                            Price <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'price', $sortAsc) !!}</span>
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" wire:click="sortBy('quantity')">
+                            Quantity <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'quantity', $sortAsc) !!}</span>
+                        </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" wire:click="sortBy('created_at')">
                             Added at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -69,6 +71,18 @@
                                 </div>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap font-semibold">
+                                    {{ Format::priceWithTaxAndCurrency($product->price) }}
+                                </p>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                    <span class="rounded-full p-2 bg-gray-200 {{ $product->quantity <= $product->quantity_alert ? 'text-red-500' : '' }}">
+                                        {{ $product->quantity }}
+                                    </span>
+                                </p>
+                            </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <p class="text-gray-900 whitespace-no-wrap">
                                     {{ Format::date($product->created_at) }}
                                 </p>
@@ -80,9 +94,6 @@
                                 </span>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
-                                {{-- <a href="#" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
-                                    <span class="text-lg mdi mdi-eye"></span>
-                                </a> --}}
                                 <a href="{{ route('admin.products.edit', $product) }}" class="bg-gray-200 p-2 rounded inline-flex text-orange-400 hover:text-orange-600 mr-2">
                                     <span class="text-lg mdi mdi-pencil-outline"></span>
                                 </a>

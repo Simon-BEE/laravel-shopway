@@ -21,7 +21,7 @@
     </div>
     <div class="flex flex-col text-center w-full mb-10 md:mb-20">
         <h2 class="text-2xl font-medium title-font mb-4 tracking-widest uppercase">
-            {{ __('Order n°') . $order->id }} 
+            {{ __('Order n°') . $order->id }}
             <span class="text-gray-500">({{ Format::date($order->created_at) }})</span>
         </h2>
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
@@ -87,6 +87,9 @@
                             <span class="mdi mdi-cellphone-iphone text-gray-600 text-xl font-semibold mr-6" title="phone number"></span>
                             {{ $order->address->phone }}
                         </p>
+                        @if ($order->address->deleted_at)
+                            <p class="text-red-500">&rarr; {{ __('Address deleted at') }}: {{ Format::date($order->address->deleted_at) }}</p>
+                        @endif
                     </div>
                 </div>
                 @else
@@ -118,19 +121,19 @@
             <h3 class="text-xl tracking-widest font-semibold text-gray-700 mb-4">{{ __('Total') }}</h3>
             <ul class="space-y-4 text-center">
                 <li class="px-2 py-3 bg-gray-200">
-                    <span class="text-gray-600 mr-2">{{ __('Shipping fees') }}:</span> 
+                    <span class="text-gray-600 mr-2">{{ __('Shipping fees') }}:</span>
                     <span class="font-semibold">{{ Format::priceWithCurrency($order->shipping) }}</span>
                 </li>
                 <li class="px-2 py-3 bg-gray-200">
-                    <span class="text-gray-600 mr-2">{{ __('Price without taxes') }}:</span> 
+                    <span class="text-gray-600 mr-2">{{ __('Price without taxes') }}:</span>
                     <span class="font-semibold">{{ Format::priceWithoutTaxAndWithCurrency($order->total) }}</span>
                 </li>
                 <li class="px-2 py-3 bg-gray-200">
-                    <span class="text-gray-600 mr-2">{{ __('Price with taxes') }}:</span> 
+                    <span class="text-gray-600 mr-2">{{ __('Price with taxes') }}:</span>
                     <span class="font-semibold">{{ Format::priceWithCurrency($order->total) }}</span>
                 </li>
                 <li class="px-2 py-3 bg-gray-800 text-gray-100">
-                    <span class="mr-2">{{ __('Total price with taxes and shipping fees') }}:</span> 
+                    <span class="mr-2">{{ __('Total price with taxes and shipping fees') }}:</span>
                     <span class="font-semibold">{{ Format::priceWithCurrency($order->price) }}</span>
                 </li>
             </ul>

@@ -6,6 +6,7 @@ use App\Helpers\Cart;
 use App\Models\Order;
 use App\Models\State;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Services\Cart\CartCalculator;
 
 class OrderProcessRepository
@@ -26,6 +27,11 @@ class OrderProcessRepository
     public function storeOrderItems(Order $order)
     {
         $orderItems = collect(Cart::content())->map(function ($item, $itemId) use ($order){
+            $product = Product::findOrFail($itemId);
+            $product->update([
+                'quantity' => $product->quantity - $item['quantity'],
+            ]);
+
             return [
                 'product_id' => $itemId,
                 'order_id' => $order->id,

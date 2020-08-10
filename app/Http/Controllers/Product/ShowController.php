@@ -10,7 +10,7 @@ class ShowController extends Controller
     public function __invoke(Product $product)
     {
         return view('products.show', [
-            'product' => $product,
+            'product' => $product->load(['images']),
         ]);
     }
 }

@@ -19,33 +19,29 @@ class Order extends Model
      * ? ATTRIBUTES
      */
 
-    public function getPaymentTextAttribute($value)
+    public function getTotalAttribute()
     {
-        $texts = [
-            'card' => 'Carte bancaire',
-            'bank transfer' => 'Virement',
-            'check' => 'Chèque',
-            'money order' => 'Mandat administratif',
-        ];
-
-        return $texts[$this->payment];
-    }
-
-    public function getPriceAttribute()
-    {
-        return $this->total + $this->shipping;
+        return $this->price + $this->shipping;
     }
 
     public function getShippingCompanyAttribute()
     {
-        $shipping = Shipping::where('price', $this->shipping)->first();
+        return $this->shipping->company->name;;
+    }
 
-        return $shipping ? $shipping->company->name : ShippingCompany::first()->name;
+    public function getShippingAmountAttribute()
+    {
+        return $this->shipping->price;
     }
 
     public function getStatusAttribute()
     {
         return $this->state->name;
+    }
+
+    public function getReferenceAttribute()
+    {
+        return $this->payment->payment_id;
     }
 
     /**
@@ -75,5 +71,10 @@ class Order extends Model
     public function payment()
     {
         return $this->hasOne(Payment::class);
+    }
+
+    public function shipping()
+    {
+        return $this->belongsTo(Shipping::class);
     }
 }

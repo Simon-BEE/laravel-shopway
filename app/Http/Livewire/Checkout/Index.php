@@ -32,7 +32,7 @@ class Index extends Component
     {
         $this->redirectIfCartEmpty();
 
-        $shippingFees = Cart::shipping();
+        $shippingFees = Cart::shippingPrice();
 
         return view('livewire.checkout.index', [
             'cartProducts' => Cart::content(),

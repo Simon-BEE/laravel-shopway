@@ -25,7 +25,7 @@ class Cart
         return session('cart')[$itemId];
     }
 
-    public static function shipping()
+    public static function shipping(): Shipping
     {
         $totalWeight = collect(self::content())->map(function ($item, $itemId){
             $product = self::model($itemId);
@@ -34,7 +34,12 @@ class Cart
 
         $shipping = Shipping::byWeight($totalWeight, 1)->first();
 
-        return $shipping->price;
+        return $shipping;
+    }
+
+    public static function shippingPrice(): int
+    {
+        return self::shipping()->price;
     }
 
     public static function model(int $itemId)
@@ -72,7 +77,7 @@ class Cart
 
     public static function shippingFees()
     {
-        return Format::price(self::shipping()) . config('cart.currency');
+        return Format::price(self::shippingPrice()) . config('cart.currency');
     }
 
     public static function totalWithoutTax()
@@ -102,7 +107,7 @@ class Cart
     public static function totalWithTaxAndShipping()
     {
         $calculator = new CartCalculator();
-        return Format::price(($calculator->totalWithTax() + self::shipping())) . config('cart.currency');
+        return Format::price(($calculator->totalWithTax() + self::shippingPrice())) . config('cart.currency');
     }
 
     public static function totalItemWithoutTax(int $productId)

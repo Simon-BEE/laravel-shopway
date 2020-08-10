@@ -104,7 +104,7 @@
                     </p>
                     <p class="flex items-center">
                         <span class="mdi mdi-cash-marker text-gray-600 font-semibold text-xl mr-3"></span>
-                        {{ __('Shipping fees') }}: <span class="font-semibold ml-1">{{ Format::priceWithCurrency($order->shipping) }}</span>
+                        {{ __('Shipping fees') }}: <span class="font-semibold ml-1">{{ Format::priceWithCurrency($order->shipping_amount) }}</span>
                     </p>
                     <p class="flex items-center">
                         <span class="mdi mdi-domain text-gray-600 font-semibold text-xl mr-3"></span>
@@ -122,15 +122,15 @@
             <ul class="space-y-4 text-center">
                 <li class="px-2 py-3 bg-gray-200">
                     <span class="text-gray-600 mr-2">{{ __('Shipping fees') }}:</span>
-                    <span class="font-semibold">{{ Format::priceWithCurrency($order->shipping) }}</span>
+                    <span class="font-semibold">{{ Format::priceWithCurrency($order->shipping_amount) }}</span>
                 </li>
                 <li class="px-2 py-3 bg-gray-200">
                     <span class="text-gray-600 mr-2">{{ __('Price without taxes') }}:</span>
-                    <span class="font-semibold">{{ Format::priceWithoutTaxAndWithCurrency($order->total) }}</span>
+                    <span class="font-semibold">{{ Format::priceWithoutTaxAndWithCurrency($order->price) }}</span>
                 </li>
                 <li class="px-2 py-3 bg-gray-200">
                     <span class="text-gray-600 mr-2">{{ __('Price with taxes') }}:</span>
-                    <span class="font-semibold">{{ Format::priceWithCurrency($order->total) }}</span>
+                    <span class="font-semibold">{{ Format::priceWithCurrency($order->price) }}</span>
                 </li>
                 <li class="px-2 py-3 bg-gray-800 text-gray-100">
                     <span class="mr-2">{{ __('Total price with taxes and shipping fees') }}:</span>

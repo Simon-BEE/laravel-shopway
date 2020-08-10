@@ -6,21 +6,20 @@ use App\Helpers\Cart;
 use App\Models\Order;
 use App\Models\State;
 use App\Models\OrderItem;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Services\Cart\CartCalculator;
 
 class OrderProcessRepository
 {
-    public function storeOrder(string $paymentIntentId , string $state = 'paid', string $paymentMethod = 'card')
+    public function storeOrder(string $state = 'paid')
     {
         return Order::create([
             'state_id' => State::getStateIdBySlug($state),
             'user_id' => auth()->id(),
             'address_id' => auth()->user()->address->id,
-            'reference' => $paymentIntentId,
-            'total' => app(CartCalculator::class)->totalWithTax(),
-            'shipping' => Cart::shipping(),
-            'payment' => $paymentMethod
+            'shipping_id' => Cart::shipping()->id,
+            'price' => app(CartCalculator::class)->totalWithTax(),
         ]);
     }
 
@@ -47,11 +46,12 @@ class OrderProcessRepository
         OrderItem::insert($orderItems);
     }
 
-    public function storePayments(Order $order)
+    public function storePayments(Order $order, string $paymentIntentId, string $type = Payment::STRIPE_TYPE)
     {
         $order->payment()->create([
             'user_id' => auth()->id(),
-            'payment_id' => $order->reference,
+            'payment_id' => $paymentIntentId,
+            'type' => $type,
         ]);
     }
 }

@@ -8,6 +8,9 @@ class Payment extends Model
 {
     protected $guarded = ['id'];
 
+    const STRIPE_TYPE = 'stripe';
+    const PAYPAL_TYPE = 'paypal';
+
     /**
      * ? RELATIONS
      */

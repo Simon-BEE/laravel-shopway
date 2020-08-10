@@ -10,6 +10,7 @@ use App\Services\Cart\CartCalculator;
 use App\Http\Controllers\Controller;
 use App\Mail\ConfirmOrderMail;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\User;
 use App\Notifications\NewOrderNotification;
 use App\Repository\OrderProcessRepository;
@@ -29,7 +30,7 @@ class CheckoutController extends Controller
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
         $clientSecret = PaymentIntent::create([
-            'amount' => app(CartCalculator::class)->totalWithTax() + Cart::shipping(),
+            'amount' => app(CartCalculator::class)->totalWithTax() + Cart::shippingPrice(),
             'currency' => config('cart.currency_iso'),
             'metadata' => [
                 'user_id' => auth()->id(),
@@ -46,7 +47,7 @@ class CheckoutController extends Controller
      */
     public function storingOrder(OrderProcessRepository $orderProcessRepository)
     {
-        $order = $orderProcessRepository->storeOrder(request()->paymentIntent);
+        $order = $orderProcessRepository->storeOrder();
 
         if (!$order) {
             session()->put('checkout_error');
@@ -58,7 +59,7 @@ class CheckoutController extends Controller
 
         $orderProcessRepository->storeOrderItems($order);
 
-        $orderProcessRepository->storePayments($order);
+        $orderProcessRepository->storePayments($order, request()->paymentIntent, Payment::STRIPE_TYPE);
 
         Mail::to(auth()->user())->queue(new ConfirmOrderMail(auth()->user(), $order));
 

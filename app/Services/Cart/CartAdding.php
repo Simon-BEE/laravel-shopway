@@ -13,18 +13,19 @@ class CartAdding
      * @param Model $product
      * @return void
      */
-    public static function add(Model $product)
+    public static function add(Model $productOption)
     {
         $cartSession = Cart::content();
 
         if (is_null($cartSession)) {
             $cart = [
-                $product->id => [
-                    'name' => isset($product->name) ? $product->name : null,
+                $productOption->id => [
+                    'product' => $productOption->product->id,
+                    'name' => isset($productOption->product->name) ? $productOption->product->name : null,
                     'quantity' => 1,
-                    'price' => $product->price,
-                    'photo' => $product->mainImagePath,
-                    'path' => $product->path,
+                    'price' => $productOption->price,
+                    'photo' => $productOption->mainImagePath,
+                    'path' => $productOption->product->path,
                 ]
             ];
 
@@ -33,19 +34,20 @@ class CartAdding
             return;
         }
 
-        if (isset($cartSession[$product->id])) {
-            $cartSession[$product->id]['quantity']++;
+        if (isset($cartSession[$productOption->id])) {
+            $cartSession[$productOption->id]['quantity']++;
             session(['cart' => $cartSession]);
 
             return;
         }
 
-        $cartSession[$product->id] = [
-            'name' => isset($product->name) ? $product->name : null,
+        $cartSession[$productOption->id] = [
+            'product' => $productOption->product->id,
+            'name' => isset($productOption->product->name) ? $productOption->product->name : null,
             'quantity' => 1,
-            'price' => $product->price,
-            'photo' => $product->mainImagePath,
-            'path' => $product->path,
+            'price' => $productOption->price,
+            'photo' => $productOption->mainImagePath,
+            'path' => $productOption->product->path,
         ];
 
         session()->put('cart', $cartSession);

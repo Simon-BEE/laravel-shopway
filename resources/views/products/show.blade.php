@@ -43,6 +43,19 @@
                     </span>
                 </div>
                 <p class="text-justify leading-5">{{ $product->description }}</p>
+                <p>
+                    @foreach ($product->getOptionsTypes() as $type)
+                    <div class="mx-6">{{ $type }}</div>
+                        @foreach ($product->product_options as $productOption)
+                            @if ($productOption->type === $type)
+                            <span>{{ $productOption->getOptions() }}</span>
+                                @foreach ($productOption->options as $option)
+                                <span class="font-semibold">{{ $option->name }}</span>
+                                @endforeach
+                            @endif
+                        @endforeach
+                    @endforeach
+                </p>
             </div>
             <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
                 <div class="price text-3xl font-semibold text-gray-700">

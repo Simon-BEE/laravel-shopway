@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 
 class Product extends Model
 {
@@ -71,6 +72,13 @@ class Product extends Model
         }
 
         return $this->wishes->contains('user_id', auth()->id());
+    }
+
+    public function getOptionsTypes(): Collection
+    {
+        return $this->product_options->map(function ($productOption){
+            return $productOption->type;
+        })->unique();
     }
 
     /**

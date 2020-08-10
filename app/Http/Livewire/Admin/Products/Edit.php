@@ -166,7 +166,7 @@ class Edit extends Component
     public function updatedPrice(string $newValue)
     {
         $this->validate([
-            'price' => 'required|numeric|between:1,2000',
+            'price' => 'required|numeric|between:100,20000',
         ]);
 
         $this->product->update([

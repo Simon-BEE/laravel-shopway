@@ -48,7 +48,7 @@
                     <div class="p-3 mb-2 bg-gray-200 flex flex-col md:flex-row items-center md:justify-between">
                         <p>
                             @if ($item->product)
-                                <a href="{{ route('products.show', $item->product) }}" class="text-blue-500 hover:underline">{{ $item->product->name }}</a>
+                                <a href="{{ route('admin.products.edit', $item->product) }}" class="text-blue-500 hover:underline">{{ $item->product->name }}</a>
                             @else
                                 {{ $item->name }}
                             @endif

@@ -49,11 +49,11 @@ class Product extends Model
     public function getMainImagePathAttribute()
     {
         return $this->images->isNotEmpty() 
-            ? $this->imagePath($this->getMainImage()->filename) 
+            ? $this->imagePath($this->main_image->filename) 
             : "https://picsum.photos/800";
     }
 
-    public function getMainImage()
+    public function getMainImageAttribute()
     {
         if ($this->images->contains('is_main', true)) {
             return $this->images->skipUntil(function ($image){
@@ -91,6 +91,16 @@ class Product extends Model
     public function getPathAttribute()
     {
         return route('products.show', $this->slug);
+    }
+
+    public function getQuantityAttribute()
+    {
+        return $this->product_options->sum('quantity');
+    }
+
+    public function getPriceAttribute()
+    {
+        return $this->product_options->first()->price;
     }
 
     /**

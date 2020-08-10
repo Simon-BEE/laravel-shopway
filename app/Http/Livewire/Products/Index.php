@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Products;
 
 use App\Models\Product;
-use Illuminate\Pagination\Paginator;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,11 +12,6 @@ class Index extends Component
 
     public $search;
 
-    // public function paginationView()
-    // {
-    //     return 'vendor.pagination.livewire-tailwind';
-    // }
-
     public function updatedSearch()
     {
         $this->gotoPage(1);
@@ -26,8 +20,9 @@ class Index extends Component
     public function render()
     {
         return view('livewire.products.index', [
-            'products' => Product::with(['wishes', 'images'])
+            'products' => Product::with(['wishes', 'images', 'product_options'])
                 ->where('name', 'like', '%' . $this->search . '%')
+                ->orWhere('description', 'like', '%' . $this->search . '%')
                 ->paginate(12),
         ]);
     }

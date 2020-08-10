@@ -2,6 +2,7 @@
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Address;
 use App\Models\Permission;
 use Illuminate\Database\Seeder;
 
@@ -34,5 +35,14 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('123123'),
         ]);
         $manager->roles()->attach($manager_role);
+
+
+        factory(User::class, 20)
+            ->create()
+            ->each(function ($user) {
+                $user->addresses()->createMany(
+                    factory(Address::class, mt_rand(2, 3))->make()->toArray()
+                );
+        });
     }
 }

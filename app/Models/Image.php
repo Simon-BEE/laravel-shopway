@@ -24,7 +24,7 @@ class Image extends Model
 
     public function getMainImageByProduct(int $productId)
     {
-        return Image::where('product_id', $productId)->where('is_main', true)->first();
+        return Image::where('product_item_option_id', $productId)->where('is_main', true)->first();
     }
 
     /**
@@ -33,6 +33,6 @@ class Image extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductItemOption::class, 'product_item_option_id');
     }
 }

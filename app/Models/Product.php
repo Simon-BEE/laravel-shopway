@@ -124,11 +124,16 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasMany(Image::class);
+        return $this->hasManyThrough(Image::class, ProductItemOption::class);
     }
 
     public function wishes()
     {
         return $this->hasMany(Wish::class);
+    }
+
+    public function product_options()
+    {
+        return $this->hasMany(ProductItemOption::class);
     }
 }

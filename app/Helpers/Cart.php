@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Product;
+use App\Models\ProductItemOption;
 use App\Models\Shipping;
 use App\Services\Cart\CartAdding;
 use App\Services\Cart\CartCalculator;
@@ -56,19 +57,19 @@ class Cart
         return session()->forget(['cart']);
     }
 
-    public static function remove(int $itemId)
+    public static function remove(int $itemId, int $sizeId)
     {
-        CartRemoving::remove($itemId);
+        CartRemoving::remove($itemId, $sizeId);
     }
 
-    public static function add(Product $product)
+    public static function add(ProductItemOption $product, int $sizeId)
     {
-        CartAdding::add($product);
+        CartAdding::add($product, $sizeId);
     }
 
-    public static function update(int $productId, int $qty)
+    public static function update(int $productId, int $sizeId, int $qty)
     {
-        CartUpdating::update($productId, $qty);
+        CartUpdating::update($productId, $sizeId, $qty);
     }
 
     /**

@@ -10,8 +10,12 @@ class CartCalculator
 
     public function totalWithoutTax()
     {
+        dump(session('cart'));
         return collect(session('cart'))->sum(function ($product){
-            return ($product['quantity'] * $product['price']);
+            // dd($product);
+            collect($product)->sum(function ($size){
+                return ($size['quantity'] * $size['price']);
+            });
         });
     }
 
@@ -25,17 +29,17 @@ class CartCalculator
         return $this->totalWithoutTax() * config('cart.tax');
     }
 
-    public function totalItemWithoutTax(int $productId)
+    public function totalItemWithoutTax(int $productId, int $sizeId)
     {
-        if (isset(session('cart')[$productId])) {
-            return session('cart')[$productId]['quantity'] * session('cart')[$productId]['price'];
+        if (isset(session('cart')[$productId][$sizeId])) {
+            return session('cart')[$productId][$sizeId]['quantity'] * session('cart')[$productId][$sizeId]['price'];
         }
 
         return 0;
     }
 
-    public function totalItemWithTax(int $productId)
+    public function totalItemWithTax(int $productId, int $sizeId)
     {
-        return $this->totalItemWithoutTax($productId) + ($this->totalItemWithoutTax($productId) * config('cart.tax'));
+        return $this->totalItemWithoutTax($productId, $sizeId) + ($this->totalItemWithoutTax($productId, $sizeId) * config('cart.tax'));
     }
 }

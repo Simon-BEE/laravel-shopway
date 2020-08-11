@@ -59,7 +59,11 @@
                 {{ Format::priceWithTaxAndCurrency($selectedProduct->price) }}
             </div>
             <div class="flex">
-                <livewire:cart.add :product="$product" :slot="'button'" />
+                <button type="button" class="flex items-center p-2 rounded text-xl text-white mr-2 bg-blue-400 hover:bg-blue-600" wire:click="addToCart">
+                    <span class="mdi mdi-cart-outline mr-2"></span>
+                    {{ __('Add to cart') }}
+                </button>
+                
                 <livewire:wish.toggle :product="$product" :key="$product->id" />
             </div>
         </div>

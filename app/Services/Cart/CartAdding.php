@@ -13,35 +13,33 @@ class CartAdding
      * @param Model $product
      * @return void
      */
-    public static function add(Model $productOption)
+    public static function add(Model $productOption, int $sizeId)
     {
         $cartSession = Cart::content();
 
         if (is_null($cartSession)) {
-            $cart = [
-                $productOption->id => [
-                    'product' => $productOption->product->id,
-                    'name' => isset($productOption->product->name) ? $productOption->product->name : null,
-                    'quantity' => 1,
-                    'price' => $productOption->price,
-                    'photo' => $productOption->mainImagePath,
-                    'path' => $productOption->product->path,
-                ]
-            ];
+            $cart = [$productOption->id => [$sizeId => [
+                'product' => $productOption->product->id,
+                'name' => isset($productOption->product->name) ? $productOption->product->name : null,
+                'quantity' => 1,
+                'price' => $productOption->price,
+                'photo' => $productOption->mainImagePath,
+                'path' => $productOption->product->path,
+            ]]];
 
             session()->put('cart', $cart);
 
             return;
         }
 
-        if (isset($cartSession[$productOption->id])) {
-            $cartSession[$productOption->id]['quantity']++;
+        if (isset($cartSession[$productOption->id][$sizeId])) {
+            $cartSession[$productOption->id][$sizeId]['quantity']++;
             session(['cart' => $cartSession]);
 
             return;
         }
 
-        $cartSession[$productOption->id] = [
+        $cartSession[$productOption->id][$sizeId] = [
             'product' => $productOption->product->id,
             'name' => isset($productOption->product->name) ? $productOption->product->name : null,
             'quantity' => 1,

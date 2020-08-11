@@ -14,6 +14,7 @@ class Item extends Component
 
     public function mount(int $productId, array $product)
     {
+        dd($product);
         $this->productId = $productId;
         $this->product = $product;
         $this->quantity = $product['quantity'];

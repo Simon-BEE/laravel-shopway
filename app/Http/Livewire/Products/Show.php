@@ -2,11 +2,13 @@
 
 namespace App\Http\Livewire\Products;
 
+use App\Helpers\Cart;
 use App\Models\Option;
 use App\Models\Product;
+use Livewire\Component;
+use Illuminate\Support\Str;
 use App\Models\ProductItemOption;
 use Illuminate\Support\Collection;
-use Livewire\Component;
 
 class Show extends Component
 {
@@ -50,6 +52,19 @@ class Show extends Component
         }
 
         $this->selectedSize = Option::where('id', $sizeId)->firstOrFail();
+    }
+
+    public function addToCart()
+    {
+        Cart::add($this->selectedProduct, $this->selectedSize->id);
+
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Product successfully added to cart.',
+            'id' => Str::random(10)
+        ]);
+
+        $this->emit('cartUpdated');
     }
 
     public function render()

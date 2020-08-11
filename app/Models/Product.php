@@ -74,13 +74,6 @@ class Product extends Model
         return $this->wishes->contains('user_id', auth()->id());
     }
 
-    public function getOptionsTypes(): Collection
-    {
-        return $this->product_options->map(function ($productOption){
-            return $productOption->type;
-        })->unique();
-    }
-
     /**
      * Return truncate description of a product
      *
@@ -108,7 +101,12 @@ class Product extends Model
 
     public function getPriceAttribute()
     {
-        return $this->product_options->first()->price;
+        return $this->first_option->price;
+    }
+
+    public function getFirstOptionAttribute()
+    {
+        return $this->product_options->first();
     }
 
     /**
@@ -129,6 +127,17 @@ class Product extends Model
             ->where('active', true)
             ->inRandomOrder()
             ->take($number);
+    }
+
+    public function hasSize(int $sizeId)
+    {
+        $r = $this->product_options->filter(function ($productOption) use ($sizeId){
+            if ($productOption->hasSize($sizeId)) {
+                return true;
+            }
+        });
+
+        return $r->isNotEmpty();
     }
 
     /**

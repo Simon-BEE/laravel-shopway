@@ -17,14 +17,22 @@ class MainSeeder extends Seeder
      */
     public function run()
     {
-        factory(Category::class, 20)->create()->each(function ($category){
-            $category->products()->saveMany(factory(Product::class, mt_rand(6, 32))->create());
+        factory(Category::class, 5)->create()->each(function ($category){
+            $category->products()->saveMany(factory(Product::class, mt_rand(2, 9))->create());
             $category->products->each(function ($product){
 
-                $product->product_options()->saveMany(factory(ProductItemOption::class, mt_rand(1, 5))->make());
+                $product->product_options()->saveMany(factory(ProductItemOption::class, mt_rand(1, 2))->make());
                 $product->product_options->each(function ($productOption){
 
-                    $productOption->options()->attach(mt_rand(1, Option::get()->count()));
+                    // All sizes (XS, S, etc..)
+                    Option::where('option_type_id', 1)->get()->each(function ($option) use ($productOption){
+                        $option->product_items()->attach($productOption);
+                    });
+
+                    // Random color
+                    $this->randomColor($productOption);
+                    // Random material
+                    $productOption->options()->attach(18);
 
                     $productOption->images()->create([
                         'filename' => 'product_' . mt_rand(1, 2) . '.jpg',
@@ -50,5 +58,20 @@ class MainSeeder extends Seeder
                 'title' => $item[1],
             ]);
         }
+    }
+
+    public function randomColor($productOption)
+    {
+        $color = mt_rand(7, 16);
+
+        $productOption->product->product_options->each(function ($item) use ($color, $productOption){
+            if ($item->hasColor($color)) {
+                $this->randomColor($productOption);
+                return;
+            }
+        });
+
+        $productOption->options()->attach($color);
+        return;
     }
 }

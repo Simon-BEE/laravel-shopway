@@ -8,6 +8,11 @@ class ProductItemOption extends Model
 {
     protected $guarded = ['id'];
 
+    public function imagePath(string $filename): string
+    {
+        return asset('/storage/products') . '/' . $filename;
+    }
+
     /**
      * ? Attributes
      */
@@ -30,18 +35,47 @@ class ProductItemOption extends Model
         return $this->images->first();
     }
 
-    public function getTypeAttribute()
+    public function getColorAttribute(): Option
     {
-        return $this->options->map(function ($option){
-            return $option->type_string;
-        })->first();
+        return $this->options()->where('option_type_id', Option::COLOR_OPTION)->first();
     }
 
-    public function getOptions()
+    public function getMaterialAttribute(): Option
     {
-        return $this->options->map(function ($option){
-            return $option->name;
-        });
+        return $this->options()->where('option_type_id', Option::MATERIAL_OPTION)->first();
+    }
+
+    public function getDefaultSizeAttribute(): Option
+    {
+        return $this->sizes_available->first();
+    }
+
+    public function getSizesAvailableAttribute()
+    {
+        return $this->options()->where('option_type_id', Option::SIZE_OPTION)->get();
+    }
+
+    public function getClassnameAttribute()
+    {
+        if ($this->color->name === 'black') {
+            return "bg-black text-white";
+        }elseif($this->color->name === 'white'){
+            return "bg-white text-gray-700";
+        }else{
+            return "bg-{$this->color->name}-500 text-white";
+        }
+    }
+
+    ////
+
+    public function hasColor(int $colorId)
+    {
+        return $this->options->contains('id', $colorId);
+    }
+
+    public function hasSize(int $sizeId)
+    {
+        return $this->options->contains('id', $sizeId);
     }
 
     /**

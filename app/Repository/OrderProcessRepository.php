@@ -25,7 +25,7 @@ class OrderProcessRepository
 
     public function storeOrderItems(Order $order)
     {
-        $orderItems = collect(Cart::content())->map(function ($item, $itemId) use ($order){
+        $orderItems = Cart::content()->map(function ($item, $itemId) use ($order){
             $product = Product::findOrFail($itemId);
             $product->update([
                 'quantity' => $product->quantity - $item['quantity'],

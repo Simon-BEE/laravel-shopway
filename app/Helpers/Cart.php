@@ -2,12 +2,14 @@
 
 namespace App\Helpers;
 
+use App\Models\Option;
 use App\Models\ProductItemOption;
 use App\Models\Shipping;
 use App\Services\Cart\CartAdding;
 use App\Services\Cart\CartCalculator;
 use App\Services\Cart\CartRemoving;
 use App\Services\Cart\CartUpdating;
+use Illuminate\Support\Collection;
 
 class Cart
 {
@@ -15,19 +17,19 @@ class Cart
      * ? Get Result of session
      */
 
-    public static function content()
+    public static function content(): Collection
     {
-        return session('cart');
+        return collect(session('cart'));
     }
 
-    public static function item(int $itemId)
+    public static function item(int $itemId): array
     {
         return session('cart')[$itemId];
     }
 
     public static function shipping(): Shipping
     {
-        $totalWeight = collect(self::content())->map(function ($item, $itemId){
+        $totalWeight = self::content()->map(function ($item, $itemId){
             return collect($item)->map(function ($option, $optionId){
                 $product = self::model($optionId);
                 return $option['quantity'] * $product->weight;
@@ -49,11 +51,16 @@ class Cart
         return ProductItemOption::select(['weight', 'quantity'])->where('id', $itemId)->firstOrFail();
     }
 
-    public static function count()
+    public static function count(): int
     {
-        return collect(Cart::content())->map(function ($c){
+        return Cart::content()->map(function ($c){
             return count($c);
         })->sum();
+    }
+
+    public static function size(int $sizeId): string
+    {
+        return Option::MAP_SIZES[$sizeId];
     }
 
     /**

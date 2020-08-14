@@ -42,27 +42,38 @@
             Order summary
         </h2>
         <div class="p-2 rounded shadow-md mt-5 overflow-y-auto max-height-400">
-            @foreach ($cartProducts as $productId => $product)
+            {{-- @foreach ($cartProducts as $productId => $product)
+            @endforeach --}}
+            @forelse ($cartProducts as $productOptionId => $productOption)
+            @foreach ($productOption as $productOptionSizeId => $productOptionSize)
                 <article class="w-full p-5 relative flex items-center mb-3">
                     <div class="img w-5/12">
-                        <img src="{{ $product['photo'] }}" alt="{{ $product['name'] }}" class="object-cover rounded-lg" style="width:110px;height:110px">
+                        <img src="{{ $productOptionSize['photo'] }}" alt="{{ $productOptionSize['name'] }}" class="object-cover rounded-lg" style="width:110px;height:110px">
                     </div>
                     <div class="ml-2 flex flex-col justify-between h-20">
                         <div class="flex flex-col">
-                            <a href="#">{{ $product['name'] }}</a>
-                            <span class="text-gray-500 text-xs">Quantity: {{ $product['quantity'] }}</span>
+                            <a href="#">{{ $productOptionSize['name'] }}</a>
+                            <span class="text-gray-500 text-xs">{{ __('Quantity') }}: {{ $productOptionSize['quantity'] }}</span>
+                            <span class="text-gray-500 text-xs">{{ __('Size') }}: {{ Cart::size($productOptionSizeId) }}</span>
                         </div>
                         <span class="font-semibold text-lg">
-                            {{ Format::priceWithTaxAndCurrency($product['price']) }}
+                            {{ Format::priceWithTaxAndCurrency($productOptionSize['price']) }}
                         </span>
                     </div>
                     <div class="absolute top-0 right-0 mr-1 mt-1">
-                        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productId }})">
+                        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productOptionId }}, {{ $productOptionSizeId }})">
                             <span class="mdi mdi-delete ml-2 text-xs"></span>
                         </x-form.form-button>
                     </div>
                 </article>
-            @endforeach
+                @endforeach
+            @empty
+                <article class="w-full p-5 relative flex items-center mb-3">
+                    <p>
+                        &rarr; No product added to cart.
+                    </p>
+                </article>
+            @endforelse
         </div>
         <div class="mt-5">
             <h2 class="uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl">

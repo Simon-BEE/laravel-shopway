@@ -35,7 +35,7 @@ class OrderProcessRepository
     public function storeOrderItems(Order $order, Collection $cart = null)
     {
         $cart = $cart ?? Cart::content();
-        x;
+
         $orderItems = $cart->map(function ($productOptions, $productOptionId) use ($order){
             return collect($productOptions)->map(function ($optionItem, $optionItemSizeId) use ($order, $productOptionId){
                 $product = ProductItemOption::findOrFail($productOptionId);

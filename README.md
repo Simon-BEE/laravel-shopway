@@ -23,4 +23,5 @@ Soberly called **Shopway**
 
 Admin : edit delete orders    
 Admin : edit delete users    
+Admin : possibility to refund total or part of a payment
 Implement paypal

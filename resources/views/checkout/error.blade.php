@@ -22,8 +22,8 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem similique neque cumque, magnam reiciendis consequuntur labore minima quasi laudantium, earum saepe vel sint ex totam quidem voluptate, dignissimos eum odit.
     
             <p class="flex justify-between mt-16">
-                <a href="#" class="font-semibold text-red-600 hover:underline">&rarr; Back to checkout page</a>
-                <a href="#" class="font-semibold text-red-600 hover:underline">&rarr; Back to homepage</a>
+                <a href="{{ route('checkout.index') }}" class="font-semibold text-red-600 hover:underline">&rarr; Back to checkout page</a>
+                <a href="{{ route('welcome') }}" class="font-semibold text-red-600 hover:underline">&rarr; Back to homepage</a>
             </p>
         </div>
     </article>

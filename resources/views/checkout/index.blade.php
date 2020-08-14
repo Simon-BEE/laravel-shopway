@@ -98,15 +98,19 @@
                     paymentIntent: paymentIntentId
                 })
             }).then((result) => {
-                result.json().then((r) => { 
-                    if (r.success) {
-                        console.log('Payment: OK');
-                        window.location.href = "{{ route('checkout.successful') }}";
-                    }else{
-                        window.location.href = "{{ route('checkout.error') }}";
-                    }
+                result.json().then((r) => {
+                    // if (!result.success) {
+                    //     console.log(result);
+                    //     console.log(r);
+                    //     // window.location.href = "{{ route('checkout.error') }}";
+                    //     return;
+                    // }
+
+                    console.log('Payment: OK');
+                    window.location.href = "{{ route('checkout.successful') }}";
                 });
             }).catch((error) => {
+                alert(error);
                 console.log(error);
                 window.location.href = "{{ route('checkout.error') }}";
             });

@@ -15,7 +15,7 @@ class CartAdding
      */
     public static function add(Model $productOption, int $sizeId)
     {
-        $cartSession = Cart::content();
+        $cartSession = session('cart');
 
         if (is_null($cartSession)) {
             $cart = [$productOption->id => [$sizeId => [

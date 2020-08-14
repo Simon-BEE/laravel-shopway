@@ -8,6 +8,7 @@ use App\Models\State;
 use App\Models\OrderItem;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\ProductItemOption;
 use App\Services\Cart\CartCalculator;
 
 class OrderProcessRepository
@@ -25,23 +26,26 @@ class OrderProcessRepository
 
     public function storeOrderItems(Order $order)
     {
-        $orderItems = Cart::content()->map(function ($item, $itemId) use ($order){
-            $product = Product::findOrFail($itemId);
-            $product->update([
-                'quantity' => $product->quantity - $item['quantity'],
-            ]);
+        $orderItems = Cart::content()->map(function ($productOptions, $productOptionId) use ($order){
+            return collect($productOptions)->map(function ($optionItem, $optionItemSizeId) use ($order, $productOptionId){
+                $product = ProductItemOption::findOrFail($productOptionId);
+                $product->update([
+                    'quantity' => $product->quantity - $optionItem['quantity'],
+                ]);
 
-            return [
-                'product_id' => $itemId,
-                'order_id' => $order->id,
-                'name' => $item['name'],
-                'tax' => config('cart.tax'),
-                'price' => $item['price'],
-                'quantity' => $item['quantity'],
-                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
-            ];
-        })->toArray();
+                return [
+                    'product_item_option_id' => $productOptionId,
+                    'order_id' => $order->id,
+                    'size_id' => $optionItemSizeId,
+                    'name' => $optionItem['name'],
+                    'tax' => config('cart.tax'),
+                    'price' => $optionItem['price'],
+                    'quantity' => $optionItem['quantity'],
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                ];
+            });
+        })->collapse()->toArray();
 
         OrderItem::insert($orderItems);
     }

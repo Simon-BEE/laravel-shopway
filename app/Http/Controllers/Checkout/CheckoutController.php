@@ -2,19 +2,16 @@
 
 namespace App\Http\Controllers\Checkout;
 
-use Stripe\Stripe;
-use App\Helpers\Cart;
-use App\Helpers\Format;
-use Stripe\PaymentIntent;
-use App\Services\Cart\CartCalculator;
-use App\Http\Controllers\Controller;
-use App\Mail\ConfirmOrderMail;
-use App\Models\Order;
-use App\Models\Payment;
-use App\Models\User;
-use App\Notifications\NewOrderNotification;
-use App\Repository\OrderProcessRepository;
 use Illuminate\Support\Facades\Mail;
+use Stripe\Stripe;
+use Stripe\PaymentIntent;
+use App\Models\{User, Order, Payment, Cart as CartModel};
+use App\Helpers\Cart;
+use App\Mail\ConfirmOrderMail;
+use App\Http\Controllers\Controller;
+use App\Services\Cart\CartCalculator;
+use App\Repository\OrderProcessRepository;
+use App\Notifications\NewOrderNotification;
 
 class CheckoutController extends Controller
 {
@@ -49,17 +46,18 @@ class CheckoutController extends Controller
     {
         $order = $orderProcessRepository->storeOrder();
 
-        if (!$order) {
-            session()->put('checkout_error');
-
-            return response()->json([
-                'success' => false,
-            ]);
+        try {
+            $orderProcessRepository->storeOrderItems($order);
+    
+            $orderProcessRepository->storePayments($order, request()->paymentIntent, Payment::STRIPE_TYPE);
+        } catch (\Exception $e) {
+            $this->saveCartInDatabase($order);
+            
+            // session()->put('checkout_error', 'error');
+            // return response()->json([
+            //     'success' => false,
+            // ], 500);
         }
-
-        $orderProcessRepository->storeOrderItems($order);
-
-        $orderProcessRepository->storePayments($order, request()->paymentIntent, Payment::STRIPE_TYPE);
 
         Mail::to(auth()->user())->queue(new ConfirmOrderMail(auth()->user(), $order));
 
@@ -98,5 +96,14 @@ class CheckoutController extends Controller
         session()->forget('checkout_error');
 
         return view('checkout.error');
+    }
+
+    private function saveCartInDatabase(Order $order)
+    {
+        CartModel::create([
+            'user_id' => auth()->id(),
+            'order_id' => $order->id,
+            'content' => serialize(session('cart')),
+        ]);
     }
 }

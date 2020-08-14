@@ -16,7 +16,7 @@ class CartIsNotEmpty
      */
     public function handle($request, Closure $next)
     {
-        if (empty(Cart::content())) {
+        if (Cart::content()->isEmpty()) {
             return redirect()->route('welcome')->with([
                 'type' => 'error',
                 'message' => __('You need some products in your cart before.'),

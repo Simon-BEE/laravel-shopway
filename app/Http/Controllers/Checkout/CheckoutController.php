@@ -9,6 +9,7 @@ use App\Models\{User, Order, Payment, Cart as CartModel};
 use App\Helpers\Cart;
 use App\Mail\ConfirmOrderMail;
 use App\Http\Controllers\Controller;
+use App\Jobs\PushMissingOrderItemsFromCart;
 use App\Services\Cart\CartCalculator;
 use App\Repository\OrderProcessRepository;
 use App\Notifications\NewOrderNotification;
@@ -47,11 +48,13 @@ class CheckoutController extends Controller
         $order = $orderProcessRepository->storeOrder();
 
         try {
+            $orderProcessRepository->storePayments($order, request()->paymentIntent, Payment::STRIPE_TYPE);
             $orderProcessRepository->storeOrderItems($order);
     
-            $orderProcessRepository->storePayments($order, request()->paymentIntent, Payment::STRIPE_TYPE);
         } catch (\Exception $e) {
             $this->saveCartInDatabase($order);
+
+            PushMissingOrderItemsFromCart::dispatch();
             
             // session()->put('checkout_error', 'error');
             // return response()->json([

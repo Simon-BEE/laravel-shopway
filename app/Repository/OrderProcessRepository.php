@@ -7,9 +7,9 @@ use App\Models\Order;
 use App\Models\State;
 use App\Models\OrderItem;
 use App\Models\Payment;
-use App\Models\Product;
 use App\Models\ProductItemOption;
 use App\Services\Cart\CartCalculator;
+use Illuminate\Support\Collection;
 
 class OrderProcessRepository
 {
@@ -24,9 +24,19 @@ class OrderProcessRepository
         ]);
     }
 
-    public function storeOrderItems(Order $order)
+    /**
+     * Push in database all cart items
+     * If cart is null, session cart will be take
+     *
+     * @param Order $order
+     * @param Collection $cart
+     * @return void
+     */
+    public function storeOrderItems(Order $order, Collection $cart = null)
     {
-        $orderItems = Cart::content()->map(function ($productOptions, $productOptionId) use ($order){
+        $cart = $cart ?? Cart::content();
+        x;
+        $orderItems = $cart->map(function ($productOptions, $productOptionId) use ($order){
             return collect($productOptions)->map(function ($optionItem, $optionItemSizeId) use ($order, $productOptionId){
                 $product = ProductItemOption::findOrFail($productOptionId);
                 $product->update([

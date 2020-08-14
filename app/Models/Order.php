@@ -41,7 +41,7 @@ class Order extends Model
 
     public function getReferenceAttribute()
     {
-        return $this->payment->payment_id;
+        return $this->payment ? $this->payment->payment_id : '';
     }
 
     /**

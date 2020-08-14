@@ -44,14 +44,15 @@
         <article class="flex flex-col pl-3 border-l-2 border-gray-700 w-full pb-3">
             <h3 class="text-xl tracking-widest font-semibold text-gray-700 mb-4">{{ __('Products details') }}</h3>
             <div class="mt-2">
-                @foreach ($order->order_items as $item)
+                @forelse ($order->order_items as $item)
                     <div class="p-3 mb-2 bg-gray-200 flex flex-col md:flex-row items-center md:justify-between">
                         <p>
-                            @if ($item->product)
-                                <a href="{{ route('admin.products.edit', $item->product) }}" class="text-blue-500 hover:underline">{{ $item->product->name }}</a>
+                            @if ($item->product_option)
+                                <a href="{{ route('products.show', $item->product_option->product) }}" class="text-blue-500 hover:underline">{{ $item->product_option->product->name }}</a>
                             @else
                                 {{ $item->name }}
                             @endif
+                            <span class="text-gray-700 text-sm">({{ __('Size') }}: {{ Cart::size($item->size_id) }})</span>
                         </p>
                         <p class="mt-2 md:mt-0">
                             <span class="text-sm text-gray-600">
@@ -62,7 +63,12 @@
                             </span>
                         </p>
                     </div>
-                @endforeach
+                @empty
+                    <p class="flex items-center">
+                        <span class="mdi mdi-alert-outline text-red-500 font-semibold text-xl mr-3"></span>
+                        {{ __('Unable to get your product items. Sorry for that, problem will be resolve very soon. Thanks for your patience.') }}
+                    </p>
+                @endforelse
             </div>
         </article>
         <div class="flex flex-col md:flex-row justify-between md:my-8">
@@ -111,8 +117,13 @@
                         {{ __('Shipping company') }}: <span class="font-semibold ml-1">{{ $order->shipping_company }}</span>
                     </p>
                     <p class="flex items-center">
-                        <span class="mdi mdi-truck text-gray-600 font-semibold text-xl mr-3"></span>
-                        {{ __('Tracking number') }}: <span class="font-semibold ml-1">{{ $order->reference }}</span>
+                        @if ($order->order_items->isNotEmpty())
+                            <span class="mdi mdi-truck text-gray-600 font-semibold text-xl mr-3"></span>
+                            {{ __('Tracking number') }}: <span class="font-semibold ml-1">{{ $order->reference }}</span>
+                        @else
+                            <span class="mdi mdi-alert-outline text-red-500 font-semibold text-xl mr-3"></span>
+                            {{ __('Unable to get. Sorry for that, problem will be resolve very soon. Thanks for your patience.') }}
+                        @endif
                     </p>
                 </div>
             </article>

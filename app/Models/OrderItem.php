@@ -8,7 +8,7 @@ class OrderItem extends Model
 {
     protected $guarded = ['id'];
 
-    public $with = ['product'];
+    public $with = ['product_option'];
 
     /**
      * ? RELATIONS
@@ -19,8 +19,8 @@ class OrderItem extends Model
         return $this->belongsTo(Order::class);
     }
 
-    public function product()
+    public function product_option()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(ProductItemOption::class, 'product_item_option_id');
     }
 }

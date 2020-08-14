@@ -10,10 +10,8 @@ class CartCalculator
 
     public function totalWithoutTax()
     {
-        dump(session('cart'));
         return collect(session('cart'))->sum(function ($product){
-            // dd($product);
-            collect($product)->sum(function ($size){
+            return collect($product)->sum(function ($size){
                 return ($size['quantity'] * $size['price']);
             });
         });

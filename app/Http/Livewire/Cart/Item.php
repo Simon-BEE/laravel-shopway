@@ -3,27 +3,31 @@
 namespace App\Http\Livewire\Cart;
 
 use App\Helpers\Cart;
+use App\Models\Option;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
 class Item extends Component
 {
-    public $product;
-    public $productId;
+    public $productOption;
+    public $productOptionId;
+    public $productOptionSizeId;
     public $quantity;
+    public $sizeLetter;
 
-    public function mount(int $productId, array $product)
+    public function mount(int $productOptionId, int $productOptionSizeId, array $productOption)
     {
-        dd($product);
-        $this->productId = $productId;
-        $this->product = $product;
-        $this->quantity = $product['quantity'];
+        $this->productOptionId = $productOptionId;
+        $this->productOptionSizeId = $productOptionSizeId;
+        $this->productOption = $productOption;
+        $this->quantity = $productOption['quantity'];
+        $this->sizeLetter = Option::MAP_SIZES[$this->productOptionSizeId];
     }
 
     public function updatedQuantity(int $quantity)
     {
         if ($quantity > 0) {
-            Cart::update($this->productId, $quantity);
+            Cart::update($this->productOptionId, $this->productOptionSizeId, $quantity);
 
             $this->emit('flashMessage', [
                 'type' => 'success',
@@ -34,12 +38,12 @@ class Item extends Component
             return;
         }
 
-        $this->removeFromCart($this->productId);
+        $this->removeFromCart($this->productOptionId);
     }
 
     public function removeFromCart(int $productId)
     {
-        Cart::remove($productId);
+        Cart::remove($productId, $this->productOptionSizeId);
 
         $this->emit('flashMessage', [
             'type' => 'success',

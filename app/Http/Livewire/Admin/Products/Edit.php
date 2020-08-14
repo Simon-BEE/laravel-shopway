@@ -27,7 +27,6 @@ class Edit extends Component
 
     public function mount(Product $product)
     {
-        // dd(request()->route()->parameters()['product']);
         $this->product = $product;
         $this->name = $product->name;
         $this->description = $product->description;
@@ -99,7 +98,6 @@ class Edit extends Component
     public function updateCategories(int $categoryId)
     {
         if ($this->product->categories->count() <= 1) {
-            // dd($this->product->categories->contains('id', $categoryId));
             if ($this->product->categories->contains('id', $categoryId)) {
                 $this->emit('flashMessage', [
                     'type' => 'success',

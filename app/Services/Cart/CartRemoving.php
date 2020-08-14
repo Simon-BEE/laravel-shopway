@@ -19,6 +19,10 @@ class CartRemoving
 
             unset($cart[$productId][$sizeId]);
 
+            if (empty($cart[$productId])) {
+                unset($cart[$productId]);
+            }
+
             session()->put('cart', $cart);
         }
     }

@@ -11,9 +11,6 @@ class ShowController extends Controller
 {
     public function __invoke(Product $product)
     {
-
-        // dd($product->hasSize(1));
-
         $allSizes = Option::where('option_type_id', Option::SIZE_OPTION)->get();
 
         return view('products.show', [

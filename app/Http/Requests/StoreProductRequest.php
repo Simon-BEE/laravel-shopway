@@ -59,7 +59,6 @@ class StoreProductRequest extends FormRequest
         $validator->after(function ($validator){
             $failedRules = $validator->failed();
             if (!empty($failedRules)) {
-                // dd($failedRules);
                 session()->flash('type', 'error');
                 session()->flash('message', 'Please fill correctly the form.');
             }

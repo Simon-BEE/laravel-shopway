@@ -12,6 +12,15 @@ class Option extends Model
     const COLOR_OPTION = 2;
     const MATERIAL_OPTION = 3;
 
+    const MAP_SIZES = [
+        1 => 'XS',
+        2 => 'S',
+        3 => 'M',
+        4 => 'L',
+        5 => 'XL',
+        6 => 'XXL',
+    ];
+
     public function getTypeStringAttribute()
     {
         return $this->type->name;

@@ -1,14 +1,14 @@
 <tr>
     <td class="hidden md:table-cell">
         <a href="#">
-            <img src="{{ $product['photo'] }}" class="w-12 h-12 rounded" alt="Thumbnail">
+            <img src="{{ $productOption['photo'] }}" class="w-12 h-12 rounded" alt="Thumbnail">
         </a>
     </td>
     <td>
-        <a href="{{ $product['path'] }}" class="hover:underline mr-2">
-            {{ $product['name'] }}
+        <a href="{{ $productOption['path'] }}" class="hover:underline mr-2">
+            {{ $productOption['name'] }} - {{ $sizeLetter }}
         </a>
-        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productId }})">
+        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productOptionId }})">
             <span class="mdi mdi-delete ml-2"></span>
         </x-form.form-button>
     </td>
@@ -24,12 +24,12 @@
     </td>
     <td class="hidden text-right md:table-cell">
         <span class="text-sm lg:text-base font-medium">
-            {{ Format::priceWithTaxAndCurrency($product['price']) }}
+            {{ Format::priceWithTaxAndCurrency($productOption['price']) }}
         </span>
     </td>
     <td class="text-right">
         <span class="text-sm lg:text-base font-semibold">
-            {{ $productId ? Cart::totalItemWithTax($this->productId) : 0 }}
+            {{ $productOptionId ? Cart::totalItemWithTax($productOptionId, $productOptionSizeId) : 0 }}
         </span>
     </td>
 </tr>

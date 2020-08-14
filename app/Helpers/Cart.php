@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use App\Models\Product;
 use App\Models\ProductItemOption;
 use App\Models\Shipping;
 use App\Services\Cart\CartAdding;
@@ -29,8 +28,10 @@ class Cart
     public static function shipping(): Shipping
     {
         $totalWeight = collect(self::content())->map(function ($item, $itemId){
-            $product = self::model($itemId);
-            return $item['quantity'] * $product->weight;
+            return collect($item)->map(function ($option, $optionId){
+                $product = self::model($optionId);
+                return $option['quantity'] * $product->weight;
+            })->sum();
         })->sum();
 
         $shipping = Shipping::byWeight($totalWeight, 1)->first();
@@ -45,7 +46,14 @@ class Cart
 
     public static function model(int $itemId)
     {
-        return Product::select('weight')->where('id', $itemId)->firstOrFail();
+        return ProductItemOption::select(['weight', 'quantity'])->where('id', $itemId)->firstOrFail();
+    }
+
+    public static function count()
+    {
+        return collect(Cart::content())->map(function ($c){
+            return count($c);
+        })->sum();
     }
 
     /**
@@ -111,16 +119,16 @@ class Cart
         return Format::price(($calculator->totalWithTax() + self::shippingPrice())) . config('cart.currency');
     }
 
-    public static function totalItemWithoutTax(int $productId)
+    public static function totalItemWithoutTax(int $productId, int $sizeId)
     {
         $calculator = new CartCalculator();
-        return Format::price($calculator->totalItemWithoutTax($productId)) . config('cart.currency');
+        return Format::price($calculator->totalItemWithoutTax($productId, $sizeId)) . config('cart.currency');
     }
 
-    public static function totalItemWithTax(int $productId)
+    public static function totalItemWithTax(int $productId, int $sizeId)
     {
         $calculator = new CartCalculator();
-        return Format::price($calculator->totalItemWithTax($productId)) . config('cart.currency');
+        return Format::price($calculator->totalItemWithTax($productId, $sizeId)) . config('cart.currency');
     }
 
     public static function totalTax()

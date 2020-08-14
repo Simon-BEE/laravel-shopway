@@ -12,7 +12,7 @@ class Icon extends Component
     public function render()
     {
         return view('livewire.cart.icon', [
-            'cartAmount' => Cart::content() ? count(Cart::content()) : 0,
+            'cartAmount' => Cart::count(),
         ]);
     }
 }

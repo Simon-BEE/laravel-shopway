@@ -14,7 +14,6 @@ class Index extends Component
 
     public function setAddressAsMain(int $addressId)
     {
-        // dd($addressId);
         $validator = Validator::make(['id' => $addressId,], [
             'id' => [
                 'required', 'numeric', 

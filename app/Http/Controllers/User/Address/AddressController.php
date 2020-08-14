@@ -38,7 +38,6 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        // dd(request()->all());
         $validatedData = $request->validated();
 
         auth()->user()->addresses()->create($validatedData);

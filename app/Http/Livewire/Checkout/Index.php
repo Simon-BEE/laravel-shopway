@@ -8,9 +8,9 @@ use App\Helpers\{Cart, Format};
 
 class Index extends Component
 {
-    public function removeFromCart(int $productId)
+    public function removeFromCart(int $productId, int $sizeId)
     {
-        Cart::remove($productId);
+        Cart::remove($productId, $sizeId);
 
         $this->emit('flashMessage', [
             'type' => 'success',

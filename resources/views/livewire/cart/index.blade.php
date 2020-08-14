@@ -10,8 +10,10 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($cartProducts as $productId => $product)
-            <livewire:cart.item :productId="$productId" :product="$product" :key="$productId"/>
+            @forelse ($cartProducts as $productOptionId => $productOption)
+                @foreach ($productOption as $productOptionSizeId => $productOptionSize)
+                    <livewire:cart.item :productOptionId="$productOptionId" :productOptionSizeId="$productOptionSizeId" :productOption="$productOptionSize" :key="$productOptionId + $productOptionSizeId"/>
+                @endforeach
             @empty
                 <tr>
                     <td colspan="100%" class="text-center p-4 bg-gray-200">
@@ -76,8 +78,14 @@
                     </div> --}}
                     <div class="flex justify-between pt-4 border-b">
                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">Tax</div>
-                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{$totalTax}}</div>
+                        <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalTax }}</div>
                     </div>
+                    @if ($shippingFees)
+                        <div class="flex justify-between pt-4 border-b">
+                            <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">Shipping Fees</div>
+                            <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $shippingFees }}</div>
+                        </div>
+                    @endif
                     <div class="flex justify-between pt-4 border-b">
                         <div class="lg:px-4 lg:py-2 m-2 text-lg font-semibold text-center text-gray-800">Total</div>
                         <div class="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">{{ $totalWithTax }}</div>

@@ -16,6 +16,7 @@ class Index extends Component
             'totalWithoutTax' => Cart::totalWithoutTax(),
             'totalWithTax' => Cart::totalWithTax(),
             'totalTax' => Cart::totalTax(),
+            'shippingFees' => Cart::shippingFees(),
         ]);
     }
 }

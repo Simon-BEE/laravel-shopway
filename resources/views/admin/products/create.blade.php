@@ -45,10 +45,15 @@
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
             </x-form.select>
-            <x-form.input-icon
+
+            <h4 class="text-lg font-semibold mb-3">Option</h4>
+
+            <button class="rounded text-white p-2 bg-orange-500 hover:bg-orange-600" id="btnOption">Add an option</button>
+            
+            {{-- <x-form.input-icon
                 label="Define a product's price"
                 type="text"
-                name="price"
+                name="option[1][price]"
                 placeholder="Product's price"
                 value="{{ old('price') }}"
                 helper="Must be in cents and without currency and tax."
@@ -60,7 +65,7 @@
                     <x-form.input-icon
                         label="Define a product's weight"
                         type="text"
-                        name="weight"
+                        name="option[1][weight]"
                         placeholder="Product's weight"
                         value="{{ old('weight') }}"
                         helper="Must be in grams"
@@ -72,7 +77,7 @@
                     <x-form.input-icon
                         label="Define a product's quantity"
                         type="text"
-                        name="quantity"
+                        name="option[1][quantity]"
                         placeholder="Product's quantity"
                         value="{{ old('quantity') }}"
                         icon="mdi-package-variant"
@@ -80,7 +85,7 @@
                         required
                     />
                 </div>
-            </div>
+            </div> --}}
 
             <h4 class="text-lg font-semibold mb-3">Media</h4>
 
@@ -112,9 +117,6 @@
                         </div>
                     </label>
                 </div>
-                <x-form.button classDiv="flex justify-center my-4" type="button" class="p-4 bg-orange-500 hover:bg-orange-600">
-                    {{ __('Or choose in Image Manager') }}
-                </x-form.button>
             </section>
 
             <div class="mt-6">
@@ -129,6 +131,25 @@
 
 @section('extra-js')
     <script>
-        Turbolinks.visit(window.location.reload())
+        Turbolinks.visit(window.location.reload());
+
+        const newInput = `
+        <div class="flex flex-wrap mb-4">
+            <div class="flex justify-between w-full items-center mb-2">
+                <label class="label label-required text-gray-700" for="option[${incrementId}][${inputName}]">
+                    ${inputLabel}
+                </label>
+            </div>
+    
+            <div class="relative inline-block w-full">
+                <input type="text" name="option[${incrementId}][${inputName}]" id="option_${incrementId}_${inputName}" class="form-input w-full border-gray-200 pl-10 " placeholder="${inputLabel}" value="" required="">
+                <div class="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center ">
+                    <span class="mdi mdi-${inputIcon} text-gray-500"></span>
+                </div>
+            </div>
+
+             <p class="text-gray-500 text-xs mt-2 w-full">${inputHelper}</p>
+        </div>
+        `;
     </script>
 @endsection

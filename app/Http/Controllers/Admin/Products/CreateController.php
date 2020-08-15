@@ -19,8 +19,9 @@ class CreateController extends Controller
         ]);
     }
 
-    public function store(StoreProductRequest $request)
+    public function store()
     {
+        dd(request()->all());
         $validatedData = $request->validated();
         $images = array_pop($validatedData);
         $categories = array_pop($validatedData);

@@ -23,7 +23,7 @@ class Index extends Component
 
     public function redirectIfCartEmpty()
     {
-        if (empty(Cart::content())) {
+        if (Cart::content()->isEmpty()) {
             return redirect()->route('products.index');
         }
     }

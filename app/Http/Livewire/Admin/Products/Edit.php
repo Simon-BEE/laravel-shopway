@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Products;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\Product;
+use App\Models\ProductItemOption;
 use App\Traits\Upload\ImageUpload;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -14,14 +15,14 @@ class Edit extends Component
 {
     use ImageUpload, WithFileUploads;
 
+    // public $pictures = [];
     public $product;
-    public $pictures = [];
     public $name;
     public $description;
-    public $price;
-    public $weight;
-    public $quantity;
     public $categories;
+    // public $price;
+    // public $weight;
+    // public $quantity;
 
     protected $listeners = ['removeProductImage', 'setImageAsMain'];
 
@@ -30,9 +31,9 @@ class Edit extends Component
         $this->product = $product;
         $this->name = $product->name;
         $this->description = $product->description;
-        $this->price = $product->price;
-        $this->weight = $product->weight;
-        $this->quantity = $product->quantity;
+        // $this->price = $product->price;
+        // $this->weight = $product->weight;
+        // $this->quantity = $product->quantity;
         $this->categories = Category::all();
     }
 
@@ -122,7 +123,7 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.admin.products.edit', [
-            'images' => Image::where('product_id', $this->product->id)->get(),
+            'images' => $this->product->images,
         ]);
     }
 

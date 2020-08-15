@@ -38,11 +38,11 @@
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"wire:click="sortBy('name')">
                             Name <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'name', $sortAsc) !!}</span>
                         </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" wire:click="sortBy('price')">
-                            Price <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'price', $sortAsc) !!}</span>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Price
                         </th>
-                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" wire:click="sortBy('quantity')">
-                            Quantity <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'quantity', $sortAsc) !!}</span>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                            Quantity
                         </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer" wire:click="sortBy('created_at')">
                             Added at <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'created_at', $sortAsc) !!}</span>

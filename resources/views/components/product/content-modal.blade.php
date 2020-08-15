@@ -33,14 +33,14 @@
             <p class="text-justify leading-5" x-ref="productModalDesc">
                 {{-- Dynamic Content Here --}}
             </p>
-            <a href="#" class="link p-2 text-blue-400 hover:underline ml-auto mt-4" x-ref="productModalRoute">Show details...</a>
         </div>
         <div class="mt-3 pt-6 border-t-2 border-gray-200 flex items-center justify-between">
             <div class="price text-3xl font-semibold text-gray-700"><span class="price" x-ref="productModalPrice">
                 {{-- Dynamic Content Here --}}
             </div>
             <div class="flex">
-                <livewire:cart.add-from-modal />
+                {{-- <livewire:cart.add-from-modal /> --}}
+                <a href="#" class="link p-3 rounded text-white bg-blue-500 hover:bg-blue-600" x-ref="productModalRoute">Show details</a>
             </div>
         </div>
     </div>

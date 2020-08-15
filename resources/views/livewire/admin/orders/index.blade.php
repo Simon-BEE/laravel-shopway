@@ -66,7 +66,7 @@
                                 {{ $order->id }}
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-semibold">
-                                {{ Format::priceWithCurrency($order->price) }}
+                                {{ Format::priceWithCurrency($order->total) }}
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-xs">
                                 {{ Format::date($order->created_at, 'd/m/Y H:i') }}

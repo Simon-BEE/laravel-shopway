@@ -101,7 +101,7 @@ class Product extends Model
 
     public function getPriceAttribute()
     {
-        return $this->first_option->price;
+        return $this->first_option ? $this->first_option->price : 0;
     }
 
     public function getFirstOptionAttribute()
@@ -127,6 +127,11 @@ class Product extends Model
             ->where('active', true)
             ->inRandomOrder()
             ->take($number);
+    }
+
+    public function scopeLast(Builder $query)
+    {
+        return $query->latest()->first();
     }
 
     public function hasSize(int $sizeId)

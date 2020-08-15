@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Cart;
 
 use App\Helpers\Cart;
-use App\Models\Product;
+use App\Models\ProductItemOption;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -13,7 +13,9 @@ class AddFromModal extends Component
 
     public function addToCartFromModal(int $id)
     {
-        Cart::add(Product::findOrFail($id));
+        $product = ProductItemOption::findOrFail($id);
+
+        Cart::add($product, $product->default_size);
 
         $this->emit('flashMessage', [
             'type' => 'success',

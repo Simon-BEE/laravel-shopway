@@ -21,7 +21,7 @@ class Order extends Model
 
     public function getTotalAttribute()
     {
-        return $this->price + $this->shipping;
+        return $this->price + $this->shipping_amount;
     }
 
     public function getShippingCompanyAttribute()

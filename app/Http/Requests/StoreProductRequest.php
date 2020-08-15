@@ -30,26 +30,11 @@ class StoreProductRequest extends FormRequest
             'description' => [
                 'required', 'string', 'min:40',
             ],
-            'weight' => [
-                'nullable', 'numeric', 'between:1,2000',
-            ],
-            'price' => [
-                'required', 'numeric', 'between:100,20000',
-            ],
-            'quantity' => [
-                'required', 'numeric', 'between:0,2000',
-            ],
             'categories' => [
                 'required', 'array', 'min:1',
             ],
             'categories.*' => [
                 'required', 'numeric', 'exists:categories,id',
-            ],
-            'images' => [
-                'required', 'array', 'min:1',
-            ],
-            'images.*' => [
-                'required', 'image', 'mimes:png,jpg,jpeg', 'max:2200',
             ],
         ];
     }

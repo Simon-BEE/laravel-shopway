@@ -47,6 +47,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::group(['as' => 'products.', 'prefix' => 'products'], function () {
                 Route::get('create', 'CreateController@create')->name('create');
                 Route::post('/', 'CreateController@store')->name('store');
+
+                Route::group(['namespace' => 'Option'], function () {
+                    Route::get('{product}/options/create', 'OptionController@create')->name('options.create');
+                    Route::resource('options', 'OptionController')->only(['store']);
+                });
+
                 Route::resource('categories', 'Category\CategoryController')->except(['show', 'edit', 'create', 'update']);
             });
         });

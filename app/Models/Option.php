@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
@@ -20,6 +21,21 @@ class Option extends Model
         5 => 'XL',
         6 => 'XXL',
     ];
+
+    public function scopeAllSizes(Builder $query): Builder
+    {
+        return $query->where('option_type_id', Option::SIZE_OPTION);
+    }
+
+    public function scopeAllMaterials(Builder $query): Builder
+    {
+        return $query->where('option_type_id', Option::MATERIAL_OPTION);
+    }
+
+    public function scopeAllColors(Builder $query): Builder
+    {
+        return $query->where('option_type_id', Option::COLOR_OPTION);
+    }
 
     public function getTypeStringAttribute()
     {

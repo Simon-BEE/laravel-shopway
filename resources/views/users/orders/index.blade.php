@@ -37,9 +37,11 @@
                         <tr class="hover:bg-gray-100 border-b border-gray-200 py-10">
                             <td class="p-4 md:pl-12 font-bold">{{ $order->id }}</td>
                             <td class="p-4">{{ Format::date($order->created_at) }}</td>
-                            <td class="p-4">{{ Format::priceWithCurrency($order->price) }}</td>
+                            <td class="p-4">{{ Format::priceWithCurrency($order->total) }}</td>
                             <td class="p-4">
-                                <a href="{{ route('users.orders.show', $order) }}" class="text-blue-500 hover:underline">{{ __('Show details') }}</a>
+                                <a href="{{ route('users.orders.show', $order) }}" class="p-2 rounded bg-blue-500 text-white hover:bg-blue-600">
+                                    {{ __('Show details') }}
+                                </a>
                             </td>
                         </tr>
                     @endforeach

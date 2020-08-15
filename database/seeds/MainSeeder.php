@@ -25,7 +25,7 @@ class MainSeeder extends Seeder
                 $product->product_options->each(function ($productOption){
 
                     // All sizes (XS, S, etc..)
-                    Option::where('option_type_id', 1)->get()->each(function ($option) use ($productOption){
+                    Option::allSizes()->get()->each(function ($option) use ($productOption){
                         $option->product_items()->attach($productOption);
                     });
 

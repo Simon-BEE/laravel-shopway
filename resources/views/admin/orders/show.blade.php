@@ -145,7 +145,7 @@
                 </li>
                 <li class="px-2 py-3 bg-gray-800 text-gray-100">
                     <span class="mr-2">{{ __('Total price with taxes and shipping fees') }}:</span>
-                    <span class="font-semibold">{{ Format::priceWithCurrency($order->price) }}</span>
+                    <span class="font-semibold">{{ Format::priceWithCurrency($order->total) }}</span>
                 </li>
             </ul>
         </article>

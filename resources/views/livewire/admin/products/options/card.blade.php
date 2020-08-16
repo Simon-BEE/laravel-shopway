@@ -6,7 +6,11 @@
         <div class="ml-4">
             <p class="font-semibold">Option n°{{ $productOption->id }}</p>
             <p>{{ __('Sizes available') }}: {{ $productOption->sizes_available_formatted }}</p>
-            <p>{{ __('Specifities') }}: {{ $productOption->color->name }}/{{ $productOption->material->name }}</p>
+            <p class="mt-2">{{ __('Specific feature') }}: 
+                <span class="p-2 rounded {{ $productOption->classname }}">
+                    {{ $productOption->color->name }} / {{ $productOption->material->name }}
+                </span>
+            </p>
         </div>
     </div>
     <div class="w-3/12 text-sm">

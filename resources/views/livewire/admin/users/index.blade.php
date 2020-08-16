@@ -55,6 +55,11 @@
                         >
                             Email <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'email', $sortAsc) !!}</span>
                         </th>
+                        <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider cursor-pointer"
+                            wire:click="sortBy('last_login_at')"
+                        >
+                            Last login <span class="ml-1 text-xs">{!! Filter::iconDirection($sortField, 'last_login_at', $sortAsc) !!}</span>
+                        </th>
                         <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Actions
                         </th>
@@ -77,6 +82,11 @@
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-xs">
                                 {{ $user->email }}
                             </td>
+                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                <p class="text-gray-900 whitespace-no-wrap">
+                                    {{ $user->last_login_at ? Format::date($user->last_login_at, 'd/m/Y H:i') : __('Never') }}
+                                </p>
+                            </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm flex">
                                 <a href="{{ route('admin.users.show', $user) }}" class="bg-gray-200 p-2 rounded inline-flex text-green-400 hover:text-green-900 mr-2">
                                     <span class="text-lg mdi mdi-eye"></span>
@@ -85,7 +95,7 @@
                                     <span class="text-lg mdi mdi-pencil-outline"></span>
                                 </a>
                                 <button type="button" class="bg-gray-200 p-2 rounded inline-flex text-red-400 hover:text-red-600">
-                                    <span class="text-lg mdi mdi-delete-outline" data-route="#" x-on:click="setAction($event); isDialogOpen = true;"></span>
+                                    <span class="text-lg mdi mdi-delete-outline" data-route="{{ route('admin.users.destroy', $user) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
                                 </button>
                             </td>
                         </tr>

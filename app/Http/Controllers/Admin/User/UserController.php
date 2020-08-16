@@ -25,4 +25,21 @@ class UserController extends Controller
             'user' => $user->load(['orders']),
         ]);
     }
+
+    public function destroy(User $user)
+    {
+        if ($user->hasRoles('admin')) {
+            return back()->with([
+                'type' => 'error',
+                'message' => 'Admin user can\'t be removed.'
+            ]);
+        }
+
+        $user->delete();
+
+        return back()->with([
+            'type' => 'success',
+            'message' => 'User has been removed successfully.'
+        ]);
+    }
 }

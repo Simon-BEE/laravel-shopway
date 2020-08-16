@@ -4,12 +4,13 @@ namespace App\Providers;
 
 use App\Models\Image;
 use App\Models\Product;
-use App\Observers\ImageObserver;
 use App\Models\ProductItemOption;
+use App\Models\User;
+use App\Observers\ImageObserver;
 use App\Observers\ProductObserver;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Auth\Events\Registered;
 use App\Observers\ProductItemOptionObserver;
+use App\Observers\UserObserver;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -30,6 +31,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserIsLogout' => [
             'App\Listeners\SetUserCartToDatabase',
         ],
+        'Illuminate\Auth\Events\Login' => [
+            'App\Listeners\UserEventSubscriber',
+        ],
     ];
 
     /**
@@ -41,8 +45,14 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
+        $this->registerObservers();
+    }
+
+    private function registerObservers()
+    {
         Product::observe(ProductObserver::class);
         ProductItemOption::observe(ProductItemOptionObserver::class);
         Image::observe(ImageObserver::class);
+        User::observe(UserObserver::class);
     }
 }

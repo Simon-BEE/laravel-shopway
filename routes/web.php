@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group([
             'namespace' => 'User',
         ], function () {
-            Route::resource('users', 'UserController')->only(['index', 'show']);
+            Route::resource('users', 'UserController')->only(['index', 'show', 'destroy']);
             Route::resource('addresses', 'AddressController')->only(['destroy']);
         });
 

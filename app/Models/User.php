@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasPermissionsTrait;
+    use Notifiable, HasPermissionsTrait, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

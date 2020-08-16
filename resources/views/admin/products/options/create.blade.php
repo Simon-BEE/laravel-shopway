@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <h4 class="text-lg font-semibold mb-3">Specificities</h4>
+            <h4 class="text-lg font-semibold mb-3">{{ __('Specific feature') }}</h4>
 
             <x-form.select 
                 label="Choose a color"

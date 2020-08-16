@@ -48,9 +48,12 @@ Route::group(['middleware' => ['auth']], function () {
                 Route::get('create', 'CreateController@create')->name('create');
                 Route::post('/', 'CreateController@store')->name('store');
 
-                Route::group(['namespace' => 'Option'], function () {
-                    Route::get('{product}/options/create', 'OptionController@create')->name('options.create');
-                    Route::resource('options', 'OptionController')->only(['store']);
+                Route::group(['namespace' => 'Option', 'as' => 'options.', 'prefix' => '{product}/options'], function () {
+                    Route::get('create', 'OptionController@create')->name('create');
+                    Route::post('/', 'OptionController@store')->name('store');
+                    Route::get('edit/{option}', 'OptionController@edit')->name('edit');
+                    Route::patch('{option}', 'OptionController@update')->name('update');
+                    Route::delete('{option}', 'OptionController@destroy')->name('destroy');
                 });
 
                 Route::resource('categories', 'Category\CategoryController')->except(['show', 'edit', 'create', 'update']);

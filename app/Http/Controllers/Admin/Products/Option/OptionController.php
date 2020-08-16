@@ -17,12 +17,6 @@ class OptionController extends Controller
 
     public function create(Product $product)
     {
-        // if ($product->id !== $latestProduct = Product::last()->id) {
-        //     return redirect()->route('admin.products.options.create', $latestProduct);
-        // }
-
-        // dd(Option::allSizes()->get()->pluck('id')->toArray());
-
         return view('admin.products.options.create', [
             'product' => $product,
             'sizes' => Option::allSizes()->get(),
@@ -31,7 +25,7 @@ class OptionController extends Controller
         ]);
     }
 
-    public function store(StoreProductOptionRequest $request)
+    public function store(StoreProductOptionRequest $request, Product $product)
     {
         $validatedData = $request->validated();
         $images = Arr::pull($validatedData, 'images');
@@ -39,7 +33,7 @@ class OptionController extends Controller
         $color = Arr::pull($validatedData, 'color');
         $material = Arr::pull($validatedData, 'material');
 
-        $productOption = ProductItemOption::create($validatedData);
+        $productOption = $product->product_options()->create($validatedData);
 
         $productOption->options()->sync(array_merge([$color, $material], $sizes));
 
@@ -51,15 +45,33 @@ class OptionController extends Controller
         });
 
         if (isset(request()->another_form)) {
-            return redirect()->route('admin.products.options.create', request()->product_id)->with([
+            return redirect()->route('admin.products.options.create', $product)->with([
                 'type' => 'success',
                 'message' => 'Product option has been added.'
             ]);
         }
 
-        return redirect()->route('admin.products.index')->with([
+        return redirect()->route('admin.products.edit', $product)->with([
             'type' => 'success',
             'message' => 'Product option has been added.'
+        ]);
+    }
+
+    public function edit(Product $product, ProductItemOption $option)
+    {
+        return view('admin.products.options.edit', [
+            'product' => $product,
+            'productOption' => $option,
+        ]);
+    }
+
+    public function destroy(Product $product, ProductItemOption $option)
+    {
+        $option->delete();
+
+        return back()->with([
+            'type' => 'success',
+            'message' => 'Product option has been removed.'
         ]);
     }
 }

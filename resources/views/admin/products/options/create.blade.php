@@ -6,7 +6,7 @@
 
 @section('breadcrumb')
     <x-back.breadcrumb-item route="{{ route('admin.products.index') }}" label="List of products"/>
-    <x-back.breadcrumb-item route="{{ route('admin.products.create') }}" label="Create a product"/>
+    <x-back.breadcrumb-item route="{{ route('admin.products.edit', $product) }}" label="{{ $product->name }}"/>
     <x-back.breadcrumb-item route="{{ route('admin.products.options.create', $product) }}" label="Add an option" active/>
 @endsection
 
@@ -16,11 +16,11 @@
         <h3 class="text-gray-700 text-3xl font-medium">Add an option</h3>
     </div>
     <div class="mt-6 p-4 bg-white">
-        <form action="{{ route('admin.products.options.store') }}" method="post" class="productForm" enctype="multipart/form-data">
+        <form action="{{ route('admin.products.options.store', $product) }}" method="post" class="productForm" enctype="multipart/form-data">
             @csrf
             <h4 class="text-lg font-semibold mb-3">Details</h4>
 
-            <input type="hidden" name="product_id" value="{{ $product->id }}" class="inputHidden">
+            <input type="hidden" name="" value="" class="inputHidden">
             
             <x-form.input-icon
                 label="Define a product's price"
@@ -145,11 +145,10 @@
         function goToAnotherForm(e) {
             e.preventDefault();
             const form = document.querySelector('.productForm');
-            const newHiddenInput = document.querySelector('.inputHidden').cloneNode();
-            newHiddenInput.name = "another_form";
-            newHiddenInput.value = true;
+            const inputHidden = document.querySelector('.inputHidden');
+            inputHidden.name = "another_form";
+            inputHidden.value = true;
 
-            form.appendChild(newHiddenInput);
             form.submit();
         }
     </script>

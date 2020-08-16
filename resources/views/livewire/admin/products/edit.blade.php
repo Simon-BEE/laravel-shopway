@@ -24,7 +24,6 @@
             required
             wire:model.lazy="description"
         />
-        {{-- <livewire:admin.products.edit-categories :productId="$product->id" /> --}}
 
         <div class="">
             <p class="text-gray-700 mb-2">Select one or more categories</p>

@@ -30,7 +30,7 @@
             @forelse ($products as $product)
             <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
                 <div class="cursor-pointer"
-                    @click="
+                    x-on:click="
                         isDialogOpen = true;
                         $refs.productModalRoute.href='{{ route('products.show', $product) }}';
                         $refs.productModalTitle.innerText='{{ ucfirst($product->name) }}';

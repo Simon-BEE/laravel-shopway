@@ -55,6 +55,11 @@ class ProductItemOption extends Model
         return $this->options()->where('option_type_id', Option::SIZE_OPTION)->get();
     }
 
+    public function getSizesAvailableFormattedAttribute()
+    {
+        return $this->options()->where('option_type_id', Option::SIZE_OPTION)->get()->pluck('name')->implode(', ');
+    }
+
     public function getClassnameAttribute()
     {
         if ($this->color->name === 'black') {

@@ -62,9 +62,9 @@ class StoreProductOptionRequest extends FormRequest
                     $q->where('option_type_id', Option::MATERIAL_OPTION);
                 }),
             ],
-            'product_id' => [
-                'required', 'numeric', 'exists:products,id',
-            ],
+            // 'product_id' => [
+            //     'required', 'numeric', 'exists:products,id',
+            // ],
             'another_form' => [
                 'sometimes', 'nullable',
             ]

@@ -1,9 +1,9 @@
-<div>
+<div class="bg-white p-4 mt-6 relative">
     <x-form.input-icon
-        label="Define a product's price"
+        label="Define a product option's price"
         type="text"
         name="price"
-        placeholder="Product's price"
+        placeholder="Product option's price"
         value="{{ old('price') ?? $productOption->price }}"
         helper="Must be in cents and without currency and tax. (Price with tax: {{ Format::priceWithTaxAndCurrency($productOption->price) }})"
         icon="mdi-home-currency-usd"
@@ -13,10 +13,10 @@
     <div class="flex flex-col md:flex-row justify-between mt-3">
         <div class="w-full md:w-5/12">
             <x-form.input-icon
-                label="Define a product's weight"
+                label="Define a product option's weight"
                 type="text"
                 name="weight"
-                placeholder="Product's weight"
+                placeholder="Product option's weight"
                 value="{{ old('weight') ?? $productOption->weight }}"
                 helper="Must be in grams"
                 icon="mdi-weight"
@@ -26,10 +26,10 @@
         </div>
         <div class="w-full md:w-5/12">
             <x-form.input-icon
-                label="Define a product's quantity"
+                label="Define a product option's quantity"
                 type="text"
                 name="quantity"
-                placeholder="Product's quantity"
+                placeholder="Product option's quantity"
                 value="{{ old('quantity') ?? $productOption->quantity }}"
                 icon="mdi-package-variant"
                 required
@@ -42,7 +42,7 @@
     <section class="media">
         <div class="flex justify-between w-full items-center mb-2">
             <label class="label text-gray-700" for="labelImages">
-                {{ __('Remove or add images about your product') }}
+                {{ __('Remove or add images about your product option') }}
             </label>
             <button type="button" class="hidden p-2 text-red-500 rounded hover:bg-gray-200" id="resetImages" title="{{ __('Reset images') }}">
                 <span class="mdi mdi-delete-outline"></span>

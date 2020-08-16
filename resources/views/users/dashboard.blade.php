@@ -28,7 +28,7 @@
         </x-form.form-button>
     </article>
     <section class="pt-16 pb-12 grid md:grid-cols-3 col-gap-8 row-gap-12 items-baseline">
-        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
+        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" x-on:click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-archive-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Orders') }}</h2>
             <ul class="mt-5 text-center" x-show.transition="open">
@@ -40,7 +40,7 @@
                 </li>
             </ul>
         </article>
-        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
+        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" x-on:click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-map-search-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Addresses') }}</h2>
             <ul class="mt-5 text-center" x-show.transition="open">
@@ -52,7 +52,7 @@
                 </li>
             </ul>
         </article>
-        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
+        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" x-on:click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-account-cog-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Account') }}</h2>
             <ul class="mt-5 text-center" x-show.transition="open">
@@ -67,7 +67,7 @@
             <span class="text-6xl text-blue-500 mdi mdi-heart-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Wishlist') }}</h2>
         </a>
-        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
+        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" x-on:click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-credit-card-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Payments') }}</h2>
             <ul class="mt-5 text-center" x-show.transition="open">
@@ -76,7 +76,7 @@
                 </li>
             </ul>
         </article>
-        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" @click="open = !open">
+        <article class="rounded-lg p-6 shadow-md bg-white flex flex-col items-center justify-center transition-transform duration-300 transform hover:scale-105 cursor-pointer" x-data="{open: false}" x-on:click="open = !open">
             <span class="text-6xl text-blue-500 mdi mdi-help-circle-outline"></span>
             <h2 class="text-blue-500 text-lg tracking-wider">{{ __('Help') }}</h2>
             <ul x-show.transition="open">

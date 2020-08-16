@@ -25,7 +25,7 @@
 </head>
 <body class="text-gray-700">
     <div x-data="{ sidebarOpen: false, 'isDialogOpen': false, 'formModalOpen' : false }" class="flex h-screen bg-gray-200 font-family-karla">
-        <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
+        <div :class="sidebarOpen ? 'block' : 'hidden'" x-on:click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
 
         <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform bg-gray-900 overflow-y-auto lg:translate-x-0 lg:static lg:inset-0">
             <div class="flex items-center justify-center mt-8">
@@ -45,7 +45,7 @@
                 </a>
 
                 {{-- dropdown link --}}
-                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.products.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownProducts : false }" @click="dropdownProducts = !dropdownProducts">
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.products.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownProducts : false }" x-on:click="dropdownProducts = !dropdownProducts">
                     <div class="flex items-center">
                         <span class="mdi mdi-cart-arrow-down text-xl"></span>
 
@@ -64,7 +64,7 @@
                     </ul>
                 </div>
                 {{-- dropdown link --}}
-                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.sales.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownSales : false }" @click="dropdownSales = !dropdownSales">
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.sales.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownSales : false }" x-on:click="dropdownSales = !dropdownSales">
                     <div class="flex items-center">
                         <span class="mdi mdi-basket-outline text-xl"></span>
 
@@ -83,7 +83,7 @@
                     </ul>
                 </div>
                 {{-- dropdown link --}}
-                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.users.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownUsers : false }" @click="dropdownUsers = !dropdownUsers">
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.users.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownUsers : false }" x-on:click="dropdownUsers = !dropdownUsers">
                     <div class="flex items-center">
                         <span class="mdi mdi-account-group-outline text-xl"></span>
 
@@ -109,7 +109,7 @@
         <div class="flex-1 flex flex-col overflow-hidden">
             <header class="flex justify-between items-center py-3 px-6 bg-white">
                 <div class="flex items-center">
-                    <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+                    <button x-on:click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
                         <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -136,11 +136,11 @@
                     </button>
 
                     <div x-data="{ dropdownOpen: false }"  class="relative">
-                        <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none">
+                        <button x-on:click="dropdownOpen = !dropdownOpen" class="relative z-10 block h-8 w-8 rounded-full overflow-hidden shadow focus:outline-none">
                             <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80" alt="Your avatar">
                         </button>
 
-                        <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+                        <div x-show="dropdownOpen" x-on:click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
                         <div x-show="dropdownOpen" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
                             <a href="{{ route('welcome') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">

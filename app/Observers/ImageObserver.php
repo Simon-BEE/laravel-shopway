@@ -10,15 +10,16 @@ class ImageObserver
 {
     use ImageUpload;
     /**
-     * Handle the image "creating" event.
+     * Handle the image "created" event.
      *
      * @param  \App\Models\Image  $image
      * @return void
      */
-    public function creating(Image $image)
+    public function created(Image $image)
     {
         if (!$image->getMainImageByProduct($image->product->id)) {
             $image->is_main = true;
+            $image->save();
         };
     }
 
@@ -28,8 +29,11 @@ class ImageObserver
      * @param  \App\Models\Image  $image
      * @return void
      */
-    public function deleted(Image $image)
+    public function deleting(Image $image)
     {
-        $this->removeImage($image->filename, 'products');
+        // Just save placeholder pictures
+        if ($image->filename !== 'product_1.jpg' && $image->filename !== 'product_2.jpg') {
+            $this->removeImage($image->filename, 'products');
+        }
     }
 }

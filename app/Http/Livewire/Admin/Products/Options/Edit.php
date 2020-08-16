@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\Products\Options;
 
 use App\Models\Image;
+use App\Models\Option;
 use App\Models\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -20,6 +21,9 @@ class Edit extends Component
     public $price;
     public $weight;
     public $quantity;
+    public $sizes;
+    public $materials;
+    public $colors;
 
     protected $listeners = ['removeProductImage', 'setImageAsMain'];
 
@@ -30,6 +34,9 @@ class Edit extends Component
         $this->price = $productOption->price;
         $this->weight = $productOption->weight;
         $this->quantity = $productOption->quantity;
+        $this->sizes = Option::allSizes()->get();
+        $this->materials = Option::allMaterials()->get();
+        $this->colors = Option::allColors()->get();
     }
 
     public function setImageAsMain(int $id)
@@ -138,6 +145,45 @@ class Edit extends Component
         $this->emit('flashMessage', [
             'type' => 'success',
             'message' => 'Product\'s weight has been updated successfully.',
+            'id' => Str::random(10)
+        ]);
+    }
+
+    public function updateSize(int $sizeId)
+    {
+        $this->productOption->options()->toggle($sizeId);
+
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Product\'s size available has been updated successfully.',
+            'id' => Str::random(10)
+        ]);
+    }
+
+    public function updateMaterial(int $materialId)
+    {
+        $oldMaterial = Option::allMaterials()->where('id', $this->productOption->material->id)->first();
+
+        $this->productOption->options()->detach($oldMaterial->id);
+        $this->productOption->options()->attach($materialId);
+
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Product\'s material has been updated successfully.',
+            'id' => Str::random(10)
+        ]);
+    }
+
+    public function updateColor(int $colorId)
+    {
+        $oldColor = Option::allColors()->where('id', $this->productOption->color->id)->first();
+
+        $this->productOption->options()->detach($oldColor->id);
+        $this->productOption->options()->attach($colorId);
+
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Product\'s color has been updated successfully.',
             'id' => Str::random(10)
         ]);
     }

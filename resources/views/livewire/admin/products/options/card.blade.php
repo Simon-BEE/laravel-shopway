@@ -4,13 +4,13 @@
             <img src="{{ $productOption->main_image_path }}" alt="" class="w-20 h-20 object-cover rounded shadow">
         </div>
         <div class="ml-4">
-            <p class="font-semibold">Option n°{{ $productOption->id }}</p>
-            <p>{{ __('Sizes available') }}: {{ $productOption->sizes_available_formatted }}</p>
-            <p class="mt-2">{{ __('Specific feature') }}: 
-                <span class="p-2 rounded {{ $productOption->classname }}">
+            <p class="font-semibold">
+                Option n°{{ $productOption->id }} 
+                <span class="p-2 ml-2 rounded {{ $productOption->classname }}">
                     {{ $productOption->color->name }} / {{ $productOption->material->name }}
                 </span>
             </p>
+            <p class="mt-3 text-sm text-gray-500">{{ __('Sizes available') }}: {{ $productOption->sizes_available_formatted }}</p>
         </div>
     </div>
     <div class="w-3/12 text-sm">

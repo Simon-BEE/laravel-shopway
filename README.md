@@ -22,6 +22,8 @@ Soberly called **Shopway**
 - [ ] Manage order status
 
 Admin : edit delete orders    
-Admin : edit delete users    
+Admin : edit users    
 Admin : possibility to refund total or part of a payment
 Implement paypal
+
+!!! Size product quantity ':()

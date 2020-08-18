@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Products;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
 {
@@ -25,15 +23,15 @@ class Image extends Model
 
     public function getMainImageByProduct(int $productId)
     {
-        return Image::where('product_item_option_id', $productId)->where('is_main', true)->first();
+        return Image::where('product_option_id', $productId)->where('is_main', true)->first();
     }
 
     /**
      * ? RELATIONS
      */
 
-    public function product()
+    public function product_option()
     {
-        return $this->belongsTo(ProductItemOption::class, 'product_item_option_id');
+        return $this->belongsTo(ProductOption::class);
     }
 }

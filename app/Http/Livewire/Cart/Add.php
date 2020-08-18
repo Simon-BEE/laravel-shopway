@@ -5,8 +5,8 @@ namespace App\Http\Livewire\Cart;
 use App\Helpers\Cart;
 use App\Models\Option;
 use Livewire\Component;
-use App\Models\Product;
-use App\Models\ProductItemOption;
+use App\Models\Products\Product;
+use App\Models\Products\ProductOption;
 use Illuminate\Support\Str;
 
 class Add extends Component

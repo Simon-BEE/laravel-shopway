@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
-use App\Models\Category;
-use App\Models\Image;
-use App\Models\Product;
-use App\Models\ProductItemOption;
+use App\Models\Products\Category;
+use App\Models\Products\Image;
+use App\Models\Products\Product;
+use App\Models\Products\ProductOption;
 use App\Traits\Upload\ImageUpload;
 use Livewire\Component;
 use Illuminate\Support\Str;

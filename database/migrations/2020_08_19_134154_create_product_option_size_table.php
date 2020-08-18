@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOptionProductTable extends Migration
+class CreateProductOptionSizeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateOptionProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('option_product', function (Blueprint $table) {
-            $table->foreignId('option_id')->constrained()->onDelete('cascade');
-            $table->foreignId('product_item_option_id')->constrained()->onDelete('cascade');
+        Schema::create('product_option_size', function (Blueprint $table) {
+            $table->foreignId('product_option_id')->constrained()->onDelete('cascade');
+            $table->foreignId('size_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateOptionProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('option_product');
+        Schema::dropIfExists('product_option_size');
     }
 }

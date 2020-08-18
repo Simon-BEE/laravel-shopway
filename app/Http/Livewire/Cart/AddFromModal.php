@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Cart;
 
 use App\Helpers\Cart;
-use App\Models\ProductItemOption;
+use App\Models\Products\ProductOption;
 use Livewire\Component;
 use Illuminate\Support\Str;
 

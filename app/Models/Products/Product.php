@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -96,7 +96,7 @@ class Product extends Model
 
     public function getQuantityAttribute()
     {
-        return $this->product_options->sum('quantity');
+        return $this->options->sum('quantity');
     }
 
     public function getPriceAttribute()
@@ -106,7 +106,14 @@ class Product extends Model
 
     public function getFirstOptionAttribute()
     {
-        return $this->product_options->first();
+        return $this->options->first();
+    }
+
+    public function getSizesAttribute()
+    {
+        return $this->options->map(function ($productOption){
+            return $productOption->size;
+        });
     }
 
     /**
@@ -136,13 +143,7 @@ class Product extends Model
 
     public function hasSize(int $sizeId)
     {
-        $r = $this->product_options->filter(function ($productOption) use ($sizeId){
-            if ($productOption->hasSize($sizeId)) {
-                return true;
-            }
-        });
-
-        return $r->isNotEmpty();
+        return $this->sizes->contains('id', $sizeId);
     }
 
     /**
@@ -156,7 +157,7 @@ class Product extends Model
 
     public function images()
     {
-        return $this->hasManyThrough(Image::class, ProductItemOption::class);
+        return $this->hasManyThrough(Image::class, ProductOption::class);
     }
 
     public function wishes()
@@ -166,6 +167,6 @@ class Product extends Model
 
     public function product_options()
     {
-        return $this->hasMany(ProductItemOption::class);
+        return $this->hasMany(ProductOption::class);
     }
 }

@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Models\State;
 use App\Models\OrderItem;
 use App\Models\Payment;
-use App\Models\ProductItemOption;
+use App\Models\Products\ProductOption;
 use App\Services\Cart\CartCalculator;
 use Illuminate\Support\Collection;
 
@@ -44,7 +44,7 @@ class OrderProcessRepository
                 ]);
 
                 return [
-                    'product_item_option_id' => $productOptionId,
+                    'product_option_id' => $productOptionId,
                     'order_id' => $order->id,
                     'size_id' => $optionItemSizeId,
                     'name' => $optionItem['name'],

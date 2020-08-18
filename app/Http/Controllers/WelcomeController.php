@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Products\Product;
 use Illuminate\View\View;
 
 class WelcomeController extends Controller

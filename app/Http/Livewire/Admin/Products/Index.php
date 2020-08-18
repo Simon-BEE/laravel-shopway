@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
-use App\Models\Product;
+use App\Models\Products\Product;
 use App\Traits\Classify\IsFilterableWithLivewire;
 use Livewire\Component;
 use Livewire\WithPagination;

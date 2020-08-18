@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOptionTypesTable extends Migration
+class CreateMaterialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOptionTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('option_types', function (Blueprint $table) {
+        Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('name');
         });
@@ -26,6 +26,6 @@ class CreateOptionTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('option_types');
+        Schema::dropIfExists('materials');
     }
 }

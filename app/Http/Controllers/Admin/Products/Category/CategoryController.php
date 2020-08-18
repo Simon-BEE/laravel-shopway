@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Products\Category;
 
-use App\Models\Category;
+use App\Models\Products\Category;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +50,7 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  \App\Models\Products\Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Wish;
 
 use App\Helpers\Cart;
-use App\Models\Product;
+use App\Models\Products\Product;
 use App\Models\Wish;
 use Livewire\Component;
 use Illuminate\Support\Str;

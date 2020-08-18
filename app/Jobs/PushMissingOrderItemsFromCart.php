@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
-use App\Models\ProductItemOption;
+use App\Models\Products\ProductOption;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -54,7 +54,7 @@ class PushMissingOrderItemsFromCart implements ShouldQueue
                     ]);
     
                     return [
-                        'product_item_option_id' => $productOptionId,
+                        'product_option_id' => $productOptionId,
                         'order_id' => $orderId,
                         'size_id' => $optionItemSizeId,
                         'name' => $optionItem['name'],

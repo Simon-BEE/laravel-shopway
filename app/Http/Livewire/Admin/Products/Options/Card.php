@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin\Products\Options;
 
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Models\ProductItemOption;
+use App\Models\Products\ProductOption;
 
 class Card extends Component
 {

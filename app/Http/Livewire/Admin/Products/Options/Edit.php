@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Products\Options;
 
-use App\Models\Image;
+use App\Models\Products\Image;
 use App\Models\Option;
-use App\Models\Product;
+use App\Models\Products\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use App\Models\ProductItemOption;
+use App\Models\Products\ProductOption;
 use App\Traits\Upload\ImageUpload;
 
 class Edit extends Component
@@ -151,7 +151,7 @@ class Edit extends Component
 
     public function updateSize(int $sizeId)
     {
-        $this->productOption->options()->toggle($sizeId);
+        $this->productOption->product_options()->toggle($sizeId);
 
         $this->emit('flashMessage', [
             'type' => 'success',
@@ -164,8 +164,8 @@ class Edit extends Component
     {
         $oldMaterial = Option::allMaterials()->where('id', $this->productOption->material->id)->first();
 
-        $this->productOption->options()->detach($oldMaterial->id);
-        $this->productOption->options()->attach($materialId);
+        $this->productOption->product_options()->detach($oldMaterial->id);
+        $this->productOption->product_options()->attach($materialId);
 
         $this->emit('flashMessage', [
             'type' => 'success',
@@ -178,8 +178,8 @@ class Edit extends Component
     {
         $oldColor = Option::allColors()->where('id', $this->productOption->color->id)->first();
 
-        $this->productOption->options()->detach($oldColor->id);
-        $this->productOption->options()->attach($colorId);
+        $this->productOption->product_options()->detach($oldColor->id);
+        $this->productOption->product_options()->attach($colorId);
 
         $this->emit('flashMessage', [
             'type' => 'success',

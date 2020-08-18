@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
-use App\Models\Category;
-use App\Models\Product;
+use App\Models\Products\Category;
+use App\Models\Products\Product;
 use Illuminate\Support\Arr;
 
 class CreateController extends Controller

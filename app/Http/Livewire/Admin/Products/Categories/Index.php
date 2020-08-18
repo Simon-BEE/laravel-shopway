@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin\Products\Categories;
 
 use Livewire\Component;
-use App\Models\Category;
+use App\Models\Products\Category;
 use App\Traits\Classify\IsFilterableWithLivewire;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;

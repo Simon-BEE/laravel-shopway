@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Wish;
 
-use App\Models\Product;
+use App\Models\Products\Product;
 use Livewire\Component;
 use App\Models\Wish;
 use Illuminate\Support\Str;

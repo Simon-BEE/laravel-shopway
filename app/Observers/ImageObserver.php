@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Image;
+use App\Models\Products\Image;
 use App\Traits\Upload\ImageUpload;
 use Illuminate\Support\Facades\Storage;
 
@@ -12,12 +12,12 @@ class ImageObserver
     /**
      * Handle the image "created" event.
      *
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Products\Image  $image
      * @return void
      */
     public function created(Image $image)
     {
-        if (!$image->getMainImageByProduct($image->product->id)) {
+        if (!$image->getMainImageByProduct($image->product_option->product->id)) {
             $image->is_main = true;
             $image->save();
         };
@@ -26,7 +26,7 @@ class ImageObserver
     /**
      * Handle the image "deleted" event.
      *
-     * @param  \App\Models\Image  $image
+     * @param  \App\Models\Products\Image  $image
      * @return void
      */
     public function deleting(Image $image)

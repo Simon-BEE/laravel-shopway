@@ -7,8 +7,8 @@ use App\Traits\Upload\ImageUpload;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductOptionRequest;
 use App\Models\Option;
-use App\Models\Product;
-use App\Models\ProductItemOption;
+use App\Models\Products\Product;
+use App\Models\Products\ProductOption;
 use Illuminate\Support\Arr;
 
 class OptionController extends Controller
@@ -35,7 +35,7 @@ class OptionController extends Controller
 
         $productOption = $product->product_options()->create($validatedData);
 
-        $productOption->options()->sync(array_merge([$color, $material], $sizes));
+        $productOption->product_options()->sync(array_merge([$color, $material], $sizes));
 
         collect($images)->each(function ($image) use ($productOption){
             $filename = $this->storeImage($image, 'products');

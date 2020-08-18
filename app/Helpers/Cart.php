@@ -3,7 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\Option;
-use App\Models\ProductItemOption;
+use App\Models\Products\ProductOption;
 use App\Models\Shipping;
 use App\Services\Cart\CartAdding;
 use App\Services\Cart\CartCalculator;

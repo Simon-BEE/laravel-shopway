@@ -28,11 +28,11 @@
             </div>
             <p class="text-justify leading-5">{{ $product->description }}</p>
             <div class="my-6">
-                <h4 class="font-semibold">Sizes</h4>
+                <h4 class="font-semibold">{{ __('Sizes avalaible') }}</h4>
                 <ul class="flex flex-wrap mt-2">
                     @foreach ($sizes as $size)
                         <li 
-                            class="p-2 mr-1 mb-1 border {{ $selectedProduct->hasSize($size->id) ? 'hover:bg-gray-200 cursor-pointer' : 'bg-gray-300 text-white' }} {{ $selectedSize->id === $size->id ? 'border-solid border-blue-500 cursor-text' : 'border-dashed' }}"
+                            class="p-2 mr-1 mb-1 border {{ $product->hasSize($size->id) ? 'hover:bg-gray-200 cursor-pointer' : 'bg-gray-300 text-white' }} {{ $selectedProduct->size->id === $size->id ? 'border-solid border-blue-500 cursor-text' : 'border-dashed' }}"
                             wire:click="selectSizeOption({{ $size->id }})"
                         >
                             {{ $size->name }}
@@ -44,12 +44,18 @@
                 <h4 class="font-semibold">Colors</h4>
                 <ul class="flex flex-wrap mt-2">
                     @foreach ($product->product_options as $productOption)
-                        <li 
-                            class="p-2 mr-1 mb-1 border {{ $productOption->id === $selectedProduct->id ? $productOption->classname : 'hover:bg-gray-100 cursor-pointer' }}"
-                            wire:click="selectOption({{ $productOption->id }})"
-                        >
-                            {{ $productOption->color->name }} / {{ $productOption->material->name }}
-                        </li>
+                        @if ($selectedProduct->size->id === $productOption->size->id)
+                            <li 
+                                class="p-2 mr-1 mb-1 border {{ $productOption->id === $selectedProduct->id ? $productOption->classname : 'hover:bg-gray-100 cursor-pointer' }}"
+                                wire:click="selectOption({{ $productOption->id }})"
+                            >
+                                {{ $productOption->color->name }} / {{ $productOption->material->name }}
+                            </li>
+                        @elseif($selectedProduct->material->id !== $productOption->material->id && $selectedProduct->color->id !== $productOption->color->id && $selectedProduct->size->id !== $productOption->size->id)
+                            <li class="p-2 mr-1 mb-1 border bg-gray-200">
+                                {{ $productOption->color->name }} / {{ $productOption->material->name }}
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

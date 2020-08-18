@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\Option;
-use App\Models\OptionType;
+use App\Models\Products\Size;
+use App\Models\Products\Color;
+use App\Models\Products\Material;
 use Illuminate\Database\Seeder;
 
 class OptionSeeder extends Seeder
@@ -13,35 +14,35 @@ class OptionSeeder extends Seeder
      */
     public function run()
     {
-        OptionType::insert([
-            ['name' => 'Size'],
-            ['name' => 'Color'],
-            ['name' => 'Material'],
+        Size::insert([
+            ['name' => 'XS'],
+            ['name' => 'S'],
+            ['name' => 'M'],
+            ['name' => 'L'],
+            ['name' => 'XL'],
+            ['name' => 'XXL'],
         ]);
 
-        Option::insert([
-            ['option_type_id' => 1, 'name' => 'XS'],
-            ['option_type_id' => 1, 'name' => 'S'],
-            ['option_type_id' => 1, 'name' => 'M'],
-            ['option_type_id' => 1, 'name' => 'L'],
-            ['option_type_id' => 1, 'name' => 'XL'],
-            ['option_type_id' => 1, 'name' => 'XXL'],
-            ['option_type_id' => 2, 'name' => 'red'],
-            ['option_type_id' => 2, 'name' => 'black'],
-            ['option_type_id' => 2, 'name' => 'green'],
-            ['option_type_id' => 2, 'name' => 'white'],
-            ['option_type_id' => 2, 'name' => 'blue'],
-            ['option_type_id' => 2, 'name' => 'orange'],
-            ['option_type_id' => 2, 'name' => 'purple'],
-            ['option_type_id' => 2, 'name' => 'gray'],
-            ['option_type_id' => 2, 'name' => 'yellow'],
-            ['option_type_id' => 2, 'name' => 'pink'],
-            ['option_type_id' => 3, 'name' => 'cotton'],
-            ['option_type_id' => 3, 'name' => 'polyester'],
-            ['option_type_id' => 3, 'name' => 'wool'],
-            ['option_type_id' => 3, 'name' => 'silk'],
-            ['option_type_id' => 3, 'name' => 'flax'],
-            ['option_type_id' => 3, 'name' => 'nylon'],
+        Color::insert([
+            ['name' => 'red'],
+            ['name' => 'black'],
+            ['name' => 'green'],
+            ['name' => 'white'],
+            ['name' => 'blue'],
+            ['name' => 'orange'],
+            ['name' => 'purple'],
+            ['name' => 'gray'],
+            ['name' => 'yellow'],
+            ['name' => 'pink'],
+        ]);
+
+        Material::insert([
+            ['name' => 'cotton'],
+            ['name' => 'polyester'],
+            ['name' => 'wool'],
+            ['name' => 'silk'],
+            ['name' => 'flax'],
+            ['name' => 'nylon'],
         ]);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Helpers\Cart;
-use App\Models\Product;
+use App\Models\Products\Product;
 use App\Events\UserIsLogged;
 use Illuminate\Support\Collection;
 

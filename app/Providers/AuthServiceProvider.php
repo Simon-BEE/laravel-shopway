@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Order;
-use App\Models\Address;
+use App\Models\Orders\Order;
+use App\Models\Users\Address;
 use App\Policies\OrderPolicy;
 use App\Policies\AddressPolicy;
 use Illuminate\Support\Facades\Gate;

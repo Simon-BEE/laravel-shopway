@@ -2,8 +2,8 @@
 
 namespace App\Traits\Permissions;
 
-use App\Models\Role;
-use App\Models\Permission;
+use App\Models\Users\Role;
+use App\Models\Users\Permission;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait HasPermissionsTrait

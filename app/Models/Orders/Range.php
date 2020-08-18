@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Orders;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Range extends Model
 {

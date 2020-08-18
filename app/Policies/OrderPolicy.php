@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Order;
-use App\Models\User;
+use App\Models\Orders\Order;
+use App\Models\Users\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class OrderPolicy
@@ -13,8 +13,8 @@ class OrderPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Order  $order
+     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Orders\Order  $order
      * @return mixed
      */
     public function view(User $user, Order $order)

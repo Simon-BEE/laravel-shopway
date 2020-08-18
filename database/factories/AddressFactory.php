@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Models\Address;
+use App\Models\Users\Address;
 use Faker\Generator as Faker;
 
 $factory->define(Address::class, function (Faker $faker) {

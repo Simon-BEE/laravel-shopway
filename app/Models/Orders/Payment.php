@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Orders;
 
+use App\Models\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model

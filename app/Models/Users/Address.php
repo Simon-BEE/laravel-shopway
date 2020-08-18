@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
+use App\Models\Country;
+use App\Models\Orders\Order;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;

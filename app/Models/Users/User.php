@@ -1,12 +1,16 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Users;
 
+use App\Models\Cart;
+use App\Models\Wish;
+use App\Models\Orders\Order;
+use App\Models\Orders\Payment;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\Permissions\HasPermissionsTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable

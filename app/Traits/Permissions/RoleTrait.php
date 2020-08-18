@@ -2,7 +2,7 @@
 
 namespace App\Traits\Permissions;
 
-use App\Models\Role;
+use App\Models\Users\Role;
 use Illuminate\Database\Eloquent\Collection;
 
 trait RoleTrait

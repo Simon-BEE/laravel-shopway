@@ -4,7 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Option;
 use App\Models\Products\ProductOption;
-use App\Models\Shipping;
+use App\Models\Orders\Shipping;
 use App\Services\Cart\CartAdding;
 use App\Services\Cart\CartCalculator;
 use App\Services\Cart\CartRemoving;

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Addresses;
 
-use App\Models\Address;
+use App\Models\Users\Address;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;

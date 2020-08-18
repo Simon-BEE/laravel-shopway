@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Orders;
 
+use App\Models\Country;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 

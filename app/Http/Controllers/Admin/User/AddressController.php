@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
+use App\Models\Users\Address;
 
 class AddressController extends Controller
 {

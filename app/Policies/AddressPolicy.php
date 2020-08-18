@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\Address;
-use App\Models\User;
+use App\Models\Users\Address;
+use App\Models\Users\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class AddressPolicy
@@ -13,8 +13,8 @@ class AddressPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Address  $address
+     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Users\Address  $address
      * @return mixed
      */
     public function update(User $user, Address $address)
@@ -25,8 +25,8 @@ class AddressPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Address  $address
+     * @param  \App\Models\Users\User  $user
+     * @param  \App\Models\Users\Address  $address
      * @return mixed
      */
     public function delete(User $user, Address $address)

@@ -3,10 +3,10 @@
 namespace App\Repository;
 
 use App\Helpers\Cart;
-use App\Models\Order;
-use App\Models\State;
-use App\Models\OrderItem;
-use App\Models\Payment;
+use App\Models\Orders\Order;
+use App\Models\Orders\State;
+use App\Models\Orders\OrderItem;
+use App\Models\Orders\Payment;
 use App\Models\Products\ProductOption;
 use App\Services\Cart\CartCalculator;
 use Illuminate\Support\Collection;

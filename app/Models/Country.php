@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Orders\Range;
+use App\Models\Users\Address;
 use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model

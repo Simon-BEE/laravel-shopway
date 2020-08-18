@@ -5,7 +5,7 @@ namespace App\Providers;
 use App\Models\Products\Image;
 use App\Models\Products\Product;
 use App\Models\Products\ProductOption;
-use App\Models\User;
+use App\Models\Users\User;
 use App\Observers\ImageObserver;
 use App\Observers\ProductObserver;
 use App\Observers\ProductOptionObserver;

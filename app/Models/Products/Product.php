@@ -2,9 +2,10 @@
 
 namespace App\Models\Products;
 
+use App\Models\Wish;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Collection;
 
 class Product extends Model
 {

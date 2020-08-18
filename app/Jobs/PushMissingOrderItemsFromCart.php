@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Cart;
-use App\Models\OrderItem;
+use App\Models\Orders\OrderItem;
 use Illuminate\Support\Str;
 use Illuminate\Bus\Queueable;
 use App\Models\Products\ProductOption;

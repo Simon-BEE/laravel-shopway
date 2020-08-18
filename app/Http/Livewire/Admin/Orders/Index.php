@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Admin\Orders;
 
-use App\Models\Order;
+use App\Models\Orders\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\Classify\IsFilterableWithLivewire;

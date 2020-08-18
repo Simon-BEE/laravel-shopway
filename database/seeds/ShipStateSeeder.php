@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\Range;
-use App\Models\State;
+use App\Models\Orders\Range;
+use App\Models\Orders\State;
 use App\Models\Country;
-use App\Models\Shipping;
-use App\Models\ShippingCompany;
+use App\Models\Orders\Shipping;
+use App\Models\Orders\ShippingCompany;
 use Illuminate\Database\Seeder;
 
 class ShipStateSeeder extends Seeder

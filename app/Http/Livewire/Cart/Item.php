@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Cart;
 
 use App\Helpers\Cart;
-use App\Models\Option;
+use App\Models\Products\Size;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -21,7 +21,7 @@ class Item extends Component
         $this->productOptionSizeId = $productOptionSizeId;
         $this->productOption = $productOption;
         $this->quantity = $productOption['quantity'];
-        $this->sizeLetter = Option::MAP_SIZES[$this->productOptionSizeId];
+        $this->sizeLetter = Size::findOrFail($this->productOptionSizeId)->name;
     }
 
     public function updatedQuantity(int $quantity)

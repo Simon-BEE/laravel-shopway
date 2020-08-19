@@ -9,7 +9,7 @@ class OrderItem extends Model
 {
     protected $guarded = ['id'];
 
-    public $with = ['option'];
+    public $with = ['product_option'];
 
     /**
      * ? RELATIONS

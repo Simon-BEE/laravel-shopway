@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Checkout;
 use Illuminate\Support\Facades\Mail;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
-use App\Models\{User, Order, Payment, Cart as CartModel};
-use App\Helpers\Cart;
-use App\Mail\ConfirmOrderMail;
 use App\Http\Controllers\Controller;
-use App\Jobs\PushMissingOrderItemsFromCart;
+use App\Mail\ConfirmOrderMail;
+use App\Helpers\Cart;
 use App\Services\Cart\CartCalculator;
 use App\Repository\OrderProcessRepository;
+use App\Jobs\PushMissingOrderItemsFromCart;
 use App\Notifications\NewOrderNotification;
+use App\Models\Users\User;
+use App\Models\Orders\{Order, Payment};
+use App\Models\Cart as CartModel;
 
 class CheckoutController extends Controller
 {
@@ -27,13 +29,21 @@ class CheckoutController extends Controller
     public function paymentIntent()
     {
         Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-        $clientSecret = PaymentIntent::create([
-            'amount' => app(CartCalculator::class)->totalWithTax() + Cart::shippingPrice(),
-            'currency' => config('cart.currency_iso'),
-            'metadata' => [
-                'user_id' => auth()->id(),
-            ],
-        ])->client_secret;
+
+        try {
+            $clientSecret = PaymentIntent::create([
+                'amount' => app(CartCalculator::class)->totalWithTax() + Cart::shippingPrice(),
+                'currency' => config('cart.currency_iso'),
+                'metadata' => [
+                    'user_id' => auth()->id(),
+                ],
+            ])->client_secret;
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
 
         return response()->json([
             'clientSecret' => $clientSecret
@@ -55,11 +65,6 @@ class CheckoutController extends Controller
             $this->saveCartInDatabase($order);
 
             PushMissingOrderItemsFromCart::dispatch();
-            
-            // session()->put('checkout_error', 'error');
-            // return response()->json([
-            //     'success' => false,
-            // ], 500);
         }
 
         Mail::to(auth()->user())->queue(new ConfirmOrderMail(auth()->user(), $order));

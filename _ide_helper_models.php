@@ -327,12 +327,11 @@ namespace App\Models\Products{
  * @property int $material_id
  * @property int $price
  * @property int $weight
- * @property int $quantity
- * @property int $quantity_alert
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Products\Color $color
  * @property-read mixed $classname
+ * @property-read mixed $default_size
  * @property-read mixed $main_image
  * @property-read mixed $main_image_path
  * @property-read mixed $sizes_available_formatted
@@ -355,7 +354,8 @@ namespace App\Models\Products{
  *
  * @property int $id
  * @property string $name
- * @property-read \App\Models\Products\ProductOption $product_option
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Products\ProductOption[] $product_option
+ * @property-read int|null $product_option_count
  * @method static \Illuminate\Database\Eloquent\Builder|Size newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Size newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Size query()

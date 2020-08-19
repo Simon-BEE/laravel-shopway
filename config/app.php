@@ -230,7 +230,7 @@ return [
         'Cart' => App\Helpers\Cart::class,
         'Format' => App\Helpers\Format::class,
         'Filter' => App\Helpers\Filter::class,
-
+        'Option' => App\Helpers\Option::class
     ],
 
 ];

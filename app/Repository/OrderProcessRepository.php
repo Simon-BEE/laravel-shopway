@@ -32,16 +32,28 @@ class OrderProcessRepository
      * @param Collection $cart
      * @return void
      */
-    public function storeOrderItems(Order $order, Collection $cart = null)
+    public function storeOrderItems(Order $order)
+    {
+        $orderItems = $this->prepareOrderItems($order);
+
+        OrderItem::insert($orderItems);
+    }
+
+    public function storePayments(Order $order, string $paymentIntentId, string $type = Payment::STRIPE_TYPE)
+    {
+        $order->payment()->create([
+            'user_id' => auth()->id(),
+            'payment_id' => $paymentIntentId,
+            'type' => $type,
+        ]);
+    }
+
+    public function prepareOrderItems(Order $order, Collection $cart = null)
     {
         $cart = $cart ?? Cart::content();
 
-        $orderItems = $cart->map(function ($productOptions, $productOptionId) use ($order){
+        return $cart->map(function ($productOptions, $productOptionId) use ($order){
             return collect($productOptions)->map(function ($optionItem, $optionItemSizeId) use ($order, $productOptionId){
-                $product = ProductItemOption::findOrFail($productOptionId);
-                $product->update([
-                    'quantity' => $product->quantity - $optionItem['quantity'],
-                ]);
 
                 return [
                     'product_option_id' => $productOptionId,
@@ -56,16 +68,5 @@ class OrderProcessRepository
                 ];
             });
         })->collapse()->toArray();
-
-        OrderItem::insert($orderItems);
-    }
-
-    public function storePayments(Order $order, string $paymentIntentId, string $type = Payment::STRIPE_TYPE)
-    {
-        $order->payment()->create([
-            'user_id' => auth()->id(),
-            'payment_id' => $paymentIntentId,
-            'type' => $type,
-        ]);
     }
 }

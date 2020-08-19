@@ -46,7 +46,10 @@
                             @else
                                 {{ $item->name }}
                             @endif
-                            <span class="text-gray-700 text-sm">({{ __('Size') }}: {{ Cart::size($item->size_id) }})</span>
+                            <span class="text-gray-700 text-sm">
+                                ({{ __('Size') }}: {{ Option::size($item->size_id) }}) / 
+                                ({{ $item->product_option->color->name }}/{{ $item->product_option->material->name }})
+                            </span>
                         </p>
                         <p class="mt-2 md:mt-0">
                             <span class="text-sm text-gray-600">

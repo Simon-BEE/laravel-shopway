@@ -2,9 +2,9 @@
 
 namespace App\Helpers;
 
-use App\Models\Option;
 use App\Models\Products\ProductOption;
 use App\Models\Orders\Shipping;
+use App\Models\Products\Size;
 use App\Services\Cart\CartAdding;
 use App\Services\Cart\CartCalculator;
 use App\Services\Cart\CartRemoving;
@@ -29,10 +29,10 @@ class Cart
 
     public static function shipping(): Shipping
     {
-        $totalWeight = self::content()->map(function ($item, $itemId){
+        $totalWeight = self::content()->map(function ($item){
             return collect($item)->map(function ($option, $optionId){
-                $product = self::model($optionId);
-                return $option['quantity'] * $product->weight;
+                $productOption = self::model($optionId);
+                return $option['quantity'] * $productOption->weight;
             })->sum();
         })->sum();
 
@@ -48,7 +48,7 @@ class Cart
 
     public static function model(int $itemId)
     {
-        return ProductItemOption::select(['weight', 'quantity'])->where('id', $itemId)->firstOrFail();
+        return ProductOption::select(['weight'])->findOrFail($itemId);
     }
 
     public static function count(): int
@@ -58,9 +58,9 @@ class Cart
         })->sum();
     }
 
-    public static function size(int $sizeId): string
+    public static function size(int $sizeId): ?string
     {
-        return Option::MAP_SIZES[$sizeId];
+        return Size::findOrFail($sizeId)->name;
     }
 
     /**
@@ -77,9 +77,9 @@ class Cart
         CartRemoving::remove($itemId, $sizeId);
     }
 
-    public static function add(ProductItemOption $product, int $sizeId)
+    public static function add(ProductOption $productOption, int $sizeId)
     {
-        CartAdding::add($product, $sizeId);
+        CartAdding::add($productOption, $sizeId);
     }
 
     public static function update(int $productId, int $sizeId, int $qty)

@@ -19,7 +19,7 @@ class ProductObserver
     public function creating(Product $product)
     {
         $product->slug = Str::slug($product->name);
-        // $product->active = $product->quantity > 1;
+        $product->refreshStatus();
     }
 
     /**
@@ -30,7 +30,7 @@ class ProductObserver
      */
     public function updating(Product $product)
     {
-        // $product->active = $product->quantity > 0;
+        $product->refreshStatus();
     }
 
     /**

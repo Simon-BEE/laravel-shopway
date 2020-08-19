@@ -58,6 +58,13 @@ class ProductOption extends Model
         return $this->sizes->first();
     }
 
+    public function getTotalQuantityAttribute()
+    {
+        return $this->sizes->map(function ($size){
+            return $size->pivot->quantity;
+        })->sum();
+    }
+
     //
 
     public function hasSize(int $sizeId)

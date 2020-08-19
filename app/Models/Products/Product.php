@@ -14,9 +14,9 @@ class Product extends Model
 
     protected $casts = [
         'active' => 'boolean',
-        'price' => 'float',
-        'weight' => 'float',
-        'quantity' => 'integer',
+        // 'price' => 'float',
+        // 'weight' => 'float',
+        // 'quantity' => 'integer',
     ];
 
     /**
@@ -97,7 +97,9 @@ class Product extends Model
 
     public function getQuantityAttribute()
     {
-        return $this->product_options->sum('quantity');
+        return $this->product_options->sum(function ($option){
+            return $option->total_quantity;
+        });
     }
 
     public function getPriceAttribute()
@@ -112,8 +114,8 @@ class Product extends Model
 
     public function getSizesAttribute()
     {
-        $test = collect();
-        $this->product_options->each(function ($productOption) use ($test){
+        $sizesCollection = collect();
+        $this->product_options->each(function ($productOption) use ($sizesCollection){
             return $productOption->sizes->each(function ($size) use (&$test){
                 if (!$test->contains('id', $size->id)) {
                     $test->push($size);
@@ -121,7 +123,7 @@ class Product extends Model
             });
         });
         
-        return $test;
+        return $sizesCollection;
     }
 
     /**
@@ -144,14 +146,31 @@ class Product extends Model
             ->take($number);
     }
 
-    public function scopeLast(Builder $query)
+    public function scopeLast(Builder $query): self
     {
         return $query->latest()->first();
     }
 
-    public function hasSize(int $sizeId)
+    //
+
+    public function hasSize(int $sizeId): bool
     {
         return $this->sizes->contains('id', $sizeId);
+    }
+
+    public function refreshStatus(): void
+    {
+        if ($this->quantity > 1 && !$this->active) {
+            $this->update([
+                'active' => true,
+            ]);
+        }
+
+        if ($this->quantity < 1 && $this->active) {
+            $this->update([
+                'active' => false,
+            ]);
+        }
     }
 
     /**

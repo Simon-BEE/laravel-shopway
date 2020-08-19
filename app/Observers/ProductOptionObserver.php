@@ -17,9 +17,18 @@ class ProductOptionObserver
      */
     public function created(ProductOption $productOption)
     {
-        // $productOption->product->update([
-        //     'active' => $productOption->product->quantity > 1,
-        // ]);
+        $productOption->product->refreshStatus();
+    }
+
+    /**
+     * Handle the product "updated" event.
+     *
+     * @param  \App\Models\Products\Product  $product
+     * @return void
+     */
+    public function updated(ProductOption $productOption)
+    {
+        $productOption->product->refreshStatus();
     }
 
     public function deleting(ProductOption $productOption)

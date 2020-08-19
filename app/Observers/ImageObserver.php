@@ -17,7 +17,7 @@ class ImageObserver
      */
     public function created(Image $image)
     {
-        if (!$image->getMainImageByProduct($image->product_option->product->id)) {
+        if (!$image->getMainImageByProduct($image->product_option->id)) {
             $image->is_main = true;
             $image->save();
         };

@@ -4,11 +4,14 @@ namespace App\Http\Livewire\Admin\Products\Options;
 
 use App\Models\Products\Image;
 use App\Models\Option;
+use App\Models\Products\Color;
+use App\Models\Products\Material;
 use App\Models\Products\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use App\Models\Products\ProductOption;
+use App\Models\Products\Size;
 use App\Traits\Upload\ImageUpload;
 
 class Edit extends Component
@@ -27,16 +30,16 @@ class Edit extends Component
 
     protected $listeners = ['removeProductImage', 'setImageAsMain'];
 
-    public function mount(Product $product, ProductItemOption $productOption)
+    public function mount(Product $product, ProductOption $productOption)
     {
         $this->product = $product;
         $this->productOption = $productOption;
         $this->price = $productOption->price;
         $this->weight = $productOption->weight;
         $this->quantity = $productOption->quantity;
-        $this->sizes = Option::allSizes()->get();
-        $this->materials = Option::allMaterials()->get();
-        $this->colors = Option::allColors()->get();
+        $this->sizes = Size::all();
+        $this->materials = Material::all();
+        $this->colors = Color::all();
     }
 
     public function setImageAsMain(int $id)

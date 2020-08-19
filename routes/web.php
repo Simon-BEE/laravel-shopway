@@ -29,54 +29,6 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
 
     /**
-     * Admin routes
-     */
-    Route::group([
-        'middleware' => ['role:admin'],
-        'namespace' => 'Admin',
-        'prefix' => 'admin',
-        'as' => 'admin.',
-    ], function () {
-        Route::get('/', 'DashboardController')->name('dashboard');
-
-        // ADMIN PRODUCTS
-        Route::group([
-            'namespace' => 'Products',
-        ], function () {
-            Route::resource('products', 'ProductController')->only(['index', 'destroy', 'edit']);
-            Route::group(['as' => 'products.', 'prefix' => 'products'], function () {
-                Route::get('create', 'CreateController@create')->name('create');
-                Route::post('/', 'CreateController@store')->name('store');
-
-                Route::group(['namespace' => 'Option', 'as' => 'options.', 'prefix' => '{product}/options'], function () {
-                    Route::get('create', 'OptionController@create')->name('create');
-                    Route::post('/', 'OptionController@store')->name('store');
-                    Route::get('edit/{option}', 'OptionController@edit')->name('edit');
-                    Route::patch('{option}', 'OptionController@update')->name('update');
-                    Route::delete('{option}', 'OptionController@destroy')->name('destroy');
-                });
-
-                Route::resource('categories', 'Category\CategoryController')->except(['show', 'edit', 'create', 'update']);
-            });
-        });
-
-        // ADMIN USERS
-        Route::group([
-            'namespace' => 'User',
-        ], function () {
-            Route::resource('users', 'UserController')->only(['index', 'show', 'destroy']);
-            Route::resource('addresses', 'AddressController')->only(['destroy']);
-        });
-
-        // ADMIN ORDERS
-        Route::group([
-            'namespace' => 'Order',
-        ], function () {
-            Route::resource('orders', 'OrderController')->only(['index', 'show']);
-        });
-    });
-
-    /**
      * User dashboard routes
      */
     Route::group([

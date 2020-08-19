@@ -4,6 +4,10 @@
     Add an option
 @endsection
 
+{{-- @section('extra-css')
+<meta name="turbolinks-visit-control" content="reload">
+@endsection --}}
+
 @section('breadcrumb')
     <x-back.breadcrumb-item route="{{ route('admin.products.index') }}" label="List of products"/>
     <x-back.breadcrumb-item route="{{ route('admin.products.edit', $product) }}" label="{{ $product->name }}"/>
@@ -32,38 +36,22 @@
                 icon="mdi-home-currency-usd"
                 required
             />
-            <div class="flex flex-col md:flex-row justify-between mt-3">
-                <div class="w-full md:w-5/12">
-                    <x-form.input-icon
-                        label="Define a product's weight"
-                        type="text"
-                        name="weight"
-                        placeholder="Product's weight"
-                        value="{{ old('weight') }}"
-                        helper="Must be in grams"
-                        icon="mdi-weight"
-                        required
-                    />
-                </div>
-                <div class="w-full md:w-5/12">
-                    <x-form.input-icon
-                        label="Define a product's quantity"
-                        type="text"
-                        name="quantity"
-                        placeholder="Product's quantity"
-                        value="{{ old('quantity') }}"
-                        icon="mdi-package-variant"
-                        helper="Product will be offline when quantity is less than 2."
-                        required
-                    />
-                </div>
-            </div>
+            <x-form.input-icon
+                label="Define a product's weight"
+                type="text"
+                name="weight"
+                placeholder="Product's weight"
+                value="{{ old('weight') }}"
+                helper="Must be in grams"
+                icon="mdi-weight"
+                required
+            />
 
             <h4 class="text-lg font-semibold mb-3">{{ __('Specific feature') }}</h4>
 
             <x-form.select 
                 label="Choose a color"
-                name="color"
+                name="color_id"
                 required
             >
                 @foreach ($colors as $color)
@@ -72,23 +60,37 @@
             </x-form.select>
             <x-form.select 
                 label="Choose a material"
-                name="material"
+                name="material_id"
                 required
             >
                 @foreach ($materials as $material)
                     <option value="{{ $material->id }}">{{ __($material->name) }}</option>
                 @endforeach
             </x-form.select>
-            <x-form.select 
-                label="Choose sizes available"
-                name="sizes[]"
-                required
-                multiple
-            >
-                @foreach ($sizes as $size)
-                    <option value="{{ $size->id }}">{{ __($size->name) }}</option>
-                @endforeach
-            </x-form.select>
+
+            <div class="">
+                <p class="text-gray-700 mb-2">Select sizes available and their quantities</p>
+                <div class="flex flex-wrap">
+                    @foreach ($sizes as $size)
+                        <div class="w-1/2 flex items-center" x-data="{showQuantityInput: false}">
+                            <x-form.checkbox 
+                                name="sizes[{{ $size->id }}]"
+                                label="{{ $size->name }}"
+                                value="{{ $size->id }}"
+                                x-on:click="showQuantityInput = !showQuantityInput"
+                            />
+                            <div x-show.transition="showQuantityInput">
+                                <x-form.input
+                                    type="text"
+                                    name="quantities[{{ $size->id }}]"
+                                    placeholder="{{ $size->name }} quantity"
+                                />
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
 
             <h4 class="text-lg font-semibold mb-3">Media</h4>
 
@@ -141,7 +143,7 @@
 @section('extra-js')
     <script>
         Turbolinks.visit(window.location.reload());
-
+        
         function goToAnotherForm(e) {
             e.preventDefault();
             const form = document.querySelector('.productForm');
@@ -149,7 +151,19 @@
             inputHidden.name = "another_form";
             inputHidden.value = true;
 
+            removeInputIfEmpty();
+
             form.submit();
         }
+
+        function removeInputIfEmpty() {
+            const inputs = document.querySelectorAll('input[name^="quantities"]');
+            inputs.forEach((input) => {
+                if (input.value === '') {
+                    input.remove();
+                }
+            });
+        }
+
     </script>
 @endsection

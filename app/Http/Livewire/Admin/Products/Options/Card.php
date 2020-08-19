@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin\Products\Options;
 
 use Livewire\Component;
-use Illuminate\Support\Str;
 use App\Models\Products\ProductOption;
 
 class Card extends Component
@@ -12,7 +11,7 @@ class Card extends Component
     public $product;
 
 
-    public function mount(ProductItemOption $productOption)
+    public function mount(ProductOption $productOption)
     {
         $this->productOption = $productOption;
         $this->product = $productOption->product;

@@ -32,9 +32,6 @@ class StoreProductOptionRequest extends FormRequest
             'price' => [
                 'required', 'numeric', 'between:100,20000',
             ],
-            'quantity' => [
-                'required', 'numeric', 'between:0,2000',
-            ],
             'images' => [
                 'required', 'array', 'min:1',
             ],
@@ -45,26 +42,20 @@ class StoreProductOptionRequest extends FormRequest
                 'required', 'array', 'min:1',
             ],
             'sizes.*' => [
-                'required', 'numeric', 
-                Rule::exists('options', 'id')->where(function ($q){
-                    $q->where('option_type_id', Option::SIZE_OPTION);
-                }),
+                'required', 'numeric', 'exists:sizes,id',
             ],
-            'color' => [
-                'required', 'numeric', 
-                Rule::exists('options', 'id')->where(function ($q){
-                    $q->where('option_type_id', Option::COLOR_OPTION);
-                }),
+            'quantities' => [
+                'required', 'array', 'min:1',
             ],
-            'material' => [
-                'required', 'numeric', 
-                Rule::exists('options', 'id')->where(function ($q){
-                    $q->where('option_type_id', Option::MATERIAL_OPTION);
-                }),
+            'quantities.*' => [
+                'nullable', 'numeric', 'between:0,20000',
             ],
-            // 'product_id' => [
-            //     'required', 'numeric', 'exists:products,id',
-            // ],
+            'color_id' => [
+                'required', 'numeric', 'exists:colors,id',
+            ],
+            'material_id' => [
+                'required', 'numeric', 'exists:materials,id',
+            ],
             'another_form' => [
                 'sometimes', 'nullable',
             ]
@@ -76,6 +67,7 @@ class StoreProductOptionRequest extends FormRequest
         $validator->after(function ($validator){
             $failedRules = $validator->failed();
             if (!empty($failedRules)) {
+                dd($failedRules);
                 session()->flash('type', 'error');
                 session()->flash('message', 'Please fill correctly the form.');
             }

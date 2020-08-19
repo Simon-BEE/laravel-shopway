@@ -20,8 +20,6 @@ class CreateProductOptionsTable extends Migration
             $table->foreignId('material_id')->constrained()->onDelete('cascade');
             $table->integer('price');
             $table->integer('weight');
-            $table->integer('quantity');
-            $table->integer('quantity_alert')->default(5);
             $table->timestamps();
         });
     }

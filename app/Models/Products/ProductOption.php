@@ -53,6 +53,23 @@ class ProductOption extends Model
         }
     }
 
+    public function getDefaultSizeAttribute()
+    {
+        return $this->sizes->first();
+    }
+
+    //
+
+    public function hasSize(int $sizeId)
+    {
+        return $this->sizes->contains('id', $sizeId);
+    }
+
+    public function whereSizeIs(int $sizeId): Size
+    {
+        return $this->sizes->firstWhere('id', $sizeId);
+    }
+
     /**
      * ? Relations
     */
@@ -74,7 +91,7 @@ class ProductOption extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class);
+        return $this->belongsToMany(Size::class)->withPivot('quantity');
     }
 
     public function images()

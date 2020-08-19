@@ -16,6 +16,7 @@ class CreateProductOptionSizeTable extends Migration
         Schema::create('product_option_size', function (Blueprint $table) {
             $table->foreignId('product_option_id')->constrained()->onDelete('cascade');
             $table->foreignId('size_id')->constrained()->onDelete('cascade');
+            $table->integer('quantity');
         });
     }
 

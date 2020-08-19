@@ -23,7 +23,13 @@ class MainSeeder extends Seeder
                 $product->product_options()->saveMany(factory(ProductOption::class, mt_rand(1, 2))->make());
                 $product->product_options->each(function ($productOption){
 
-                    $productOption->sizes()->attach([1, 2, 3, 4, 5]);
+                    $productOption->sizes()->attach([
+                        1 => ['quantity' => 10],
+                        2 => ['quantity' => 10],
+                        3 => ['quantity' => 10],
+                        4 => ['quantity' => 10],
+                        5 => ['quantity' => 10],
+                    ]);
 
                     $productOption->images()->create([
                         'filename' => 'product_' . mt_rand(1, 2) . '.jpg',

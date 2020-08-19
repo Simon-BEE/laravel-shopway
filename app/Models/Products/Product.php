@@ -97,7 +97,7 @@ class Product extends Model
 
     public function getQuantityAttribute()
     {
-        return $this->options->sum('quantity');
+        return $this->product_options->sum('quantity');
     }
 
     public function getPriceAttribute()
@@ -107,14 +107,21 @@ class Product extends Model
 
     public function getFirstOptionAttribute()
     {
-        return $this->options->first();
+        return $this->product_options->first();
     }
 
     public function getSizesAttribute()
     {
-        return $this->options->map(function ($productOption){
-            return $productOption->size;
+        $test = collect();
+        $this->product_options->each(function ($productOption) use ($test){
+            return $productOption->sizes->each(function ($size) use (&$test){
+                if (!$test->contains('id', $size->id)) {
+                    $test->push($size);
+                }
+            });
         });
+        
+        return $test;
     }
 
     /**

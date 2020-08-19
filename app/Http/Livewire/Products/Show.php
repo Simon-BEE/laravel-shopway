@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Products;
 
 use App\Helpers\Cart;
-use App\Models\Option;
 use App\Models\Products\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -22,9 +21,9 @@ class Show extends Component
     {
         $this->product = $product;
         $this->sizes = $sizes;
-        dd($product->product_options);
         $this->selectedProduct = $product->first_option;
-        // $this->selectedSize = $this->selectedProduct->default_size;
+        $this->selectedSize = $this->selectedProduct->default_size;
+        // dd($this->selectedSize);
         // $this->selectedImage = $this->selectedProduct->main_image;
     }
 
@@ -34,24 +33,24 @@ class Show extends Component
             return;
         }
 
-        $this->selectedProduct = ProductItemOption::findOrFail($productOptionId);
+        $this->selectedProduct = ProductOption::findOrFail($productOptionId);
 
-        // if (!$this->selectedProduct->hasSize($this->selectedSize->id)) {
-        //     $this->selectedSize = $this->selectedProduct->default_size;
-        // }
+        if (!$this->selectedProduct->hasSize($this->selectedSize->id)) {
+            $this->selectedSize = $this->selectedProduct->default_size;
+        }
     }
 
     public function selectSizeOption(int $sizeId)
     {
-        if ($this->selectedProduct->size->id === $sizeId) {
+        if ($this->selectedSize->id === $sizeId) {
             return;
         }
 
-        if (!$this->product->hasSize($sizeId)) {
+        if (!$this->selectedProduct->hasSize($sizeId)) {
             return;
         }
 
-        $this->selectedProduct = $this->product->getOptionWhere('size', $sizeId);
+        $this->selectedSize = $this->selectedProduct->whereSizeIs($sizeId);
     }
 
     public function addToCart()

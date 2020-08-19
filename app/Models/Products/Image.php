@@ -10,7 +10,7 @@ class Image extends Model
 
     public function setAsMain()
     {
-        $oldMainImage = $this->getMainImageByProduct($this->product->id);
+        $oldMainImage = $this->getMainImageByProduct($this->product_option->id);
 
         $oldMainImage->update([
             'is_main' => false,
@@ -21,9 +21,9 @@ class Image extends Model
         ]);
     }
 
-    public function getMainImageByProduct(int $productId)
+    public function getMainImageByProduct(int $productOptionId)
     {
-        return Image::where('product_option_id', $productId)->where('is_main', true)->first();
+        return Image::where('product_option_id', $productOptionId)->where('is_main', true)->first();
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App\Http\Livewire\Admin\Products\Options;
 
 use App\Models\Products\Image;
-use App\Models\Option;
 use App\Models\Products\Color;
 use App\Models\Products\Material;
 use App\Models\Products\Product;
@@ -118,23 +117,6 @@ class Edit extends Component
         ]);
     }
 
-    public function updatedQuantity(string $newValue)
-    {
-        $this->validate([
-            'quantity' => 'required|numeric|between:1,2000',
-        ]);
-
-        $this->productOption->update([
-            'quantity' => $newValue,
-        ]);
-
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s quantity has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
-    }
-
     public function updatedWeight(string $newValue)
     {
         $this->validate([
@@ -152,9 +134,21 @@ class Edit extends Component
         ]);
     }
 
-    public function updateSize(int $sizeId)
+    public function updateSize(int $sizeId, $value)
     {
-        $this->productOption->product_options()->toggle($sizeId);
+        if ($value < 0 || $value > 20000) {
+            return;
+        }
+
+        if ($this->productOption->hasSize($sizeId)) {
+            if ($value > 0) {
+                $this->productOption->sizes()->where('id', $sizeId)->first()->pivot->update(['quantity' => $value]);
+            }else{
+                $this->productOption->sizes()->detach($sizeId);
+            }
+        }else{
+            $this->productOption->sizes()->attach([$sizeId => ['quantity' => $value]]);
+        }
 
         $this->emit('flashMessage', [
             'type' => 'success',
@@ -163,12 +157,30 @@ class Edit extends Component
         ]);
     }
 
+    public function uncheckIfNeeded(int $sizeId, bool $checked)
+    {
+        if ($checked) {
+            return;
+        }
+
+        $this->productOption->sizes()->detach($sizeId);
+
+        $this->emit('flashMessage', [
+            'type' => 'success',
+            'message' => 'Size has been removed successfully.',
+            'id' => Str::random(10)
+        ]);
+    }
+
     public function updateMaterial(int $materialId)
     {
-        $oldMaterial = Option::allMaterials()->where('id', $this->productOption->material->id)->first();
+        if ($this->productOption->material->id === $materialId) {
+            return;
+        }
 
-        $this->productOption->product_options()->detach($oldMaterial->id);
-        $this->productOption->product_options()->attach($materialId);
+        $this->productOption->update([
+            'material_id' => Material::findOrFail($materialId)->id,
+        ]);
 
         $this->emit('flashMessage', [
             'type' => 'success',
@@ -179,10 +191,13 @@ class Edit extends Component
 
     public function updateColor(int $colorId)
     {
-        $oldColor = Option::allColors()->where('id', $this->productOption->color->id)->first();
+        if ($this->productOption->color->id === $colorId) {
+            return;
+        }
 
-        $this->productOption->product_options()->detach($oldColor->id);
-        $this->productOption->product_options()->attach($colorId);
+        $this->productOption->update([
+            'color_id' => Color::findOrFail($colorId)->id,
+        ]);
 
         $this->emit('flashMessage', [
             'type' => 'success',

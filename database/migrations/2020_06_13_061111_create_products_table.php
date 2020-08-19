@@ -18,10 +18,6 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description');
-            // $table->integer('price');
-            // $table->integer('weight');
-            // $table->integer('quantity');
-            // $table->integer('quantity_alert')->default(5);
             $table->boolean('active')->default(false);
             $table->timestamps();
         });

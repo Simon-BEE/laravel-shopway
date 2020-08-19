@@ -27,13 +27,14 @@ class ProductOptionController extends Controller
         $images = $validatedData->pull('images');
         $quantities = $validatedData->pull('quantities');
 
-        $validatedData->forget('sizes');
-
-        $sizesArray = $this->prepareSizeData($quantities);
-
+        // $validatedData->forget('sizes');
         $productOption = $product->product_options()->create($validatedData->toArray());
 
-        $productOption->sizes()->attach($sizesArray);
+        if (!empty($quantities)) {
+            $sizesArray = $this->prepareSizeData($quantities);
+
+            $productOption->sizes()->attach($sizesArray);
+        }
 
         $this->attachAndPushImages($productOption, $images);
 

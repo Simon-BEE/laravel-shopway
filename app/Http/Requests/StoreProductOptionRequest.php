@@ -38,15 +38,6 @@ class StoreProductOptionRequest extends FormRequest
             'images.*' => [
                 'required', 'image', 'mimes:png,jpg,jpeg', 'max:2200',
             ],
-            'sizes' => [
-                'required', 'array', 'min:1',
-            ],
-            'sizes.*' => [
-                'required', 'numeric', 'exists:sizes,id',
-            ],
-            'quantities' => [
-                'required', 'array', 'min:1',
-            ],
             'quantities.*' => [
                 'nullable', 'numeric', 'between:0,20000',
             ],
@@ -67,7 +58,7 @@ class StoreProductOptionRequest extends FormRequest
         $validator->after(function ($validator){
             $failedRules = $validator->failed();
             if (!empty($failedRules)) {
-                dd($failedRules);
+                // dd($failedRules);
                 session()->flash('type', 'error');
                 session()->flash('message', 'Please fill correctly the form.');
             }

@@ -10,39 +10,23 @@
         required
         wire:model.lazy="price"
     />
-    <div class="flex flex-col md:flex-row justify-between mt-3">
-        <div class="w-full md:w-5/12">
-            <x-form.input-icon
-                label="Define a product option's weight"
-                type="text"
-                name="weight"
-                placeholder="Product option's weight"
-                value="{{ old('weight') ?? $productOption->weight }}"
-                helper="Must be in grams"
-                icon="mdi-weight"
-                required
-                wire:model.lazy="weight"
-            />
-        </div>
-        <div class="w-full md:w-5/12">
-            <x-form.input-icon
-                label="Define a product option's quantity"
-                type="text"
-                name="quantity"
-                placeholder="Product option's quantity"
-                value="{{ old('quantity') ?? $productOption->quantity }}"
-                icon="mdi-package-variant"
-                required
-                wire:model.lazy="quantity"
-            />
-        </div>
-    </div>
+    <x-form.input-icon
+        label="Define a product option's weight"
+        type="text"
+        name="weight"
+        placeholder="Product option's weight"
+        value="{{ old('weight') ?? $productOption->weight }}"
+        helper="Must be in grams"
+        icon="mdi-weight"
+        required
+        wire:model.lazy="weight"
+    />
 
     <h4 class="text-lg font-semibold mb-3">{{ __('Specific feature') }}</h4>
 
     <x-form.select 
         label="Choose a color"
-        name="color"
+        name="color_id"
         required
         wire:change="updateColor($event.target.value)"
     >
@@ -52,7 +36,7 @@
     </x-form.select>
     <x-form.select 
         label="Choose a material"
-        name="material"
+        name="material_id"
         required
         wire:change="updateMaterial($event.target.value)"
     >
@@ -60,30 +44,44 @@
             <option value="{{ $material->id }}" {{ $productOption->material->id === $material->id ? 'selected' : '' }} >{{ __($material->name) }}</option>
         @endforeach
     </x-form.select>
-    {{-- <x-form.select 
-        label="Choose sizes available"
-        name="sizes[]"
-        required
-        multiple
-    >
-        @foreach ($sizes as $size)
-            <option value="{{ $size->id }}" {{ $productOption->hasSize($size->id) ? 'selected' : '' }}>{{ __($size->name) }}</option>
-        @endforeach
-    </x-form.select> --}}
-
 
     <div class="">
-        <p class="text-gray-700 mb-2">Select sizes available</p>
+        <p class="text-gray-700 mb-2">Select sizes available and their quantities</p>
         <div class="flex flex-wrap">
             @foreach ($sizes as $size)
-                <x-form.checkbox 
-                    name="categories[{{ $size->id }}]"
-                    label="{{ $size->name }}"
-                    value="{{ $size->id }}" 
-                    checked="{{ $productOption->hasSize($size->id) ? true : false }}"
-                    wire:change="updateSize({{ $size->id }})"
-                    wire:poll.2500ms="$refresh"
-                />
+                <div class="w-1/2 flex items-center" x-data="{showQuantityInput: false}">
+                    <x-form.checkbox 
+                        name="sizes[{{ $size->id }}]"
+                        label="{{ $size->name }}"
+                        value="{{ $size->id }}"
+                        checked="{{ $productOption->hasSize($size->id) ? true : false }}"
+                        x-on:click="showQuantityInput = !showQuantityInput"
+                        wire:click="uncheckIfNeeded({{ $size->id }}, $event.target.checked)"
+                    />
+                    @foreach ($productOption->sizes as $sizeOption)
+                        @if ($sizeOption->id === $size->id)
+                            <div>
+                                <x-form.input
+                                    type="text"
+                                    name="quantities[{{ $size->id }}]"
+                                    placeholder="{{ $size->name }} quantity"
+                                    value="{{ $sizeOption->pivot->quantity }}"
+                                    wire:change="updateSize({{ $size->id }}, $event.target.value)"
+                                />
+                            </div>
+                        @endif
+                    @endforeach
+                    @if (!$productOption->hasSize($size->id))
+                        <div x-show.transition="showQuantityInput">
+                            <x-form.input
+                                type="text"
+                                name="quantities[{{ $size->id }}]"
+                                placeholder="{{ $size->name }} quantity"
+                                wire:change="updateSize({{ $size->id }}, $event.target.value)"
+                            />
+                        </div>
+                    @endif
+                </div>
             @endforeach
         </div>
     </div>

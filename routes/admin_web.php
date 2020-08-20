@@ -61,5 +61,7 @@ Route::group([
 ], function () {
     Route::get('/', 'IndexController')->name('index');
     Route::get('/backup', 'BackupController@index')->name('backup.index');
+    Route::post('/backup/download', 'BackupController@download')->name('backup.download');
     Route::post('/backup/database', 'BackupController@database')->name('backup.database');
+    Route::post('/backup/clean', 'BackupController@clean')->name('backup.clean');
 });

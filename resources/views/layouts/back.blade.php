@@ -41,7 +41,7 @@
                 <a class="flex items-center mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.dashboard')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif" href="{{ route('admin.dashboard') }}">
                     <span class="mdi mdi-chart-pie text-xl"></span>
 
-                    <span class="mx-4">Dashboard</span>
+                    <span class="mx-4">{{ __('Dashboard') }}</span>
                 </a>
 
                 {{-- dropdown link --}}
@@ -49,17 +49,17 @@
                     <div class="flex items-center">
                         <span class="mdi mdi-cart-arrow-down text-xl"></span>
 
-                        <span class="mx-4">Products</span>
+                        <span class="mx-4">{{ __('Products') }}</span>
                     </div>
                     <ul class="flex flex-col py-2" x-show.transition="dropdownProducts">
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="{{ route('admin.products.index') }}"><span class="mr-4">&mdash;</span> Show list</a>
+                            <a class="block py-2" href="{{ route('admin.products.index') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Show list</a>
                         </li>
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="{{ route('admin.products.create') }}"><span class="mr-4">&mdash;</span> Add new one</a>
+                            <a class="block py-2" href="{{ route('admin.products.create') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Add new one</a>
                         </li>
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="{{ route('admin.products.categories.index') }}"><span class="mr-4">&mdash;</span> Categories</a>
+                            <a class="block py-2" href="{{ route('admin.products.categories.index') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Categories</a>
                         </li>
                     </ul>
                 </div>
@@ -68,17 +68,17 @@
                     <div class="flex items-center">
                         <span class="mdi mdi-basket-outline text-xl"></span>
 
-                        <span class="mx-4">Sales</span>
+                        <span class="mx-4">{{ __('Sales') }}</span>
                     </div>
                     <ul class="flex flex-col py-2" x-show.transition="dropdownSales">
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="{{ route('admin.orders.index') }}"><span class="mr-4">&mdash;</span> Orders</a>
+                            <a class="block py-2" href="{{ route('admin.orders.index') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Orders</a>
                         </li>
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Payments</a>
+                            <a class="block py-2" href="#"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Payments</a>
                         </li>
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Shipments</a>
+                            <a class="block py-2" href="#"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Shipments</a>
                         </li>
                     </ul>
                 </div>
@@ -87,23 +87,33 @@
                     <div class="flex items-center">
                         <span class="mdi mdi-account-group-outline text-xl"></span>
 
-                        <span class="mx-4">Users</span>
+                        <span class="mx-4">{{ __('Users') }}</span>
                     </div>
                     <ul class="flex flex-col py-2" x-show.transition="dropdownUsers">
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="{{ route('admin.users.index') }}"><span class="mr-4">&mdash;</span> Show list</a>
+                            <a class="block py-2" href="{{ route('admin.users.index') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Show list</a>
                         </li>
                         <li class="hover:bg-gray-500">
-                            <a class="block py-2" href="#"><span class="mr-4">&mdash;</span> Add new one</a>
+                            <a class="block py-2" href="#"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Add new one</a>
                         </li>
                     </ul>
                 </div>
-                {{-- normal link --}}
-                <a href="{{ route('admin.settings.index') }}" class="flex items-center mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.settings.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif">
-                    <span class="mdi mdi-cellphone-cog text-xl"></span>
+                {{-- dropdown link --}}
+                <div class="flex flex-col mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.settings.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif cursor-pointer" x-data="{ dropdownSettings : false }" x-on:click="dropdownSettings = !dropdownSettings">
+                    <div class="flex items-center">
+                        <span class="mdi mdi-cellphone-cog text-xl"></span>
 
-                    <span class="mx-4">Settings</span>
-                </a>
+                        <span class="mx-4">{{ __('Settings') }}</span>
+                    </div>
+                    <ul class="flex flex-col py-2" x-show.transition="dropdownSettings">
+                        <li class="hover:bg-gray-500">
+                            <a class="block py-2" href="{{ route('admin.settings.index') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Settings Panel</a>
+                        </li>
+                        <li class="hover:bg-gray-500">
+                            <a class="block py-2" href="{{ route('admin.settings.backup.index') }}"><span class="mdi mdi-arrow-right-drop-circle-outline mr-4 ml-1"></span> Backup Manager</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </div>
         <div class="flex-1 flex flex-col overflow-hidden">

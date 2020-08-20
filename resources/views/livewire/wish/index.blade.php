@@ -25,10 +25,11 @@
                             {{ Format::priceWithTaxAndCurrency($wish->product->price) }}
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                            <button href="#" class="text-xl text-blue-500 hover:text-blue-900 mr-6" title="Add to cart" wire:click="addToCart({{ $wish->product->id }})">
-                                <span class="mdi mdi-cart-outline"></span>
-                            </button>
-                            <button href="#" class="text-xl text-red-500 hover:text-red-900" title="Remove from wishlist" wire:click="removeFromWishlist({{ $wish->product->id }})">
+                            <a href="{{ route('products.show', $wish->product) }}" class="text-blue-500 hover:text-blue-600 inline-flex items-center mr-6">
+                                <span class="text-xl mdi mdi-tune mr-3"></span>
+                                {{ __('Select options') }}
+                            </a>
+                            <button class="text-xl text-red-500 hover:text-red-900" title="Remove from wishlist" wire:click="removeFromWishlist({{ $wish->product->id }})">
                                 <span class="mdi mdi-delete-outline"></span>
                             </button>
                         </td>

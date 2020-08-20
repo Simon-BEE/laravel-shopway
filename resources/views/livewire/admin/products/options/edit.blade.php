@@ -62,7 +62,7 @@
                         @if ($sizeOption->id === $size->id)
                             <div>
                                 <x-form.input
-                                    type="text"
+                                    type="number"
                                     name="quantities[{{ $size->id }}]"
                                     placeholder="{{ $size->name }} quantity"
                                     value="{{ $sizeOption->pivot->quantity }}"

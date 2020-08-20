@@ -18,23 +18,23 @@ class SetUserCartToDatabase
      */
     public function handle(UserIsLogout $event)
     {
-        if (!$cart = Cart::content()) {
-            if ($event->user->hasAlreadyCart) {
-                $event->user->cart()->delete();
-            }
-            return;
-        }
+        // if (!$cart = Cart::content()) {
+        //     if ($event->user->hasAlreadyCart) {
+        //         $event->user->cart()->delete();
+        //     }
+        //     return;
+        // }
 
-        if ($event->user->hasAlreadyCart) {
-            $event->user->cart()->update([
-                'content' => serialize($cart)
-            ]);
-            return;
-        }
+        // if ($event->user->hasAlreadyCart) {
+        //     $event->user->cart()->update([
+        //         'content' => serialize($cart)
+        //     ]);
+        //     return;
+        // }
 
-        CartModel::create([
-            'user_id' => $event->user->id,
-            'content' => serialize($cart),
-        ]);
+        // CartModel::create([
+        //     'user_id' => $event->user->id,
+        //     'content' => serialize($cart),
+        // ]);
     }
 }

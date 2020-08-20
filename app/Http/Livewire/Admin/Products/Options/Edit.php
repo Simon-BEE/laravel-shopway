@@ -2,20 +2,16 @@
 
 namespace App\Http\Livewire\Admin\Products\Options;
 
-use App\Models\Products\Image;
-use App\Models\Products\Color;
-use App\Models\Products\Material;
-use App\Models\Products\Product;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
-use App\Models\Products\ProductOption;
-use App\Models\Products\Size;
+use App\Models\Products\{Product, ProductOption, Size, Color, Material, Image};
 use App\Traits\Upload\ImageUpload;
+use App\Traits\Validator\FieldWithLivewire;
 
 class Edit extends Component
 {
-    use ImageUpload, WithFileUploads;
+    use ImageUpload, WithFileUploads, FieldWithLivewire;
 
     public $product;
     public $productOption;
@@ -140,6 +136,10 @@ class Edit extends Component
             return;
         }
 
+        if (!$this->isRequiredNumericAndExists('size_id', $sizeId, 'sizes')) {
+            return;
+        }
+
         if ($this->productOption->hasSize($sizeId)) {
             if ($value > 0) {
                 $this->productOption->sizes()->where('id', $sizeId)->first()->pivot->update(['quantity' => $value]);
@@ -163,6 +163,10 @@ class Edit extends Component
             return;
         }
 
+        if (!$this->isRequiredNumericAndExists('size_id', $sizeId, 'sizes')) {
+            return;
+        }
+
         $this->productOption->sizes()->detach($sizeId);
 
         $this->emit('flashMessage', [
@@ -178,8 +182,12 @@ class Edit extends Component
             return;
         }
 
+        if (!$this->isRequiredNumericAndExists('material_id', $materialId, 'materials')) {
+            return;
+        }
+
         $this->productOption->update([
-            'material_id' => Material::findOrFail($materialId)->id,
+            'material_id' => $materialId,
         ]);
 
         $this->emit('flashMessage', [
@@ -195,8 +203,12 @@ class Edit extends Component
             return;
         }
 
+        if (!$this->isRequiredNumericAndExists('color_id', $colorId, 'colors')) {
+            return;
+        }
+
         $this->productOption->update([
-            'color_id' => Color::findOrFail($colorId)->id,
+            'color_id' => $colorId,
         ]);
 
         $this->emit('flashMessage', [

@@ -5,35 +5,18 @@ namespace App\Http\Livewire\Admin\Products\Categories;
 use Livewire\Component;
 use App\Models\Products\Category;
 use App\Traits\Classify\IsFilterableWithLivewire;
+use App\Traits\Validator\FieldWithLivewire;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 
 class Index extends Component
 {
-    use WithPagination, IsFilterableWithLivewire;
+    use WithPagination, IsFilterableWithLivewire, FieldWithLivewire;
 
     public function updateCategory(int $id, string $value)
-    {        
-        $validator = Validator::make([
-                'id' => $id,
-                'name' => $value,
-            ], [
-                'id' => 'required|numeric|exists:categories,id',
-                'name' => [
-                    'required', 'string', 'between:3,150', 
-                    Rule::unique('categories', 'name')->ignore($id)
-                ],
-        ]);
-
-        if ($validator->fails()) {
-            $this->emit('flashMessage', [
-                'type' => 'error',
-                'message' => 'Please fill the form correctly.',
-                'id' => Str::random(10)
-            ]);
-
+    {
+        if (!$this->isRequiredNumericAndExists('id', $id, 'categories') || 
+            !$this->isUnique('name', $value, 'categories', $id)) {
             return;
         }
 

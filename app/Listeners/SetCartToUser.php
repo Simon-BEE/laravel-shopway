@@ -17,19 +17,19 @@ class SetCartToUser
      */
     public function handle(UserIsLogged $event): void
     {
-        if (!$event->user->hasAlreadyCart) {
-            return;
-        }
+        // if (!$event->user->hasAlreadyCart) {
+        //     return;
+        // }
 
-        $cartFromDatabase = collect($event->user->cart->content);
+        // $cartFromDatabase = collect($event->user->cart->content);
 
-        if (!$cartSession = Cart::content()) {
-            $this->addItemsToCart($cartFromDatabase);
-            return;
-        }
+        // if (!$cartSession = Cart::content()) {
+        //     $this->addItemsToCart($cartFromDatabase);
+        //     return;
+        // }
 
-        $cart = collect($cartSession)->union($cartFromDatabase);
-        $this->addItemsToCart($cart);
+        // $cart = collect($cartSession)->union($cartFromDatabase);
+        // $this->addItemsToCart($cart);
     }
 
     /**
@@ -40,10 +40,10 @@ class SetCartToUser
      */
     private function addItemsToCart(Collection $cart): void
     {
-        $cart->each(function ($item, $productId){
-            if ($product = Product::find($productId)) {
-                return Cart::add($product);
-            }
-        });
+        // $cart->each(function ($item, $productId){
+        //     if ($product = Product::find($productId)) {
+        //         return Cart::add($product);
+        //     }
+        // });
     }
 }

@@ -20,10 +20,9 @@ Soberly called **Shopway**
 - [ ] Products filter
 - [ ] Coupon system
 - [ ] Manage order status
+- [ ] Backup database
 
 Admin : edit delete orders    
 Admin : edit users    
 Admin : possibility to refund total or part of a payment
 Implement paypal
-
-!!! Size product quantity ':()

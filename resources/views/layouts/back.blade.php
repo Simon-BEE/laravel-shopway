@@ -99,7 +99,7 @@
                     </ul>
                 </div>
                 {{-- normal link --}}
-                <a class="flex items-center mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.settings')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif" href="#">
+                <a href="{{ route('admin.settings.index') }}" class="flex items-center mt-4 py-2 px-6 border-l-4 @if(Route::is('admin.settings.*')) bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100 @else border-gray-900 text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100 @endif">
                     <span class="mdi mdi-cellphone-cog text-xl"></span>
 
                     <span class="mx-4">Settings</span>

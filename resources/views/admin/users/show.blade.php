@@ -10,13 +10,23 @@
 @endsection
 
 @section('content')
+<x-modal title="Are you sure ?">
+    <p>{{ __('Are you sure you want to delete this user?') }}</p>
+    <div class="mt-5 flex justify-end">
+        <x-form.button classDiv="none" class="p-2 mr-3 bg-gray-200 text-gray-700 hover:bg-gray-300" x-on:click="isDialogOpen = false">{{ __('Cancel') }}</x-form.button>
+        <x-form.form-button action="#" method="DELETE" class="p-2 rounded bg-red-500 text-white hover:bg-red-600" x-ref="modalDelete">
+            {{ __('Delete this user') }}
+        </x-form.form-button>
+    </div>
+</x-modal>
+
 <section class="mb-12 min-h-full px-6 py-10 relative bg-white">
     <div class="absolute top-0 right-0 mr-2 mt-2">
         <a href="#" class="bg-white p-2 rounded inline-flex text-orange-400 hover:text-orange-600 hover:bg-gray-100 mr-2">
             <span class="text-lg mdi mdi-pencil-outline"></span>
         </a>
         <button type="button" class="bg-white p-2 rounded inline-flex text-red-400 hover:text-red-600 hover:bg-gray-100">
-            <span class="text-lg mdi mdi-delete-outline" data-route="#" x-on:click="setAction($event); isDialogOpen = true;"></span>
+            <span class="text-lg mdi mdi-delete-outline" data-route="{{ route('admin.users.destroy', $user) }}" x-on:click="setAction($event); isDialogOpen = true;"></span>
         </button>
     </div>
     <div class="flex flex-col text-center w-full mb-10 md:mb-20">
@@ -115,4 +125,12 @@
     </section>
 </section>
 
+@endsection
+
+@section('extra-js')
+    <script>
+        function setAction(event) {
+            document.querySelector('.modal-element form').action = event.target.getAttribute('data-route');
+        }
+    </script>
 @endsection

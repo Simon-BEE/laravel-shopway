@@ -51,3 +51,15 @@ Route::group([
 ], function () {
     Route::resource('orders', 'OrderController')->only(['index', 'show']);
 });
+
+// ADMIN SETTINGS
+
+Route::group([
+    'namespace' => 'Settings',
+    'as' => 'settings.',
+    'prefix' => 'settings',
+], function () {
+    Route::get('/', 'IndexController')->name('index');
+    Route::get('/backup', 'BackupController@index')->name('backup.index');
+    Route::post('/backup/database', 'BackupController@database')->name('backup.database');
+});

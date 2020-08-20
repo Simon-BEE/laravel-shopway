@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "livewire/livewire": "^1.2",
+        "spatie/laravel-backup": "^6.11",
         "stripe/stripe-php": "^7.45"
     },
     "require-dev": {

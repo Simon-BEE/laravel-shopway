@@ -37,7 +37,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return back()->with([
+        return redirect()->route('admin.users.index')->with([
             'type' => 'success',
             'message' => 'User has been removed successfully.'
         ]);

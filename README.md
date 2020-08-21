@@ -27,6 +27,5 @@ Admin : edit users
 Admin : possibility to refund total or part of a payment
 Implement paypal
 
-Create admin from terminal    
 Adjust quantity when ordered    
 Refresh status when creating not work    

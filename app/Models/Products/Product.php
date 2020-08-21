@@ -158,6 +158,25 @@ class Product extends Model
         return $this->sizes->contains('id', $sizeId);
     }
 
+    public function hasColor(int $colorId): bool
+    {
+        return $this->product_options()->where(function ($productOption) use($colorId){
+            $productOption->where('color_id', $colorId);
+        })->exists();
+    }
+
+    public function hasMaterial(int $materialId): bool
+    {
+        return $this->product_options()->where(function ($productOption) use($materialId){
+            $productOption->where('material_id', $materialId);
+        })->exists();
+    }
+
+    public function hasOptions(int $colorId, int $materialId): bool
+    {
+        return ($this->hasColor($colorId) && $this->hasMaterial($materialId));
+    }
+
     public function refreshStatus(): void
     {
         if ($this->quantity > 1 && !$this->active) {

@@ -13,7 +13,7 @@ class CreateController extends Controller
     public function create()
     {
         $categories = Category::all();
-
+        
         if ($categories->isEmpty()) {
             return redirect()->route('admin.products.categories.index')->with([
                 'type' => 'error',

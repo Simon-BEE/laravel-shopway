@@ -37,4 +37,9 @@ class ProductOptionObserver
             $image->delete();
         });
     }
+
+    public function deleted(ProductOption $productOption)
+    {
+        $productOption->product->refreshStatus();
+    }
 }

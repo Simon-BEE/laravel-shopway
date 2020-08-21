@@ -27,7 +27,13 @@ class ProductOptionController extends Controller
         $images = $validatedData->pull('images');
         $quantities = $validatedData->pull('quantities');
 
-        // $validatedData->forget('sizes');
+        if ($product->hasOptions($validatedData->get('color_id'), $validatedData->get('material_id'))) {
+            return redirect()->route('admin.products.options.create', $product)->with([
+                'type' => 'error',
+                'message' => 'Product option combinaison already exists.'
+            ]);
+        }
+
         $productOption = $product->product_options()->create($validatedData->toArray());
 
         if (!empty($quantities)) {

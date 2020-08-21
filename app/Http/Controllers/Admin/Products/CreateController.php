@@ -12,8 +12,17 @@ class CreateController extends Controller
 {
     public function create()
     {
+        $categories = Category::all();
+
+        if ($categories->isEmpty()) {
+            return redirect()->route('admin.products.categories.index')->with([
+                'type' => 'error',
+                'message' => 'Add some categories before continue.'
+            ]);
+        }
+
         return view('admin.products.create', [
-            'categories' => Category::all(),
+            'categories' => $categories,
         ]);
     }
 

@@ -29,10 +29,10 @@ class Cart
 
     public static function shipping(): Shipping
     {
-        $totalWeight = self::content()->map(function ($item){
-            return collect($item)->map(function ($option, $optionId){
+        $totalWeight = self::content()->map(function ($cartProductOption, $optionId){
+            return collect($cartProductOption)->map(function ($cartItem, $sizeId) use ($optionId){
                 $productOption = self::model($optionId);
-                return $option['quantity'] * $productOption->weight;
+                return $cartItem['quantity'] * $productOption->weight;
             })->sum();
         })->sum();
 

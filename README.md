@@ -30,3 +30,4 @@ Implement paypal
 Cache button    
 Create admin from terminal    
 Adjust quantity when ordered    
+Refresh status when creating not work    

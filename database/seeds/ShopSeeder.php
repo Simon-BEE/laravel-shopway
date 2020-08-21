@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Page;
 use App\Models\Shop;
 use Illuminate\Database\Seeder;
 

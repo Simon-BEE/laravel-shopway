@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Settings\OptimizerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,4 +65,7 @@ Route::group([
     Route::post('/backup/download', 'BackupController@download')->name('backup.download');
     Route::post('/backup/database', 'BackupController@database')->name('backup.database');
     Route::post('/backup/clean', 'BackupController@clean')->name('backup.clean');
+
+    Route::get('cache/clear', 'OptimizerController@clear')->name('optimizer.clear');
+    Route::get('cache', 'OptimizerController@cache')->name('optimizer.cache');
 });

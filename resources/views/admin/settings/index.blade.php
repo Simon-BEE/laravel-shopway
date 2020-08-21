@@ -27,14 +27,24 @@
 
     <div class="mt-6 flex flex-col md:flex-row justify-between">
         <article class="bg-gray-300 p-4">
-            <h4 class="text-xl text-center uppercase font-semibold">Backup</h4>
+            <h4 class="text-xl text-center uppercase font-semibold">{{ __('Backup') }}</h4>
             <p class="text-center my-3">
-                <a href="{{ route('admin.settings.backup.index') }}" class="text-blue-500 hover:underline">Show all backup</a>
+                <a href="{{ route('admin.settings.backup.index') }}" class="text-blue-500 hover:underline">{{ __('Show all backup') }}</a>
             </p>
             <button type="button" class="bg-gray-200 text-gray-700 inline-flex flex-col justify-center items-center p-4 mb-2 transition-colors duration-200 hover:bg-gray-700 hover:text-blue-300" data-route="{{ route('admin.settings.backup.database') }}" x-on:click="setAction($event); isDialogOpen = true;">
                 <span class="mdi mdi-database-sync mb-2 text-3xl"></span>
                 <p>{{ __('Backup database') }}.</p>
             </button>
+        </article>
+        <article class="bg-gray-300 p-4 flex flex-col justify-center w-1/5">
+            <a href="{{ route('admin.settings.optimizer.cache') }}" class="bg-gray-200 text-gray-700 inline-flex flex-col justify-center items-center p-1 mb-2 transition-colors duration-200 hover:bg-gray-700 hover:text-blue-300" data-turbolinks="false">
+                <span class="mdi mdi-clipboard-file-outline mb-2 text-xl"></span>
+                {{ __('Renew cache') }}
+            </a>
+            <a href="{{ route('admin.settings.optimizer.clear') }}" class="bg-gray-200 text-gray-700 inline-flex flex-col justify-center items-center p-1 mb-2 transition-colors duration-200 hover:bg-gray-700 hover:text-blue-300" data-turbolinks="false">
+                <span class="mdi mdi-autorenew mb-2 text-xl"></span>
+                {{ __('Clear cache') }}
+            </a>
         </article>
     </div>
 

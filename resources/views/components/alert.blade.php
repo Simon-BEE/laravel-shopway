@@ -8,9 +8,9 @@
                     <span class="mdi mdi-alert-remove-outline text-2xl"></span>
                 @endif
             </span>
-            <span class="inline-flex px-2 leading-4 text-gray-700">
-                {{ $slot }}
-            </span>
+            <p class="inline-flex px-2 leading-4 text-gray-700">
+                {!! nl2br(e($slot)) !!}
+            </p>
         </div>
     </div>
 </div>

@@ -43,7 +43,7 @@
 @section('extra-js')
     <script>
         function setAction(event) {
-            document.querySelector('.modal-element form').action = event.target.getAttribute('data-route');
+            document.querySelector('.modal-element form').action = event.currentTarget.getAttribute('data-route');
         }
     </script>
 @endsection

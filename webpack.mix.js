@@ -22,14 +22,14 @@ mix.js('resources/js/app.js', 'public/js')
 if (mix.inProduction()) {
   mix
     .purgeCss()
-    .options({
-        postCss: [
-            require('autoprefixer')({
-                browsers: [
-                    'last 30 versions',
-                ]
-            })
-        ]
-    })
+    // .options({
+    //     postCss: [
+    //         require('autoprefixer')({
+    //             browsers: [
+    //                 'last 30 versions',
+    //             ]
+    //         })
+    //     ]
+    // })
     .version();
 }

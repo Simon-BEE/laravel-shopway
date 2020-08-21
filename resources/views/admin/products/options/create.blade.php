@@ -142,8 +142,6 @@
 
 @section('extra-js')
     <script>
-        Turbolinks.visit(window.location.reload());
-        
         function goToAnotherForm(e) {
             e.preventDefault();
             const form = document.querySelector('.productForm');

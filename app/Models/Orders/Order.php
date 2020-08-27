@@ -16,6 +16,11 @@ class Order extends Model
         return $query->where('user_id', $user ? $user->id : auth()->id());
     }
 
+    public function scopeLastOrderByUser(Builder $query, int $userId = null)
+    {
+        return $query->where('user_id', $userId ? $userId : auth()->id())->latest()->first();
+    }
+
     /**
      * ? ATTRIBUTES
      */

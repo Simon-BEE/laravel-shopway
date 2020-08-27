@@ -43,7 +43,7 @@ class GenerateCacheCompletely extends Command
         $this->call('view:cache');
 
         $this->info('Everything has been cached!');
-        
+
         return 0;
     }
 }

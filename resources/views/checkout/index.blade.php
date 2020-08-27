@@ -21,7 +21,7 @@
 @section('extra-js')
 <script src="https://js.stripe.com/v3/"></script>
     <script>
-        const stripe = Stripe('pk_test_51HAHRjJ3i26ImFyQUeuMgpNDr9qsWVFsxrOC8OyarC4JzlYTuOKfXlhLuTG4NdCQf6sERLl5Qds0O4mHV9YxHidH00sMDO0xZk');
+        const stripe = Stripe("{{ config('shop.stripe.public_key') }}");
         const elements = stripe.elements();
         const cardError = document.querySelector("#card-error");
         const style = {
@@ -55,7 +55,7 @@
                 paymentProccess(stripe, card);
             }
         });
-        
+
         const paymentProccess = (stripe, card) => {
             loading();
 
@@ -67,7 +67,7 @@
                 }
             }).then((result) => {
                 result.json().then((r) => { 
-                    
+
                     stripe.confirmCardPayment(r.clientSecret, {
                         payment_method: {
                             card: card
@@ -115,7 +115,7 @@
                 window.location.href = "{{ route('checkout.error') }}";
             });
         };
-        
+
         const loading = (isLoading = true) => {
             if (isLoading) {
                 buttonForm.disabled = true;

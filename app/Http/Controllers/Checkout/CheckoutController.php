@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers\Checkout;
 
-use Illuminate\Support\Facades\Mail;
+use App\Events\OrderPerformed;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
 use App\Http\Controllers\Controller;
-use App\Mail\ConfirmOrderMail;
 use App\Helpers\Cart;
 use App\Services\Cart\CartCalculator;
 use App\Repository\OrderProcessRepository;
-use App\Jobs\PushMissingOrderItemsFromCart;
-use App\Notifications\NewOrderNotification;
-use App\Models\Users\User;
-use App\Models\Orders\{Order, Payment};
-use App\Models\Cart as CartModel;
+use App\Models\Orders\Order;
 
 class CheckoutController extends Controller
 {
@@ -28,7 +23,7 @@ class CheckoutController extends Controller
      */
     public function paymentIntent()
     {
-        Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        Stripe::setApiKey(config('shop.stripe.secret_key'));
 
         try {
             $clientSecret = PaymentIntent::create([
@@ -55,27 +50,9 @@ class CheckoutController extends Controller
      */
     public function storingOrder(OrderProcessRepository $orderProcessRepository)
     {
-        $order = $orderProcessRepository->storeOrder();
-
-        try {
-            $orderProcessRepository->storePayments($order, request()->paymentIntent, Payment::STRIPE_TYPE);
-            $orderProcessRepository->storeOrderItems($order);
-    
-        } catch (\Exception $e) {
-            $this->saveCartInDatabase($order);
-
-            PushMissingOrderItemsFromCart::dispatch();
-        }
-
-        Mail::to(auth()->user())->queue(new ConfirmOrderMail(auth()->user(), $order));
-
-        User::admins()->each(function ($admin) use ($order){
-            $admin->notify(new NewOrderNotification($order));
-        });
+        event(new OrderPerformed(auth()->user()));
 
         Cart::clear();
-
-        session()->put('checkout_success', $order->id);
 
         return response()->json([
             'success' => true,
@@ -104,14 +81,5 @@ class CheckoutController extends Controller
         session()->forget('checkout_error');
 
         return view('checkout.error');
-    }
-
-    private function saveCartInDatabase(Order $order)
-    {
-        CartModel::create([
-            'user_id' => auth()->id(),
-            'order_id' => $order->id,
-            'content' => serialize(session('cart')),
-        ]);
     }
 }

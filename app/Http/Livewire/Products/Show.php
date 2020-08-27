@@ -23,8 +23,6 @@ class Show extends Component
         $this->sizes = $sizes;
         $this->selectedProduct = $product->first_option;
         $this->selectedSize = $this->selectedProduct->default_size;
-        // dd($this->selectedSize);
-        // $this->selectedImage = $this->selectedProduct->main_image;
     }
 
     public function selectOption(int $productOptionId)

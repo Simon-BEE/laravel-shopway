@@ -34,6 +34,10 @@ class EventServiceProvider extends ServiceProvider
         'Illuminate\Auth\Events\Login' => [
             'App\Listeners\UserEventSubscriber',
         ],
+        'App\Events\OrderPerformed' => [
+            'App\Listeners\PushOrderInDatabase',
+            'App\Listeners\SendNewOrderNotifications',
+        ],
     ];
 
     /**

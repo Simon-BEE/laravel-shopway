@@ -77,6 +77,11 @@ class ProductOption extends Model
         return $this->sizes->firstWhere('id', $sizeId);
     }
 
+    public function sizeQuantity(int $sizeId)
+    {
+        return $this->whereSizeIs($sizeId)->pivot->quantity;
+    }
+
     /**
      * ? Relations
     */

@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Checkout;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Helpers\{Cart, Format};
+use App\Models\Products\ProductOption;
+use App\Models\Products\Size;
 
 class Index extends Component
 {
@@ -28,8 +30,26 @@ class Index extends Component
         }
     }
 
+    public function checkProductsQuantities()
+    {
+        Cart::content()->each(function ($cartItem, $productOptionKey){
+            collect($cartItem)->each(function ($itemContent, $sizeOptionId) use ($productOptionKey){
+
+                $optionSizeQuantityInStock = ProductOption::find($productOptionKey)->whereSizeIs($sizeOptionId)->pivot->quantity;
+
+                if (($optionSizeQuantityInStock - $itemContent['quantity']) <= Size::QUANTITY_ALERT) {
+                    Cart::update($productOptionKey, $sizeOptionId, (int)$itemContent['quantity'] - 1);
+
+                    $this->checkProductsQuantities();
+                }
+            });
+        });
+    }
+
     public function render()
     {
+        $this->checkProductsQuantities();
+
         $this->redirectIfCartEmpty();
 
         $shippingFees = Cart::shippingPrice();

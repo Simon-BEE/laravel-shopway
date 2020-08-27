@@ -40,11 +40,10 @@ class Show extends Component
 
     public function selectSizeOption(int $sizeId)
     {
-        if ($this->selectedSize->id === $sizeId) {
-            return;
-        }
-
-        if (!$this->selectedProduct->hasSize($sizeId)) {
+        if ($this->selectedSize->id === $sizeId ||
+            !$this->selectedProduct->hasSize($sizeId) || 
+            !$this->selectedProduct->whereSizeIs($sizeId)->hasEnoughQuantity()
+        ) {
             return;
         }
 
@@ -53,6 +52,15 @@ class Show extends Component
 
     public function addToCart()
     {
+        if(!$this->selectedProduct->whereSizeIs($this->selectedSize->id)->hasEnoughQuantity()){
+            $this->emit('flashMessage', [
+                'type' => 'error',
+                'message' => 'Product has no stock.',
+                'id' => Str::random(10)
+            ]);
+            return;
+        }
+
         Cart::add($this->selectedProduct, $this->selectedSize->id);
 
         $this->emit('flashMessage', [

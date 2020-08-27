@@ -10,6 +10,8 @@ class ShowController extends Controller
 {
     public function __invoke(Product $product)
     {
+        abort_if($product->quantity < 1, 404, 'Product unavailable');
+
         $allSizes = Size::all();
 
         return view('products.show', [

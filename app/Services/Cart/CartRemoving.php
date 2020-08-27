@@ -7,20 +7,20 @@ class CartRemoving
     /**
      * Remove a product in cart
      *
-     * @param int $productId
+     * @param int $productOptionId
      * @param int $sizeId
      * @return void
      */
-    public static function remove(int $productId, int $sizeId)
+    public static function remove(int $productOptionId, int $sizeId)
     {
         $cart = session('cart');
 
-        if(isset($cart[$productId][$sizeId])) {
+        if(isset($cart[$productOptionId][$sizeId])) {
 
-            unset($cart[$productId][$sizeId]);
+            unset($cart[$productOptionId][$sizeId]);
 
-            if (empty($cart[$productId])) {
-                unset($cart[$productId]);
+            if (empty($cart[$productOptionId])) {
+                unset($cart[$productOptionId]);
             }
 
             session()->put('cart', $cart);

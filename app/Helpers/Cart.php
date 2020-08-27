@@ -72,9 +72,9 @@ class Cart
         return session()->forget(['cart']);
     }
 
-    public static function remove(int $itemId, int $sizeId)
+    public static function remove(int $productOptionId, int $sizeId)
     {
-        CartRemoving::remove($itemId, $sizeId);
+        CartRemoving::remove($productOptionId, $sizeId);
     }
 
     public static function add(ProductOption $productOption, int $sizeId)
@@ -82,9 +82,9 @@ class Cart
         CartAdding::add($productOption, $sizeId);
     }
 
-    public static function update(int $productId, int $sizeId, int $qty)
+    public static function update(int $productOptionId, int $sizeId, int $qty)
     {
-        CartUpdating::update($productId, $sizeId, $qty);
+        CartUpdating::update($productOptionId, $sizeId, $qty);
     }
 
     /**

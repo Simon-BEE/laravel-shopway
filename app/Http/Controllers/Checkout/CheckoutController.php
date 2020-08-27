@@ -8,7 +8,6 @@ use Stripe\PaymentIntent;
 use App\Http\Controllers\Controller;
 use App\Helpers\Cart;
 use App\Services\Cart\CartCalculator;
-use App\Repository\OrderProcessRepository;
 use App\Models\Orders\Order;
 
 class CheckoutController extends Controller
@@ -48,7 +47,7 @@ class CheckoutController extends Controller
     /**
      * After payment was processed, store in DB order
      */
-    public function storingOrder(OrderProcessRepository $orderProcessRepository)
+    public function storingOrder()
     {
         event(new OrderPerformed(auth()->user()));
 

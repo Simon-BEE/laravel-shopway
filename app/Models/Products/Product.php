@@ -130,6 +130,11 @@ class Product extends Model
      * ? SCOPES
      */
 
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('active', true);
+    }
+
      /**
       * Return a random collection of products
       *
@@ -141,7 +146,6 @@ class Product extends Model
     public function scopeRandomProducts(Builder $query, int $number = 12): Builder
     {
         return $query
-            ->where('active', true)
             ->inRandomOrder()
             ->take($number);
     }

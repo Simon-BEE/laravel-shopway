@@ -16,7 +16,13 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return view('admin.products.edit', [
-            'product' => $product->load(['categories', 'product_options']),
+            'product' => $product->load([
+                'categories', 
+                'product_options.color', 
+                'product_options.images', 
+                'product_options.material', 
+                'product_options.sizes'
+            ]),
         ]);
     }
 

@@ -37,6 +37,8 @@ class GenerateCacheCompletely extends Command
      */
     public function handle()
     {
+        $this->call('cache:reset');
+
         $this->call('config:cache');
         $this->call('event:cache');
         $this->call('route:cache');

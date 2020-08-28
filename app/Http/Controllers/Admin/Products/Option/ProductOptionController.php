@@ -62,7 +62,7 @@ class ProductOptionController extends Controller
     {
         return view('admin.products.options.edit', [
             'product' => $product,
-            'productOption' => $option,
+            'productOption' => $option->load(['images', 'material', 'color', 'sizes']),
         ]);
     }
 

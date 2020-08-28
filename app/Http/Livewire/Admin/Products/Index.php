@@ -15,7 +15,7 @@ class Index extends Component
     {
         return view('livewire.admin.products.index', [
             'products' => Product::where('name', 'like' , "%$this->searchTerm%")
-                ->with(['images', 'categories'])
+                ->with(['images', 'categories', 'product_options.sizes'])
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage)
             ,

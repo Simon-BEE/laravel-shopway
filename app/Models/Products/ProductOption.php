@@ -8,7 +8,7 @@ class ProductOption extends Model
 {
     protected $guarded = ['id'];
 
-    protected $with = ['color', 'sizes', 'material'];
+    // protected $with = ['color', 'sizes', 'material'];
 
     public function imagePath(string $filename): string
     {

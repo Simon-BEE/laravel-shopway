@@ -22,6 +22,7 @@ class Index extends Component
         return view('livewire.admin.orders.index', [
             'orders' => Order::where('price', 'like' , "%$this->searchTerm%")
                 ->orWhere('created_at', 'like' , "%$this->searchTerm%")
+                ->with(['shipping', 'state'])
                 ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                 ->paginate($this->perPage)
             ,

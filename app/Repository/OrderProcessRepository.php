@@ -75,22 +75,19 @@ class OrderProcessRepository
     public function updateQuantity(int $productOptionId, int $sizeId, int $quantity)
     {
         $sizeOption = ProductOption::find($productOptionId)->whereSizeIs($sizeId);
-
+        
         if ($sizeOption->pivot->quantity >= $quantity) {
             $sizeOption->pivot->update([
                 'quantity' => $sizeOption->pivot->quantity - $quantity,
-            ]);
+                ]);
 
-            $sizeOption->pivot->refresh();
+            $sizeOption->refresh();
 
             if ($sizeOption->pivot->quantity < 1) {
                 $sizeOption->pivot->delete();
             }
-
-            return;
+        }else{
+            throw new \Exception("Quantity can't be updated", 1);
         }
-
-        throw new \Exception("Quantity can't be updated", 1);
-        return;
     }
 }

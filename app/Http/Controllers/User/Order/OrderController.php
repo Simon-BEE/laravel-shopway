@@ -19,7 +19,13 @@ class OrderController extends Controller
         $this->authorize('view', $order);
 
         return view('users.orders.show', [
-            'order' => $order->load(['address', 'state']),
+            'order' => $order->load([
+                'address', 'state', 'shipping', 'user',
+                'order_items.product_option.color', 
+                'order_items.product_option.material', 
+                'order_items.product_option.sizes',
+                'order_items.product_option.product',
+            ]),
         ]);
     }
 }

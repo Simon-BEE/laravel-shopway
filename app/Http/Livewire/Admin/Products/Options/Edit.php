@@ -221,7 +221,7 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.admin.products.options.edit', [
-            'images' => $this->productOption->refresh()->images,
+            'images' => $this->productOption->images()->get(),
         ]);
     }
 }

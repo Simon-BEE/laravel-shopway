@@ -45,27 +45,27 @@
             {{-- @foreach ($cartProducts as $productId => $product)
             @endforeach --}}
             @forelse ($cartProducts as $productOptionId => $productOption)
-            @foreach ($productOption as $productOptionSizeId => $productOptionSize)
-                <article class="w-full p-5 relative flex items-center mb-3">
-                    <div class="img w-5/12">
-                        <img src="{{ $productOptionSize['photo'] }}" alt="{{ $productOptionSize['name'] }}" class="object-cover rounded-lg" style="width:110px;height:110px">
-                    </div>
-                    <div class="ml-2 flex flex-col justify-between h-20">
-                        <div class="flex flex-col">
-                            <a href="#">{{ $productOptionSize['name'] }}</a>
-                            <span class="text-gray-500 text-xs">{{ __('Quantity') }}: {{ $productOptionSize['quantity'] }}</span>
-                            <span class="text-gray-500 text-xs">{{ __('Size') }}: {{ Cart::size($productOptionSizeId) }}</span>
+                @foreach ($productOption as $productOptionSizeId => $productOptionSize)
+                    <article class="w-full p-5 relative flex items-center mb-3">
+                        <div class="img w-5/12">
+                            <img src="{{ $productOptionSize['photo'] }}" alt="{{ $productOptionSize['name'] }}" class="object-cover rounded-lg" style="width:110px;height:110px">
                         </div>
-                        <span class="font-semibold text-lg">
-                            {{ Format::priceWithTaxAndCurrency($productOptionSize['price']) }}
-                        </span>
-                    </div>
-                    <div class="absolute top-0 right-0 mr-1 mt-1">
-                        <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productOptionId }}, {{ $productOptionSizeId }})">
-                            <span class="mdi mdi-delete ml-2 text-xs"></span>
-                        </x-form.form-button>
-                    </div>
-                </article>
+                        <div class="ml-2 flex flex-col justify-between h-20">
+                            <div class="flex flex-col">
+                                <a href="#">{{ $productOptionSize['name'] }}</a>
+                                <span class="text-gray-500 text-xs">{{ __('Quantity') }}: {{ $productOptionSize['quantity'] }}</span>
+                                <span class="text-gray-500 text-xs">{{ __('Size') }}: {{ Cart::size($productOptionSizeId) }}</span>
+                            </div>
+                            <span class="font-semibold text-lg">
+                                {{ Format::priceWithTaxAndCurrency($productOptionSize['price']) }}
+                            </span>
+                        </div>
+                        <div class="absolute top-0 right-0 mr-1 mt-1">
+                            <x-form.form-button action="#" method="DELETE" wire:submit.prevent="removeFromCart({{ $productOptionId }}, {{ $productOptionSizeId }})">
+                                <span class="mdi mdi-delete ml-2 text-xs"></span>
+                            </x-form.form-button>
+                        </div>
+                    </article>
                 @endforeach
             @empty
                 <article class="w-full p-5 relative flex items-center mb-3">

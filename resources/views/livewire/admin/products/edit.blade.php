@@ -35,14 +35,14 @@
                         value="{{ $category->id }}" 
                         checked="{{ $product->hasCategory($category) ? true : false }}"
                         wire:change="updateCategories({{ $category->id }})"
-                        {{-- wire:poll.2500ms="$refresh" --}}
+                        wire:poll.2500ms="$refresh"
                     />
                 @endforeach
             </div>
         </div>
 
         @foreach ($product->product_options as $option)
-            <livewire:admin.products.options.card :productOption="$option" :key="$option->id" />
+            <livewire:admin.products.options.card :productOption="$option" :product="$product" :key="$option->id" />
         @endforeach
         
     </form>

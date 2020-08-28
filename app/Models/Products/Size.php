@@ -4,6 +4,7 @@ namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Size extends Model
 {
@@ -60,7 +61,19 @@ class Size extends Model
      * ? Scopes
     */
 
-    //
+    public function scopeGetNameById(Builder $query, int $sizeId): string
+    {
+        $allSizes = self::allSizes();
+
+        return $allSizes->firstWhere('id', $sizeId)->name;
+    }
+
+    public function scopeAllSizes(Builder $query)
+    {
+        return Cache::remember('sizes_names', now()->addHours(2), function () use($query){
+            return $query->get();
+        });
+    }
 
     /**
      * ? Relations

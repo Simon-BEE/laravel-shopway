@@ -10,7 +10,7 @@ class Option
 {
     public static function size(int $sizeId): ?string
     {
-        return Size::findOrFail($sizeId)->name;
+        return Size::getNameById($sizeId);
     }
 
     public static function material(int $materialId): ?string

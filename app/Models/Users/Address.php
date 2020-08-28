@@ -14,6 +14,8 @@ class Address extends Model
 
     protected $guarded = ['id'];
 
+    protected $with = ['country'];
+
     public static function booted()
     {
         static::creating(function ($address){

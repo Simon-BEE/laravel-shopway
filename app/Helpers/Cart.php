@@ -27,11 +27,20 @@ class Cart
         return session('cart')[$itemId];
     }
 
+    public static function getProductOptionIds(): array
+    {
+        return self::content()->map(function ($v, $k){
+            return $k;
+        })->toArray();
+    }
+
     public static function shipping(): Shipping
     {
-        $totalWeight = self::content()->map(function ($cartProductOption, $optionId){
-            return collect($cartProductOption)->map(function ($cartItem, $sizeId) use ($optionId){
-                $productOption = self::model($optionId);
+        $productOptionsInCart = ProductOption::select(['id', 'weight'])->with('sizes')->find(self::getProductOptionIds());
+
+        $totalWeight = self::content()->map(function ($cartProductOption, $optionId) use ($productOptionsInCart){
+            $productOption = $productOptionsInCart->firstWhere('id', $optionId);
+            return collect($cartProductOption)->map(function ($cartItem, $sizeId) use ($productOption){
                 return $cartItem['quantity'] * $productOption->weight;
             })->sum();
         })->sum();
@@ -60,7 +69,7 @@ class Cart
 
     public static function size(int $sizeId): ?string
     {
-        return Size::findOrFail($sizeId)->name;
+        return Size::getNameById($sizeId);
     }
 
     /**
@@ -89,10 +98,11 @@ class Cart
 
     public static function verifyProductsQuantities(): void
     {
-        self::content()->each(function ($cartItem, $productOptionKey){
-            collect($cartItem)->each(function ($itemContent, $sizeOptionId) use ($productOptionKey){
+        $productOptionsInCart = ProductOption::with('sizes')->find(self::getProductOptionIds());
 
-                $optionSizeQuantityInStock = ProductOption::find($productOptionKey)->whereSizeIs($sizeOptionId)->pivot->quantity;
+        self::content()->each(function ($cartItem, $productOptionKey) use ($productOptionsInCart){
+            collect($cartItem)->each(function ($itemContent, $sizeOptionId) use ($productOptionKey, $productOptionsInCart){
+                $optionSizeQuantityInStock = $productOptionsInCart->firstWhere('id', $productOptionKey)->whereSizeIs($sizeOptionId)->pivot->quantity;
 
                 if (($optionSizeQuantityInStock - $itemContent['quantity']) < Size::QUANTITY_ALERT) {
                     // dd($optionSizeQuantityInStock, $itemContent, ($optionSizeQuantityInStock - $itemContent['quantity']));

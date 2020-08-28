@@ -72,19 +72,41 @@ class Cart
         return session()->forget(['cart']);
     }
 
-    public static function remove(int $productOptionId, int $sizeId)
+    public static function remove(int $productOptionId, int $sizeId): void
     {
         CartRemoving::remove($productOptionId, $sizeId);
     }
 
-    public static function add(ProductOption $productOption, int $sizeId)
+    public static function add(ProductOption $productOption, int $sizeId): void
     {
         CartAdding::add($productOption, $sizeId);
     }
 
-    public static function update(int $productOptionId, int $sizeId, int $qty)
+    public static function update(int $productOptionId, int $sizeId, int $qty): void
     {
         CartUpdating::update($productOptionId, $sizeId, $qty);
+    }
+
+    public static function verifyProductsQuantities(): void
+    {
+        self::content()->each(function ($cartItem, $productOptionKey){
+            collect($cartItem)->each(function ($itemContent, $sizeOptionId) use ($productOptionKey){
+
+                $optionSizeQuantityInStock = ProductOption::find($productOptionKey)->whereSizeIs($sizeOptionId)->pivot->quantity;
+
+                if (($optionSizeQuantityInStock - $itemContent['quantity']) < Size::QUANTITY_ALERT) {
+                    // dd($optionSizeQuantityInStock, $itemContent, ($optionSizeQuantityInStock - $itemContent['quantity']));
+                    self::update($productOptionKey, $sizeOptionId, (int)$itemContent['quantity'] - 1);
+
+
+                    self::verifyProductsQuantities();
+                }
+
+                if ($itemContent['quantity'] === 0) {
+                    self::remove($productOptionKey, $sizeOptionId);
+                }
+            });
+        });
     }
 
     /**

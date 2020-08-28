@@ -32,7 +32,7 @@
                 <ul class="flex flex-wrap mt-2">
                     @foreach ($sizes as $size)
                         <li 
-                            class="p-2 mr-1 mb-1 border {{ $selectedProduct->hasSize($size->id) && $selectedProduct->whereSizeIs($size->id)->hasEnoughQuantity() ? 'hover:bg-gray-200 cursor-pointer' : 'bg-gray-300 text-white' }} {{ $selectedSize->id === $size->id ? 'border-solid border-blue-500 cursor-text' : 'border-dashed' }}"
+                            class="p-2 mr-1 mb-1 border {{ $selectedProduct->hasSize($size->id) && $selectedProduct->whereSizeIs($size->id)->is_avalaible ? 'hover:bg-gray-200 cursor-pointer' : 'bg-gray-300 text-white' }} {{ $selectedSize->id === $size->id ? 'border-solid border-blue-500 cursor-text' : 'border-dashed' }}"
                             wire:click="selectSizeOption({{ $size->id }})"
                         >
                             {{ $size->name }}

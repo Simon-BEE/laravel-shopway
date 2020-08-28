@@ -10,7 +10,9 @@
                     {{ $productOption->color->name }} / {{ $productOption->material->name }}
                 </span>
             </p>
-            <p class="mt-3 text-sm text-gray-500">{{ __('Sizes available') }}: {{ $productOption->sizes_available_formatted }}</p>
+            <p class="mt-3 text-sm text-gray-500">{{ __('Sizes available') }}: 
+                <span class="font-semibold">{{ $productOption->total_quantity > 0 ? $productOption->sizes_available_formatted : 'No sizes available' }}</span>
+            </p>
         </div>
     </div>
     <div class="w-3/12 text-sm">
@@ -19,7 +21,7 @@
                 <span class="font-semibold">{{ Format::priceWithCurrency($productOption->price) }}</span>(HT)/
                 <span class="font-semibold">{{ Format::priceWithTaxAndCurrency($productOption->price) }}</span>
             </p>
-            <p>{{ __('Quantity') }}: {{ $productOption->quantity }}</p>
+            <p>{{ __('Quantity') }}: {{ $productOption->total_quantity }}</p>
     </div>
     <div class="w-1/12">
         <a href="{{ route('admin.products.options.edit', [$product, $productOption]) }}" class="bg-transparent p-2 rounded inline-flex text-orange-400 hover:bg-gray-200 hover:text-orange-600 mr-2">

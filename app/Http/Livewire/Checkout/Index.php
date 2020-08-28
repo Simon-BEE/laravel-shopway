@@ -30,25 +30,9 @@ class Index extends Component
         }
     }
 
-    public function checkProductsQuantities()
-    {
-        Cart::content()->each(function ($cartItem, $productOptionKey){
-            collect($cartItem)->each(function ($itemContent, $sizeOptionId) use ($productOptionKey){
-
-                $optionSizeQuantityInStock = ProductOption::find($productOptionKey)->whereSizeIs($sizeOptionId)->pivot->quantity;
-
-                if (($optionSizeQuantityInStock - $itemContent['quantity']) <= Size::QUANTITY_ALERT) {
-                    Cart::update($productOptionKey, $sizeOptionId, (int)$itemContent['quantity'] - 1);
-
-                    $this->checkProductsQuantities();
-                }
-            });
-        });
-    }
-
     public function render()
     {
-        $this->checkProductsQuantities();
+        Cart::verifyProductsQuantities();
 
         $this->redirectIfCartEmpty();
 

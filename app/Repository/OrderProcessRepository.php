@@ -55,6 +55,8 @@ class OrderProcessRepository
         return $cart->map(function ($productOptions, $productOptionId) use ($order){
             return collect($productOptions)->map(function ($optionItem, $optionItemSizeId) use ($order, $productOptionId){
 
+                $this->updateQuantity($productOptionId, $optionItemSizeId, $optionItem['quantity']);
+
                 return [
                     'product_option_id' => $productOptionId,
                     'order_id' => $order->id,
@@ -68,5 +70,27 @@ class OrderProcessRepository
                 ];
             });
         })->collapse()->toArray();
+    }
+
+    public function updateQuantity(int $productOptionId, int $sizeId, int $quantity)
+    {
+        $sizeOption = ProductOption::find($productOptionId)->whereSizeIs($sizeId);
+
+        if ($sizeOption->pivot->quantity >= $quantity) {
+            $sizeOption->pivot->update([
+                'quantity' => $sizeOption->pivot->quantity - $quantity,
+            ]);
+
+            $sizeOption->pivot->refresh();
+
+            if ($sizeOption->pivot->quantity < 1) {
+                $sizeOption->pivot->delete();
+            }
+
+            return;
+        }
+
+        throw new \Exception("Quantity can't be updated", 1);
+        return;
     }
 }

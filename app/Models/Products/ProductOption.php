@@ -55,7 +55,7 @@ class ProductOption extends Model
 
     public function getDefaultSizeAttribute()
     {
-        return $this->sizes->first();
+        return $this->sizes->where('pivot.quantity', '>', Size::QUANTITY_ALERT)->first();
     }
 
     public function getTotalQuantityAttribute()

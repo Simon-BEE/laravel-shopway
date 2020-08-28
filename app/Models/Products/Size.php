@@ -2,6 +2,7 @@
 
 namespace App\Models\Products;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Size extends Model
@@ -43,8 +44,23 @@ class Size extends Model
             return false;
         }
 
-       return $this->pivot->quantity >= self::QUANTITY_ALERT;
+       return $this->pivot->quantity > self::QUANTITY_ALERT;
     }
+
+    /**
+     * ? Attributes
+    */
+
+    public function getIsAvalaibleAttribute(): bool
+    {
+        return $this->hasEnoughQuantity();
+    }
+
+    /**
+     * ? Scopes
+    */
+
+    //
 
     /**
      * ? Relations

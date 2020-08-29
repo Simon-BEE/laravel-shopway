@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Admin\Products;
 
 use App\Models\Products\Product;
-use App\Traits\Classify\IsFilterableWithLivewire;
+use App\Traits\Livewire\IsFilterable;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, IsFilterableWithLivewire;
+    use WithPagination, IsFilterable;
 
     public function render()
     {

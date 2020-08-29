@@ -4,11 +4,13 @@ namespace App\Http\Livewire\Cart;
 
 use App\Helpers\Cart;
 use App\Models\Products\Size;
+use App\Traits\Livewire\HasFlashMessage;
 use Livewire\Component;
-use Illuminate\Support\Str;
 
 class Item extends Component
 {
+    use HasFlashMessage;
+
     public $productOption;
     public $productOptionId;
     public $productOptionSizeId;
@@ -27,13 +29,15 @@ class Item extends Component
     public function updatedQuantity(int $quantity)
     {
         if ($quantity > 0) {
+            if (!Cart::verifyProductQuantity($this->productOptionId, $this->productOptionSizeId, $quantity)) {
+                $this->newFlashMessage('Product does not have enough stock.', 'error');
+    
+                return;
+            }
+
             Cart::update($this->productOptionId, $this->productOptionSizeId, $quantity);
 
-            $this->emit('flashMessage', [
-                'type' => 'success',
-                'message' => 'Product successfully updated on cart.',
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('Product successfully updated on cart.');
 
             return;
         }
@@ -45,11 +49,7 @@ class Item extends Component
     {
         Cart::remove($productId, $this->productOptionSizeId);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product successfully removed from cart.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product successfully removed from cart.');
     }
 
     public function render()

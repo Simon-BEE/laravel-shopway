@@ -7,11 +7,12 @@ use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use App\Models\Products\{Product, ProductOption, Size, Color, Material, Image};
 use App\Traits\Upload\ImageUpload;
-use App\Traits\Validator\FieldWithLivewire;
+use App\Traits\Livewire\FieldValidator;
+use App\Traits\Livewire\HasFlashMessage;
 
 class Edit extends Component
 {
-    use ImageUpload, WithFileUploads, FieldWithLivewire;
+    use ImageUpload, WithFileUploads, FieldValidator, HasFlashMessage;
 
     public $product;
     public $productOption;
@@ -43,11 +44,7 @@ class Edit extends Component
         
         $image->setAsMain();
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s image has been set as main.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s image has been marked as main.');
     }
 
     public function removeProductImage(int $id)
@@ -55,22 +52,14 @@ class Edit extends Component
         $image = Image::findOrFail($id);
 
         if ($image->is_main) {
-            $this->emit('flashMessage', [
-                'type' => 'error',
-                'message' => 'Product\'s main image can\'t be removed.',
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('Product\'s main image can\'t be removed.', 'error');
 
             return;
         }
 
         $image->delete();
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s image has been removed definitely.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s image has been removed definitely.');
     }
 
     function updatedPictures()
@@ -89,11 +78,7 @@ class Edit extends Component
             ]);
         }
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s image has been added successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s image has been added successfully.');
     }
 
     public function updatedPrice(string $newValue)
@@ -106,11 +91,7 @@ class Edit extends Component
             'price' => $newValue,
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s price has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s price has been updated successfully.');
     }
 
     public function updatedWeight(string $newValue)
@@ -123,11 +104,7 @@ class Edit extends Component
             'weight' => $newValue,
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s weight has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s weight has been updated successfully.');
     }
 
     public function updateSize(int $sizeId, $value)
@@ -150,11 +127,7 @@ class Edit extends Component
             $this->productOption->sizes()->attach([$sizeId => ['quantity' => $value]]);
         }
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s size available has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s size available has been updated successfully.');
     }
 
     public function uncheckIfNeeded(int $sizeId, bool $checked)
@@ -169,11 +142,7 @@ class Edit extends Component
 
         $this->productOption->sizes()->detach($sizeId);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Size has been removed successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Size has been removed.');
     }
 
     public function updateMaterial(int $materialId)
@@ -190,11 +159,7 @@ class Edit extends Component
             'material_id' => $materialId,
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s material has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s material has been updated successfully.');
     }
 
     public function updateColor(int $colorId)
@@ -211,11 +176,7 @@ class Edit extends Component
             'color_id' => $colorId,
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s color has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s color has been updated successfully.');
     }
 
     public function render()

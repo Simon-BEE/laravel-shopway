@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Admin\Users;
 
 use App\Models\Users\User;
-use App\Traits\Classify\IsFilterableWithLivewire;
+use App\Traits\Livewire\IsFilterable;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, IsFilterableWithLivewire;
+    use WithPagination, IsFilterable;
 
     public function mount()
     {

@@ -3,13 +3,15 @@
 namespace App\Http\Livewire\Addresses;
 
 use App\Models\Users\Address;
+use App\Traits\Livewire\HasFlashMessage;
 use Livewire\Component;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
 class Index extends Component
 {
+    use HasFlashMessage;
+
     protected $listeners = ['setAddressAsMain'];
 
     public function setAddressAsMain(int $addressId)
@@ -24,11 +26,7 @@ class Index extends Component
         ]);
 
         if ($validator->fails()) {
-            $this->emit('flashMessage', [
-                'type' => 'error',
-                'message' => __('Address not found.'),
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('Address not found.', 'error');
 
             return;
         }
@@ -38,11 +36,7 @@ class Index extends Component
         if (!$address->is_main) {
             $address->setAsMain();
 
-            $this->emit('flashMessage', [
-                'type' => 'success',
-                'message' => __('Address set as main.'),
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('Address mark as main.');
         }
         
     }

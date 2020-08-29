@@ -3,14 +3,16 @@
 namespace App\Http\Livewire\Products;
 
 use App\Helpers\Cart;
-use App\Models\Products\Product;
 use Livewire\Component;
-use Illuminate\Support\Str;
-use App\Models\Products\ProductOption;
+use App\Models\Products\Product;
 use Illuminate\Support\Collection;
+use App\Models\Products\ProductOption;
+use App\Traits\Livewire\HasFlashMessage;
 
 class Show extends Component
 {
+    use HasFlashMessage;
+
     public $product;
     public $sizes;
     public $selectedProduct;
@@ -53,21 +55,13 @@ class Show extends Component
     public function addToCart()
     {
         if(!$this->selectedProduct->whereSizeIs($this->selectedSize->id)->hasEnoughQuantity()){
-            $this->emit('flashMessage', [
-                'type' => 'error',
-                'message' => 'Product has no stock.',
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('Product has no stock.');
             return;
         }
 
         Cart::add($this->selectedProduct, $this->selectedSize->id);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product successfully added to cart.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product successfully added to cart.');
 
         $this->emit('cartUpdated');
     }

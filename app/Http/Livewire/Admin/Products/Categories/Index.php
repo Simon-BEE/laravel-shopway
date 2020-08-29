@@ -4,14 +4,14 @@ namespace App\Http\Livewire\Admin\Products\Categories;
 
 use Livewire\Component;
 use App\Models\Products\Category;
-use App\Traits\Classify\IsFilterableWithLivewire;
-use App\Traits\Validator\FieldWithLivewire;
-use Illuminate\Support\Str;
+use App\Traits\Livewire\IsFilterable;
+use App\Traits\Livewire\FieldValidator;
+use App\Traits\Livewire\HasFlashMessage;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
-    use WithPagination, IsFilterableWithLivewire, FieldWithLivewire;
+    use WithPagination, IsFilterable, FieldValidator, HasFlashMessage;
 
     public function updateCategory(int $id, string $value)
     {
@@ -26,11 +26,7 @@ class Index extends Component
             'name' => $value,
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Category\'s name has been edited.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Category\'s name has been updated successfully.');
     }
 
     public function render()

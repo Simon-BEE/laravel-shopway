@@ -3,22 +3,18 @@
 namespace App\Http\Livewire\Checkout;
 
 use Livewire\Component;
-use Illuminate\Support\Str;
 use App\Helpers\{Cart, Format};
-use App\Models\Products\ProductOption;
-use App\Models\Products\Size;
+use App\Traits\Livewire\HasFlashMessage;
 
 class Index extends Component
 {
+    use HasFlashMessage;
+
     public function removeFromCart(int $productId, int $sizeId)
     {
         Cart::remove($productId, $sizeId);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product successfully removed from cart.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product successfully removed from cart.');
 
         $this->emit('cartUpdated');
     }

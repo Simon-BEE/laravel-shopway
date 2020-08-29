@@ -5,11 +5,11 @@ namespace App\Http\Livewire\Admin\Orders;
 use App\Models\Orders\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Traits\Classify\IsFilterableWithLivewire;
+use App\Traits\Livewire\IsFilterable;
 
 class Index extends Component
 {
-    use WithPagination, IsFilterableWithLivewire;
+    use WithPagination, IsFilterable;
 
     public function mount()
     {

@@ -98,7 +98,7 @@ class Cart
 
     public static function verifyProductsQuantities(): void
     {
-        $productOptionsInCart = ProductOption::with('sizes')->find(self::getProductOptionIds());
+        $productOptionsInCart = ProductOption::with(['sizes'])->find(self::getProductOptionIds());
 
         self::content()->each(function ($cartItem, $productOptionKey) use ($productOptionsInCart){
             collect($cartItem)->each(function ($itemContent, $sizeOptionId) use ($productOptionKey, $productOptionsInCart){
@@ -117,6 +117,14 @@ class Cart
                 }
             });
         });
+    }
+
+    public static function verifyProductQuantity(int $productOptionId, int $sizeId, int $quantity): bool
+    {
+        $productOption = ProductOption::with(['sizes'])->findOrFail($productOptionId);
+        $productOptionSize = $productOption->whereSizeIs($sizeId)->pivot->quantity;
+
+        return ($productOptionSize >= $quantity) && ($productOptionSize - $quantity >= Size::QUANTITY_ALERT)  ? true : false;
     }
 
     /**

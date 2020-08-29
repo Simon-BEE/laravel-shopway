@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Wish;
 
-use App\Models\Products\Product;
-use Livewire\Component;
 use App\Models\Wish;
+use Livewire\Component;
 use Illuminate\Support\Str;
+use App\Models\Products\Product;
+use App\Traits\Livewire\HasFlashMessage;
 
 class Toggle extends Component
 {
+    use HasFlashMessage;
+
     public $product;
 
     public function mount(Product $product)
@@ -19,11 +22,7 @@ class Toggle extends Component
     public function addToWishlist()
     {
         if (!auth()->check()) {
-            $this->emit('flashMessage', [
-                'type' => 'error',
-                'message' => 'You need to be connected for this.',
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('You need to be connected for this.', 'error');
             return;
         }
 
@@ -35,11 +34,7 @@ class Toggle extends Component
                 'product_id' => $this->product->id,
             ]);
 
-            $this->emit('flashMessage', [
-                'type' => 'success',
-                'message' => 'This item has been added to your wishlist.',
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('This item has been added to your wishlist.');
         }
 
         $this->product = Product::find($this->product->id);
@@ -49,11 +44,7 @@ class Toggle extends Component
     {
         $wish = Wish::remove($this->product->id, auth()->id());
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'This item has been removed from your wishlist.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('This item has been removed to your wishlist.');
     }
 
     public function render()

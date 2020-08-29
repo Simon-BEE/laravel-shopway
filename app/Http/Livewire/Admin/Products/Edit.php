@@ -2,18 +2,17 @@
 
 namespace App\Http\Livewire\Admin\Products;
 
-use App\Models\Products\Category;
-use App\Models\Products\Image;
-use App\Models\Products\Product;
-use App\Models\Products\ProductOption;
-use App\Traits\Upload\ImageUpload;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
+use App\Models\Products\Product;
+use App\Models\Products\Category;
+use App\Traits\Upload\ImageUpload;
+use App\Traits\Livewire\HasFlashMessage;
 
 class Edit extends Component
 {
-    use ImageUpload, WithFileUploads;
+    use ImageUpload, WithFileUploads, HasFlashMessage;
 
     public $product;
     public $name;
@@ -32,11 +31,7 @@ class Edit extends Component
     {
         if ($this->product->categories->count() <= 1) {
             if ($this->product->categories->contains('id', $categoryId)) {
-                $this->emit('flashMessage', [
-                    'type' => 'success',
-                    'message' => 'Last product\'s category can\'t be removed.',
-                    'id' => Str::random(10)
-                ]);
+                $this->newFlashMessage('Last product\'s category can\'t be removed.', 'error');
                 return;
             }
             $this->product->categories()->attach($categoryId);
@@ -44,12 +39,7 @@ class Edit extends Component
             $this->product->categories()->toggle($categoryId);
         }
 
-        
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s categories has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s categories has been updated successfully.');
     }
 
     public function updatedName(string $newValue)
@@ -63,11 +53,7 @@ class Edit extends Component
             'slug' => Str::slug($newValue),
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s name has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product\'s name has been updated successfully.');
     }
 
     public function updatedDescription(string $newValue)
@@ -80,11 +66,8 @@ class Edit extends Component
             'description' => $newValue,
         ]);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product\'s description has been updated successfully.',
-            'id' => Str::random(10)
-        ]);
+        
+        $this->newFlashMessage('Product\'s description has been updated successfully.');
     }
 
     public function render()

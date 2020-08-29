@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Traits\Validator;
+namespace App\Traits\Livewire;
 
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-trait FieldWithLivewire
+trait FieldValidator
 {
+    use HasFlashMessage;
+
     /**
      * Validate rule to a field: required, numeric and exists in DB
      *
@@ -60,10 +62,6 @@ trait FieldWithLivewire
 
     private function generateErrorMessage(string $message = 'Please fill the form correctly.')
     {
-        $this->emit('flashMessage', [
-            'type' => 'error',
-            'message' => $message,
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage($message, 'error');
     }
 }

@@ -2,35 +2,27 @@
 
 namespace App\Http\Livewire\Wish;
 
-use App\Helpers\Cart;
-use App\Models\Products\Product;
 use App\Models\Wish;
+use App\Helpers\Cart;
 use Livewire\Component;
-use Illuminate\Support\Str;
+use App\Models\Products\Product;
+use App\Traits\Livewire\HasFlashMessage;
 
 class Index extends Component
 {
-
+    use HasFlashMessage;
 
     public function addToCart(int $productId)
     {
         $product = Product::find($productId);
 
         if (!$product) {
-            $this->emit('flashMessage', [
-                'type' => 'error',
-                'message' => 'Error from product.',
-                'id' => Str::random(10)
-            ]);
+            $this->newFlashMessage('Error from product.', 'error');
         }
 
-        Cart::add($product);
+        // Cart::add($product);
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product successfully added to cart.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product successfully added to cart.');
 
         $this->emit('cartUpdated');
 
@@ -41,11 +33,7 @@ class Index extends Component
     {
         Wish::remove($productId, auth()->id());
 
-        $this->emit('flashMessage', [
-            'type' => 'success',
-            'message' => 'Product removed from your wishlist.',
-            'id' => Str::random(10)
-        ]);
+        $this->newFlashMessage('Product removed from wishlist.');
     }
 
     public function render()

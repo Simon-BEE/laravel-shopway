@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Traits\Classify;
+namespace App\Traits\Livewire;
 
-trait IsFilterableWithLivewire
+trait IsFilterable
 {
     public $perPage = 10;
     public $searchTerm;

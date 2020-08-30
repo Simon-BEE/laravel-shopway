@@ -106,7 +106,9 @@ class ProductOption extends Model
 
     public function sizes()
     {
-        return $this->belongsToMany(Size::class)->withPivot('quantity');
+        return $this->belongsToMany(Size::class)
+            ->using(ProductOptionSize::class)
+            ->withPivot('quantity');
     }
 
     public function images()

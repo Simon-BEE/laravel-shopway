@@ -17,6 +17,7 @@ class ProductOptionObserver
      */
     public function created(ProductOption $productOption)
     {
+        $productOption->product->refresh();
         $productOption->product->refreshStatus();
     }
 

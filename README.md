@@ -19,13 +19,9 @@ Soberly called **Shopway**
 - [x] Stripe payment
 - [ ] Products filter
 - [ ] Coupon system
-- [ ] Manage order status
-- [ ] Backup database
-
-Admin : edit delete orders    
-Admin : edit users    
-Admin : possibility to refund total or part of a payment
-Implement paypal
-
-Adjust quantity when ordered    
-Refresh status when creating not work    
+- [x] Backup database
+- [ ] Admin : edit delete orders
+- [ ] Manage order status (if cancelled or error rechange product quantity)
+- [ ] Admin : edit users
+- [ ] Refund total or part of a payment
+- [ ] Paypal

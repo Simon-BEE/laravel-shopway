@@ -28,12 +28,11 @@ class SetCartToUser
 
         if ($cart->isEmpty()) {
             $this->addItemsToCart($oldContent);
-
-            return;
+        }else{
+            $this->addItemsToCart($cart->union($oldContent));
         }
 
-        Cart::clear();
-        $this->addItemsToCart($cart->union($oldContent));
+        $oldCart->delete();
 
         return;
     }

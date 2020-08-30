@@ -5,10 +5,8 @@ namespace App\Listeners;
 use App\Helpers\Cart;
 use App\Events\UserIsLogout;
 use App\Models\Cart as CartModel;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SetUserCartToDatabase implements ShouldQueue
+class SetUserCartToDatabase
 {
     /**
      * Handle the event.

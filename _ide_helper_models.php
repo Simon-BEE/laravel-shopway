@@ -76,6 +76,7 @@ namespace App\Models\Orders{
  * @property-read \App\Models\Orders\State $state
  * @property-read \App\Models\Users\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|Order allByUser(\App\Models\Users\User $user = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order lastOrderByUser($userId = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Order query()
@@ -308,6 +309,7 @@ namespace App\Models\Products{
  * @property-read int|null $product_options_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Wish[] $wishes
  * @property-read int|null $wishes_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Product active()
  * @method static \Illuminate\Database\Eloquent\Builder|Product last()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
@@ -335,6 +337,7 @@ namespace App\Models\Products{
  * @property-read mixed $main_image
  * @property-read mixed $main_image_path
  * @property-read mixed $sizes_available_formatted
+ * @property-read mixed $total_quantity
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Products\Image[] $images
  * @property-read int|null $images_count
  * @property-read \App\Models\Products\Material $material
@@ -354,8 +357,11 @@ namespace App\Models\Products{
  *
  * @property int $id
  * @property string $name
+ * @property-read bool $is_avalaible
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Products\ProductOption[] $product_option
  * @property-read int|null $product_option_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Size allSizes()
+ * @method static \Illuminate\Database\Eloquent\Builder|Size getNameById($sizeId)
  * @method static \Illuminate\Database\Eloquent\Builder|Size newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Size newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Size query()

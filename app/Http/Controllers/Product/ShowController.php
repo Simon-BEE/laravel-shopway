@@ -15,7 +15,7 @@ class ShowController extends Controller
         $allSizes = Size::all();
 
         return view('products.show', [
-            'product' => $product->load(['images', 'product_options']),
+            'product' => $product->load(['images', 'product_options.sizes', 'product_options.material']),
             'sizes' => $allSizes,
         ]);
     }

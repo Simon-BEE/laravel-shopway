@@ -22,15 +22,15 @@ class Cart
         return collect(session('cart'));
     }
 
-    public static function item(int $itemId): array
+    public static function item(int $productOptionId): Collection
     {
-        return session('cart')[$itemId];
+        return collect(self::content()->get($productOptionId));
     }
 
     public static function getProductOptionIds(): array
     {
-        return self::content()->map(function ($v, $k){
-            return $k;
+        return self::content()->map(function ($item, $productOptionId){
+            return $productOptionId;
         })->toArray();
     }
 
@@ -72,6 +72,17 @@ class Cart
         return Size::getNameById($sizeId);
     }
 
+    public static function exists(int $productOptionId, ?int $sizeId = null): bool
+    {
+        $hasProductOption = Cart::content()->has($productOptionId);
+
+        if ($hasProductOption && $sizeId) {
+            return self::item($productOptionId)->has($sizeId);
+        }
+
+        return $hasProductOption;
+    }
+
     /**
      * ? Do actions on cart
      */
@@ -91,7 +102,7 @@ class Cart
         CartAdding::add($productOption, $sizeId);
     }
 
-    public static function update(int $productOptionId, int $sizeId, int $qty): void
+    public static function update(int $productOptionId, int $sizeId, int $qty = 1): void
     {
         CartUpdating::update($productOptionId, $sizeId, $qty);
     }
@@ -105,7 +116,6 @@ class Cart
                 $optionSizeQuantityInStock = $productOptionsInCart->firstWhere('id', $productOptionKey)->whereSizeIs($sizeOptionId)->pivot->quantity;
 
                 if (($optionSizeQuantityInStock - $itemContent['quantity']) < Size::QUANTITY_ALERT) {
-                    // dd($optionSizeQuantityInStock, $itemContent, ($optionSizeQuantityInStock - $itemContent['quantity']));
                     self::update($productOptionKey, $sizeOptionId, (int)$itemContent['quantity'] - 1);
 
 

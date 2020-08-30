@@ -16,11 +16,6 @@ class Card extends Component
         $this->product = $product;
     }
 
-    public function refresh()
-    {
-        // $this->product->eager;
-    }
-
     public function render()
     {
         return view('livewire.products.card');

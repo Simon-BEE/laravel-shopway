@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Helpers\Cart;
-use App\Models\Products\Product;
 use App\Events\UserIsLogged;
+use App\Models\Products\ProductOption;
 use Illuminate\Support\Collection;
 
 class SetCartToUser
@@ -17,19 +17,25 @@ class SetCartToUser
      */
     public function handle(UserIsLogged $event): void
     {
-        // if (!$event->user->hasAlreadyCart) {
-        //     return;
-        // }
+        if (!$event->user->hasAlreadyCart) {
+            return;
+        }
 
-        // $cartFromDatabase = collect($event->user->cart->content);
+        $cart = Cart::content();
+        $oldCart = $event->user->cart;
+        /** @var Collection */
+        $oldContent = $oldCart->content;
 
-        // if (!$cartSession = Cart::content()) {
-        //     $this->addItemsToCart($cartFromDatabase);
-        //     return;
-        // }
+        if ($cart->isEmpty()) {
+            $this->addItemsToCart($oldContent);
 
-        // $cart = collect($cartSession)->union($cartFromDatabase);
-        // $this->addItemsToCart($cart);
+            return;
+        }
+
+        Cart::clear();
+        $this->addItemsToCart($cart->union($oldContent));
+
+        return;
     }
 
     /**
@@ -40,10 +46,17 @@ class SetCartToUser
      */
     private function addItemsToCart(Collection $cart): void
     {
-        // $cart->each(function ($item, $productId){
-        //     if ($product = Product::find($productId)) {
-        //         return Cart::add($product);
-        //     }
-        // });
+        $cart->each(function ($item, $productOptionId){
+            $productOption = ProductOption::findOrFail($productOptionId);
+
+            collect($item)->each(function ($itemContent, $sizeId) use ($productOption){
+
+                if (Cart::exists($productOption->id, $sizeId) || $itemContent['quantity'] > 1) {
+                    Cart::update($productOption->id, $sizeId, $itemContent['quantity']);
+                }else{
+                    Cart::add($productOption, $sizeId);
+                }
+            });
+        });
     }
 }

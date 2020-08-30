@@ -12,23 +12,6 @@ class Index extends Component
 {
     use HasFlashMessage;
 
-    public function addToCart(int $productId)
-    {
-        $product = Product::find($productId);
-
-        if (!$product) {
-            $this->newFlashMessage('Error from product.', 'error');
-        }
-
-        // Cart::add($product);
-
-        $this->newFlashMessage('Product successfully added to cart.');
-
-        $this->emit('cartUpdated');
-
-        $this->removeFromWishlist($productId);
-    }
-
     public function removeFromWishlist(int $productId)
     {
         Wish::remove($productId, auth()->id());

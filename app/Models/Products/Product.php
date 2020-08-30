@@ -14,9 +14,6 @@ class Product extends Model
 
     protected $casts = [
         'active' => 'boolean',
-        // 'price' => 'float',
-        // 'weight' => 'float',
-        // 'quantity' => 'integer',
     ];
 
     /**

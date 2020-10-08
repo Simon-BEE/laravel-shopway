@@ -1,9 +1,5 @@
-# Laravel E-commerce Solution
+# Laravel E-commerce Attempt
 Soberly called **Shopway**    
-
------
-# NO @click for search
------
 
 ## TODO
 - [ ] Cart icon when not logged
